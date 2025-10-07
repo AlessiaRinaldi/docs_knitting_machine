@@ -1,0 +1,13 @@
+---
+title: "Automated Knitting Machine"
+---
+The idea behind this project draws inspiration from the operating principle of 3D printers: starting from a digital model, they can automatically produce three-dimensional objects with precision and repeatability.
+
+The objective of this project is to transpose this paradigm to the textile field by developing an automated knitting machine capable of producing knit patterns from a predefined digital design.
+
+
+## - **[Error recognition](error-recognition.qmd)**  
+
+## - **[Components](components.qmd)**  
+
+## - **[Control System](control-system.qmd)**  

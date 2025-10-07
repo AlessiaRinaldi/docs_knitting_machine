@@ -1,0 +1,21 @@
+﻿---
+title: Error Recognition
+---
+
+## From Tradition to Automation
+
+The first step toward automating such an ancient and traditional technique is the ability to detect production errors in real time.  
+An integrated vision system must be able to identify the occurrence of anomalies (for example, missing yarn or skipped stitches),  
+allowing the machine to intervene and stop the process before the defect fully develops, preventing serious errors and material waste.
+
+## - **[Selection of the Acquisition System for Error Detection](error-camera.qmd)**  
+  Requirements, sensor & lens selection, lighting, sync, and mounting constraints.
+
+## - **[Error Recognition — Code](error-code.qmd)**  
+  Algorithms, model/code structure, data flow, and deployment notes.
+
+## - **[3D Camera Mount](error-mount.qmd)**  
+  Mechanical support, 3D printing, working distance, and CAD notes.
+
+## - **[Results & Efficiency](error-results.qmd)**  
+  Datasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget.

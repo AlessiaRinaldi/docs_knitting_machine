@@ -1,0 +1,240 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Automated Knitting Machine",
+    "section": "",
+    "text": "The idea behind this project draws inspiration from the operating principle of 3D printers: starting from a digital model, they can automatically produce three-dimensional objects with precision and repeatability.\nThe objective of this project is to transpose this paradigm to the textile field by developing an automated knitting machine capable of producing knit patterns from a predefined digital design."
+  },
+  {
+    "objectID": "components.html",
+    "href": "components.html",
+    "title": "Components",
+    "section": "",
+    "text": "Key Components\n\nMotors, drivers, sensors\nCamera & lighting\nMCU & wiring"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "control-system.html",
+    "href": "control-system.html",
+    "title": "Control System",
+    "section": "",
+    "text": "Overview\n\nReal-time control loops\nVision-based thread detection\nSafety & states"
+  },
+  {
+    "objectID": "error-recognition.html",
+    "href": "error-recognition.html",
+    "title": "Error Recognition",
+    "section": "",
+    "text": "The first step toward automating such an ancient and traditional technique is the ability to detect production errors in real time.\nAn integrated vision system must be able to identify the occurrence of anomalies (for example, missing yarn or skipped stitches),\nallowing the machine to intervene and stop the process before the defect fully develops, preventing serious errors and material waste."
+  },
+  {
+    "objectID": "error-recognition.html#error-taxonomy",
+    "href": "error-recognition.html#error-taxonomy",
+    "title": "Error Recognition",
+    "section": "",
+    "text": "Missing thread: no yarn present during a stitch.\nThread break: yarn snapped or slack beyond tolerance.\nMis-stitch / skipped stitch: hook failed to catch/transfer the loop.\nJams / obstruction: mechanical interference preventing motion.\nBacklash / positioning drift: kinematic error causing misplaced stitches.\nLighting drift: exposure or color shift degrading vision accuracy."
+  },
+  {
+    "objectID": "error-recognition.html#detection-pipeline-high-level",
+    "href": "error-recognition.html#detection-pipeline-high-level",
+    "title": "Error Recognition",
+    "section": "",
+    "text": "Sensing: camera frames + optional encoders / tension sensor.\nPreprocessing: crop, denoise, exposure normalization.\nInference: lightweight CNN / classical vision (edges, morphology).\nDecision logic: thresholds, temporal filtering, hysteresis.\nAction: warn, pause, retry, or safe-stop with guided recovery."
+  },
+  {
+    "objectID": "error-recognition.html#dataset-labeling",
+    "href": "error-recognition.html#dataset-labeling",
+    "title": "Error Recognition",
+    "section": "",
+    "text": "Classes: {ok, missing_thread, break, mis_stitch, jam}.\nLabeling protocol: annotate bounding boxes/masks around hook & loop region; store frame index + machine state.\nSplit: train/val/test with subject and lighting stratification.\nAugmentations: brightness/contrast jitter, small blur, slight rotations."
+  },
+  {
+    "objectID": "error-recognition.html#metrics",
+    "href": "error-recognition.html#metrics",
+    "title": "Error Recognition",
+    "section": "",
+    "text": "Per-class F1 and macro-F1 as primary.\nLatency (ms/frame), throughput (fps), false alarm rate (%/hr).\nMTTD (mean time to detection) for critical faults."
+  },
+  {
+    "objectID": "error-recognition.html#runtime-deployment",
+    "href": "error-recognition.html#runtime-deployment",
+    "title": "Error Recognition",
+    "section": "",
+    "text": "Target: ≥ 25–30 fps @ 320–640 px ROI.\nBudget: ≤ 25 ms inference, ≤ 10 ms I/O, ≤ 5 ms post-proc.\nFail-safe: if confidence &lt; threshold for N frames → degrade to safe mode."
+  },
+  {
+    "objectID": "error-recognition.html#requirements",
+    "href": "error-recognition.html#requirements",
+    "title": "Error Recognition",
+    "section": "Requirements",
+    "text": "Requirements\n\nShutter: global preferred (avoid motion artifacts on fast hooks).\nFrame rate: ≥ 60 fps recommended; ≥ 120 fps if fast cycles.\nResolution: enough to resolve the loop region (typically 320–800 px ROI on the hook).\nInterface: CSI (low latency) or USB3 (ubiquitous). GigE only if long cable runs.\nLens: C/CS-mount or M12 with suitable focal length; low distortion.\nLighting: diffuse LED ring or backlight; fixed CCT; flicker-free.\nSync: exposure synced to machine phase (encoder or GPIO trigger) if possible.\nMounting: rigid, vibration-damped, easy to re-calibrate."
+  },
+  {
+    "objectID": "error-recognition.html#candidate-options-examples",
+    "href": "error-recognition.html#candidate-options-examples",
+    "title": "Error Recognition",
+    "section": "Candidate Options (Examples)",
+    "text": "Candidate Options (Examples)\n\nRaspberry Pi Camera (HQ / v3): CSI, low latency, good ecosystem; pick global shutter variant for fast motion.\nUSB3 industrial (e.g., IMX sensors): robust drivers, global shutter options, flexible lenses; slightly higher cost.\nLow-cost USB webcams: easy, but rolling shutter + auto-exposure can hurt reliability."
+  },
+  {
+    "objectID": "error-recognition.html#decision-matrix-template",
+    "href": "error-recognition.html#decision-matrix-template",
+    "title": "Error Recognition",
+    "section": "Decision Matrix (Template)",
+    "text": "Decision Matrix (Template)\n\n\n\n\n\n\n\n\n\n\nCriterion\nWeight\nPi Cam (GS)\nUSB3 Industrial\nUSB Webcam\n\n\n\n\nLatency / Sync\n0.25\n4\n4\n2\n\n\nMotion artifacts (GS)\n0.25\n5\n5\n2\n\n\nImage quality / optics\n0.20\n4\n5\n3\n\n\nCost\n0.15\n4\n3\n5\n\n\nEase of integration\n0.15\n4\n4\n4\n\n\nWeighted score\n\n4.3\n4.4\n3.1\n\n\n\nScoring 1–5. Adjust weights to your constraints."
+  },
+  {
+    "objectID": "error-recognition.html#recommended-baseline",
+    "href": "error-recognition.html#recommended-baseline",
+    "title": "Error Recognition",
+    "section": "Recommended Baseline",
+    "text": "Recommended Baseline\n\nGlobal-shutter camera (CSI or USB3) + fixed-focus lens covering the hook area + diffuse LED lighting.\nLock exposure/white balance; disable auto features.\nOptional GPIO trigger to align exposure with hook phase."
+  },
+  {
+    "objectID": "error-recognition.html#recovery-hmi",
+    "href": "error-recognition.html#recovery-hmi",
+    "title": "Error Recognition",
+    "section": "Recovery & HMI",
+    "text": "Recovery & HMI\n\nOn detection: pause motion at safe phase, highlight ROI capture, show probable cause and guided steps (e.g., re-thread).\nOperator tools: snapshot, slow-motion replay (last 0.5–1.0 s), one-click retry."
+  },
+  {
+    "objectID": "error-recognition.html#roadmap",
+    "href": "error-recognition.html#roadmap",
+    "title": "Error Recognition",
+    "section": "Roadmap",
+    "text": "Roadmap\n\nPhase 1: classical vision baseline (edges + region stats).\nPhase 2: lightweight CNN for robustness to yarn/lighting variants.\nPhase 3: multi-sensor fusion (tension + vision) and predictive alarms."
+  },
+  {
+    "objectID": "error-recognition.html#choose-a-topic",
+    "href": "error-recognition.html#choose-a-topic",
+    "title": "Error Recognition",
+    "section": "",
+    "text": "👉 Acquisition System (Camera)\nRequirements, sensor & lens selection, lighting, sync, and mounting constraints.\n💻 Error Recognition — Code\nAlgorithms, model/code structure, data flow, and deployment notes.\n🧩 3D Camera Mount\nMechanical support, rigidity, vibration damping, working distance, and CAD notes.\n📈 Results & Efficiency\nDatasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget."
+  },
+  {
+    "objectID": "error-recognition.html#selection-of-the-acquisition-system-for-error-detection",
+    "href": "error-recognition.html#selection-of-the-acquisition-system-for-error-detection",
+    "title": "Error Recognition",
+    "section": "- Selection of the Acquisition System for Error Detection",
+    "text": "- Selection of the Acquisition System for Error Detection\nRequirements, sensor & lens selection, lighting, sync, and mounting constraints."
+  },
+  {
+    "objectID": "error-recognition.html#error-recognition-code",
+    "href": "error-recognition.html#error-recognition-code",
+    "title": "Error Recognition",
+    "section": "- Error Recognition — Code",
+    "text": "- Error Recognition — Code\nAlgorithms, model/code structure, data flow, and deployment notes."
+  },
+  {
+    "objectID": "error-recognition.html#d-camera-mount",
+    "href": "error-recognition.html#d-camera-mount",
+    "title": "Error Recognition",
+    "section": "- 3D Camera Mount",
+    "text": "- 3D Camera Mount\nMechanical support, 3D printing, working distance, and CAD notes."
+  },
+  {
+    "objectID": "error-recognition.html#results-efficiency",
+    "href": "error-recognition.html#results-efficiency",
+    "title": "Error Recognition",
+    "section": "- Results & Efficiency",
+    "text": "- Results & Efficiency\nDatasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget."
+  },
+  {
+    "objectID": "error-camera.html",
+    "href": "error-camera.html",
+    "title": "Selection of the Acquisition System for Error Detection on a Raspberry Pi 3 model B+",
+    "section": "",
+    "text": "The goal of the system is to ensure automatic monitoring of the knitting process at each hook movement.\nA micro switch provides a synchronization signal, allowing the vision system to verify that the yarn — regardless of its color, thickness, or texture — is correctly positioned around the base of the hook.\nIn particular, the yarn should take on a “U”-shaped configuration embracing the base of the hook.\nAny configuration that does not match this pattern must be detected as an error.\nWhen an anomaly is detected, the system should: - Immediately stop the motor driving the process;\n- Display an error message and indicate the index of the corresponding hook.\nInsert example photo here."
+  },
+  {
+    "objectID": "error-camera.html#objectives",
+    "href": "error-camera.html#objectives",
+    "title": "Selection of the Acquisition System for Error Detection on a Raspberry Pi 3 model B+",
+    "section": "",
+    "text": "The goal of the system is to ensure automatic monitoring of the knitting process at each hook movement.\nA micro switch provides a synchronization signal, allowing the vision system to verify that the yarn — regardless of its color, thickness, or texture — is correctly positioned around the base of the hook.\nIn particular, the yarn should take on a “U”-shaped configuration embracing the base of the hook.\nAny configuration that does not match this pattern must be detected as an error.\nWhen an anomaly is detected, the system should: - Immediately stop the motor driving the process;\n- Display an error message and indicate the index of the corresponding hook.\nInsert example photo here."
+  },
+  {
+    "objectID": "error-camera.html#requirements",
+    "href": "error-camera.html#requirements",
+    "title": "Selection of the Acquisition System for Error Detection on a Raspberry Pi 3 model B+",
+    "section": "Requirements",
+    "text": "Requirements\nTo meet these objectives, the choice of camera and acquisition system must satisfy the following requirements:\n\nCompatibility with Raspberry Pi 3: use of natively supported interfaces and libraries.\n\nEase of software integration: availability of well-established computer vision libraries (e.g., libcamera, Picamera2, OpenCV).\n\nCost-effectiveness: a sensor with sufficient resolution to distinguish fine yarn details, while keeping costs low.\n\nClose-focus capability: ability to capture sharp images at short distances, near the hook area.\n\nCompact dimensions: a small camera module to facilitate mechanical integration within the machine’s 3D frame.\n\nLow power consumption: efficient power usage to minimize the overall system load."
+  },
+  {
+    "objectID": "error-recognition.html#from-tradition-to-automation",
+    "href": "error-recognition.html#from-tradition-to-automation",
+    "title": "Error Recognition",
+    "section": "",
+    "text": "The first step toward automating such an ancient and traditional technique is the ability to detect production errors in real time.\nAn integrated vision system must be able to identify the occurrence of anomalies (for example, missing yarn or skipped stitches),\nallowing the machine to intervene and stop the process before the defect fully develops, preventing serious errors and material waste."
+  },
+  {
+    "objectID": "index.html#selection-of-the-acquisition-system-for-error-detection",
+    "href": "index.html#selection-of-the-acquisition-system-for-error-detection",
+    "title": "Automated Knitting Machine",
+    "section": "- Selection of the Acquisition System for Error Detection",
+    "text": "- Selection of the Acquisition System for Error Detection\nRequirements, sensor & lens selection, lighting, sync, and mounting constraints."
+  },
+  {
+    "objectID": "index.html#error-recognition-code",
+    "href": "index.html#error-recognition-code",
+    "title": "Automated Knitting Machine",
+    "section": "- Error Recognition — Code",
+    "text": "- Error Recognition — Code\nAlgorithms, model/code structure, data flow, and deployment notes."
+  },
+  {
+    "objectID": "index.html#d-camera-mount",
+    "href": "index.html#d-camera-mount",
+    "title": "Automated Knitting Machine",
+    "section": "- 3D Camera Mount",
+    "text": "- 3D Camera Mount\nMechanical support, 3D printing, working distance, and CAD notes."
+  },
+  {
+    "objectID": "index.html#results-efficiency",
+    "href": "index.html#results-efficiency",
+    "title": "Automated Knitting Machine",
+    "section": "- Results & Efficiency",
+    "text": "- Results & Efficiency\nDatasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget."
+  },
+  {
+    "objectID": "index.html#components",
+    "href": "index.html#components",
+    "title": "Automated Knitting Machine",
+    "section": "- Components",
+    "text": "- Components"
+  },
+  {
+    "objectID": "index.html#errore",
+    "href": "index.html#errore",
+    "title": "Automated Knitting Machine",
+    "section": "- Errore",
+    "text": "- Errore\nRequirements, sensor & lens selection, lighting, sync, and mounting constraints."
+  },
+  {
+    "objectID": "index.html#error-recognition",
+    "href": "index.html#error-recognition",
+    "title": "Automated Knitting Machine",
+    "section": "- Error recognition",
+    "text": "- Error recognition"
+  },
+  {
+    "objectID": "index.html#control-s",
+    "href": "index.html#control-s",
+    "title": "Automated Knitting Machine",
+    "section": "- Control S",
+    "text": "- Control S\nMechanical support, 3D printing, working distance, and CAD notes."
+  },
+  {
+    "objectID": "index.html#control-system",
+    "href": "index.html#control-system",
+    "title": "Automated Knitting Machine",
+    "section": "- Control System",
+    "text": "- Control System"
+  }
+]

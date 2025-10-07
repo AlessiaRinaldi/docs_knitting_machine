@@ -1,0 +1,172 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap');
+
+/* ---------- General page style ---------- */
+body {
+  background-color: #fff5f8; /* rosa chiarissimo */
+  font-family: "Georgia", "Times New Roman", serif;
+  color: #333;
+  line-height: 1.7;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------- Headings ---------- */
+h1, h2, h3, h4 {
+  font-family: "Playfair Display", "Georgia", serif;
+  color: #3b3b3b;
+  letter-spacing: 0.2px;
+}
+
+/* ---------- Navbar customization ---------- */
+.navbar {
+  background-color: #f8dfe5 !important; /* rosa molto tenue */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  font-size: 1rem;
+  letter-spacing: 0.3px;
+}
+
+/* ---------- Links ---------- */
+a {
+  color: #b30059; /* rosa elegante */
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+a:hover {
+  color: #800040;
+  text-decoration: underline;
+}
+
+/* ---------- Main content layout ---------- */
+/* sfondo pieno, contenuto più a sinistra */
+main.content {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 2.5em 6vw;
+  margin: 0;
+  max-width: 100%;
+}
+
+/* lascia spazio al margine destro occupato dalla sidebar fissa (desktop) */
+@media (min-width: 1200px) {
+  #quarto-content {
+    margin-right: 20rem; /* deve combaciare con la larghezza sidebar */
+  }
+}
+
+/* ---------- RIGHT "On this page" SIDEBAR ---------- */
+/* In Quarto è il margin sidebar: #quarto-margin-sidebar */
+@media (min-width: 1200px) {
+  #quarto-margin-sidebar {
+    background: #ffffff !important;        /* bianco pieno */
+    position: fixed !important;            /* fissata a destra */
+    top: 56px;                              /* sotto la navbar (≈56px) */
+    right: 0;
+    bottom: 0;
+    width: 20rem;
+    overflow-y: auto;
+    border-left: 2px solid #f2cbdc;        /* bordo rosa tenue */
+    box-shadow: -4px 0 8px rgba(0,0,0,0.05);
+    padding: 1rem 1.25rem;
+  }
+
+  /* titolo e link del TOC */
+  #quarto-margin-sidebar .sidebar-title {
+    font-family: "Playfair Display", "Georgia", serif;
+    color: #800040;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+  }
+  #quarto-margin-sidebar a {
+    color: #333;
+  }
+  #quarto-margin-sidebar a:hover {
+    color: #a13766;
+    text-decoration: underline;
+  }
+}
+
+/* comportamento mobile/tablet: sidebar normale */
+@media (max-width: 1199.98px) {
+  #quarto-margin-sidebar {
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(6px);
+    border-left: 3px solid #f0c9da;
+    padding-left: 1em;
+    position: static !important;
+    width: auto;
+    box-shadow: none;
+  }
+}
+
+/* ---------- Tables ---------- */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 1.5em;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+th, td {
+  border: 1px solid #e6cfd9;
+  padding: 0.75em;
+}
+th {
+  background-color: #f8dfe5;
+  color: #333;
+}
+
+/* ---------- Code blocks ---------- */
+pre, code {
+  background-color: #fff0f6;
+  border-radius: 6px;
+  padding: 0.3em 0.6em;
+}
+
+/* ---------- Footer ---------- */
+footer {
+  background: #f8dfe5;
+  color: #555;
+  text-align: center;
+  padding: 1em 0;
+  margin-top: 2em;
+  font-size: 0.9em;
+}
+/* ---------- Force full-width layout for all pages ---------- */
+
+/* Rimuove i limiti di larghezza imposti da Quarto o Bootstrap */
+:root {
+  --content-max-width: 100% !important;
+}
+
+.quarto-container,
+.page-columns,
+.content,
+.container,
+.container-lg,
+.container-xl,
+.container-xxl {
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  padding-left: 3vw !important;
+  padding-right: 3vw !important;
+}
+
+/* Assicura che la sezione principale occupi tutto lo spazio */
+#quarto-content {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* Sidebar e contenuto coordinati */
+@media (min-width: 1200px) {
+  #quarto-content {
+    margin-right: 20rem; /* deve combaciare con la larghezza sidebar */
+  }
+
+  #quarto-margin-sidebar {
+    width: 20rem;
+  }
+}

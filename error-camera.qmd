@@ -1,0 +1,27 @@
+---
+title: Selection of the Acquisition System for Error Detection on a Raspberry Pi 3 model B+
+---
+## Objectives
+
+The goal of the system is to ensure automatic monitoring of the knitting process at each hook movement.  
+A micro switch provides a synchronization signal, allowing the vision system to verify that the yarn — regardless of its color, thickness, or texture — is correctly positioned around the base of the hook.
+
+In particular, the yarn should take on a “U”-shaped configuration embracing the base of the hook.  
+Any configuration that does not match this pattern must be detected as an error.
+
+When an anomaly is detected, the system should:
+- Immediately stop the motor driving the process;  
+- Display an error message and indicate the index of the corresponding hook.
+
+*Insert example photo here.*
+
+## Requirements
+
+To meet these objectives, the choice of camera and acquisition system must satisfy the following requirements:
+
+- **Compatibility with Raspberry Pi 3:** use of natively supported interfaces and libraries.  
+- **Ease of software integration:** availability of well-established computer vision libraries (e.g., `libcamera`, Picamera2, OpenCV).  
+- **Cost-effectiveness:** a sensor with sufficient resolution to distinguish fine yarn details, while keeping costs low.  
+- **Close-focus capability:** ability to capture sharp images at short distances, near the hook area.  
+- **Compact dimensions:** a small camera module to facilitate mechanical integration within the machine’s 3D frame.  
+- **Low power consumption:** efficient power usage to minimize the overall system load.

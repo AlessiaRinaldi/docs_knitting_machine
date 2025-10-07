@@ -1,0 +1,36 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  #title: "Automated Knitting Machine"
+  navbar:
+    background: "#f8dfe5"   # rosa molto tenue
+    foreground: "#4a4a4a"   # testo grigio scuro
+    left:
+      - text: Home
+        href: index.qmd
+      - text: Error Recognition
+        menu:
+          - text: Overview
+            href: error-recognition.qmd
+          - text: Selection of the Acquisition System for Error Detection
+            href: error-camera.qmd
+          - text: Error Recognition — Code
+            href: error-code.qmd
+          - text: 3D Camera Mount
+            href: error-mount.qmd
+          - text: Results & Efficiency
+            href: error-results.qmd
+      - text: Components
+        href: components.qmd
+      - text: Control System
+        href: control-system.qmd
+
+format:
+  html:
+    theme: minty  # alternative: flatly, journal, minty, zephyr, quartz, lumen
+    css: styles.css
+    toc: true
+    page-layout: full   # <— importante
+

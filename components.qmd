@@ -1,0 +1,8 @@
+---
+title: Components
+---
+
+# Key Components
+- Motors, drivers, sensors
+- Camera & lighting
+- MCU & wiring
