@@ -24,15 +24,15 @@ quarto --version
 
 ### Clone this repository
 
-<pre> ```bash
+<pre> 
   git clone https://github.com/AlessiaRinaldi/docs_knitting_machine 
-  ``` </pre>
-<pre> ```bash
+</pre>
+<pre>
   cd docs_knitting_machine 
-  ```</pre>
+</pre>
 
 ### Preview the Site Locally
 
-<pre> ```bash
+<pre> 
   quarto preview 
-  ```</pre>
+</pre>
