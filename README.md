@@ -17,13 +17,22 @@ If you don’t already have Quarto installed, download it here:
 Then check that it’s correctly installed:
 
 <pre>```bash
-quarto --version``` </pre>
+  
+quarto --version
+
+  ``` </pre>
 
 ### Clone this repository
 
-<pre> ``` git clone https://github.com/AlessiaRinaldi/docs_knitting_machine ``` </pre>
-<pre> ``` cd docs_knitting_machine ```</pre>
+<pre> ```bash
+  git clone https://github.com/AlessiaRinaldi/docs_knitting_machine 
+  ``` </pre>
+<pre> ```bash
+  cd docs_knitting_machine 
+  ```</pre>
 
 ### Preview the Site Locally
 
-<pre> ``` quarto preview ```</pre>
+<pre> ```bash
+  quarto preview 
+  ```</pre>
