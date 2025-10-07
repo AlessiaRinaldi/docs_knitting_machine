@@ -5,8 +5,7 @@ title: Error Recognition
 ## From Tradition to Automation
 
 The first step toward automating such an ancient and traditional technique is the ability to detect production errors in real time.  
-An integrated vision system must be able to identify the occurrence of anomalies (for example, missing yarn or skipped stitches),  
-allowing the machine to intervene and stop the process before the defect fully develops, preventing serious errors and material waste.
+An integrated vision system must be able to identify the occurrence of anomalies (for example, missing yarn or skipped stitches), allowing the machine to intervene and stop the process before the defect fully develops, preventing serious errors and material waste.
 
 ## - **[Selection of the Acquisition System for Error Detection](error-camera.qmd)**  
   Requirements, sensor & lens selection, lighting, sync, and mounting constraints.

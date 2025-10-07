@@ -4,12 +4,13 @@ title: Selection of the Acquisition System for Error Detection on a Raspberry Pi
 ## Objectives
 
 The goal of the system is to ensure automatic monitoring of the knitting process at each hook movement.  
-A micro switch provides a synchronization signal, allowing the vision system to verify that the yarn — regardless of its color, thickness, or texture — is correctly positioned around the base of the hook.
+A micro switch provides a synchronization signal, allowing the vision system to verify that the yarn (regardless of its color, thickness, or texture) is correctly positioned around the base of the hook.
 
 In particular, the yarn should take on a “U”-shaped configuration embracing the base of the hook.  
 Any configuration that does not match this pattern must be detected as an error.
 
 When an anomaly is detected, the system should:
+
 - Immediately stop the motor driving the process;  
 - Display an error message and indicate the index of the corresponding hook.
 
@@ -25,3 +26,80 @@ To meet these objectives, the choice of camera and acquisition system must satis
 - **Close-focus capability:** ability to capture sharp images at short distances, near the hook area.  
 - **Compact dimensions:** a small camera module to facilitate mechanical integration within the machine’s 3D frame.  
 - **Low power consumption:** efficient power usage to minimize the overall system load.
+
+## Considered Architectures
+
+This section describes the image acquisition options evaluated for the error detection system on Raspberry Pi 3, highlighting their implications in terms of image quality, latency, software integration, and overall system complexity.
+
+### Pi Camera via CSI Interface (recommended choice)
+
+The Raspberry Pi Camera v2.1 connects to the Broadcom SoC through the MIPI-CSI interface, a high-speed differential serial bus dedicated to video capture.  
+This direct connection offers several advantages:
+
+- **High bandwidth and low latency:** the pixel stream reaches the processor without passing through the USB or network stack, resulting in lower jitter and more deterministic timing.  
+- **Superior image quality:** 8 MP sensor with the Raspberry platform’s integrated ISP, providing fine control over exposure, gain, white balance, and frame rate.  
+- **Native integration:** direct support via `libcamera`/Picamera2 and V4L2, with robust pipelines for OpenCV, TFLite, and other vision frameworks.
+
+*Implications:* a better signal-to-noise ratio and frame consistency lead to improved accuracy in detecting subtle defects.  
+The low latency facilitates synchronized triggering with the microswitch event.
+
+---
+
+### ESP32-CAM via Wi-Fi or Serial
+
+The ESP32-CAM integrates an OV2640 sensor (2 MP) and a microcontroller with Wi-Fi connectivity.  
+Typical acquisition involves onboard JPEG/MJPEG compression and frame transmission:
+
+- **Wi-Fi:** sends frames or snapshots to a broker/server; wiring is simple, but latency and jitter depend on network conditions and buffering.  
+- **Serial/USB-UART:** sends data in chunks to the Raspberry Pi. It reduces network uncertainty but requires fragmentation/reassembly protocols and buffer management.
+
+*Implications:* extremely low cost and stand-alone operation, but lower image quality and controllability compared to CSI.  
+Compression may hide fine defects, and the less deterministic timing makes it harder to align precisely with the hook’s motion.  
+Moreover, the ESP32-CAM module is bulkier than the Pi Camera, making integration into the existing mechanical frame more difficult.  
+On the positive side, its shorter minimum focus distance makes it potentially more suitable for close-up shots without additional lenses.
+
+#### Serial Variant Experiment (unsuccessful)
+
+In preliminary tests with a direct USB–UART connection, the module was successfully flashed with a MicroPython firmware, but upon reboot, the board remained stuck in the bootloader. The serial output only produced unreadable characters or repetitive error messages, never reaching the REPL prompt. This prevented validation of direct communication with the Raspberry Pi.
+
+#### MQTT Variant Experiment (unsuccessful)
+
+Within the Wi-Fi setup, a connection from ESP32-CAM → Raspberry Pi was attempted via an MQTT broker, following a *snapshot*-based approach:
+
+- The ESP32-CAM captures a JPEG frame every few seconds and publishes it to an MQTT topic.  
+- The Raspberry Pi, running a Mosquitto broker, subscribes to the topic, decodes the images, and displays/saves them locally.
+
+Despite the theoretical simplicity of this architecture, the practical tests were unsuccessful.  
+In particular, transmission and decoding issues occurred with the JPEG payloads (published directly via MQTT), making it impossible to correctly reconstruct the images on the Raspberry Pi side.
+
+Given these early failures and adopting an **agile** development approach (iterative and adaptive, as opposed to a waterfall model), the decision was made not to continue integrating the ESP32-CAM through this method, favoring more reliable solutions consistent with the project requirements.
+
+*Conclusion:* the ESP32-CAM via MQTT approach proved too unreliable for real-time error detection, further reinforcing the preference for the Pi Camera connected via CSI.
+
+---
+
+### Other Considered Alternatives (not tested)
+
+#### USB Webcam
+A ready-to-use and widely available solution with UVC support.  
+However, the data path goes through the USB stack, adding overhead compared to CSI and limiting camera control.  
+It can be suitable for prototyping or when latency requirements are less strict.
+
+#### Raspberry Pi HQ Camera
+A 12 MP module with a C/CS mount for interchangeable lenses.  
+It offers superior optical quality and flexibility (focus adjustment, focal lengths, dedicated macro optics) at the cost of higher price and larger size. Recommended when extreme close-ups or professional optical control are required.
+
+
+
+## - **[Error Recognition — Code](error-code.qmd)**  
+  Algorithms, model/code structure, data flow, and deployment notes.
+
+## - **[3D Camera Mount](error-mount.qmd)**  
+  Mechanical support, 3D printing, working distance, and CAD notes.
+
+## - **[Results & Efficiency](error-results.qmd)**  
+  Datasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget.
+
+
+## - **[Overview](error-recognition.qmd)**  
+  

@@ -3,7 +3,8 @@
 /* ---------- General page style ---------- */
 body {
   background-color: #fff5f8; /* rosa chiarissimo */
-  font-family: "Georgia", "Times New Roman", serif;
+  /*font-family: "Georgia", "Times New Roman", serif;*/
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #333;
   line-height: 1.7;
   margin: 0;
@@ -12,7 +13,8 @@ body {
 
 /* ---------- Headings ---------- */
 h1, h2, h3, h4 {
-  font-family: "Playfair Display", "Georgia", serif;
+  /*font-family: "Playfair Display", "Georgia", serif;*/
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #3b3b3b;
   letter-spacing: 0.2px;
 }
@@ -72,7 +74,8 @@ main.content {
 
   /* titolo e link del TOC */
   #quarto-margin-sidebar .sidebar-title {
-    font-family: "Playfair Display", "Georgia", serif;
+    /*font-family: "Playfair Display", "Georgia", serif;*/
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #800040;
     font-weight: 600;
     margin-bottom: 0.6rem;
