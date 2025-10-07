@@ -16,11 +16,11 @@ If you don’t already have Quarto installed, download it here:
 
 Then check that it’s correctly installed:
 
-<pre>```bash
+<pre>
   
 quarto --version
 
-  ``` </pre>
+ </pre>
 
 ### Clone this repository
 
