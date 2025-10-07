@@ -16,23 +16,25 @@ If you don’t already have Quarto installed, download it here:
 
 Then check that it’s correctly installed:
 
-<pre>
-  
+<pre> 
 quarto --version
-
- </pre>
+</pre>
 
 ### Clone this repository
 
 <pre> 
-  git clone https://github.com/AlessiaRinaldi/docs_knitting_machine 
+git clone https://github.com/AlessiaRinaldi/docs_knitting_machine 
 </pre>
-<pre>
-  cd docs_knitting_machine 
+<pre>cd docs_knitting_machine 
 </pre>
 
 ### Preview the Site Locally
 
 <pre> 
-  quarto preview 
+quarto preview 
+</pre>
+
+### Close Preview
+<pre>
+Go back to PowerShell and press **Ctrl + C**.
 </pre>
