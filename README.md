@@ -36,5 +36,5 @@ quarto preview
 
 ### Close Preview
 <pre>
-Go back to PowerShell and press **Ctrl + C**.
+Go back to PowerShell and press Ctrl + C.
 </pre>
