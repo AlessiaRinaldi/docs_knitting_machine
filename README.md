@@ -11,11 +11,10 @@ To build and preview the documentation website on your computer:
 
 ### Install Quarto
 
-If you don’t already have Quarto installed, download it here:  
-👉 [https://quarto.org/docs/get-started](https://quarto.org/docs/get-started)
+If you don’t already have Quarto installed, download it here:   
+[https://quarto.org/docs/get-started](https://quarto.org/docs/get-started)
 
-Then check that it’s correctly installed:
-
+Little check to make sure it’s installed:
 <pre> 
 quarto --version
 </pre>
