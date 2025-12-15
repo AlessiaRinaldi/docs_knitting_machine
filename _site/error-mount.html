@@ -139,17 +139,70 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#sec:camera_mount" id="toc-sec:camera_mount" class="nav-link active" data-scroll-target="#sec\:camera_mount">Mechanical Design of the Camera Mount</a></li>
+  <li><a href="#error-recognition-code" id="toc-error-recognition-code" class="nav-link" data-scroll-target="#error-recognition-code">- <strong>Error Recognition — Code</strong></a></li>
+  <li><a href="#results-efficiency" id="toc-results-efficiency" class="nav-link" data-scroll-target="#results-efficiency">- <strong>Results &amp; Efficiency</strong></a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">- <strong>Overview</strong></a></li>
+  <li><a href="#selection-of-the-acquisition-system-for-error-detection" id="toc-selection-of-the-acquisition-system-for-error-detection" class="nav-link" data-scroll-target="#selection-of-the-acquisition-system-for-error-detection">- <strong>Selection of the Acquisition System for Error Detection</strong></a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
 
+<section id="sec:camera_mount" class="level2">
+<h2 class="anchored" data-anchor-id="sec:camera_mount">Mechanical Design of the Camera Mount</h2>
+<p>The camera mounting solution combines a commercially available magnetic-base stand with a custom 3D-printed support designed specifically for the Raspberry Pi Camera module.<br>
+The magnetic base provides a rigid and highly stable foundation, while allowing fine manual adjustment in height, angle, and lateral position through its articulated arm.</p>
+<p>A custom holder for the Raspberry Pi Camera v2.1 was designed in Autodesk Fusion 360 and fabricated using fused deposition modeling (FDM) with PLA filament on a Bambu Lab A1 Mini 3D printer.<br>
+The printed part encloses the camera PCB and incorporates a series of mounting holes and a pin that fits into the threaded end of the magnetic base arm.</p>
+<p>While the magnetic stand and the 3D-printed camera holder provide sufficient stability for prototyping, the overall stiffness of the structure is not optimal yet.<br>
+Small shifts caused by machine vibration or accidental contact can slightly alter the camera pose over time, affecting the exact position of the region of interest in the image.<br>
+Improving the mechanical stability of the mounting solution is therefore an important direction for future work, with the goal of achieving fully repeatable alignment over long acquisition periods.</p>
+<p>A CAD rendering of the printed holder is shown in Figure.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div id="fig:front" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/3d_front.png" class="img-fluid figure-img"></p>
+<figcaption>Front of the 3D structure</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div id="fig:back" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/3d_back.png" class="img-fluid figure-img"></p>
+<figcaption>Back of the 3D structure</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="error-recognition-code" class="level2">
+<h2 class="anchored" data-anchor-id="error-recognition-code">- <strong><a href="./error-code.html">Error Recognition — Code</a></strong></h2>
+<p>Algorithms, model/code structure, data flow, and deployment notes.</p>
+</section>
+<section id="results-efficiency" class="level2">
+<h2 class="anchored" data-anchor-id="results-efficiency">- <strong><a href="./error-results.html">Results &amp; Efficiency</a></strong></h2>
+<p>Datasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget.</p>
+</section>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">- <strong><a href="./error-recognition.html">Overview</a></strong></h2>
+</section>
+<section id="selection-of-the-acquisition-system-for-error-detection" class="level2">
+<h2 class="anchored" data-anchor-id="selection-of-the-acquisition-system-for-error-detection">- <strong><a href="./error-camera.html">Selection of the Acquisition System for Error Detection</a></strong></h2>
+<p>Requirements, sensor &amp; lens selection, lighting, sync, and mounting constraints.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

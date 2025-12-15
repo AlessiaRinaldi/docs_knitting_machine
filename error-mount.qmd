@@ -1,0 +1,37 @@
+## Mechanical Design of the Camera Mount {#sec:camera_mount}
+
+The camera mounting solution combines a commercially available magnetic-base stand with a custom 3D-printed support designed specifically for the Raspberry Pi Camera module.  
+The magnetic base provides a rigid and highly stable foundation, while allowing fine manual adjustment in height, angle, and lateral position through its articulated arm.
+
+A custom holder for the Raspberry Pi Camera v2.1 was designed in Autodesk Fusion 360 and fabricated using fused deposition modeling (FDM) with PLA filament on a Bambu Lab A1 Mini 3D printer.  
+The printed part encloses the camera PCB and incorporates a series of mounting holes and a pin that fits into the threaded end of the magnetic base arm.
+
+While the magnetic stand and the 3D-printed camera holder provide sufficient stability for prototyping, the overall stiffness of the structure is not optimal yet.  
+Small shifts caused by machine vibration or accidental contact can slightly alter the camera pose over time, affecting the exact position of the region of interest in the image.  
+Improving the mechanical stability of the mounting solution is therefore an important direction for future work, with the goal of achieving fully repeatable alignment over long acquisition periods.
+
+A CAD rendering of the printed holder is shown in Figure.
+
+::: {.columns}
+::: {.column width="50%"}
+![Front of the 3D structure](images/3d_front.png){#fig:front}
+:::
+
+::: {.column width="50%"}
+![Back of the 3D structure](images/3d_back.png){#fig:back}
+:::
+:::
+
+
+## - **[Error Recognition — Code](error-code.qmd)**  
+  Algorithms, model/code structure, data flow, and deployment notes.
+
+
+## - **[Results & Efficiency](error-results.qmd)**  
+  Datasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget.
+
+
+## - **[Overview](error-recognition.qmd)**  
+  
+## - **[Selection of the Acquisition System for Error Detection](error-camera.qmd)**  
+  Requirements, sensor & lens selection, lighting, sync, and mounting constraints.

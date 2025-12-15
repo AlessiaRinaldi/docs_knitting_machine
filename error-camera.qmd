@@ -89,13 +89,12 @@ It can be suitable for prototyping or when latency requirements are less strict.
 A 12 MP module with a C/CS mount for interchangeable lenses.  
 It offers superior optical quality and flexibility (focus adjustment, focal lengths, dedicated macro optics) at the cost of higher price and larger size. Recommended when extreme close-ups or professional optical control are required.
 
-
+## - **[3D Camera Mount](error-mount.qmd)**  
+  Mechanical support, 3D printing, working distance, and CAD notes.
 
 ## - **[Error Recognition — Code](error-code.qmd)**  
   Algorithms, model/code structure, data flow, and deployment notes.
 
-## - **[3D Camera Mount](error-mount.qmd)**  
-  Mechanical support, 3D printing, working distance, and CAD notes.
 
 ## - **[Results & Efficiency](error-results.qmd)**  
   Datasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget.

@@ -292,5 +292,54 @@
     "title": "Selection of the Acquisition System for Error Detection on a Raspberry Pi 3 model B+",
     "section": "- Overview",
     "text": "- Overview"
+  },
+  {
+    "objectID": "error-mount.html",
+    "href": "error-mount.html",
+    "title": "",
+    "section": "",
+    "text": "The camera mounting solution combines a commercially available magnetic-base stand with a custom 3D-printed support designed specifically for the Raspberry Pi Camera module.\nThe magnetic base provides a rigid and highly stable foundation, while allowing fine manual adjustment in height, angle, and lateral position through its articulated arm.\nA custom holder for the Raspberry Pi Camera v2.1 was designed in Autodesk Fusion 360 and fabricated using fused deposition modeling (FDM) with PLA filament on a Bambu Lab A1 Mini 3D printer.\nThe printed part encloses the camera PCB and incorporates a series of mounting holes and a pin that fits into the threaded end of the magnetic base arm.\nWhile the magnetic stand and the 3D-printed camera holder provide sufficient stability for prototyping, the overall stiffness of the structure is not optimal yet.\nSmall shifts caused by machine vibration or accidental contact can slightly alter the camera pose over time, affecting the exact position of the region of interest in the image.\nImproving the mechanical stability of the mounting solution is therefore an important direction for future work, with the goal of achieving fully repeatable alignment over long acquisition periods.\nA CAD rendering of the printed holder is shown in Figure.\n\n\n\n\n\nFront of the 3D structure\n\n\n\n\n\n\nBack of the 3D structure"
+  },
+  {
+    "objectID": "error-mount.html#sec:camera_mount",
+    "href": "error-mount.html#sec:camera_mount",
+    "title": "",
+    "section": "",
+    "text": "The camera mounting solution combines a commercially available magnetic-base stand with a custom 3D-printed support designed specifically for the Raspberry Pi Camera module.\nThe magnetic base provides a rigid and highly stable foundation, while allowing fine manual adjustment in height, angle, and lateral position through its articulated arm.\nA custom holder for the Raspberry Pi Camera v2.1 was designed in Autodesk Fusion 360 and fabricated using fused deposition modeling (FDM) with PLA filament on a Bambu Lab A1 Mini 3D printer.\nThe printed part encloses the camera PCB and incorporates a series of mounting holes and a pin that fits into the threaded end of the magnetic base arm.\nWhile the magnetic stand and the 3D-printed camera holder provide sufficient stability for prototyping, the overall stiffness of the structure is not optimal yet.\nSmall shifts caused by machine vibration or accidental contact can slightly alter the camera pose over time, affecting the exact position of the region of interest in the image.\nImproving the mechanical stability of the mounting solution is therefore an important direction for future work, with the goal of achieving fully repeatable alignment over long acquisition periods.\nA CAD rendering of the printed holder is shown in Figure.\n\n\n\n\n\nFront of the 3D structure\n\n\n\n\n\n\nBack of the 3D structure"
+  },
+  {
+    "objectID": "error-mount.html#error-recognition-code",
+    "href": "error-mount.html#error-recognition-code",
+    "title": "",
+    "section": "- Error Recognition — Code",
+    "text": "- Error Recognition — Code\nAlgorithms, model/code structure, data flow, and deployment notes."
+  },
+  {
+    "objectID": "error-mount.html#d-camera-mount",
+    "href": "error-mount.html#d-camera-mount",
+    "title": "",
+    "section": "- 3D Camera Mount",
+    "text": "- 3D Camera Mount\nMechanical support, 3D printing, working distance, and CAD notes."
+  },
+  {
+    "objectID": "error-mount.html#results-efficiency",
+    "href": "error-mount.html#results-efficiency",
+    "title": "",
+    "section": "- Results & Efficiency",
+    "text": "- Results & Efficiency\nDatasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget."
+  },
+  {
+    "objectID": "error-mount.html#overview",
+    "href": "error-mount.html#overview",
+    "title": "",
+    "section": "- Overview",
+    "text": "- Overview"
+  },
+  {
+    "objectID": "error-mount.html#selection-of-the-acquisition-system-for-error-detection",
+    "href": "error-mount.html#selection-of-the-acquisition-system-for-error-detection",
+    "title": "",
+    "section": "- Selection of the Acquisition System for Error Detection",
+    "text": "- Selection of the Acquisition System for Error Detection\nRequirements, sensor & lens selection, lighting, sync, and mounting constraints."
   }
 ]

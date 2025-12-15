@@ -10,11 +10,12 @@ An integrated vision system must be able to identify the occurrence of anomalies
 ## - **[Selection of the Acquisition System for Error Detection](error-camera.qmd)**  
   Requirements, sensor & lens selection, lighting, sync, and mounting constraints.
 
+## - **[3D Camera Mount](error-mount.qmd)**  
+  Mechanical support, 3D printing, working distance, and CAD notes.
+  
 ## - **[Error Recognition — Code](error-code.qmd)**  
   Algorithms, model/code structure, data flow, and deployment notes.
 
-## - **[3D Camera Mount](error-mount.qmd)**  
-  Mechanical support, 3D printing, working distance, and CAD notes.
 
 ## - **[Results & Efficiency](error-results.qmd)**  
   Datasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget.
