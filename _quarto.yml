@@ -16,10 +16,10 @@ website:
             href: error-recognition.qmd
           - text: Selection of the Acquisition System for Error Detection
             href: error-camera.qmd
-          - text: Error Recognition — Code
-            href: error-code.qmd
           - text: 3D Camera Mount
             href: error-mount.qmd
+          - text: Error Recognition — Code
+            href: error-code.qmd
           - text: Results & Efficiency
             href: error-results.qmd
       - text: Components
@@ -32,5 +32,6 @@ format:
     theme: minty  # alternative: flatly, journal, minty, zephyr, quartz, lumen
     css: styles.css
     toc: true
+    toc-depth: 4
     page-layout: full   # <— importante
 

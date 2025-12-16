@@ -1,97 +1,129 @@
+## Selection of the Acquisition System
+
+The acquisition system plays a central role in the proposed error detection pipeline, as it must provide close-up images of the hook region at every relevant movement of the crochet machine.  
+In this work, we start from a commercially available circular crochet loom intended for hobby use and adapt it into an automated system through a set of mechanical and electronic modifications.  
+This choice allows us to preserve the low-cost and accessible nature of the original tool while enabling precise synchronization and repeatable inspection of each hook.
+
+![Overview of the circular crochet loom.](images/SENTRO.png){#fig:loom_overview width=50% fig-align="center"}
+
+A hardware microswitch mounted on the modified loom generates a synchronization signal that marks the exact moment in the hook’s motion when the yarn configuration becomes informative.  
+This signal is used by the Raspberry Pi 3 Model B+ to trigger image acquisition in real time.  
+At each trigger, the system inspects the hook to verify that the yarn—regardless of its color, thickness, or texture—assumes the expected **“U”-shaped** configuration around the base of the hook.  
+Any configuration that does not match this pattern is classified as an error.
+
+When an anomaly is detected, the system immediately stops the motor driving the process and displays a diagnostic message indicating the index of the affected hook.  
+An example close-up of the inspected region is reported in these two figures.
+
+::: {.columns}
+::: {.column width="50%"}
+![Examples of correct and defective yarn configuration.](images/pos.png){#fig:pos}
+:::
+
+::: {.column width="50%"}
+![](images/neg.png){#fig:neg}
+:::
+:::
+
+
+
 ---
-title: Selection of the Acquisition System for Error Detection on a Raspberry Pi 3 model B+
----
-## Objectives
 
-The goal of the system is to ensure automatic monitoring of the knitting process at each hook movement.  
-A micro switch provides a synchronization signal, allowing the vision system to verify that the yarn (regardless of its color, thickness, or texture) is correctly positioned around the base of the hook.
+### Requirements
 
-In particular, the yarn should take on a “U”-shaped configuration embracing the base of the hook.  
-Any configuration that does not match this pattern must be detected as an error.
+The primary objective of the acquisition system is to enable automatic, hook-level monitoring of the knitting process on a low-cost embedded platform.  
+To meet this goal, the choice of camera and interface must satisfy the following requirements:
 
-When an anomaly is detected, the system should:
-
-- Immediately stop the motor driving the process;  
-- Display an error message and indicate the index of the corresponding hook.
-
-*Insert example photo here.*
-
-## Requirements
-
-To meet these objectives, the choice of camera and acquisition system must satisfy the following requirements:
-
-- **Compatibility with Raspberry Pi 3:** use of natively supported interfaces and libraries.  
-- **Ease of software integration:** availability of well-established computer vision libraries (e.g., `libcamera`, Picamera2, OpenCV).  
-- **Cost-effectiveness:** a sensor with sufficient resolution to distinguish fine yarn details, while keeping costs low.  
-- **Close-focus capability:** ability to capture sharp images at short distances, near the hook area.  
-- **Compact dimensions:** a small camera module to facilitate mechanical integration within the machine’s 3D frame.  
+- **Compatibility with Raspberry Pi 3:** use of natively supported interfaces and libraries.
+- **Ease of software integration:** availability of well-established computer vision libraries (e.g., libcamera, Picamera2, OpenCV).
+- **Cost-effectiveness:** sufficient resolution to distinguish fine yarn details while keeping costs low.
+- **Close-focus capability:** ability to capture sharp images at short distances near the hook area.
 - **Low power consumption:** efficient power usage to minimize the overall system load.
 
-## Considered Architectures
-
-This section describes the image acquisition options evaluated for the error detection system on Raspberry Pi 3, highlighting their implications in terms of image quality, latency, software integration, and overall system complexity.
-
-### Pi Camera via CSI Interface (recommended choice)
-
-The Raspberry Pi Camera v2.1 connects to the Broadcom SoC through the MIPI-CSI interface, a high-speed differential serial bus dedicated to video capture.  
-This direct connection offers several advantages:
-
-- **High bandwidth and low latency:** the pixel stream reaches the processor without passing through the USB or network stack, resulting in lower jitter and more deterministic timing.  
-- **Superior image quality:** 8 MP sensor with the Raspberry platform’s integrated ISP, providing fine control over exposure, gain, white balance, and frame rate.  
-- **Native integration:** direct support via `libcamera`/Picamera2 and V4L2, with robust pipelines for OpenCV, TFLite, and other vision frameworks.
-
-*Implications:* a better signal-to-noise ratio and frame consistency lead to improved accuracy in detecting subtle defects.  
-The low latency facilitates synchronized triggering with the microswitch event.
+These requirements guided the evaluation of several acquisition architectures for the Raspberry Pi 3, considering their impact on image quality, latency, software complexity, and mechanical integration.
 
 ---
 
-### ESP32-CAM via Wi-Fi or Serial
+### Considered Acquisition Architectures
 
-The ESP32-CAM integrates an OV2640 sensor (2 MP) and a microcontroller with Wi-Fi connectivity.  
-Typical acquisition involves onboard JPEG/MJPEG compression and frame transmission:
+#### Pi Camera via CSI Interface (Selected Option)
 
-- **Wi-Fi:** sends frames or snapshots to a broker/server; wiring is simple, but latency and jitter depend on network conditions and buffering.  
-- **Serial/USB-UART:** sends data in chunks to the Raspberry Pi. It reduces network uncertainty but requires fragmentation/reassembly protocols and buffer management.
+The Raspberry Pi Camera v2.1 connects directly to the Broadcom SoC through the MIPI–CSI interface, a high-speed differential serial bus dedicated to video capture.  
+This direct link offers several advantages for the considered application:
 
-*Implications:* extremely low cost and stand-alone operation, but lower image quality and controllability compared to CSI.  
-Compression may hide fine defects, and the less deterministic timing makes it harder to align precisely with the hook’s motion.  
-Moreover, the ESP32-CAM module is bulkier than the Pi Camera, making integration into the existing mechanical frame more difficult.  
-On the positive side, its shorter minimum focus distance makes it potentially more suitable for close-up shots without additional lenses.
+- **High bandwidth and low latency:** the pixel stream reaches the processor without traversing the USB or network stack, resulting in reduced jitter and more deterministic timing.
+- **Image quality and control:** the 8 MP sensor, combined with the Raspberry platform’s integrated image signal processor (ISP), provides fine control over exposure, gain, white balance, and frame rate.
+- **Native integration:** the camera is supported via `libcamera` / Picamera2 and V4L2, with stable pipelines toward OpenCV, TensorFlow Lite, and other vision frameworks.
 
-#### Serial Variant Experiment (unsuccessful)
-
-In preliminary tests with a direct USB–UART connection, the module was successfully flashed with a MicroPython firmware, but upon reboot, the board remained stuck in the bootloader. The serial output only produced unreadable characters or repetitive error messages, never reaching the REPL prompt. This prevented validation of direct communication with the Raspberry Pi.
-
-#### MQTT Variant Experiment (unsuccessful)
-
-Within the Wi-Fi setup, a connection from ESP32-CAM → Raspberry Pi was attempted via an MQTT broker, following a *snapshot*-based approach:
-
-- The ESP32-CAM captures a JPEG frame every few seconds and publishes it to an MQTT topic.  
-- The Raspberry Pi, running a Mosquitto broker, subscribes to the topic, decodes the images, and displays/saves them locally.
-
-Despite the theoretical simplicity of this architecture, the practical tests were unsuccessful.  
-In particular, transmission and decoding issues occurred with the JPEG payloads (published directly via MQTT), making it impossible to correctly reconstruct the images on the Raspberry Pi side.
-
-Given these early failures and adopting an **agile** development approach (iterative and adaptive, as opposed to a waterfall model), the decision was made not to continue integrating the ESP32-CAM through this method, favoring more reliable solutions consistent with the project requirements.
-
-*Conclusion:* the ESP32-CAM via MQTT approach proved too unreliable for real-time error detection, further reinforcing the preference for the Pi Camera connected via CSI.
+In the context of hook-level defect detection, these properties translate into a favorable signal-to-noise ratio and consistent frame characteristics, which are beneficial for detecting subtle differences in yarn configuration.  
+The low and predictable latency also facilitates accurate synchronization between the microswitch event and the captured image, which is critical for reliable inspection.
 
 ---
 
-### Other Considered Alternatives (not tested)
+#### ESP32-CAM via Wi-Fi or Serial
 
-#### USB Webcam
-A ready-to-use and widely available solution with UVC support.  
-However, the data path goes through the USB stack, adding overhead compared to CSI and limiting camera control.  
-It can be suitable for prototyping or when latency requirements are less strict.
+The ESP32-CAM module integrates an OV2640 sensor (2 MP) and a microcontroller with on-board Wi-Fi connectivity.  
+In a typical setup, images are captured on the ESP32-CAM and transmitted to the Raspberry Pi for processing, either via Wi-Fi or over a serial link:
 
-#### Raspberry Pi HQ Camera
-A 12 MP module with a C/CS mount for interchangeable lenses.  
-It offers superior optical quality and flexibility (focus adjustment, focal lengths, dedicated macro optics) at the cost of higher price and larger size. Recommended when extreme close-ups or professional optical control are required.
+- **Wi-Fi:** the module sends JPEG or MJPEG frames to a broker or server.  
+  Wiring is simple, but latency and jitter depend on network conditions, buffering, and retransmissions.
+- **Serial / USB–UART:** the module transmits image data in chunks to the Raspberry Pi through a UART–USB bridge.  
+  This reduces dependence on the wireless network, but requires application-level protocols for fragmentation, reassembly, and buffering.
+
+The ESP32-CAM is extremely low cost and can operate as a stand-alone node.  
+However, compared to a CSI-connected Pi Camera, it provides lower image quality and less precise control over acquisition parameters.  
+On-board compression may obscure fine textile defects, and the less deterministic timing makes it harder to align the acquisition instant with the hook motion.
+
+From a mechanical standpoint, the ESP32-CAM module is also bulkier than the Pi Camera, complicating its integration into the compact 3D-printed frame of the desktop crochet machine.  
+On the positive side, its shorter minimum focus distance can be advantageous for very close-up shots, potentially reducing the need for additional optics.
+
+---
+
+##### Serial variant (unsuccessful)
+
+In preliminary experiments with a direct USB–UART connection, the ESP32-CAM was successfully flashed with a MicroPython firmware.  
+However, upon reboot, the board remained stuck in the bootloader, and the serial output consisted only of unreadable characters or repetitive error messages, never reaching a stable REPL prompt.  
+This behavior prevented the validation of a reliable point-to-point communication channel with the Raspberry Pi and hindered further development of the serial-based approach.
+
+---
+
+##### MQTT-based variant (unsuccessful)
+
+A Wi-Fi-based architecture was also evaluated, in which the ESP32-CAM periodically captured JPEG snapshots and published them to an MQTT topic, while the Raspberry Pi—running a Mosquitto broker—subscribed to the topic, decoded the images, and displayed or stored them locally.  
+Despite its conceptual simplicity, this approach suffered from practical issues related to the transmission and reconstruction of the JPEG payloads.  
+Decoding errors and corrupted frames frequently occurred, making it impossible to guarantee consistent image delivery for real-time detection.
+
+Given these early difficulties and following an iterative, prototype-driven development process, the ESP32-CAM solutions were deemed insufficiently reliable for the timing and robustness requirements of hook-level error detection, and effort was redirected toward more tightly integrated alternatives.
+
+---
+
+#### Other Considered Alternatives (Not Tested)
+
+##### USB webcam
+
+Standard USB webcams offer a ready-to-use and widely available solution, typically with UVC support under Linux.  
+However, image data must traverse the USB stack, introducing additional overhead compared to CSI and limiting the level of low-level camera control.  
+Such devices are suitable for early prototyping or applications with less stringent latency requirements, but are less attractive when deterministic timing and compact integration are needed.
+
+##### Raspberry Pi HQ Camera
+
+The Raspberry Pi HQ Camera is a 12 MP module with a C/CS mount for interchangeable lenses.  
+It provides superior optical quality and flexibility in terms of focus, focal length, and macro optics, at the cost of higher price and significantly larger size compared to the Pi Camera v2.1.  
+The HQ Camera is therefore more appropriate when extreme close-ups or professional optical control are required, whereas the present work prioritizes low cost and compactness.
+
+---
+
+### Final Choice
+
+Considering the functional requirements, the practical experiments with the ESP32-CAM, and the constraints of the crochet machine, the Pi Camera v2.1 connected via the MIPI–CSI interface emerged as the most suitable option.  
+It combines sufficient resolution and close-focus capability with low and deterministic latency, strong software support on the Raspberry Pi 3, and a compact form factor compatible with the 3D-printed camera mount described in Section @sec:camera_mount.  
+This configuration is therefore adopted as the reference acquisition system for the error detection pipeline.
+
+
+
 
 ## - **[3D Camera Mount](error-mount.qmd)**  
   Mechanical support, 3D printing, working distance, and CAD notes.
-
+  
 ## - **[Error Recognition — Code](error-code.qmd)**  
   Algorithms, model/code structure, data flow, and deployment notes.
 
@@ -99,6 +131,4 @@ It offers superior optical quality and flexibility (focus adjustment, focal leng
 ## - **[Results & Efficiency](error-results.qmd)**  
   Datasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget.
 
-
 ## - **[Overview](error-recognition.qmd)**  
-  
