@@ -1,16 +1,20 @@
 ## Mechanical Design of the Camera Mount {#sec:camera_mount}
 
-The camera mounting solution combines a commercially available magnetic-base stand with a custom 3D-printed support designed specifically for the Raspberry Pi Camera module.  
-The magnetic base provides a rigid and highly stable foundation, while allowing fine manual adjustment in height, angle, and lateral position through its articulated arm.
+The camera mounting solution combines a commercially available __magnetic-base stand_ with a __custom 3D-printed support__ designed specifically for the Raspberry Pi Camera module.  
+The magnetic base provides a __rigid__ and __highly stable foundation__, while allowing fine manual adjustment in height, angle, and lateral position through its articulated arm.
 
-A custom holder for the Raspberry Pi Camera v2.1 was designed in Autodesk Fusion 360 and fabricated using fused deposition modeling (FDM) with PLA filament on a Bambu Lab A1 Mini 3D printer.  
+### Custom 3D-Printed Camera Holder
+
+A custom holder for the Raspberry Pi Camera v2.1 was designed in __Autodesk Fusion 360__ and fabricated using fused deposition modeling (FDM) with __PLA filament__ on a __Bambu Lab A1 Mini 3D printer__.  
 The printed part encloses the camera PCB and incorporates a series of mounting holes and a pin that fits into the threaded end of the magnetic base arm.
 
-While the magnetic stand and the 3D-printed camera holder provide sufficient stability for prototyping, the overall stiffness of the structure is not optimal yet.  
-Small shifts caused by machine vibration or accidental contact can slightly alter the camera pose over time, affecting the exact position of the region of interest in the image.  
-Improving the mechanical stability of the mounting solution is therefore an important direction for future work, with the goal of achieving fully repeatable alignment over long acquisition periods.
+### Stability Considerations and Limitations
 
-A CAD rendering of the printed holder is shown in Figure.
+While the magnetic stand and the 3D-printed camera holder provide sufficient __stability__ for prototyping, the overall __stiffness__ of the structure is __not optimal yet__.  
+Small shifts caused by machine __vibration__ or accidental contact can slightly __alter the camera pose__ over time, affecting the exact position of the __region of interest__ in the image.  
+Improving the mechanical stability of the mounting solution is therefore an __important direction__ for future work, with the goal of achieving __fully repeatable alignment__ over long acquisition periods.
+
+A __CAD rendering__ of the printed holder is shown in Figure.
 
 ::: {.columns}
 ::: {.column width="50%"}

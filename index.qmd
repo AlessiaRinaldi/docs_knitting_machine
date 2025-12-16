@@ -3,10 +3,12 @@ title: "Automated Knitting Machine"
 page-layout: full
 ---
 
-::: {.columns .v-center}
-::: {.column width="50%"}
 
 ## From a Digital Design to Fabric
+
+
+::: {.columns .v-center}
+::: {.column width="50%"}
 
 The idea behind this project draws inspiration from the operating principle of **3D printers**: starting from a digital model, they can automatically produce objects with **precision** and **repeatability**.
 

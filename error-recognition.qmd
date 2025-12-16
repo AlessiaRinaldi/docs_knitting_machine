@@ -6,13 +6,27 @@ title: Error Recognition
 
 Textile practices such as __crochet__ and __knitting__ have recently experienced a widespread resurgence. Many creative activities traditionally rooted in manual craftsmanship, once considered less relevant in the context of industrialization and globalization, are now being rediscovered. Skills that historically required years of hands-on experience can, however, be difficult and discouraging for beginners, especially for adults who approach these practices with limited time, resources, or access to expert guidance. Crochet is a notable example: although widely practiced across cultures and historically spread in Europe through Italian convents in the sixteenth century, it remains technically demanding and __highly dependent__ on the __maker’s ability__ to recognize and correct errors. The COVID-19 pandemic further contributed to this renewed interest, encouraging many people to explore slow, creative, and tactile activities.
 
+### Why Crochet Is Still Error-Prone
+
 Despite this revival, crochet performed using mechanical devices has seen relatively little technological development. Existing crochet machines remain strongly __operator-dependent__ and offer __limited support__ for automated quality monitoring. Moreover, hobbyist tools such as __circular crochet looms__, widely available and inexpensive, provide __no error feedback__ and require __constant attention__ from the user. In this work, we start from a commercially available circular loom intended for hobby use and, through a series of mechanical, electronic, and software modifications, transform it into a __fully automated crochet machine__ capable of __self-monitoring__. This approach demonstrates how __accessible__ off-the-shelf tools can be augmented and repurposed into automated systems, lowering the barrier to entry for creative technologies.
+
+### Why Early Error Detection Matters
 
 A single __undetected defect__, such as missing yarn, incomplete engagement, or a misaligned loop, may __propagate__ across many subsequent cycles, compromising the entire production and resulting in __wasted time__ and __materials__. For hobbyists and individual makers, this leads to frustration and loss of work. For small and medium-sized factories, the consequences extend to production __inefficiencies__ and __environmental impact__. As the textile industry is one of the major contributors to global waste and pollution, __improving error detection__ and __reducing material waste__ is a relevant challenge from both practical and sustainability perspectives.
 
-Automating the early detection of such defects requires __monitoring__ the hook at the precise moment when the yarn configuration becomes informative. In the scenario addressed in this work, a correctly formed stitch appears as a characteristic __“U”-shaped__ engagement around the base of the hook. Any __deviation__ from this expected pattern must be __identified__ promptly to prevent the defect from propagating downstream. A ___hardware microswitch___ mounted on the machine provides a __synchronization signal__ marking the exact phase of the hook movement, enabling image acquisition at each cycle for real-time inspection.
+### What a Correct Stitch Looks Like
 
-In this section, we present a __lightweight__, __real-time embedded vision system__ for hook-level error detection implemented entirely on a ___Raspberry Pi 3___ equipped with a ___CSI camera module___ and mounted on a ___custom 3D-printed support___. The system captures images in synchrony with the machine’s motion, isolates the region of interest, and analyzes it using a dedicated __detection algorithm__ capable of distinguishing correct yarn engagement from error conditions. Our goal is to support both individual makers, who may not have access to industrial-grade equipment, and future industrial applications, where inline quality monitoring could significantly reduce waste and promote more __sustainable__ textile manufacturing.
+Automating the early detection of such defects requires __monitoring__ the hook at the precise moment when the yarn configuration becomes informative. In the scenario addressed in this work, a correctly formed stitch appears as a characteristic __“U”-shaped__ engagement around the base of the hook. Any __deviation__ from this expected pattern must be __identified__ promptly to prevent the defect from propagating downstream.
+
+### Our Approach
+
+In this section, we present a __lightweight__, __real-time embedded vision system__ for hook-level error detection implemented entirely on a ___Raspberry Pi 3___ equipped with a ___CSI camera module___ and mounted on a ___custom 3D-printed support___. 
+
+A ___hardware microswitch___ mounted on the machine provides a __synchronization signal__ marking the exact phase of the hook movement, enabling image acquisition at each cycle for real-time inspection. 
+
+In this way system captures images in synchrony with the machine’s motion, isolates the region of interest, and analyzes it using a dedicated __detection algorithm__ capable of distinguishing correct yarn engagement from error conditions. 
+
+Our goal is to support both individual makers, who may not have access to industrial-grade equipment, and future industrial applications, where inline quality monitoring could significantly reduce waste and promote more __sustainable__ textile manufacturing.
 
 
 ## - **[Selection of the Acquisition System for Error Detection](error-camera.qmd)**  
