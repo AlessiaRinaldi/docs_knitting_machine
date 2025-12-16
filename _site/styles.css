@@ -1,9 +1,20 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap');
 
-/* ---------- General page style ---------- */
+/* ============================================================
+   COLOR PALETTE
+   ============================================================ */
+:root {
+  --vinaccia: #7b2d43;
+  --vinaccia-dark: #5e1f33;
+  --rosa-chiaro: #fff5f8;
+  --rosa-navbar: #f8dfe5;
+}
+
+/* ============================================================
+   General page style
+   ============================================================ */
 body {
-  background-color: #fff5f8; /* rosa chiarissimo */
-  /*font-family: "Georgia", "Times New Roman", serif;*/
+  background-color: var(--rosa-chiaro);
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #333;
   line-height: 1.7;
@@ -11,25 +22,30 @@ body {
   padding: 0;
 }
 
-/* ---------- Headings ---------- */
+/* ============================================================
+   Headings
+   ============================================================ */
 h1, h2, h3, h4 {
-  /*font-family: "Playfair Display", "Georgia", serif;*/
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #3b3b3b;
   letter-spacing: 0.2px;
 }
 
-/* ---------- Navbar customization ---------- */
+/* ============================================================
+   Navbar customization
+   ============================================================ */
 .navbar {
-  background-color: #f8dfe5 !important; /* rosa molto tenue */
+  background-color: var(--rosa-navbar) !important;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   font-size: 1rem;
   letter-spacing: 0.3px;
 }
 
-/* ---------- Links ---------- */
+/* ============================================================
+   Links
+   ============================================================ */
 a {
-  color: #b30059; /* rosa elegante */
+  color: #b30059;
   text-decoration: none;
   transition: color 0.2s ease;
 }
@@ -38,8 +54,9 @@ a:hover {
   text-decoration: underline;
 }
 
-/* ---------- Main content layout ---------- */
-/* sfondo pieno, contenuto più a sinistra */
+/* ============================================================
+   Main content layout
+   ============================================================ */
 main.content {
   background: transparent !important;
   box-shadow: none !important;
@@ -49,37 +66,37 @@ main.content {
   max-width: 100%;
 }
 
-/* lascia spazio al margine destro occupato dalla sidebar fissa (desktop) */
+/* lascia spazio al margine destro occupato dalla sidebar fissa */
 @media (min-width: 1200px) {
   #quarto-content {
-    margin-right: 20rem; /* deve combaciare con la larghezza sidebar */
+    margin-right: 20rem;
   }
 }
 
-/* ---------- RIGHT "On this page" SIDEBAR ---------- */
-/* In Quarto è il margin sidebar: #quarto-margin-sidebar */
+/* ============================================================
+   RIGHT "On this page" SIDEBAR
+   ============================================================ */
 @media (min-width: 1200px) {
   #quarto-margin-sidebar {
-    background: #ffffff !important;        /* bianco pieno */
-    position: fixed !important;            /* fissata a destra */
-    top: 56px;                              /* sotto la navbar (≈56px) */
+    background: #ffffff !important;
+    position: fixed !important;
+    top: 56px;
     right: 0;
     bottom: 0;
     width: 20rem;
     overflow-y: auto;
-    border-left: 2px solid #f2cbdc;        /* bordo rosa tenue */
+    border-left: 2px solid #f2cbdc;
     box-shadow: -4px 0 8px rgba(0,0,0,0.05);
     padding: 1rem 1.25rem;
   }
 
-  /* titolo e link del TOC */
   #quarto-margin-sidebar .sidebar-title {
-    /*font-family: "Playfair Display", "Georgia", serif;*/
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #800040;
     font-weight: 600;
     margin-bottom: 0.6rem;
   }
+
   #quarto-margin-sidebar a {
     color: #333;
   }
@@ -89,7 +106,7 @@ main.content {
   }
 }
 
-/* comportamento mobile/tablet: sidebar normale */
+/* comportamento mobile/tablet */
 @media (max-width: 1199.98px) {
   #quarto-margin-sidebar {
     background: rgba(255,255,255,0.6);
@@ -102,7 +119,9 @@ main.content {
   }
 }
 
-/* ---------- Tables ---------- */
+/* ============================================================
+   Tables
+   ============================================================ */
 table {
   border-collapse: collapse;
   width: 100%;
@@ -116,29 +135,34 @@ th, td {
   padding: 0.75em;
 }
 th {
-  background-color: #f8dfe5;
+  background-color: var(--rosa-navbar);
   color: #333;
 }
 
-/* ---------- Code blocks ---------- */
+/* ============================================================
+   Code blocks
+   ============================================================ */
 pre, code {
   background-color: #fff0f6;
   border-radius: 6px;
   padding: 0.3em 0.6em;
 }
 
-/* ---------- Footer ---------- */
+/* ============================================================
+   Footer
+   ============================================================ */
 footer {
-  background: #f8dfe5;
+  background: var(--rosa-navbar);
   color: #555;
   text-align: center;
   padding: 1em 0;
   margin-top: 2em;
   font-size: 0.9em;
 }
-/* ---------- Force full-width layout for all pages ---------- */
 
-/* Rimuove i limiti di larghezza imposti da Quarto o Bootstrap */
+/* ============================================================
+   FORCE FULL-WIDTH LAYOUT
+   ============================================================ */
 :root {
   --content-max-width: 100% !important;
 }
@@ -157,19 +181,97 @@ footer {
   padding-right: 3vw !important;
 }
 
-/* Assicura che la sezione principale occupi tutto lo spazio */
 #quarto-content {
   max-width: 100% !important;
   width: 100% !important;
 }
 
-/* Sidebar e contenuto coordinati */
-@media (min-width: 1200px) {
-  #quarto-content {
-    margin-right: 20rem; /* deve combaciare con la larghezza sidebar */
-  }
+/* ============================================================
+   CALLOUTS (Project Sections) — VINACCIA THEME
+   ============================================================ */
+.callout-note {
+  border-left: 4px solid var(--vinaccia);
+}
 
-  #quarto-margin-sidebar {
-    width: 20rem;
-  }
+.callout-note > .callout-header {
+  background-color: var(--vinaccia);
+  color: white;
+  font-weight: 600;
+}
+
+.callout-note a {
+  color: var(--vinaccia);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.callout-note a:hover {
+  color: var(--vinaccia-dark);
+  text-decoration: underline;
+}
+/* ============================================================
+   QUARTO CALLOUT NOTE — force vinaccia (override Bootstrap vars)
+   ============================================================ */
+.callout.callout-note {
+  --callout-color: var(--vinaccia) !important;   /* colore principale (prima era blu) */
+  border-left-color: var(--vinaccia) !important;
+}
+
+/* Barra/header del callout (la fascia azzurra in alto) */
+.callout.callout-note > .callout-header {
+  background-color: rgba(123, 45, 67, 0.10) !important;
+}
+
+/* Titolo del callout */
+.callout.callout-note .callout-title-container {
+  color: var(--vinaccia) !important;
+  font-weight: 700;
+}
+
+/* Icona “i” (cerchietto azzurro) */
+.callout.callout-note .callout-icon-container,
+.callout.callout-note .callout-icon-container i {
+  color: var(--vinaccia) !important;
+}
+/*///////////////////////////////////////////////////////////////////////////////////*/
+
+
+/* ============================================================
+   SEARCH RESULTS (barra di ricerca)
+   ============================================================ */
+
+/* Cambia il colore della selezione dei risultati */
+.aa-Item[aria-selected="true"] {
+  background-color: rgba(123, 45, 67, 0.2) !important;  /* Colore selezionato per i risultati */
+  color: var(--vinaccia) !important; /* Testo vinaccia per la selezione */
+}
+
+/* Cambia la lente di ricerca attiva */
+.navbar .aa-InputWrapperPrefix {
+  color: var(--vinaccia) !important; /* Colore vinaccia per la lente di ricerca */
+}
+
+/* Risultati della ricerca su hover o selezione */
+.aa-Item:hover, .aa-Item[aria-selected="true"] {
+  background-color: rgba(123, 45, 67, 0.25) !important;  /* Sfondo più scuro quando hover o selezione */
+}
+
+/* ============================================================
+   "ON THIS PAGE" (TOC) — Cambia il colore dei link attivi
+   ============================================================ */
+
+/* Quando la sezione è selezionata mentre si scorre */
+#quarto-margin-sidebar .active > a {
+  color: var(--vinaccia) !important;
+  font-weight: 600;
+}
+
+/* Colore del link della sezione che si evidenzia mentre scorre */
+#quarto-margin-sidebar .active > a::before {
+  background-color: var(--vinaccia) !important;
+}
+
+/* Hover su un link nella sidebar */
+#quarto-margin-sidebar a:hover {
+  color: var(--vinaccia-dark) !important;
 }

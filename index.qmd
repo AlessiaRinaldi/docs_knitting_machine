@@ -1,13 +1,59 @@
 ---
 title: "Automated Knitting Machine"
+page-layout: full
 ---
-The idea behind this project draws inspiration from the operating principle of 3D printers: starting from a digital model, they can automatically produce three-dimensional objects with precision and repeatability.
 
-The objective of this project is to transpose this paradigm to the textile field by developing an automated knitting machine capable of producing knit patterns from a predefined digital design.
+::: {.columns .v-center}
+::: {.column width="50%"}
 
+## From a Digital Design to Fabric
 
-## - **[Error recognition](error-recognition.qmd)**  
+The idea behind this project draws inspiration from the operating principle of **3D printers**: starting from a digital model, they can automatically produce objects with **precision** and **repeatability**.
 
-## - **[Components](components.qmd)**  
+The objective of this work is to bring the same paradigm to textiles, by developing an **automated knitting machine** capable of producing knit patterns from a predefined digital design.
 
-## - **[Control System](control-system.qmd)**  
+:::
+
+::: {.column width="50%" style="text-align:right;"}
+![](images/sentro.png){fig-alt="Circular knitting machine" width=90%}
+:::
+:::
+
+---
+
+## Project Sections
+
+::: {.columns}
+::: {.column width="33%"}
+
+::: {.callout-note}
+### Error recognition  
+Real-time detection of defects and anomalies during operation.  
+
+[Open →](error-recognition.qmd)
+:::
+
+:::
+
+::: {.column width="33%"}
+
+::: {.callout-note}
+### Components  
+Mechanical, electronic, and sensing elements of the platform.  
+
+[Open →](components.qmd)
+:::
+
+:::
+
+::: {.column width="33%"}
+
+::: {.callout-note}
+### Control System  
+Actuation, logic, and synchronization of the machine.  
+
+[Open →](control-system.qmd)
+:::
+
+:::
+:::
