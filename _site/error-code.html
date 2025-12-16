@@ -69,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -139,17 +168,145 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#error-detection-software-and-implementation" id="toc-error-detection-software-and-implementation" class="nav-link active" data-scroll-target="#error-detection-software-and-implementation">Error Detection Software and Implementation</a>
+  <ul>
+  <li><a href="#dataset-development-and-color-specific-challenges" id="toc-dataset-development-and-color-specific-challenges" class="nav-link" data-scroll-target="#dataset-development-and-color-specific-challenges">Dataset Development and Color-Specific Challenges</a></li>
+  <li><a href="#synchronized-acquisition-and-roi-extraction" id="toc-synchronized-acquisition-and-roi-extraction" class="nav-link" data-scroll-target="#synchronized-acquisition-and-roi-extraction">Synchronized Acquisition and ROI Extraction</a></li>
+  <li><a href="#preprocessing-and-prototype-generation" id="toc-preprocessing-and-prototype-generation" class="nav-link" data-scroll-target="#preprocessing-and-prototype-generation">Preprocessing and Prototype Generation</a></li>
+  <li><a href="#discriminative-roi-mask-estimation" id="toc-discriminative-roi-mask-estimation" class="nav-link" data-scroll-target="#discriminative-roi-mask-estimation">Discriminative ROI Mask Estimation</a></li>
+  <li><a href="#log-likelihood-ratio-classification" id="toc-log-likelihood-ratio-classification" class="nav-link" data-scroll-target="#log-likelihood-ratio-classification">Log-Likelihood Ratio Classification</a></li>
+  <li><a href="#code-availability" id="toc-code-availability" class="nav-link" data-scroll-target="#code-availability">Code Availability</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
 
+<section id="error-detection-software-and-implementation" class="level2">
+<h2 class="anchored" data-anchor-id="error-detection-software-and-implementation">Error Detection Software and Implementation</h2>
+<p>The image acquisition and error-recognition pipeline is implemented in Python and runs directly on the <strong>Raspberry Pi 3</strong>.<br>
+The system operates in a fully event-driven manner: each activation of the microswitch triggers an image capture, an immediate crop of the region of interest (ROI), and a real-time evaluation of the yarn configuration using a <strong>log-likelihood ratio (LLR) classifier</strong>.</p>
+<hr>
+<section id="dataset-development-and-color-specific-challenges" class="level3">
+<h3 class="anchored" data-anchor-id="dataset-development-and-color-specific-challenges">Dataset Development and Color-Specific Challenges</h3>
+<p>To train and evaluate the classifier, a dedicated dataset of cropped hook images was collected directly from the machine.<br>
+At present, the dataset includes three yarn colors:</p>
+<ul>
+<li><strong>light blue</strong></li>
+<li><strong>purple</strong></li>
+<li><strong>fuchsia</strong></li>
+</ul>
+<p>Although these colors appear visually quite different in RGB, their behavior after preprocessing (grayscale conversion, CLAHE enhancement, ROI masking) is not uniform.<br>
+Preliminary qualitative inspection suggested that the <strong>fuchsia</strong> yarn could be challenging due to its visual similarity to the pink background of the machine.<br>
+However, subsequent experiments revealed that raw chromatic contrast is not the primary factor affecting detectability in the proposed NCC–LLR pipeline.</p>
+<p>After grayscale conversion, the <strong>light blue</strong> yarn becomes closer in intensity to the machine background, resulting in lower separability between correct and defective configurations.<br>
+Conversely, the <strong>fuchsia</strong> yarn exhibits stronger and more consistent local texture variations within the discriminative ROI, which makes the LLR scores for (H_0) and (H_1) more distinct despite its low RGB contrast.<br>
+The <strong>purple</strong> yarn displays intermediate behavior, with moderate grayscale separability.</p>
+<p>To further probe the limits of the method, additional experiments were conducted using a <strong>pale pink yarn</strong> whose color is almost indistinguishable from the background.<br>
+Under this condition, neither the NCC-based similarity nor the CLAHE-enhanced preprocessing provided sufficient discriminative information for reliable classification, and the LLR method consistently failed to separate the two hypotheses.<br>
+This extreme low-contrast scenario is therefore considered <strong>out of scope for the current handcrafted method</strong> and highlights the need for future solutions based on learned or color-invariant features.</p>
+<div class="columns">
+<div class="column" style="width:33%;">
+<p><img src="images/yarn_blue.png" class="img-fluid" alt="Light blue yarn"> <em>Light blue</em></p>
+</div><div class="column" style="width:33%;">
+<p><img src="images/yarn_purple.png" class="img-fluid" alt="Purple yarn"> <em>Purple</em></p>
+</div><div class="column" style="width:33%;">
+<p><img src="images/yarn_fuchsia.png" class="img-fluid" alt="Fuchsia yarn"> <em>Fuchsia</em></p>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:33%;">
+<p><img src="images/yarn_pink_fail.png" class="img-fluid" alt="Pale pink yarn (failure)"> <em>Pale pink (failure)</em></p>
+</div>
+</div>
+<p><strong>Figure <span class="citation" data-cites="fig:yarn_colors">@fig:yarn_colors</span>.</strong> Examples of yarn colors used in the dataset.<br>
+The pale pink yarn is almost indistinguishable from the machine background and cannot be reliably detected by the current method.</p>
+<hr>
+</section>
+<section id="synchronized-acquisition-and-roi-extraction" class="level3">
+<h3 class="anchored" data-anchor-id="synchronized-acquisition-and-roi-extraction">Synchronized Acquisition and ROI Extraction</h3>
+<p>Upon a rising edge from the microswitch (handled via the <code>gpiozero</code> library), the software captures a still image using the Picamera 2.1 interface.<br>
+Since only a small portion of the full frame contains the hook region, the image is immediately cropped according to a predefined ROI, specified either in relative coordinates or in absolute pixel values.</p>
+<p>This cropping stage reduces computational cost and increases robustness by ensuring that the classifier operates on a stable and consistent portion of the scene.<br>
+Boundary checks are applied to avoid invalid crops in case of slight camera misalignment, which is important due to the sub-centimeter positioning precision required for hook-level inspection.</p>
+<hr>
+</section>
+<section id="preprocessing-and-prototype-generation" class="level3">
+<h3 class="anchored" data-anchor-id="preprocessing-and-prototype-generation">Preprocessing and Prototype Generation</h3>
+<p>The LLR classifier relies on two prototype images:</p>
+<ul>
+<li>a <strong>positive prototype</strong> representing correct yarn engagement;</li>
+<li>a <strong>negative prototype</strong> representing a hook that has failed to catch the yarn.</li>
+</ul>
+<p>These prototypes are computed as the median of small training sets of positive and negative examples.<br>
+Before prototype computation, images undergo grayscale conversion, Gaussian denoising, and light contrast equalization using <strong>CLAHE</strong>, improving robustness to illumination variability and sensor noise.</p>
+<hr>
+</section>
+<section id="discriminative-roi-mask-estimation" class="level3">
+<h3 class="anchored" data-anchor-id="discriminative-roi-mask-estimation">Discriminative ROI Mask Estimation</h3>
+<p>The LLR classifier does not operate on the entire cropped image, but only within a discriminative region of interest (ROI).<br>
+This ROI is defined by a soft mask computed offline using a separate Python script (<code>build_mean_diff_mask.py</code>), which analyzes pre-cropped patches of both positive and negative examples.</p>
+<p>The script takes as input two sets of images: a positive set (<code>--pos</code>) and a negative set (<code>--neg</code>).<br>
+All images are converted to grayscale, denoised, equalized with CLAHE, and resized to a common resolution of (76 ) pixels.</p>
+<p>For each pixel location, the script computes a Fisher-like separability score:</p>
+<p><span class="math display">\[
+S(i,j) \propto
+\frac{|\mu_{\text{pos}}(i,j) - \mu_{\text{neg}}(i,j)|}
+{\sigma_{\text{pos}}(i,j) + \sigma_{\text{neg}}(i,j) + \varepsilon}
+\]</span></p>
+<p>The resulting score map is normalized to ([0,1]) and restricted to a fixed rectangular zone corresponding to the physical region where the yarn intersects the hook.<br>
+Outside this area, the mask is set to zero so that the LLR classifier ignores those pixels.</p>
+<p>To preserve local texture, the soft score map (S) is optionally smoothed with a bilateral filter.<br>
+A global threshold is then selected using <strong>Otsu’s method</strong>, producing a hard binary mask.</p>
+<p>The script saves: - the soft mask (<code>mask_soft.png</code>) - the hard mask (<code>mask_hard_otsu.png</code>) - a visualization of the rectangular ROI</p>
+<p>At runtime, the soft mask is used as a per-pixel weighting function in the NCC computation:</p>
+<p><span class="math display">\[
+s_{\text{pos}} = \text{NCC}(I, \mu_{\text{pos}}; \text{mask}), \qquad
+s_{\text{neg}} = \text{NCC}(I, \mu_{\text{neg}}; \text{mask})
+\]</span></p>
+<p>Among the available yarn colors, the <strong>fuchsia</strong> yarn was specifically included to demonstrate that the proposed method does not rely on RGB contrast.<br>
+Despite its visual similarity to the background, the preprocessing pipeline enables reliable detection.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img src="images/mask_soft.png" class="img-fluid" alt="Soft ROI mask"> <em>mask_soft.png</em></p>
+</div><div class="column" style="width:50%;">
+<p><img src="images/mask_hard_otsu.png" class="img-fluid" alt="Hard ROI mask"> <em>mask_hard_otsu.png</em></p>
+</div>
+</div>
+<p><strong>Figure <span class="citation" data-cites="fig:roi_masks">@fig:roi_masks</span>.</strong> Visualization of the ROI masks used during computation.</p>
+<hr>
+</section>
+<section id="log-likelihood-ratio-classification" class="level3">
+<h3 class="anchored" data-anchor-id="log-likelihood-ratio-classification">Log-Likelihood Ratio Classification</h3>
+<p>For each cropped image, the classifier computes two normalized cross-correlation (NCC) scores:</p>
+<p><span class="math display">\[
+s_{\text{pos}}, \quad s_{\text{neg}}
+\]</span></p>
+<p>The decision variable is defined as:</p>
+<p><span class="math display">\[
+LLR = s_{\text{pos}} - s_{\text{neg}}
+\]</span></p>
+<p>A threshold on the LLR score is selected to minimize false negatives, which are more detrimental than false positives in this application.<br>
+If the threshold is not satisfied, the hook is classified as defective and an immediate stop command is issued.</p>
+<hr>
+</section>
+<section id="code-availability" class="level3">
+<h3 class="anchored" data-anchor-id="code-availability">Code Availability</h3>
+<p>The complete implementation—including synchronized image capture, ROI extraction, preprocessing, prototype generation, and real-time LLR evaluation—is available at:</p>
+<p><a href="https://github.com/AlessiaRinaldi/error_recognition_knitting_machine" class="uri">https://github.com/AlessiaRinaldi/error_recognition_knitting_machine</a></p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
