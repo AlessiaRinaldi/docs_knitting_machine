@@ -1,0 +1,167 @@
+## Experimental Evaluation and Results
+
+### Experimental Protocol
+
+The performance of the proposed LLR-based detector was evaluated within the binary hypothesis-testing framework commonly adopted in supervised signal detection:
+
+$$
+H_0: \text{“U-shape” of the yarn}, \qquad
+H_1: \text{hole or missing yarn}.
+$$
+
+At each microswitch activation, the system acquires a cropped hook image, computes the log-likelihood ratio:
+
+$$
+LLR = s_{\text{pos}} - s_{\text{neg}},
+$$
+
+and compares it to a fixed threshold to decide between \(H_0\) and \(H_1\).
+This setting is equivalent to a classical detector with probabilities of detection and false alarm \(P_D\) and \(P_F\), as described in supervised signal detection and ROC analysis.
+
+To obtain an unbiased estimate of performance, the dataset was randomly partitioned into three non-overlapping subsets:
+
+- **Training set**: used exclusively to build the positive and negative prototypes and the discriminative ROI mask.  
+  It consists of 39 positive images and 27 negative images, balanced across the three yarn colors.
+- **Validation set**: 208 images, used only for threshold selection and operating-point tuning.
+- **Test set**: 771 images, used only for the final performance evaluation.
+
+---
+
+### Threshold Selection with Validation Set
+
+During validation, the classifier was evaluated using \(LLR = 0\).  
+With this configuration, at least one false alarm occurred, which is unacceptable in the real operating scenario: actual defects are extremely rare, and even a single false alarm would trigger an unnecessary machine stop.
+
+Following a **Neyman–Pearson design criterion**, the decision threshold was adjusted to obtain a false-alarm rate as close as possible to zero on the validation set, even at the expense of increased false negatives.  
+This led to the selection of
+
+$$
+LLR_{\text{thr}} = -0.035,
+$$
+
+which was kept fixed for the final evaluation on the independent test set.
+
+---
+
+### Test-Set Performance
+
+Once the threshold was fixed, the detector was evaluated on the independent test set of 771 images.
+
+|                    | Predicted \(H_0\) | Predicted \(H_1\) |
+|--------------------|------------------|------------------|
+| **True \(H_0\)** (no defect) | TN = 633 | FP = 0 |
+| **True \(H_1\)** (defect)    | FN = 20  | TP = 118 |
+
+**Table.** Confusion matrix on the test set (771 images).
+
+From these values:
+
+$$
+\begin{aligned}
+\text{Accuracy} &= \frac{TP + TN}{TP + TN + FP + FN}
+= \frac{751}{771} \approx 97.4\%, \\
+P_D &= \frac{TP}{TP + FN}
+= \frac{118}{138} \approx 85.5\%, \\
+P_F &= \frac{FP}{FP + TN} \approx 0\%, \\
+\text{Specificity} &= \frac{TN}{TN + FP} \approx 100\%.
+\end{aligned}
+$$
+
+Thus, the operating point enforces \(P_F \approx 0\) and accepts a moderate increase in missed detections 
+
+\(P_M = 1 - P_D\), consistent with a minimum-risk design in which unnecessary machine stops are far more costly than occasional missed defects.
+
+---
+
+### Per-Color Performance Analysis
+
+Performance was further analyzed by grouping test images by yarn color.
+
+#### Fuchsia (373 images)
+
+|            | Predicted \(H_0\) | Predicted \(H_1\) |
+|------------|------------------|------------------|
+| True \(H_0\) | TN = 322 | FP = 0 |
+| True \(H_1\) | FN = 3   | TP = 48 |
+
+$$
+\mathrm{ACC} \approx 99.2\%, \quad
+\mathrm{TPR} \approx 94.1\%, \quad
+\mathrm{FPR} \approx 0\%.
+$$
+
+#### Purple (238 images)
+
+|            | Predicted \(H_0\) | Predicted \(H_1\) |
+|------------|------------------|------------------|
+| True \(H_0\) | TN = 193 | FP = 0 |
+| True \(H_1\) | FN = 8   | TP = 37 |
+
+$$
+\mathrm{ACC} \approx 96.6\%, \quad
+\mathrm{TPR} \approx 82.2\%, \quad
+\mathrm{FPR} \approx 0\%.
+$$
+
+#### Light Blue (160 images)
+
+|            | Predicted \(H_0\) | Predicted \(H_1\) |
+|------------|------------------|------------------|
+| True \(H_0\) | TN = 118 | FP = 0 |
+| True \(H_1\) | FN = 9   | TP = 33 |
+
+$$
+\mathrm{ACC} \approx 94.4\%, \quad
+\mathrm{TPR} \approx 78.6\%, \quad
+\mathrm{FPR} \approx 0\%.
+$$
+
+Interestingly, the best performance is obtained for the **fuchsia** yarn, despite its visual similarity to the pink background.
+Conversely, the **light blue** yarn yields the lowest detection probability, as it is closest to the background in grayscale and generates less contrast within the ROI.
+
+This behavior reflects the fact that separability depends not on raw color contrast, but on the stability of local texture and intensity patterns after preprocessing.
+
+---
+
+### Out-of-Distribution Failure Case (Pale Pink Yarn)
+
+The pale pink yarn was not included in training, validation, or test sets, as it does not belong to normal operating conditions.
+In this edge case, more than **32%** of samples were misclassified, and the LLR distributions of \(H_0\) and \(H_1\) overlap almost completely.
+
+This confirms that extreme low-contrast conditions lie outside the operational domain of the method and motivates future extensions based on learned or contrast-invariant features.
+
+---
+
+### Real-Time Operation on Raspberry Pi 3
+
+The complete acquisition and detection pipeline runs directly on the **Raspberry Pi 3** and is triggered by the microswitch.
+The microswitch is activated approximately every \(0.42\,\text{s}\), corresponding to an inspection rate of
+
+$$
+f_{\text{inspect}} \approx 2.4 \ \text{inspections/s}.
+$$
+
+At each trigger, a full-resolution image is captured (1280×960 px), cropped to a \(76 \times 76\) ROI, and processed through preprocessing, NCC computation, and LLR evaluation.
+
+The total processing time per trigger is well below the inter-trigger interval, and no triggers were missed during testing.
+The effective inspection rate is therefore limited by the machine mechanics rather than by computation.
+
+The available computational margin enables **multi-sample decision fusion** strategies (e.g., majority voting or LLR averaging), which could reduce missed detections while maintaining the strict constraint \(P_F \approx 0\).
+
+---
+
+## - **[Conclusions and Future Works](error-future_work.qmd)**  
+
+## - **[Overview](error-recognition.qmd)**  
+
+## - **[Selection of the Acquisition System for Error Detection](error-camera.qmd)**  
+  Requirements, sensor & lens selection, lighting, sync, and mounting constraints.
+
+## - **[3D Camera Mount](error-mount.qmd)**  
+  Mechanical support, 3D printing, working distance, and CAD notes.
+
+  
+## - **[Error Recognition — Code](error-code.qmd)**  
+  Algorithms, model/code structure, data flow, and deployment notes.
+
+

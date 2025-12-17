@@ -50,7 +50,7 @@ This extreme low-contrast scenario is therefore considered **out of scope for th
 :::
 :::
 
-**Figure @fig:yarn_colors.** Examples of yarn colors used in the dataset.  
+**Figure:** Examples of yarn colors used in the dataset.  
 The pale pink yarn is almost indistinguishable from the machine background and cannot be reliably detected by the current method.
 
 ---
@@ -126,7 +126,7 @@ Despite its visual similarity to the background, the preprocessing pipeline enab
 :::
 :::
 
-**Figure @fig:roi_masks.** Visualization of the ROI masks used during computation.
+**Figure:** Visualization of the ROI masks used during computation.
 
 ---
 
@@ -154,3 +154,20 @@ If the threshold is not satisfied, the hook is classified as defective and an im
 The complete implementation—including synchronized image capture, ROI extraction, preprocessing, prototype generation, and real-time LLR evaluation—is available at:
 
 <https://github.com/AlessiaRinaldi/error_recognition_knitting_machine>
+
+
+
+## - **[Results & Efficiency](error-results.qmd)**  
+  Datasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget.
+
+
+## - **[Conclusions and Future Works](error-future_work.qmd)**  
+
+## - **[Overview](error-recognition.qmd)**  
+
+## - **[Selection of the Acquisition System for Error Detection](error-camera.qmd)**  
+  Requirements, sensor & lens selection, lighting, sync, and mounting constraints.
+
+## - **[3D Camera Mount](error-mount.qmd)**  
+  Mechanical support, 3D printing, working distance, and CAD notes.
+

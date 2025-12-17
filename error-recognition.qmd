@@ -41,3 +41,6 @@ Our goal is to support both individual makers, who may not have access to indust
 
 ## - **[Results & Efficiency](error-results.qmd)**  
   Datasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget.
+
+
+## - **[Conclusions and Future Works](error-future_work.qmd)**  

@@ -35,6 +35,8 @@ A __CAD rendering__ of the printed holder is shown in Figure.
   Datasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget.
 
 
+## - **[Conclusions and Future Works](error-future_work.qmd)**  
+
 ## - **[Overview](error-recognition.qmd)**  
   
 ## - **[Selection of the Acquisition System for Error Detection](error-camera.qmd)**  

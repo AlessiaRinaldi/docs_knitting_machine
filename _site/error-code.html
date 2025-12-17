@@ -147,6 +147,10 @@ window.Quarto = {
     <a class="dropdown-item" href="./error-results.html">
  <span class="dropdown-text">Results &amp; Efficiency</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./error-future_work.html">
+ <span class="dropdown-text">Conclusions and Future Works</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
@@ -182,6 +186,11 @@ window.Quarto = {
   <li><a href="#log-likelihood-ratio-classification" id="toc-log-likelihood-ratio-classification" class="nav-link" data-scroll-target="#log-likelihood-ratio-classification">Log-Likelihood Ratio Classification</a></li>
   <li><a href="#code-availability" id="toc-code-availability" class="nav-link" data-scroll-target="#code-availability">Code Availability</a></li>
   </ul></li>
+  <li><a href="#results-efficiency" id="toc-results-efficiency" class="nav-link" data-scroll-target="#results-efficiency">- <strong>Results &amp; Efficiency</strong></a></li>
+  <li><a href="#conclusions-and-future-works" id="toc-conclusions-and-future-works" class="nav-link" data-scroll-target="#conclusions-and-future-works">- <strong>Conclusions and Future Works</strong></a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">- <strong>Overview</strong></a></li>
+  <li><a href="#selection-of-the-acquisition-system-for-error-detection" id="toc-selection-of-the-acquisition-system-for-error-detection" class="nav-link" data-scroll-target="#selection-of-the-acquisition-system-for-error-detection">- <strong>Selection of the Acquisition System for Error Detection</strong></a></li>
+  <li><a href="#d-camera-mount" id="toc-d-camera-mount" class="nav-link" data-scroll-target="#d-camera-mount">- <strong>3D Camera Mount</strong></a></li>
   </ul>
 </nav>
     </div>
@@ -228,7 +237,7 @@ This extreme low-contrast scenario is therefore considered <strong>out of scope 
 <p><img src="images/yarn_pink_fail.png" class="img-fluid" alt="Pale pink yarn (failure)"> <em>Pale pink (failure)</em></p>
 </div>
 </div>
-<p><strong>Figure <span class="citation" data-cites="fig:yarn_colors">@fig:yarn_colors</span>.</strong> Examples of yarn colors used in the dataset.<br>
+<p><strong>Figure:</strong> Examples of yarn colors used in the dataset.<br>
 The pale pink yarn is almost indistinguishable from the machine background and cannot be reliably detected by the current method.</p>
 <hr>
 </section>
@@ -282,7 +291,7 @@ Despite its visual similarity to the background, the preprocessing pipeline enab
 <p><img src="images/mask_hard_otsu.png" class="img-fluid" alt="Hard ROI mask"> <em>mask_hard_otsu.png</em></p>
 </div>
 </div>
-<p><strong>Figure <span class="citation" data-cites="fig:roi_masks">@fig:roi_masks</span>.</strong> Visualization of the ROI masks used during computation.</p>
+<p><strong>Figure:</strong> Visualization of the ROI masks used during computation.</p>
 <hr>
 </section>
 <section id="log-likelihood-ratio-classification" class="level3">
@@ -303,9 +312,27 @@ If the threshold is not satisfied, the hook is classified as defective and an im
 <h3 class="anchored" data-anchor-id="code-availability">Code Availability</h3>
 <p>The complete implementation—including synchronized image capture, ROI extraction, preprocessing, prototype generation, and real-time LLR evaluation—is available at:</p>
 <p><a href="https://github.com/AlessiaRinaldi/error_recognition_knitting_machine" class="uri">https://github.com/AlessiaRinaldi/error_recognition_knitting_machine</a></p>
-
-
 </section>
+</section>
+<section id="results-efficiency" class="level2">
+<h2 class="anchored" data-anchor-id="results-efficiency">- <strong><a href="./error-results.html">Results &amp; Efficiency</a></strong></h2>
+<p>Datasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget.</p>
+</section>
+<section id="conclusions-and-future-works" class="level2">
+<h2 class="anchored" data-anchor-id="conclusions-and-future-works">- <strong><a href="./error-future_work.html">Conclusions and Future Works</a></strong></h2>
+</section>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">- <strong><a href="./error-recognition.html">Overview</a></strong></h2>
+</section>
+<section id="selection-of-the-acquisition-system-for-error-detection" class="level2">
+<h2 class="anchored" data-anchor-id="selection-of-the-acquisition-system-for-error-detection">- <strong><a href="./error-camera.html">Selection of the Acquisition System for Error Detection</a></strong></h2>
+<p>Requirements, sensor &amp; lens selection, lighting, sync, and mounting constraints.</p>
+</section>
+<section id="d-camera-mount" class="level2">
+<h2 class="anchored" data-anchor-id="d-camera-mount">- <strong><a href="./error-mount.html">3D Camera Mount</a></strong></h2>
+<p>Mechanical support, 3D printing, working distance, and CAD notes.</p>
+
+
 </section>
 
 </main> <!-- /main -->

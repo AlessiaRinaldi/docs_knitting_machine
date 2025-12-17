@@ -22,6 +22,8 @@ website:
             href: error-code.qmd
           - text: Results & Efficiency
             href: error-results.qmd
+          - text: Conclusions and Future Works
+            href: error-future_work.qmd
       - text: Components
         href: components.qmd
       - text: Control System

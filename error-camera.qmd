@@ -131,4 +131,7 @@ This configuration is therefore adopted as the reference acquisition system for 
 ## - **[Results & Efficiency](error-results.qmd)**  
   Datasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget.
 
+
+## - **[Conclusions and Future Works](error-future_work.qmd)**  
+
 ## - **[Overview](error-recognition.qmd)**  

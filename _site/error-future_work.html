@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Automated Knitting Machine</title>
+<title>error-future_work</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -90,7 +90,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -148,95 +148,51 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#from-a-digital-design-to-fabric" id="toc-from-a-digital-design-to-fabric" class="nav-link active" data-scroll-target="#from-a-digital-design-to-fabric">From a Digital Design to Fabric</a></li>
-  <li><a href="#project-sections" id="toc-project-sections" class="nav-link" data-scroll-target="#project-sections">Project Sections</a></li>
+  <li><a href="#conclusions-and-future-work" id="toc-conclusions-and-future-work" class="nav-link active" data-scroll-target="#conclusions-and-future-work">Conclusions and Future Work</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">- <strong>Overview</strong></a></li>
+  <li><a href="#selection-of-the-acquisition-system-for-error-detection" id="toc-selection-of-the-acquisition-system-for-error-detection" class="nav-link" data-scroll-target="#selection-of-the-acquisition-system-for-error-detection">- <strong>Selection of the Acquisition System for Error Detection</strong></a></li>
+  <li><a href="#d-camera-mount" id="toc-d-camera-mount" class="nav-link" data-scroll-target="#d-camera-mount">- <strong>3D Camera Mount</strong></a></li>
+  <li><a href="#error-recognition-code" id="toc-error-recognition-code" class="nav-link" data-scroll-target="#error-recognition-code">- <strong>Error Recognition — Code</strong></a></li>
+  <li><a href="#results-efficiency" id="toc-results-efficiency" class="nav-link" data-scroll-target="#results-efficiency">- <strong>Results &amp; Efficiency</strong></a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Automated Knitting Machine</h1>
-</div>
+<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta column-page-left">
 
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<section id="from-a-digital-design-to-fabric" class="level2">
-<h2 class="anchored" data-anchor-id="from-a-digital-design-to-fabric">From a Digital Design to Fabric</h2>
-<div class="columns v-center">
-<div class="column" style="width:50%;">
-<p>The idea behind this project draws inspiration from the operating principle of <strong>3D printers</strong>: starting from a digital model, they can automatically produce objects with <strong>precision</strong> and <strong>repeatability</strong>.</p>
-<p>The objective of this work is to bring the same paradigm to textiles, by developing an <strong>automated knitting machine</strong> capable of producing knit patterns from a predefined digital design.</p>
-</div><div class="column" style="text-align:right;">
-<p><img src="images/sentro.png" class="img-fluid" style="width:90.0%" alt="Circular knitting machine"></p>
-</div>
-</div>
-<hr>
+<section id="conclusions-and-future-work" class="level2">
+<h2 class="anchored" data-anchor-id="conclusions-and-future-work">Conclusions and Future Work</h2>
+<p>This work presented a complete real-time vision system for hook-level error detection on an automated crochet machine, implemented on a Raspberry Pi 3 using a lightweight LLR-based classifier.</p>
+<p>The system achieves high accuracy with an operating point tending toward zero false alarms, reaching approximately <strong>97.4% accuracy</strong> and <strong>85% detection probability</strong> on a test set of 771 images.</p>
+<p>Future work will investigate:</p>
+<ul>
+<li><p>multi-frame decision fusion,</p></li>
+<li><p>learned feature representations (e.g., lightweight CNNs),</p></li>
+<li><p>improved mechanical stability and camera alignment.</p></li>
+</ul>
+<p>Overall, the results demonstrate that <strong>low-cost embedded vision</strong> can support reliable, real-time quality control on textile machines, with promising extensions toward more robust and general solutions.</p>
 </section>
-<section id="project-sections" class="level2">
-<h2 class="anchored" data-anchor-id="project-sections">Project Sections</h2>
-<div class="columns">
-<div class="column" style="width:33%;">
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Error recognition
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Real-time detection of defects and anomalies during operation.</p>
-<p><a href="./error-recognition.html">Open →</a></p>
-</div>
-</div>
-</div><div class="column" style="width:33%;">
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Components
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Mechanical, electronic, and sensing elements of the platform.</p>
-<p><a href="./components.html">Open →</a></p>
-</div>
-</div>
-</div><div class="column" style="width:33%;">
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Control System
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Actuation, logic, and synchronization of the machine.</p>
-<p><a href="./control-system.html">Open →</a></p>
-</div>
-</div>
-</div>
-</div>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">- <strong><a href="./error-recognition.html">Overview</a></strong></h2>
+</section>
+<section id="selection-of-the-acquisition-system-for-error-detection" class="level2">
+<h2 class="anchored" data-anchor-id="selection-of-the-acquisition-system-for-error-detection">- <strong><a href="./error-camera.html">Selection of the Acquisition System for Error Detection</a></strong></h2>
+<p>Requirements, sensor &amp; lens selection, lighting, sync, and mounting constraints.</p>
+</section>
+<section id="d-camera-mount" class="level2">
+<h2 class="anchored" data-anchor-id="d-camera-mount">- <strong><a href="./error-mount.html">3D Camera Mount</a></strong></h2>
+<p>Mechanical support, 3D printing, working distance, and CAD notes.</p>
+</section>
+<section id="error-recognition-code" class="level2">
+<h2 class="anchored" data-anchor-id="error-recognition-code">- <strong><a href="./error-code.html">Error Recognition — Code</a></strong></h2>
+<p>Algorithms, model/code structure, data flow, and deployment notes.</p>
+</section>
+<section id="results-efficiency" class="level2">
+<h2 class="anchored" data-anchor-id="results-efficiency">- <strong><a href="./error-results.html">Results &amp; Efficiency</a></strong></h2>
+<p>Datasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget.</p>
 
 
 </section>

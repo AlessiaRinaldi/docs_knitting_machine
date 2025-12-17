@@ -1,0 +1,33 @@
+
+## Conclusions and Future Work
+
+This work presented a complete real-time vision system for hook-level error detection on an automated crochet machine, implemented on a Raspberry Pi 3 using a lightweight LLR-based classifier.
+
+The system achieves high accuracy with an operating point tending toward zero false alarms, reaching approximately **97.4% accuracy** and **85% detection probability** on a test set of 771 images.
+
+Future work will investigate:
+
+- multi-frame decision fusion,
+
+- learned feature representations (e.g., lightweight CNNs),
+
+- improved mechanical stability and camera alignment.
+
+Overall, the results demonstrate that **low-cost embedded vision** can support reliable, real-time quality control on textile machines, with promising extensions toward more robust and general solutions.
+
+
+## - **[Overview](error-recognition.qmd)**  
+
+## - **[Selection of the Acquisition System for Error Detection](error-camera.qmd)**  
+  Requirements, sensor & lens selection, lighting, sync, and mounting constraints.
+
+## - **[3D Camera Mount](error-mount.qmd)**  
+  Mechanical support, 3D printing, working distance, and CAD notes.
+
+  
+## - **[Error Recognition — Code](error-code.qmd)**  
+  Algorithms, model/code structure, data flow, and deployment notes.
+
+
+## - **[Results & Efficiency](error-results.qmd)**  
+  Datasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget.
