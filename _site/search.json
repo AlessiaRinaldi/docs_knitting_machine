@@ -7,342 +7,6 @@
     "text": "The idea behind this project draws inspiration from the operating principle of 3D printers: starting from a digital model, they can automatically produce objects with precision and repeatability.\nThe objective of this work is to bring the same paradigm to textiles, by developing an automated knitting machine capable of producing knit patterns from a predefined digital design."
   },
   {
-    "objectID": "components.html",
-    "href": "components.html",
-    "title": "Components",
-    "section": "",
-    "text": "Key Components\n\nMotors, drivers, sensors\nCamera & lighting\nMCU & wiring"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site"
-  },
-  {
-    "objectID": "control-system.html",
-    "href": "control-system.html",
-    "title": "Control System",
-    "section": "",
-    "text": "Overview\n\nReal-time control loops\nVision-based thread detection\nSafety & states"
-  },
-  {
-    "objectID": "error-recognition.html",
-    "href": "error-recognition.html",
-    "title": "Error Recognition",
-    "section": "",
-    "text": "Textile practices such as crochet and knitting have recently experienced a widespread resurgence. Many creative activities traditionally rooted in manual craftsmanship, once considered less relevant in the context of industrialization and globalization, are now being rediscovered. Skills that historically required years of hands-on experience can, however, be difficult and discouraging for beginners, especially for adults who approach these practices with limited time, resources, or access to expert guidance. Crochet is a notable example: although widely practiced across cultures and historically spread in Europe through Italian convents in the sixteenth century, it remains technically demanding and highly dependent on the maker’s ability to recognize and correct errors. The COVID-19 pandemic further contributed to this renewed interest, encouraging many people to explore slow, creative, and tactile activities.\n\n\nDespite this revival, crochet performed using mechanical devices has seen relatively little technological development. Existing crochet machines remain strongly operator-dependent and offer limited support for automated quality monitoring. Moreover, hobbyist tools such as circular crochet looms, widely available and inexpensive, provide no error feedback and require constant attention from the user. In this work, we start from a commercially available circular loom intended for hobby use and, through a series of mechanical, electronic, and software modifications, transform it into a fully automated crochet machine capable of self-monitoring. This approach demonstrates how accessible off-the-shelf tools can be augmented and repurposed into automated systems, lowering the barrier to entry for creative technologies.\n\n\n\nA single undetected defect, such as missing yarn, incomplete engagement, or a misaligned loop, may propagate across many subsequent cycles, compromising the entire production and resulting in wasted time and materials. For hobbyists and individual makers, this leads to frustration and loss of work. For small and medium-sized factories, the consequences extend to production inefficiencies and environmental impact. As the textile industry is one of the major contributors to global waste and pollution, improving error detection and reducing material waste is a relevant challenge from both practical and sustainability perspectives.\n\n\n\nAutomating the early detection of such defects requires monitoring the hook at the precise moment when the yarn configuration becomes informative. In the scenario addressed in this work, a correctly formed stitch appears as a characteristic “U”-shaped engagement around the base of the hook. Any deviation from this expected pattern must be identified promptly to prevent the defect from propagating downstream.\n\n\n\nIn this section, we present a lightweight, real-time embedded vision system for hook-level error detection implemented entirely on a Raspberry Pi 3 equipped with a CSI camera module and mounted on a custom 3D-printed support.\nA hardware microswitch mounted on the machine provides a synchronization signal marking the exact phase of the hook movement, enabling image acquisition at each cycle for real-time inspection.\nIn this way system captures images in synchrony with the machine’s motion, isolates the region of interest, and analyzes it using a dedicated detection algorithm capable of distinguishing correct yarn engagement from error conditions.\nOur goal is to support both individual makers, who may not have access to industrial-grade equipment, and future industrial applications, where inline quality monitoring could significantly reduce waste and promote more sustainable textile manufacturing."
-  },
-  {
-    "objectID": "error-recognition.html#error-taxonomy",
-    "href": "error-recognition.html#error-taxonomy",
-    "title": "Error Recognition",
-    "section": "",
-    "text": "Missing thread: no yarn present during a stitch.\nThread break: yarn snapped or slack beyond tolerance.\nMis-stitch / skipped stitch: hook failed to catch/transfer the loop.\nJams / obstruction: mechanical interference preventing motion.\nBacklash / positioning drift: kinematic error causing misplaced stitches.\nLighting drift: exposure or color shift degrading vision accuracy."
-  },
-  {
-    "objectID": "error-recognition.html#detection-pipeline-high-level",
-    "href": "error-recognition.html#detection-pipeline-high-level",
-    "title": "Error Recognition",
-    "section": "",
-    "text": "Sensing: camera frames + optional encoders / tension sensor.\nPreprocessing: crop, denoise, exposure normalization.\nInference: lightweight CNN / classical vision (edges, morphology).\nDecision logic: thresholds, temporal filtering, hysteresis.\nAction: warn, pause, retry, or safe-stop with guided recovery."
-  },
-  {
-    "objectID": "error-recognition.html#dataset-labeling",
-    "href": "error-recognition.html#dataset-labeling",
-    "title": "Error Recognition",
-    "section": "",
-    "text": "Classes: {ok, missing_thread, break, mis_stitch, jam}.\nLabeling protocol: annotate bounding boxes/masks around hook & loop region; store frame index + machine state.\nSplit: train/val/test with subject and lighting stratification.\nAugmentations: brightness/contrast jitter, small blur, slight rotations."
-  },
-  {
-    "objectID": "error-recognition.html#metrics",
-    "href": "error-recognition.html#metrics",
-    "title": "Error Recognition",
-    "section": "",
-    "text": "Per-class F1 and macro-F1 as primary.\nLatency (ms/frame), throughput (fps), false alarm rate (%/hr).\nMTTD (mean time to detection) for critical faults."
-  },
-  {
-    "objectID": "error-recognition.html#runtime-deployment",
-    "href": "error-recognition.html#runtime-deployment",
-    "title": "Error Recognition",
-    "section": "",
-    "text": "Target: ≥ 25–30 fps @ 320–640 px ROI.\nBudget: ≤ 25 ms inference, ≤ 10 ms I/O, ≤ 5 ms post-proc.\nFail-safe: if confidence &lt; threshold for N frames → degrade to safe mode."
-  },
-  {
-    "objectID": "error-recognition.html#requirements",
-    "href": "error-recognition.html#requirements",
-    "title": "Error Recognition",
-    "section": "Requirements",
-    "text": "Requirements\n\nShutter: global preferred (avoid motion artifacts on fast hooks).\nFrame rate: ≥ 60 fps recommended; ≥ 120 fps if fast cycles.\nResolution: enough to resolve the loop region (typically 320–800 px ROI on the hook).\nInterface: CSI (low latency) or USB3 (ubiquitous). GigE only if long cable runs.\nLens: C/CS-mount or M12 with suitable focal length; low distortion.\nLighting: diffuse LED ring or backlight; fixed CCT; flicker-free.\nSync: exposure synced to machine phase (encoder or GPIO trigger) if possible.\nMounting: rigid, vibration-damped, easy to re-calibrate."
-  },
-  {
-    "objectID": "error-recognition.html#candidate-options-examples",
-    "href": "error-recognition.html#candidate-options-examples",
-    "title": "Error Recognition",
-    "section": "Candidate Options (Examples)",
-    "text": "Candidate Options (Examples)\n\nRaspberry Pi Camera (HQ / v3): CSI, low latency, good ecosystem; pick global shutter variant for fast motion.\nUSB3 industrial (e.g., IMX sensors): robust drivers, global shutter options, flexible lenses; slightly higher cost.\nLow-cost USB webcams: easy, but rolling shutter + auto-exposure can hurt reliability."
-  },
-  {
-    "objectID": "error-recognition.html#decision-matrix-template",
-    "href": "error-recognition.html#decision-matrix-template",
-    "title": "Error Recognition",
-    "section": "Decision Matrix (Template)",
-    "text": "Decision Matrix (Template)\n\n\n\n\n\n\n\n\n\n\nCriterion\nWeight\nPi Cam (GS)\nUSB3 Industrial\nUSB Webcam\n\n\n\n\nLatency / Sync\n0.25\n4\n4\n2\n\n\nMotion artifacts (GS)\n0.25\n5\n5\n2\n\n\nImage quality / optics\n0.20\n4\n5\n3\n\n\nCost\n0.15\n4\n3\n5\n\n\nEase of integration\n0.15\n4\n4\n4\n\n\nWeighted score\n\n4.3\n4.4\n3.1\n\n\n\nScoring 1–5. Adjust weights to your constraints."
-  },
-  {
-    "objectID": "error-recognition.html#recommended-baseline",
-    "href": "error-recognition.html#recommended-baseline",
-    "title": "Error Recognition",
-    "section": "Recommended Baseline",
-    "text": "Recommended Baseline\n\nGlobal-shutter camera (CSI or USB3) + fixed-focus lens covering the hook area + diffuse LED lighting.\nLock exposure/white balance; disable auto features.\nOptional GPIO trigger to align exposure with hook phase."
-  },
-  {
-    "objectID": "error-recognition.html#recovery-hmi",
-    "href": "error-recognition.html#recovery-hmi",
-    "title": "Error Recognition",
-    "section": "Recovery & HMI",
-    "text": "Recovery & HMI\n\nOn detection: pause motion at safe phase, highlight ROI capture, show probable cause and guided steps (e.g., re-thread).\nOperator tools: snapshot, slow-motion replay (last 0.5–1.0 s), one-click retry."
-  },
-  {
-    "objectID": "error-recognition.html#roadmap",
-    "href": "error-recognition.html#roadmap",
-    "title": "Error Recognition",
-    "section": "Roadmap",
-    "text": "Roadmap\n\nPhase 1: classical vision baseline (edges + region stats).\nPhase 2: lightweight CNN for robustness to yarn/lighting variants.\nPhase 3: multi-sensor fusion (tension + vision) and predictive alarms."
-  },
-  {
-    "objectID": "error-recognition.html#choose-a-topic",
-    "href": "error-recognition.html#choose-a-topic",
-    "title": "Error Recognition",
-    "section": "",
-    "text": "👉 Acquisition System (Camera)\nRequirements, sensor & lens selection, lighting, sync, and mounting constraints.\n💻 Error Recognition — Code\nAlgorithms, model/code structure, data flow, and deployment notes.\n🧩 3D Camera Mount\nMechanical support, rigidity, vibration damping, working distance, and CAD notes.\n📈 Results & Efficiency\nDatasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget."
-  },
-  {
-    "objectID": "error-recognition.html#selection-of-the-acquisition-system-for-error-detection",
-    "href": "error-recognition.html#selection-of-the-acquisition-system-for-error-detection",
-    "title": "Error Recognition",
-    "section": "- Selection of the Acquisition System for Error Detection",
-    "text": "- Selection of the Acquisition System for Error Detection\nRequirements, sensor & lens selection, lighting, sync, and mounting constraints."
-  },
-  {
-    "objectID": "error-recognition.html#error-recognition-code",
-    "href": "error-recognition.html#error-recognition-code",
-    "title": "Error Recognition",
-    "section": "- Error Recognition — Code",
-    "text": "- Error Recognition — Code\nAlgorithms, model/code structure, data flow, and deployment notes."
-  },
-  {
-    "objectID": "error-recognition.html#d-camera-mount",
-    "href": "error-recognition.html#d-camera-mount",
-    "title": "Error Recognition",
-    "section": "- 3D Camera Mount",
-    "text": "- 3D Camera Mount\nMechanical support, 3D printing, working distance, and CAD notes."
-  },
-  {
-    "objectID": "error-recognition.html#results-efficiency",
-    "href": "error-recognition.html#results-efficiency",
-    "title": "Error Recognition",
-    "section": "- Results & Efficiency",
-    "text": "- Results & Efficiency\nDatasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget."
-  },
-  {
-    "objectID": "error-camera.html",
-    "href": "error-camera.html",
-    "title": "",
-    "section": "",
-    "text": "The acquisition system plays a central role in the proposed error detection pipeline, as it must provide close-up images of the hook region at every relevant movement of the crochet machine.\nIn this work, we start from a commercially available circular crochet loom intended for hobby use and adapt it into an automated system through a set of mechanical and electronic modifications.\nThis choice allows us to preserve the low-cost and accessible nature of the original tool while enabling precise synchronization and repeatable inspection of each hook.\n\n\n\nOverview of the circular crochet loom.\n\n\nA hardware microswitch mounted on the modified loom generates a synchronization signal that marks the exact moment in the hook’s motion when the yarn configuration becomes informative.\nThis signal is used by the Raspberry Pi 3 Model B+ to trigger image acquisition in real time.\nAt each trigger, the system inspects the hook to verify that the yarn—regardless of its color, thickness, or texture—assumes the expected “U”-shaped configuration around the base of the hook.\nAny configuration that does not match this pattern is classified as an error.\nWhen an anomaly is detected, the system immediately stops the motor driving the process and displays a diagnostic message indicating the index of the affected hook.\nAn example close-up of the inspected region is reported in these two figures.\n\n\n\n\n\nExamples of correct and defective yarn configuration.\n\n\n\n\n\n\n\n\n\nThe primary objective of the acquisition system is to enable automatic, hook-level monitoring of the knitting process on a low-cost embedded platform.\nTo meet this goal, the choice of camera and interface must satisfy the following requirements:\n\nCompatibility with Raspberry Pi 3: use of natively supported interfaces and libraries.\nEase of software integration: availability of well-established computer vision libraries (e.g., libcamera, Picamera2, OpenCV).\nCost-effectiveness: sufficient resolution to distinguish fine yarn details while keeping costs low.\nClose-focus capability: ability to capture sharp images at short distances near the hook area.\nLow power consumption: efficient power usage to minimize the overall system load.\n\nThese requirements guided the evaluation of several acquisition architectures for the Raspberry Pi 3, considering their impact on image quality, latency, software complexity, and mechanical integration.\n\n\n\n\n\n\nThe Raspberry Pi Camera v2.1 connects directly to the Broadcom SoC through the MIPI–CSI interface, a high-speed differential serial bus dedicated to video capture.\nThis direct link offers several advantages for the considered application:\n\nHigh bandwidth and low latency: the pixel stream reaches the processor without traversing the USB or network stack, resulting in reduced jitter and more deterministic timing.\nImage quality and control: the 8 MP sensor, combined with the Raspberry platform’s integrated image signal processor (ISP), provides fine control over exposure, gain, white balance, and frame rate.\nNative integration: the camera is supported via libcamera / Picamera2 and V4L2, with stable pipelines toward OpenCV, TensorFlow Lite, and other vision frameworks.\n\nIn the context of hook-level defect detection, these properties translate into a favorable signal-to-noise ratio and consistent frame characteristics, which are beneficial for detecting subtle differences in yarn configuration.\nThe low and predictable latency also facilitates accurate synchronization between the microswitch event and the captured image, which is critical for reliable inspection.\n\n\n\n\nThe ESP32-CAM module integrates an OV2640 sensor (2 MP) and a microcontroller with on-board Wi-Fi connectivity.\nIn a typical setup, images are captured on the ESP32-CAM and transmitted to the Raspberry Pi for processing, either via Wi-Fi or over a serial link:\n\nWi-Fi: the module sends JPEG or MJPEG frames to a broker or server.\nWiring is simple, but latency and jitter depend on network conditions, buffering, and retransmissions.\nSerial / USB–UART: the module transmits image data in chunks to the Raspberry Pi through a UART–USB bridge.\nThis reduces dependence on the wireless network, but requires application-level protocols for fragmentation, reassembly, and buffering.\n\nThe ESP32-CAM is extremely low cost and can operate as a stand-alone node.\nHowever, compared to a CSI-connected Pi Camera, it provides lower image quality and less precise control over acquisition parameters.\nOn-board compression may obscure fine textile defects, and the less deterministic timing makes it harder to align the acquisition instant with the hook motion.\nFrom a mechanical standpoint, the ESP32-CAM module is also bulkier than the Pi Camera, complicating its integration into the compact 3D-printed frame of the desktop crochet machine.\nOn the positive side, its shorter minimum focus distance can be advantageous for very close-up shots, potentially reducing the need for additional optics.\n\n\n\nIn preliminary experiments with a direct USB–UART connection, the ESP32-CAM was successfully flashed with a MicroPython firmware.\nHowever, upon reboot, the board remained stuck in the bootloader, and the serial output consisted only of unreadable characters or repetitive error messages, never reaching a stable REPL prompt.\nThis behavior prevented the validation of a reliable point-to-point communication channel with the Raspberry Pi and hindered further development of the serial-based approach.\n\n\n\n\nA Wi-Fi-based architecture was also evaluated, in which the ESP32-CAM periodically captured JPEG snapshots and published them to an MQTT topic, while the Raspberry Pi—running a Mosquitto broker—subscribed to the topic, decoded the images, and displayed or stored them locally.\nDespite its conceptual simplicity, this approach suffered from practical issues related to the transmission and reconstruction of the JPEG payloads.\nDecoding errors and corrupted frames frequently occurred, making it impossible to guarantee consistent image delivery for real-time detection.\nGiven these early difficulties and following an iterative, prototype-driven development process, the ESP32-CAM solutions were deemed insufficiently reliable for the timing and robustness requirements of hook-level error detection, and effort was redirected toward more tightly integrated alternatives.\n\n\n\n\n\n\n\nStandard USB webcams offer a ready-to-use and widely available solution, typically with UVC support under Linux.\nHowever, image data must traverse the USB stack, introducing additional overhead compared to CSI and limiting the level of low-level camera control.\nSuch devices are suitable for early prototyping or applications with less stringent latency requirements, but are less attractive when deterministic timing and compact integration are needed.\n\n\n\nThe Raspberry Pi HQ Camera is a 12 MP module with a C/CS mount for interchangeable lenses.\nIt provides superior optical quality and flexibility in terms of focus, focal length, and macro optics, at the cost of higher price and significantly larger size compared to the Pi Camera v2.1.\nThe HQ Camera is therefore more appropriate when extreme close-ups or professional optical control are required, whereas the present work prioritizes low cost and compactness.\n\n\n\n\n\n\nConsidering the functional requirements, the practical experiments with the ESP32-CAM, and the constraints of the crochet machine, the Pi Camera v2.1 connected via the MIPI–CSI interface emerged as the most suitable option.\nIt combines sufficient resolution and close-focus capability with low and deterministic latency, strong software support on the Raspberry Pi 3, and a compact form factor compatible with the 3D-printed camera mount described in Section @sec:camera_mount.\nThis configuration is therefore adopted as the reference acquisition system for the error detection pipeline."
-  },
-  {
-    "objectID": "error-camera.html#objectives",
-    "href": "error-camera.html#objectives",
-    "title": "Selection of the Acquisition System for Error Detection on a Raspberry Pi 3 model B+",
-    "section": "",
-    "text": "The goal of the system is to ensure automatic monitoring of the knitting process at each hook movement.\nA micro switch provides a synchronization signal, allowing the vision system to verify that the yarn (regardless of its color, thickness, or texture) is correctly positioned around the base of the hook.\nIn particular, the yarn should take on a “U”-shaped configuration embracing the base of the hook.\nAny configuration that does not match this pattern must be detected as an error.\nWhen an anomaly is detected, the system should:\n\nImmediately stop the motor driving the process;\n\nDisplay an error message and indicate the index of the corresponding hook.\n\nInsert example photo here."
-  },
-  {
-    "objectID": "error-camera.html#requirements",
-    "href": "error-camera.html#requirements",
-    "title": "Selection of the Acquisition System for Error Detection on a Raspberry Pi 3 model B+",
-    "section": "Requirements",
-    "text": "Requirements\nTo meet these objectives, the choice of camera and acquisition system must satisfy the following requirements:\n\nCompatibility with Raspberry Pi 3: use of natively supported interfaces and libraries.\n\nEase of software integration: availability of well-established computer vision libraries (e.g., libcamera, Picamera2, OpenCV).\n\nCost-effectiveness: a sensor with sufficient resolution to distinguish fine yarn details, while keeping costs low.\n\nClose-focus capability: ability to capture sharp images at short distances, near the hook area.\n\nCompact dimensions: a small camera module to facilitate mechanical integration within the machine’s 3D frame.\n\nLow power consumption: efficient power usage to minimize the overall system load."
-  },
-  {
-    "objectID": "error-recognition.html#from-tradition-to-automation",
-    "href": "error-recognition.html#from-tradition-to-automation",
-    "title": "Error Recognition",
-    "section": "",
-    "text": "Textile practices such as crochet and knitting have recently experienced a widespread resurgence. Many creative activities traditionally rooted in manual craftsmanship, once considered less relevant in the context of industrialization and globalization, are now being rediscovered. Skills that historically required years of hands-on experience can, however, be difficult and discouraging for beginners, especially for adults who approach these practices with limited time, resources, or access to expert guidance. Crochet is a notable example: although widely practiced across cultures and historically spread in Europe through Italian convents in the sixteenth century, it remains technically demanding and highly dependent on the maker’s ability to recognize and correct errors. The COVID-19 pandemic further contributed to this renewed interest, encouraging many people to explore slow, creative, and tactile activities.\n\n\nDespite this revival, crochet performed using mechanical devices has seen relatively little technological development. Existing crochet machines remain strongly operator-dependent and offer limited support for automated quality monitoring. Moreover, hobbyist tools such as circular crochet looms, widely available and inexpensive, provide no error feedback and require constant attention from the user. In this work, we start from a commercially available circular loom intended for hobby use and, through a series of mechanical, electronic, and software modifications, transform it into a fully automated crochet machine capable of self-monitoring. This approach demonstrates how accessible off-the-shelf tools can be augmented and repurposed into automated systems, lowering the barrier to entry for creative technologies.\n\n\n\nA single undetected defect, such as missing yarn, incomplete engagement, or a misaligned loop, may propagate across many subsequent cycles, compromising the entire production and resulting in wasted time and materials. For hobbyists and individual makers, this leads to frustration and loss of work. For small and medium-sized factories, the consequences extend to production inefficiencies and environmental impact. As the textile industry is one of the major contributors to global waste and pollution, improving error detection and reducing material waste is a relevant challenge from both practical and sustainability perspectives.\n\n\n\nAutomating the early detection of such defects requires monitoring the hook at the precise moment when the yarn configuration becomes informative. In the scenario addressed in this work, a correctly formed stitch appears as a characteristic “U”-shaped engagement around the base of the hook. Any deviation from this expected pattern must be identified promptly to prevent the defect from propagating downstream.\n\n\n\nIn this section, we present a lightweight, real-time embedded vision system for hook-level error detection implemented entirely on a Raspberry Pi 3 equipped with a CSI camera module and mounted on a custom 3D-printed support.\nA hardware microswitch mounted on the machine provides a synchronization signal marking the exact phase of the hook movement, enabling image acquisition at each cycle for real-time inspection.\nIn this way system captures images in synchrony with the machine’s motion, isolates the region of interest, and analyzes it using a dedicated detection algorithm capable of distinguishing correct yarn engagement from error conditions.\nOur goal is to support both individual makers, who may not have access to industrial-grade equipment, and future industrial applications, where inline quality monitoring could significantly reduce waste and promote more sustainable textile manufacturing."
-  },
-  {
-    "objectID": "index.html#selection-of-the-acquisition-system-for-error-detection",
-    "href": "index.html#selection-of-the-acquisition-system-for-error-detection",
-    "title": "Automated Knitting Machine",
-    "section": "- Selection of the Acquisition System for Error Detection",
-    "text": "- Selection of the Acquisition System for Error Detection\nRequirements, sensor & lens selection, lighting, sync, and mounting constraints."
-  },
-  {
-    "objectID": "index.html#error-recognition-code",
-    "href": "index.html#error-recognition-code",
-    "title": "Automated Knitting Machine",
-    "section": "- Error Recognition — Code",
-    "text": "- Error Recognition — Code\nAlgorithms, model/code structure, data flow, and deployment notes."
-  },
-  {
-    "objectID": "index.html#d-camera-mount",
-    "href": "index.html#d-camera-mount",
-    "title": "Automated Knitting Machine",
-    "section": "- 3D Camera Mount",
-    "text": "- 3D Camera Mount\nMechanical support, 3D printing, working distance, and CAD notes."
-  },
-  {
-    "objectID": "index.html#results-efficiency",
-    "href": "index.html#results-efficiency",
-    "title": "Automated Knitting Machine",
-    "section": "- Results & Efficiency",
-    "text": "- Results & Efficiency\nDatasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget."
-  },
-  {
-    "objectID": "index.html#components",
-    "href": "index.html#components",
-    "title": "Automated Knitting Machine",
-    "section": "- Components",
-    "text": "- Components"
-  },
-  {
-    "objectID": "index.html#errore",
-    "href": "index.html#errore",
-    "title": "Automated Knitting Machine",
-    "section": "- Errore",
-    "text": "- Errore\nRequirements, sensor & lens selection, lighting, sync, and mounting constraints."
-  },
-  {
-    "objectID": "index.html#error-recognition",
-    "href": "index.html#error-recognition",
-    "title": "Automated Knitting Machine",
-    "section": "- Error recognition",
-    "text": "- Error recognition"
-  },
-  {
-    "objectID": "index.html#control-s",
-    "href": "index.html#control-s",
-    "title": "Automated Knitting Machine",
-    "section": "- Control S",
-    "text": "- Control S\nMechanical support, 3D printing, working distance, and CAD notes."
-  },
-  {
-    "objectID": "index.html#control-system",
-    "href": "index.html#control-system",
-    "title": "Automated Knitting Machine",
-    "section": "- Control System",
-    "text": "- Control System"
-  },
-  {
-    "objectID": "error-camera.html#considered-architectures",
-    "href": "error-camera.html#considered-architectures",
-    "title": "Selection of the Acquisition System for Error Detection on a Raspberry Pi 3 model B+",
-    "section": "Considered Architectures",
-    "text": "Considered Architectures\nThis section describes the image acquisition options evaluated for the error detection system on Raspberry Pi 3, highlighting their implications in terms of image quality, latency, software integration, and overall system complexity.\n\nPi Camera via CSI Interface (recommended choice)\nThe Raspberry Pi Camera v2.1 connects to the Broadcom SoC through the MIPI-CSI interface, a high-speed differential serial bus dedicated to video capture.\nThis direct connection offers several advantages:\n\nHigh bandwidth and low latency: the pixel stream reaches the processor without passing through the USB or network stack, resulting in lower jitter and more deterministic timing.\n\nSuperior image quality: 8 MP sensor with the Raspberry platform’s integrated ISP, providing fine control over exposure, gain, white balance, and frame rate.\n\nNative integration: direct support via libcamera/Picamera2 and V4L2, with robust pipelines for OpenCV, TFLite, and other vision frameworks.\n\nImplications: a better signal-to-noise ratio and frame consistency lead to improved accuracy in detecting subtle defects.\nThe low latency facilitates synchronized triggering with the microswitch event.\n\n\n\nESP32-CAM via Wi-Fi or Serial\nThe ESP32-CAM integrates an OV2640 sensor (2 MP) and a microcontroller with Wi-Fi connectivity.\nTypical acquisition involves onboard JPEG/MJPEG compression and frame transmission:\n\nWi-Fi: sends frames or snapshots to a broker/server; wiring is simple, but latency and jitter depend on network conditions and buffering.\n\nSerial/USB-UART: sends data in chunks to the Raspberry Pi. It reduces network uncertainty but requires fragmentation/reassembly protocols and buffer management.\n\nImplications: extremely low cost and stand-alone operation, but lower image quality and controllability compared to CSI.\nCompression may hide fine defects, and the less deterministic timing makes it harder to align precisely with the hook’s motion.\nMoreover, the ESP32-CAM module is bulkier than the Pi Camera, making integration into the existing mechanical frame more difficult.\nOn the positive side, its shorter minimum focus distance makes it potentially more suitable for close-up shots without additional lenses.\n\nSerial Variant Experiment (unsuccessful)\nIn preliminary tests with a direct USB–UART connection, the module was successfully flashed with a MicroPython firmware, but upon reboot, the board remained stuck in the bootloader. The serial output only produced unreadable characters or repetitive error messages, never reaching the REPL prompt. This prevented validation of direct communication with the Raspberry Pi.\n\n\nMQTT Variant Experiment (unsuccessful)\nWithin the Wi-Fi setup, a connection from ESP32-CAM → Raspberry Pi was attempted via an MQTT broker, following a snapshot-based approach:\n\nThe ESP32-CAM captures a JPEG frame every few seconds and publishes it to an MQTT topic.\n\nThe Raspberry Pi, running a Mosquitto broker, subscribes to the topic, decodes the images, and displays/saves them locally.\n\nDespite the theoretical simplicity of this architecture, the practical tests were unsuccessful.\nIn particular, transmission and decoding issues occurred with the JPEG payloads (published directly via MQTT), making it impossible to correctly reconstruct the images on the Raspberry Pi side.\nGiven these early failures and adopting an agile development approach (iterative and adaptive, as opposed to a waterfall model), the decision was made not to continue integrating the ESP32-CAM through this method, favoring more reliable solutions consistent with the project requirements.\nConclusion: the ESP32-CAM via MQTT approach proved too unreliable for real-time error detection, further reinforcing the preference for the Pi Camera connected via CSI.\n\n\n\n\nOther Considered Alternatives (not tested)\n\nUSB Webcam\nA ready-to-use and widely available solution with UVC support.\nHowever, the data path goes through the USB stack, adding overhead compared to CSI and limiting camera control.\nIt can be suitable for prototyping or when latency requirements are less strict.\n\n\nRaspberry Pi HQ Camera\nA 12 MP module with a C/CS mount for interchangeable lenses.\nIt offers superior optical quality and flexibility (focus adjustment, focal lengths, dedicated macro optics) at the cost of higher price and larger size. Recommended when extreme close-ups or professional optical control are required."
-  },
-  {
-    "objectID": "error-camera.html#error-recognition-code",
-    "href": "error-camera.html#error-recognition-code",
-    "title": "",
-    "section": "- Error Recognition — Code",
-    "text": "- Error Recognition — Code\nAlgorithms, model/code structure, data flow, and deployment notes."
-  },
-  {
-    "objectID": "error-camera.html#d-camera-mount",
-    "href": "error-camera.html#d-camera-mount",
-    "title": "",
-    "section": "- 3D Camera Mount",
-    "text": "- 3D Camera Mount\nMechanical support, 3D printing, working distance, and CAD notes."
-  },
-  {
-    "objectID": "error-camera.html#results-efficiency",
-    "href": "error-camera.html#results-efficiency",
-    "title": "",
-    "section": "- Results & Efficiency",
-    "text": "- Results & Efficiency\nDatasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget."
-  },
-  {
-    "objectID": "error-camera.html#results-efficiency-1",
-    "href": "error-camera.html#results-efficiency-1",
-    "title": "Selection of the Acquisition System for Error Detection on a Raspberry Pi 3 model B+",
-    "section": "- Results & Efficiency",
-    "text": "- Results & Efficiency\nDatasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget."
-  },
-  {
-    "objectID": "error-camera.html#o",
-    "href": "error-camera.html#o",
-    "title": "Selection of the Acquisition System for Error Detection on a Raspberry Pi 3 model B+",
-    "section": "- O",
-    "text": "- O\nDatasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget."
-  },
-  {
-    "objectID": "error-camera.html#over",
-    "href": "error-camera.html#over",
-    "title": "Selection of the Acquisition System for Error Detection on a Raspberry Pi 3 model B+",
-    "section": "- Over",
-    "text": "- Over\nDatasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget."
-  },
-  {
-    "objectID": "error-camera.html#overview",
-    "href": "error-camera.html#overview",
-    "title": "",
-    "section": "- Overview",
-    "text": "- Overview"
-  },
-  {
-    "objectID": "error-mount.html",
-    "href": "error-mount.html",
-    "title": "",
-    "section": "",
-    "text": "The camera mounting solution combines a commercially available __magnetic-base stand_ with a custom 3D-printed support designed specifically for the Raspberry Pi Camera module.\nThe magnetic base provides a rigid and highly stable foundation, while allowing fine manual adjustment in height, angle, and lateral position through its articulated arm.\n\n\nA custom holder for the Raspberry Pi Camera v2.1 was designed in Autodesk Fusion 360 and fabricated using fused deposition modeling (FDM) with PLA filament on a Bambu Lab A1 Mini 3D printer.\nThe printed part encloses the camera PCB and incorporates a series of mounting holes and a pin that fits into the threaded end of the magnetic base arm.\n\n\n\nWhile the magnetic stand and the 3D-printed camera holder provide sufficient stability for prototyping, the overall stiffness of the structure is not optimal yet.\nSmall shifts caused by machine vibration or accidental contact can slightly alter the camera pose over time, affecting the exact position of the region of interest in the image.\nImproving the mechanical stability of the mounting solution is therefore an important direction for future work, with the goal of achieving fully repeatable alignment over long acquisition periods.\nA CAD rendering of the printed holder is shown in Figure.\n\n\n\n\n\nFront of the 3D structure\n\n\n\n\n\n\nBack of the 3D structure"
-  },
-  {
-    "objectID": "error-mount.html#sec:camera_mount",
-    "href": "error-mount.html#sec:camera_mount",
-    "title": "",
-    "section": "",
-    "text": "The camera mounting solution combines a commercially available __magnetic-base stand_ with a custom 3D-printed support designed specifically for the Raspberry Pi Camera module.\nThe magnetic base provides a rigid and highly stable foundation, while allowing fine manual adjustment in height, angle, and lateral position through its articulated arm.\n\n\nA custom holder for the Raspberry Pi Camera v2.1 was designed in Autodesk Fusion 360 and fabricated using fused deposition modeling (FDM) with PLA filament on a Bambu Lab A1 Mini 3D printer.\nThe printed part encloses the camera PCB and incorporates a series of mounting holes and a pin that fits into the threaded end of the magnetic base arm.\n\n\n\nWhile the magnetic stand and the 3D-printed camera holder provide sufficient stability for prototyping, the overall stiffness of the structure is not optimal yet.\nSmall shifts caused by machine vibration or accidental contact can slightly alter the camera pose over time, affecting the exact position of the region of interest in the image.\nImproving the mechanical stability of the mounting solution is therefore an important direction for future work, with the goal of achieving fully repeatable alignment over long acquisition periods.\nA CAD rendering of the printed holder is shown in Figure.\n\n\n\n\n\nFront of the 3D structure\n\n\n\n\n\n\nBack of the 3D structure"
-  },
-  {
-    "objectID": "error-mount.html#error-recognition-code",
-    "href": "error-mount.html#error-recognition-code",
-    "title": "",
-    "section": "- Error Recognition — Code",
-    "text": "- Error Recognition — Code\nAlgorithms, model/code structure, data flow, and deployment notes."
-  },
-  {
-    "objectID": "error-mount.html#d-camera-mount",
-    "href": "error-mount.html#d-camera-mount",
-    "title": "",
-    "section": "- 3D Camera Mount",
-    "text": "- 3D Camera Mount\nMechanical support, 3D printing, working distance, and CAD notes."
-  },
-  {
-    "objectID": "error-mount.html#results-efficiency",
-    "href": "error-mount.html#results-efficiency",
-    "title": "",
-    "section": "- Results & Efficiency",
-    "text": "- Results & Efficiency\nDatasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget."
-  },
-  {
-    "objectID": "error-mount.html#overview",
-    "href": "error-mount.html#overview",
-    "title": "",
-    "section": "- Overview",
-    "text": "- Overview"
-  },
-  {
-    "objectID": "error-mount.html#selection-of-the-acquisition-system-for-error-detection",
-    "href": "error-mount.html#selection-of-the-acquisition-system-for-error-detection",
-    "title": "",
-    "section": "- Selection of the Acquisition System for Error Detection",
-    "text": "- Selection of the Acquisition System for Error Detection\nRequirements, sensor & lens selection, lighting, sync, and mounting constraints."
-  },
-  {
     "objectID": "index.html#from-a-digital-design-to-fabric",
     "href": "index.html#from-a-digital-design-to-fabric",
     "title": "Automated Knitting Machine",
@@ -357,109 +21,46 @@
     "text": "Project Sections\n\n\n\n\n\n\n\n\nNoteError recognition\n\n\n\nReal-time detection of defects and anomalies during operation.\nOpen →\n\n\n\n\n\n\n\n\n\nNoteComponents\n\n\n\nMechanical, electronic, and sensing elements of the platform.\nOpen →\n\n\n\n\n\n\n\n\n\nNoteControl System\n\n\n\nActuation, logic, and synchronization of the machine.\nOpen →"
   },
   {
-    "objectID": "error-camera.html#selection-of-the-acquisition-system",
-    "href": "error-camera.html#selection-of-the-acquisition-system",
-    "title": "",
-    "section": "",
-    "text": "The acquisition system plays a central role in the proposed error detection pipeline, as it must provide close-up images of the hook region at every relevant movement of the crochet machine.\nIn this work, we start from a commercially available circular crochet loom intended for hobby use and adapt it into an automated system through a set of mechanical and electronic modifications.\nThis choice allows us to preserve the low-cost and accessible nature of the original tool while enabling precise synchronization and repeatable inspection of each hook.\n\n\n\nOverview of the circular crochet loom.\n\n\nA hardware microswitch mounted on the modified loom generates a synchronization signal that marks the exact moment in the hook’s motion when the yarn configuration becomes informative.\nThis signal is used by the Raspberry Pi 3 Model B+ to trigger image acquisition in real time.\nAt each trigger, the system inspects the hook to verify that the yarn—regardless of its color, thickness, or texture—assumes the expected “U”-shaped configuration around the base of the hook.\nAny configuration that does not match this pattern is classified as an error.\nWhen an anomaly is detected, the system immediately stops the motor driving the process and displays a diagnostic message indicating the index of the affected hook.\nAn example close-up of the inspected region is reported in these two figures.\n\n\n\n\n\nExamples of correct and defective yarn configuration.\n\n\n\n\n\n\n\n\n\nThe primary objective of the acquisition system is to enable automatic, hook-level monitoring of the knitting process on a low-cost embedded platform.\nTo meet this goal, the choice of camera and interface must satisfy the following requirements:\n\nCompatibility with Raspberry Pi 3: use of natively supported interfaces and libraries.\nEase of software integration: availability of well-established computer vision libraries (e.g., libcamera, Picamera2, OpenCV).\nCost-effectiveness: sufficient resolution to distinguish fine yarn details while keeping costs low.\nClose-focus capability: ability to capture sharp images at short distances near the hook area.\nLow power consumption: efficient power usage to minimize the overall system load.\n\nThese requirements guided the evaluation of several acquisition architectures for the Raspberry Pi 3, considering their impact on image quality, latency, software complexity, and mechanical integration.\n\n\n\n\n\n\nThe Raspberry Pi Camera v2.1 connects directly to the Broadcom SoC through the MIPI–CSI interface, a high-speed differential serial bus dedicated to video capture.\nThis direct link offers several advantages for the considered application:\n\nHigh bandwidth and low latency: the pixel stream reaches the processor without traversing the USB or network stack, resulting in reduced jitter and more deterministic timing.\nImage quality and control: the 8 MP sensor, combined with the Raspberry platform’s integrated image signal processor (ISP), provides fine control over exposure, gain, white balance, and frame rate.\nNative integration: the camera is supported via libcamera / Picamera2 and V4L2, with stable pipelines toward OpenCV, TensorFlow Lite, and other vision frameworks.\n\nIn the context of hook-level defect detection, these properties translate into a favorable signal-to-noise ratio and consistent frame characteristics, which are beneficial for detecting subtle differences in yarn configuration.\nThe low and predictable latency also facilitates accurate synchronization between the microswitch event and the captured image, which is critical for reliable inspection.\n\n\n\n\nThe ESP32-CAM module integrates an OV2640 sensor (2 MP) and a microcontroller with on-board Wi-Fi connectivity.\nIn a typical setup, images are captured on the ESP32-CAM and transmitted to the Raspberry Pi for processing, either via Wi-Fi or over a serial link:\n\nWi-Fi: the module sends JPEG or MJPEG frames to a broker or server.\nWiring is simple, but latency and jitter depend on network conditions, buffering, and retransmissions.\nSerial / USB–UART: the module transmits image data in chunks to the Raspberry Pi through a UART–USB bridge.\nThis reduces dependence on the wireless network, but requires application-level protocols for fragmentation, reassembly, and buffering.\n\nThe ESP32-CAM is extremely low cost and can operate as a stand-alone node.\nHowever, compared to a CSI-connected Pi Camera, it provides lower image quality and less precise control over acquisition parameters.\nOn-board compression may obscure fine textile defects, and the less deterministic timing makes it harder to align the acquisition instant with the hook motion.\nFrom a mechanical standpoint, the ESP32-CAM module is also bulkier than the Pi Camera, complicating its integration into the compact 3D-printed frame of the desktop crochet machine.\nOn the positive side, its shorter minimum focus distance can be advantageous for very close-up shots, potentially reducing the need for additional optics.\n\n\n\nIn preliminary experiments with a direct USB–UART connection, the ESP32-CAM was successfully flashed with a MicroPython firmware.\nHowever, upon reboot, the board remained stuck in the bootloader, and the serial output consisted only of unreadable characters or repetitive error messages, never reaching a stable REPL prompt.\nThis behavior prevented the validation of a reliable point-to-point communication channel with the Raspberry Pi and hindered further development of the serial-based approach.\n\n\n\n\nA Wi-Fi-based architecture was also evaluated, in which the ESP32-CAM periodically captured JPEG snapshots and published them to an MQTT topic, while the Raspberry Pi—running a Mosquitto broker—subscribed to the topic, decoded the images, and displayed or stored them locally.\nDespite its conceptual simplicity, this approach suffered from practical issues related to the transmission and reconstruction of the JPEG payloads.\nDecoding errors and corrupted frames frequently occurred, making it impossible to guarantee consistent image delivery for real-time detection.\nGiven these early difficulties and following an iterative, prototype-driven development process, the ESP32-CAM solutions were deemed insufficiently reliable for the timing and robustness requirements of hook-level error detection, and effort was redirected toward more tightly integrated alternatives.\n\n\n\n\n\n\n\nStandard USB webcams offer a ready-to-use and widely available solution, typically with UVC support under Linux.\nHowever, image data must traverse the USB stack, introducing additional overhead compared to CSI and limiting the level of low-level camera control.\nSuch devices are suitable for early prototyping or applications with less stringent latency requirements, but are less attractive when deterministic timing and compact integration are needed.\n\n\n\nThe Raspberry Pi HQ Camera is a 12 MP module with a C/CS mount for interchangeable lenses.\nIt provides superior optical quality and flexibility in terms of focus, focal length, and macro optics, at the cost of higher price and significantly larger size compared to the Pi Camera v2.1.\nThe HQ Camera is therefore more appropriate when extreme close-ups or professional optical control are required, whereas the present work prioritizes low cost and compactness.\n\n\n\n\n\n\nConsidering the functional requirements, the practical experiments with the ESP32-CAM, and the constraints of the crochet machine, the Pi Camera v2.1 connected via the MIPI–CSI interface emerged as the most suitable option.\nIt combines sufficient resolution and close-focus capability with low and deterministic latency, strong software support on the Raspberry Pi 3, and a compact form factor compatible with the 3D-printed camera mount described in Section @sec:camera_mount.\nThis configuration is therefore adopted as the reference acquisition system for the error detection pipeline."
-  },
-  {
-    "objectID": "error-camera.html#selection-of-the-acquisition-system-for-error-detection",
-    "href": "error-camera.html#selection-of-the-acquisition-system-for-error-detection",
-    "title": "",
-    "section": "- Selection of the Acquisition System for Error Detection",
-    "text": "- Selection of the Acquisition System for Error Detection\nRequirements, sensor & lens selection, lighting, sync, and mounting constraints."
-  },
-  {
-    "objectID": "error-recognition.html#explore-this-section",
-    "href": "error-recognition.html#explore-this-section",
+    "objectID": "error-recognition.html",
+    "href": "error-recognition.html",
     "title": "Error Recognition",
-    "section": "Explore This Section",
-    "text": "Explore This Section\n\n\n\n\n\n\n\n\nNoteSelection of the Acquisition System\n\n\n\nRequirements, sensor and lens choice, lighting, synchronization, and mounting constraints.\nOpen →\n\n\n\n\n\n\n\n\n\nNote3D Camera Mount\n\n\n\nMechanical design, 3D printing, working distance, and CAD notes.\nOpen →\n\n\n\n\n\n\n\n\n\n\n\n\nNoteError Recognition — Code\n\n\n\nAlgorithms, data flow, model structure, and deployment details.\nOpen →\n\n\n\n\n\n\n\n\n\nNoteResults & Efficiency\n\n\n\nDatasets, metrics, ablation studies, and runtime performance.\nOpen →"
-  },
-  {
-    "objectID": "error-code.html",
-    "href": "error-code.html",
-    "title": "",
     "section": "",
-    "text": "The image acquisition and error-recognition pipeline is implemented in Python and runs directly on the Raspberry Pi 3.\nThe system operates in a fully event-driven manner: each activation of the microswitch triggers an image capture, an immediate crop of the region of interest (ROI), and a real-time evaluation of the yarn configuration using a log-likelihood ratio (LLR) classifier.\n\n\n\nTo train and evaluate the classifier, a dedicated dataset of cropped hook images was collected directly from the machine.\nAt present, the dataset includes three yarn colors:\n\nlight blue\npurple\nfuchsia\n\nAlthough these colors appear visually quite different in RGB, their behavior after preprocessing (grayscale conversion, CLAHE enhancement, ROI masking) is not uniform.\nPreliminary qualitative inspection suggested that the fuchsia yarn could be challenging due to its visual similarity to the pink background of the machine.\nHowever, subsequent experiments revealed that raw chromatic contrast is not the primary factor affecting detectability in the proposed NCC–LLR pipeline.\nAfter grayscale conversion, the light blue yarn becomes closer in intensity to the machine background, resulting in lower separability between correct and defective configurations.\nConversely, the fuchsia yarn exhibits stronger and more consistent local texture variations within the discriminative ROI, which makes the LLR scores for (H_0) and (H_1) more distinct despite its low RGB contrast.\nThe purple yarn displays intermediate behavior, with moderate grayscale separability.\nTo further probe the limits of the method, additional experiments were conducted using a pale pink yarn whose color is almost indistinguishable from the background.\nUnder this condition, neither the NCC-based similarity nor the CLAHE-enhanced preprocessing provided sufficient discriminative information for reliable classification, and the LLR method consistently failed to separate the two hypotheses.\nThis extreme low-contrast scenario is therefore considered out of scope for the current handcrafted method and highlights the need for future solutions based on learned or color-invariant features.\n\n\n Light blue\n\n Purple\n\n Fuchsia\n\n\n\n\n Pale pink (failure)\n\n\nFigure: Examples of yarn colors used in the dataset.\nThe pale pink yarn is almost indistinguishable from the machine background and cannot be reliably detected by the current method.\n\n\n\n\nUpon a rising edge from the microswitch (handled via the gpiozero library), the software captures a still image using the Picamera 2.1 interface.\nSince only a small portion of the full frame contains the hook region, the image is immediately cropped according to a predefined ROI, specified either in relative coordinates or in absolute pixel values.\nThis cropping stage reduces computational cost and increases robustness by ensuring that the classifier operates on a stable and consistent portion of the scene.\nBoundary checks are applied to avoid invalid crops in case of slight camera misalignment, which is important due to the sub-centimeter positioning precision required for hook-level inspection.\n\n\n\n\nThe LLR classifier relies on two prototype images:\n\na positive prototype representing correct yarn engagement;\na negative prototype representing a hook that has failed to catch the yarn.\n\nThese prototypes are computed as the median of small training sets of positive and negative examples.\nBefore prototype computation, images undergo grayscale conversion, Gaussian denoising, and light contrast equalization using CLAHE, improving robustness to illumination variability and sensor noise.\n\n\n\n\nThe LLR classifier does not operate on the entire cropped image, but only within a discriminative region of interest (ROI).\nThis ROI is defined by a soft mask computed offline using a separate Python script (build_mean_diff_mask.py), which analyzes pre-cropped patches of both positive and negative examples.\nThe script takes as input two sets of images: a positive set (--pos) and a negative set (--neg).\nAll images are converted to grayscale, denoised, equalized with CLAHE, and resized to a common resolution of (76 ) pixels.\nFor each pixel location, the script computes a Fisher-like separability score:\n\\[\nS(i,j) \\propto\n\\frac{|\\mu_{\\text{pos}}(i,j) - \\mu_{\\text{neg}}(i,j)|}\n{\\sigma_{\\text{pos}}(i,j) + \\sigma_{\\text{neg}}(i,j) + \\varepsilon}\n\\]\nThe resulting score map is normalized to ([0,1]) and restricted to a fixed rectangular zone corresponding to the physical region where the yarn intersects the hook.\nOutside this area, the mask is set to zero so that the LLR classifier ignores those pixels.\nTo preserve local texture, the soft score map (S) is optionally smoothed with a bilateral filter.\nA global threshold is then selected using Otsu’s method, producing a hard binary mask.\nThe script saves: - the soft mask (mask_soft.png) - the hard mask (mask_hard_otsu.png) - a visualization of the rectangular ROI\nAt runtime, the soft mask is used as a per-pixel weighting function in the NCC computation:\n\\[\ns_{\\text{pos}} = \\text{NCC}(I, \\mu_{\\text{pos}}; \\text{mask}), \\qquad\ns_{\\text{neg}} = \\text{NCC}(I, \\mu_{\\text{neg}}; \\text{mask})\n\\]\nAmong the available yarn colors, the fuchsia yarn was specifically included to demonstrate that the proposed method does not rely on RGB contrast.\nDespite its visual similarity to the background, the preprocessing pipeline enables reliable detection.\n\n\n mask_soft.png\n\n mask_hard_otsu.png\n\n\nFigure: Visualization of the ROI masks used during computation.\n\n\n\n\nFor each cropped image, the classifier computes two normalized cross-correlation (NCC) scores:\n\\[\ns_{\\text{pos}}, \\quad s_{\\text{neg}}\n\\]\nThe decision variable is defined as:\n\\[\nLLR = s_{\\text{pos}} - s_{\\text{neg}}\n\\]\nA threshold on the LLR score is selected to minimize false negatives, which are more detrimental than false positives in this application.\nIf the threshold is not satisfied, the hook is classified as defective and an immediate stop command is issued.\n\n\n\n\nThe complete implementation—including synchronized image capture, ROI extraction, preprocessing, prototype generation, and real-time LLR evaluation—is available at:\nhttps://github.com/AlessiaRinaldi/error_recognition_knitting_machine"
+    "text": "Textile practices such as crochet and knitting have recently experienced a widespread resurgence. Many creative activities traditionally rooted in manual craftsmanship, once considered less relevant in the context of industrialization and globalization, are now being rediscovered. Skills that historically required years of hands-on experience can, however, be difficult and discouraging for beginners, especially for adults who approach these practices with limited time, resources, or access to expert guidance. Crochet is a notable example: although widely practiced across cultures and historically spread in Europe through Italian convents in the sixteenth century, it remains technically demanding and highly dependent on the maker’s ability to recognize and correct errors. The COVID-19 pandemic further contributed to this renewed interest, encouraging many people to explore slow, creative, and tactile activities.\n\n\nDespite this revival, crochet performed using mechanical devices has seen relatively little technological development. Existing crochet machines remain strongly operator-dependent and offer limited support for automated quality monitoring. Moreover, hobbyist tools such as circular crochet looms, widely available and inexpensive, provide no error feedback and require constant attention from the user. In this work, we start from a commercially available circular loom intended for hobby use and, through a series of mechanical, electronic, and software modifications, transform it into a fully automated crochet machine capable of self-monitoring. This approach demonstrates how accessible off-the-shelf tools can be augmented and repurposed into automated systems, lowering the barrier to entry for creative technologies.\n\n\n\nA single undetected defect, such as missing yarn, incomplete engagement, or a misaligned loop, may propagate across many subsequent cycles, compromising the entire production and resulting in wasted time and materials. For hobbyists and individual makers, this leads to frustration and loss of work. For small and medium-sized factories, the consequences extend to production inefficiencies and environmental impact. As the textile industry is one of the major contributors to global waste and pollution, improving error detection and reducing material waste is a relevant challenge from both practical and sustainability perspectives.\n\n\n\nAutomating the early detection of such defects requires monitoring the hook at the precise moment when the yarn configuration becomes informative. In the scenario addressed in this work, a correctly formed stitch appears as a characteristic “U”-shaped engagement around the base of the hook. Any deviation from this expected pattern must be identified promptly to prevent the defect from propagating downstream.\n\n\n\nIn this section, we present a lightweight, real-time embedded vision system for hook-level error detection implemented entirely on a Raspberry Pi 3 equipped with a CSI camera module and mounted on a custom 3D-printed support.\nA hardware microswitch mounted on the machine provides a synchronization signal marking the exact phase of the hook movement, enabling image acquisition at each cycle for real-time inspection.\nIn this way system captures images in synchrony with the machine’s motion, isolates the region of interest, and analyzes it using a dedicated detection algorithm capable of distinguishing correct yarn engagement from error conditions.\nOur goal is to support both individual makers, who may not have access to industrial-grade equipment, and future industrial applications, where inline quality monitoring could significantly reduce waste and promote more sustainable textile manufacturing."
   },
   {
-    "objectID": "error-code.html#error-detection-software-and-implementation",
-    "href": "error-code.html#error-detection-software-and-implementation",
-    "title": "",
+    "objectID": "error-recognition.html#from-tradition-to-automation",
+    "href": "error-recognition.html#from-tradition-to-automation",
+    "title": "Error Recognition",
     "section": "",
-    "text": "The image acquisition and error-recognition pipeline is implemented in Python and runs directly on the Raspberry Pi 3.\nThe system operates in a fully event-driven manner: each activation of the microswitch triggers an image capture, an immediate crop of the region of interest (ROI), and a real-time evaluation of the yarn configuration using a log-likelihood ratio (LLR) classifier.\n\n\n\nTo train and evaluate the classifier, a dedicated dataset of cropped hook images was collected directly from the machine.\nAt present, the dataset includes three yarn colors:\n\nlight blue\npurple\nfuchsia\n\nAlthough these colors appear visually quite different in RGB, their behavior after preprocessing (grayscale conversion, CLAHE enhancement, ROI masking) is not uniform.\nPreliminary qualitative inspection suggested that the fuchsia yarn could be challenging due to its visual similarity to the pink background of the machine.\nHowever, subsequent experiments revealed that raw chromatic contrast is not the primary factor affecting detectability in the proposed NCC–LLR pipeline.\nAfter grayscale conversion, the light blue yarn becomes closer in intensity to the machine background, resulting in lower separability between correct and defective configurations.\nConversely, the fuchsia yarn exhibits stronger and more consistent local texture variations within the discriminative ROI, which makes the LLR scores for (H_0) and (H_1) more distinct despite its low RGB contrast.\nThe purple yarn displays intermediate behavior, with moderate grayscale separability.\nTo further probe the limits of the method, additional experiments were conducted using a pale pink yarn whose color is almost indistinguishable from the background.\nUnder this condition, neither the NCC-based similarity nor the CLAHE-enhanced preprocessing provided sufficient discriminative information for reliable classification, and the LLR method consistently failed to separate the two hypotheses.\nThis extreme low-contrast scenario is therefore considered out of scope for the current handcrafted method and highlights the need for future solutions based on learned or color-invariant features.\n\n\n Light blue\n\n Purple\n\n Fuchsia\n\n\n\n\n Pale pink (failure)\n\n\nFigure: Examples of yarn colors used in the dataset.\nThe pale pink yarn is almost indistinguishable from the machine background and cannot be reliably detected by the current method.\n\n\n\n\nUpon a rising edge from the microswitch (handled via the gpiozero library), the software captures a still image using the Picamera 2.1 interface.\nSince only a small portion of the full frame contains the hook region, the image is immediately cropped according to a predefined ROI, specified either in relative coordinates or in absolute pixel values.\nThis cropping stage reduces computational cost and increases robustness by ensuring that the classifier operates on a stable and consistent portion of the scene.\nBoundary checks are applied to avoid invalid crops in case of slight camera misalignment, which is important due to the sub-centimeter positioning precision required for hook-level inspection.\n\n\n\n\nThe LLR classifier relies on two prototype images:\n\na positive prototype representing correct yarn engagement;\na negative prototype representing a hook that has failed to catch the yarn.\n\nThese prototypes are computed as the median of small training sets of positive and negative examples.\nBefore prototype computation, images undergo grayscale conversion, Gaussian denoising, and light contrast equalization using CLAHE, improving robustness to illumination variability and sensor noise.\n\n\n\n\nThe LLR classifier does not operate on the entire cropped image, but only within a discriminative region of interest (ROI).\nThis ROI is defined by a soft mask computed offline using a separate Python script (build_mean_diff_mask.py), which analyzes pre-cropped patches of both positive and negative examples.\nThe script takes as input two sets of images: a positive set (--pos) and a negative set (--neg).\nAll images are converted to grayscale, denoised, equalized with CLAHE, and resized to a common resolution of (76 ) pixels.\nFor each pixel location, the script computes a Fisher-like separability score:\n\\[\nS(i,j) \\propto\n\\frac{|\\mu_{\\text{pos}}(i,j) - \\mu_{\\text{neg}}(i,j)|}\n{\\sigma_{\\text{pos}}(i,j) + \\sigma_{\\text{neg}}(i,j) + \\varepsilon}\n\\]\nThe resulting score map is normalized to ([0,1]) and restricted to a fixed rectangular zone corresponding to the physical region where the yarn intersects the hook.\nOutside this area, the mask is set to zero so that the LLR classifier ignores those pixels.\nTo preserve local texture, the soft score map (S) is optionally smoothed with a bilateral filter.\nA global threshold is then selected using Otsu’s method, producing a hard binary mask.\nThe script saves: - the soft mask (mask_soft.png) - the hard mask (mask_hard_otsu.png) - a visualization of the rectangular ROI\nAt runtime, the soft mask is used as a per-pixel weighting function in the NCC computation:\n\\[\ns_{\\text{pos}} = \\text{NCC}(I, \\mu_{\\text{pos}}; \\text{mask}), \\qquad\ns_{\\text{neg}} = \\text{NCC}(I, \\mu_{\\text{neg}}; \\text{mask})\n\\]\nAmong the available yarn colors, the fuchsia yarn was specifically included to demonstrate that the proposed method does not rely on RGB contrast.\nDespite its visual similarity to the background, the preprocessing pipeline enables reliable detection.\n\n\n mask_soft.png\n\n mask_hard_otsu.png\n\n\nFigure: Visualization of the ROI masks used during computation.\n\n\n\n\nFor each cropped image, the classifier computes two normalized cross-correlation (NCC) scores:\n\\[\ns_{\\text{pos}}, \\quad s_{\\text{neg}}\n\\]\nThe decision variable is defined as:\n\\[\nLLR = s_{\\text{pos}} - s_{\\text{neg}}\n\\]\nA threshold on the LLR score is selected to minimize false negatives, which are more detrimental than false positives in this application.\nIf the threshold is not satisfied, the hook is classified as defective and an immediate stop command is issued.\n\n\n\n\nThe complete implementation—including synchronized image capture, ROI extraction, preprocessing, prototype generation, and real-time LLR evaluation—is available at:\nhttps://github.com/AlessiaRinaldi/error_recognition_knitting_machine"
+    "text": "Textile practices such as crochet and knitting have recently experienced a widespread resurgence. Many creative activities traditionally rooted in manual craftsmanship, once considered less relevant in the context of industrialization and globalization, are now being rediscovered. Skills that historically required years of hands-on experience can, however, be difficult and discouraging for beginners, especially for adults who approach these practices with limited time, resources, or access to expert guidance. Crochet is a notable example: although widely practiced across cultures and historically spread in Europe through Italian convents in the sixteenth century, it remains technically demanding and highly dependent on the maker’s ability to recognize and correct errors. The COVID-19 pandemic further contributed to this renewed interest, encouraging many people to explore slow, creative, and tactile activities.\n\n\nDespite this revival, crochet performed using mechanical devices has seen relatively little technological development. Existing crochet machines remain strongly operator-dependent and offer limited support for automated quality monitoring. Moreover, hobbyist tools such as circular crochet looms, widely available and inexpensive, provide no error feedback and require constant attention from the user. In this work, we start from a commercially available circular loom intended for hobby use and, through a series of mechanical, electronic, and software modifications, transform it into a fully automated crochet machine capable of self-monitoring. This approach demonstrates how accessible off-the-shelf tools can be augmented and repurposed into automated systems, lowering the barrier to entry for creative technologies.\n\n\n\nA single undetected defect, such as missing yarn, incomplete engagement, or a misaligned loop, may propagate across many subsequent cycles, compromising the entire production and resulting in wasted time and materials. For hobbyists and individual makers, this leads to frustration and loss of work. For small and medium-sized factories, the consequences extend to production inefficiencies and environmental impact. As the textile industry is one of the major contributors to global waste and pollution, improving error detection and reducing material waste is a relevant challenge from both practical and sustainability perspectives.\n\n\n\nAutomating the early detection of such defects requires monitoring the hook at the precise moment when the yarn configuration becomes informative. In the scenario addressed in this work, a correctly formed stitch appears as a characteristic “U”-shaped engagement around the base of the hook. Any deviation from this expected pattern must be identified promptly to prevent the defect from propagating downstream.\n\n\n\nIn this section, we present a lightweight, real-time embedded vision system for hook-level error detection implemented entirely on a Raspberry Pi 3 equipped with a CSI camera module and mounted on a custom 3D-printed support.\nA hardware microswitch mounted on the machine provides a synchronization signal marking the exact phase of the hook movement, enabling image acquisition at each cycle for real-time inspection.\nIn this way system captures images in synchrony with the machine’s motion, isolates the region of interest, and analyzes it using a dedicated detection algorithm capable of distinguishing correct yarn engagement from error conditions.\nOur goal is to support both individual makers, who may not have access to industrial-grade equipment, and future industrial applications, where inline quality monitoring could significantly reduce waste and promote more sustainable textile manufacturing."
   },
   {
-    "objectID": "error-code.html#selection-of-the-acquisition-system-for-error-detection",
-    "href": "error-code.html#selection-of-the-acquisition-system-for-error-detection",
-    "title": "",
+    "objectID": "error-recognition.html#selection-of-the-acquisition-system-for-error-detection",
+    "href": "error-recognition.html#selection-of-the-acquisition-system-for-error-detection",
+    "title": "Error Recognition",
     "section": "- Selection of the Acquisition System for Error Detection",
     "text": "- Selection of the Acquisition System for Error Detection\nRequirements, sensor & lens selection, lighting, sync, and mounting constraints."
   },
   {
-    "objectID": "error-code.html#d-camera-mount",
-    "href": "error-code.html#d-camera-mount",
-    "title": "",
+    "objectID": "error-recognition.html#d-camera-mount",
+    "href": "error-recognition.html#d-camera-mount",
+    "title": "Error Recognition",
     "section": "- 3D Camera Mount",
     "text": "- 3D Camera Mount\nMechanical support, 3D printing, working distance, and CAD notes."
   },
   {
-    "objectID": "error-code.html#error-recognition-code",
-    "href": "error-code.html#error-recognition-code",
-    "title": "",
+    "objectID": "error-recognition.html#error-recognition-code",
+    "href": "error-recognition.html#error-recognition-code",
+    "title": "Error Recognition",
     "section": "- Error Recognition — Code",
     "text": "- Error Recognition — Code\nAlgorithms, model/code structure, data flow, and deployment notes."
   },
   {
-    "objectID": "error-code.html#results-efficiency",
-    "href": "error-code.html#results-efficiency",
-    "title": "",
+    "objectID": "error-recognition.html#results-efficiency",
+    "href": "error-recognition.html#results-efficiency",
+    "title": "Error Recognition",
     "section": "- Results & Efficiency",
     "text": "- Results & Efficiency\nDatasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget."
-  },
-  {
-    "objectID": "error-code.html#overview",
-    "href": "error-code.html#overview",
-    "title": "",
-    "section": "- Overview",
-    "text": "- Overview"
-  },
-  {
-    "objectID": "error-camera.html#section",
-    "href": "error-camera.html#section",
-    "title": "",
-    "section": "- ",
-    "text": "-"
-  },
-  {
-    "objectID": "error-camera.html#conclusions-and-future",
-    "href": "error-camera.html#conclusions-and-future",
-    "title": "",
-    "section": "- Conclusions and Future",
-    "text": "- Conclusions and Future"
-  },
-  {
-    "objectID": "error-camera.html#conclusions-and-future-works",
-    "href": "error-camera.html#conclusions-and-future-works",
-    "title": "",
-    "section": "- Conclusions and Future Works",
-    "text": "- Conclusions and Future Works"
-  },
-  {
-    "objectID": "error-code.html#conclusions-and-future-works",
-    "href": "error-code.html#conclusions-and-future-works",
-    "title": "",
-    "section": "- Conclusions and Future Works",
-    "text": "- Conclusions and Future Works"
-  },
-  {
-    "objectID": "error-mount.html#conclusions-and-future-works",
-    "href": "error-mount.html#conclusions-and-future-works",
-    "title": "",
-    "section": "- Conclusions and Future Works",
-    "text": "- Conclusions and Future Works"
   },
   {
     "objectID": "error-recognition.html#conclusions-and-future-works",
@@ -467,27 +68,6 @@
     "title": "Error Recognition",
     "section": "- Conclusions and Future Works",
     "text": "- Conclusions and Future Works"
-  },
-  {
-    "objectID": "error-results.html",
-    "href": "error-results.html",
-    "title": "",
-    "section": "",
-    "text": "The performance of the proposed LLR-based detector was evaluated within the binary hypothesis-testing framework commonly adopted in supervised signal detection:\n\\[\nH_0: \\text{“U-shape” of the yarn}, \\qquad\nH_1: \\text{hole or missing yarn}.\n\\]\nAt each microswitch activation, the system acquires a cropped hook image, computes the log-likelihood ratio:\n\\[\nLLR = s_{\\text{pos}} - s_{\\text{neg}},\n\\]\nand compares it to a fixed threshold to decide between (H_0) and (H_1). This setting is equivalent to a classical detector with probabilities of detection and false alarm (P_D) and (P_F), as described in supervised signal detection and ROC analysis.\nTo obtain an unbiased estimate of performance, the dataset was randomly partitioned into three non-overlapping subsets:\n\nTraining set: used exclusively to build the positive and negative prototypes and the discriminative ROI mask.\nIt consists of 39 positive images and 27 negative images, balanced across the three yarn colors.\nValidation set: 208 images, used only for threshold selection and operating-point tuning.\nTest set: 771 images, used only for the final performance evaluation.\n\n\n\n\n\nDuring validation, the classifier was evaluated using (LLR = 0).\nWith this configuration, at least one false alarm occurred, which is unacceptable in the real operating scenario: actual defects are extremely rare, and even a single false alarm would trigger an unnecessary machine stop.\nFollowing a Neyman–Pearson design criterion, the decision threshold was adjusted to obtain a false-alarm rate as close as possible to zero on the validation set, even at the expense of increased false negatives.\nThis led to the selection of\n\\[\nLLR_{\\text{thr}} = -0.035,\n\\]\nwhich was kept fixed for the final evaluation on the independent test set.\n\n\n\n\nOnce the threshold was fixed, the detector was evaluated on the independent test set of 771 images.\n\n\n\n\nPredicted (H_0)\nPredicted (H_1)\n\n\n\n\nTrue (H_0) (no defect)\nTN = 633\nFP = 0\n\n\nTrue (H_1) (defect)\nFN = 20\nTP = 118\n\n\n\nTable. Confusion matrix on the test set (771 images).\nFrom these values:\n\\[\n\\begin{aligned}\n\\text{Accuracy} &= \\frac{TP + TN}{TP + TN + FP + FN}\n= \\frac{751}{771} \\approx 97.4\\%, \\\\\nP_D &= \\frac{TP}{TP + FN}\n= \\frac{118}{138} \\approx 85.5\\%, \\\\\nP_F &= \\frac{FP}{FP + TN} \\approx 0\\%, \\\\\n\\text{Specificity} &= \\frac{TN}{TN + FP} \\approx 100\\%.\n\\end{aligned}\n\\]\nThus, the operating point enforces (P_F ) and accepts a moderate increase in missed detections\n(P_M = 1 - P_D), consistent with a minimum-risk design in which unnecessary machine stops are far more costly than occasional missed defects.\n\n\n\n\nPerformance was further analyzed by grouping test images by yarn color.\n\n\n\n\n\n\nPredicted (H_0)\nPredicted (H_1)\n\n\n\n\nTrue (H_0)\nTN = 322\nFP = 0\n\n\nTrue (H_1)\nFN = 3\nTP = 48\n\n\n\n\\[\n\\mathrm{ACC} \\approx 99.2\\%, \\quad\n\\mathrm{TPR} \\approx 94.1\\%, \\quad\n\\mathrm{FPR} \\approx 0\\%.\n\\]\n\n\n\n\n\n\n\nPredicted (H_0)\nPredicted (H_1)\n\n\n\n\nTrue (H_0)\nTN = 193\nFP = 0\n\n\nTrue (H_1)\nFN = 8\nTP = 37\n\n\n\n\\[\n\\mathrm{ACC} \\approx 96.6\\%, \\quad\n\\mathrm{TPR} \\approx 82.2\\%, \\quad\n\\mathrm{FPR} \\approx 0\\%.\n\\]\n\n\n\n\n\n\n\nPredicted (H_0)\nPredicted (H_1)\n\n\n\n\nTrue (H_0)\nTN = 118\nFP = 0\n\n\nTrue (H_1)\nFN = 9\nTP = 33\n\n\n\n\\[\n\\mathrm{ACC} \\approx 94.4\\%, \\quad\n\\mathrm{TPR} \\approx 78.6\\%, \\quad\n\\mathrm{FPR} \\approx 0\\%.\n\\]\nInterestingly, the best performance is obtained for the fuchsia yarn, despite its visual similarity to the pink background. Conversely, the light blue yarn yields the lowest detection probability, as it is closest to the background in grayscale and generates less contrast within the ROI.\nThis behavior reflects the fact that separability depends not on raw color contrast, but on the stability of local texture and intensity patterns after preprocessing.\n\n\n\n\n\nThe pale pink yarn was not included in training, validation, or test sets, as it does not belong to normal operating conditions. In this edge case, more than 32% of samples were misclassified, and the LLR distributions of (H_0) and (H_1) overlap almost completely.\nThis confirms that extreme low-contrast conditions lie outside the operational domain of the method and motivates future extensions based on learned or contrast-invariant features.\n\n\n\n\nThe complete acquisition and detection pipeline runs directly on the Raspberry Pi 3 and is triggered by the microswitch. The microswitch is activated approximately every (0.42,), corresponding to an inspection rate of\n\\[\nf_{\\text{inspect}} \\approx 2.4 \\ \\text{inspections/s}.\n\\]\nAt each trigger, a full-resolution image is captured (1280×960 px), cropped to a (76 ) ROI, and processed through preprocessing, NCC computation, and LLR evaluation.\nThe total processing time per trigger is well below the inter-trigger interval, and no triggers were missed during testing. The effective inspection rate is therefore limited by the machine mechanics rather than by computation.\nThe available computational margin enables multi-sample decision fusion strategies (e.g., majority voting or LLR averaging), which could reduce missed detections while maintaining the strict constraint (P_F )."
-  },
-  {
-    "objectID": "error-results.html#experimental-evaluation-and-results",
-    "href": "error-results.html#experimental-evaluation-and-results",
-    "title": "",
-    "section": "",
-    "text": "The performance of the proposed LLR-based detector was evaluated within the binary hypothesis-testing framework commonly adopted in supervised signal detection:\n\\[\nH_0: \\text{“U-shape” of the yarn}, \\qquad\nH_1: \\text{hole or missing yarn}.\n\\]\nAt each microswitch activation, the system acquires a cropped hook image, computes the log-likelihood ratio:\n\\[\nLLR = s_{\\text{pos}} - s_{\\text{neg}},\n\\]\nand compares it to a fixed threshold to decide between (H_0) and (H_1). This setting is equivalent to a classical detector with probabilities of detection and false alarm (P_D) and (P_F), as described in supervised signal detection and ROC analysis.\nTo obtain an unbiased estimate of performance, the dataset was randomly partitioned into three non-overlapping subsets:\n\nTraining set: used exclusively to build the positive and negative prototypes and the discriminative ROI mask.\nIt consists of 39 positive images and 27 negative images, balanced across the three yarn colors.\nValidation set: 208 images, used only for threshold selection and operating-point tuning.\nTest set: 771 images, used only for the final performance evaluation.\n\n\n\n\n\nDuring validation, the classifier was evaluated using (LLR = 0).\nWith this configuration, at least one false alarm occurred, which is unacceptable in the real operating scenario: actual defects are extremely rare, and even a single false alarm would trigger an unnecessary machine stop.\nFollowing a Neyman–Pearson design criterion, the decision threshold was adjusted to obtain a false-alarm rate as close as possible to zero on the validation set, even at the expense of increased false negatives.\nThis led to the selection of\n\\[\nLLR_{\\text{thr}} = -0.035,\n\\]\nwhich was kept fixed for the final evaluation on the independent test set.\n\n\n\n\nOnce the threshold was fixed, the detector was evaluated on the independent test set of 771 images.\n\n\n\n\nPredicted (H_0)\nPredicted (H_1)\n\n\n\n\nTrue (H_0) (no defect)\nTN = 633\nFP = 0\n\n\nTrue (H_1) (defect)\nFN = 20\nTP = 118\n\n\n\nTable. Confusion matrix on the test set (771 images).\nFrom these values:\n\\[\n\\begin{aligned}\n\\text{Accuracy} &= \\frac{TP + TN}{TP + TN + FP + FN}\n= \\frac{751}{771} \\approx 97.4\\%, \\\\\nP_D &= \\frac{TP}{TP + FN}\n= \\frac{118}{138} \\approx 85.5\\%, \\\\\nP_F &= \\frac{FP}{FP + TN} \\approx 0\\%, \\\\\n\\text{Specificity} &= \\frac{TN}{TN + FP} \\approx 100\\%.\n\\end{aligned}\n\\]\nThus, the operating point enforces (P_F ) and accepts a moderate increase in missed detections\n(P_M = 1 - P_D), consistent with a minimum-risk design in which unnecessary machine stops are far more costly than occasional missed defects.\n\n\n\n\nPerformance was further analyzed by grouping test images by yarn color.\n\n\n\n\n\n\nPredicted (H_0)\nPredicted (H_1)\n\n\n\n\nTrue (H_0)\nTN = 322\nFP = 0\n\n\nTrue (H_1)\nFN = 3\nTP = 48\n\n\n\n\\[\n\\mathrm{ACC} \\approx 99.2\\%, \\quad\n\\mathrm{TPR} \\approx 94.1\\%, \\quad\n\\mathrm{FPR} \\approx 0\\%.\n\\]\n\n\n\n\n\n\n\nPredicted (H_0)\nPredicted (H_1)\n\n\n\n\nTrue (H_0)\nTN = 193\nFP = 0\n\n\nTrue (H_1)\nFN = 8\nTP = 37\n\n\n\n\\[\n\\mathrm{ACC} \\approx 96.6\\%, \\quad\n\\mathrm{TPR} \\approx 82.2\\%, \\quad\n\\mathrm{FPR} \\approx 0\\%.\n\\]\n\n\n\n\n\n\n\nPredicted (H_0)\nPredicted (H_1)\n\n\n\n\nTrue (H_0)\nTN = 118\nFP = 0\n\n\nTrue (H_1)\nFN = 9\nTP = 33\n\n\n\n\\[\n\\mathrm{ACC} \\approx 94.4\\%, \\quad\n\\mathrm{TPR} \\approx 78.6\\%, \\quad\n\\mathrm{FPR} \\approx 0\\%.\n\\]\nInterestingly, the best performance is obtained for the fuchsia yarn, despite its visual similarity to the pink background. Conversely, the light blue yarn yields the lowest detection probability, as it is closest to the background in grayscale and generates less contrast within the ROI.\nThis behavior reflects the fact that separability depends not on raw color contrast, but on the stability of local texture and intensity patterns after preprocessing.\n\n\n\n\n\nThe pale pink yarn was not included in training, validation, or test sets, as it does not belong to normal operating conditions. In this edge case, more than 32% of samples were misclassified, and the LLR distributions of (H_0) and (H_1) overlap almost completely.\nThis confirms that extreme low-contrast conditions lie outside the operational domain of the method and motivates future extensions based on learned or contrast-invariant features.\n\n\n\n\nThe complete acquisition and detection pipeline runs directly on the Raspberry Pi 3 and is triggered by the microswitch. The microswitch is activated approximately every (0.42,), corresponding to an inspection rate of\n\\[\nf_{\\text{inspect}} \\approx 2.4 \\ \\text{inspections/s}.\n\\]\nAt each trigger, a full-resolution image is captured (1280×960 px), cropped to a (76 ) ROI, and processed through preprocessing, NCC computation, and LLR evaluation.\nThe total processing time per trigger is well below the inter-trigger interval, and no triggers were missed during testing. The effective inspection rate is therefore limited by the machine mechanics rather than by computation.\nThe available computational margin enables multi-sample decision fusion strategies (e.g., majority voting or LLR averaging), which could reduce missed detections while maintaining the strict constraint (P_F )."
-  },
-  {
-    "objectID": "error-results.html#conclusions-and-future-work",
-    "href": "error-results.html#conclusions-and-future-work",
-    "title": "",
-    "section": "Conclusions and Future Work",
-    "text": "Conclusions and Future Work\nThis work presented a complete real-time vision system for hook-level error detection on an automated crochet machine, implemented on a Raspberry Pi 3 using a lightweight LLR-based classifier.\nThe system achieves high accuracy with an operating point tending toward zero false alarms, reaching approximately 97.4% accuracy and 85% detection probability on a test set of 771 images.\nFuture work will investigate: - multi-frame decision fusion, - learned feature representations (e.g., lightweight CNNs), - improved mechanical stability and camera alignment.\nOverall, the results demonstrate that low-cost embedded vision can support reliable, real-time quality control on textile machines, with promising extensions toward more robust and general solutions."
   },
   {
     "objectID": "error-future_work.html",
@@ -502,48 +82,6 @@
     "title": "",
     "section": "",
     "text": "This work presented a complete real-time vision system for hook-level error detection on an automated crochet machine, implemented on a Raspberry Pi 3 using a lightweight LLR-based classifier.\nThe system achieves high accuracy with an operating point tending toward zero false alarms, reaching approximately 97.4% accuracy and 85% detection probability on a test set of 771 images.\nFuture work will investigate:\n\nmulti-frame decision fusion,\nlearned feature representations (e.g., lightweight CNNs),\nimproved mechanical stability and camera alignment.\n\nOverall, the results demonstrate that low-cost embedded vision can support reliable, real-time quality control on textile machines, with promising extensions toward more robust and general solutions."
-  },
-  {
-    "objectID": "error-results.html#results-efficiency",
-    "href": "error-results.html#results-efficiency",
-    "title": "",
-    "section": "- Results & Efficiency",
-    "text": "- Results & Efficiency\nDatasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget."
-  },
-  {
-    "objectID": "error-results.html#conclusions-and-future-works",
-    "href": "error-results.html#conclusions-and-future-works",
-    "title": "",
-    "section": "- Conclusions and Future Works",
-    "text": "- Conclusions and Future Works"
-  },
-  {
-    "objectID": "error-results.html#overview",
-    "href": "error-results.html#overview",
-    "title": "",
-    "section": "- Overview",
-    "text": "- Overview"
-  },
-  {
-    "objectID": "error-results.html#selection-of-the-acquisition-system-for-error-detection",
-    "href": "error-results.html#selection-of-the-acquisition-system-for-error-detection",
-    "title": "",
-    "section": "- Selection of the Acquisition System for Error Detection",
-    "text": "- Selection of the Acquisition System for Error Detection\nRequirements, sensor & lens selection, lighting, sync, and mounting constraints."
-  },
-  {
-    "objectID": "error-results.html#d-camera-mount",
-    "href": "error-results.html#d-camera-mount",
-    "title": "",
-    "section": "- 3D Camera Mount",
-    "text": "- 3D Camera Mount\nMechanical support, 3D printing, working distance, and CAD notes."
-  },
-  {
-    "objectID": "error-results.html#error-recognition-code",
-    "href": "error-results.html#error-recognition-code",
-    "title": "",
-    "section": "- Error Recognition — Code",
-    "text": "- Error Recognition — Code\nAlgorithms, model/code structure, data flow, and deployment notes."
   },
   {
     "objectID": "error-future_work.html#overview",
@@ -579,5 +117,222 @@
     "title": "",
     "section": "- Results & Efficiency",
     "text": "- Results & Efficiency\nDatasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget."
+  },
+  {
+    "objectID": "error-camera.html",
+    "href": "error-camera.html",
+    "title": "",
+    "section": "",
+    "text": "The acquisition system plays a central role in the proposed error detection pipeline, as it must provide close-up images of the hook region at every relevant movement of the crochet machine.\nIn this work, we start from a commercially available circular crochet loom intended for hobby use and adapt it into an automated system through a set of mechanical and electronic modifications.\nThis choice allows us to preserve the low-cost and accessible nature of the original tool while enabling precise synchronization and repeatable inspection of each hook.\n\n\n\nOverview of the circular crochet loom.\n\n\nA hardware microswitch mounted on the modified loom generates a synchronization signal that marks the exact moment in the hook’s motion when the yarn configuration becomes informative.\nThis signal is used by the Raspberry Pi 3 Model B+ to trigger image acquisition in real time.\nAt each trigger, the system inspects the hook to verify that the yarn—regardless of its color, thickness, or texture—assumes the expected “U”-shaped configuration around the base of the hook.\nAny configuration that does not match this pattern is classified as an error.\nWhen an anomaly is detected, the system immediately stops the motor driving the process and displays a diagnostic message indicating the index of the affected hook.\nAn example close-up of the inspected region is reported in these two figures.\n\n\n\n\n\nExamples of correct and defective yarn configuration.\n\n\n\n\n\n\n\n\n\nThe primary objective of the acquisition system is to enable automatic, hook-level monitoring of the knitting process on a low-cost embedded platform.\nTo meet this goal, the choice of camera and interface must satisfy the following requirements:\n\nCompatibility with Raspberry Pi 3: use of natively supported interfaces and libraries.\nEase of software integration: availability of well-established computer vision libraries (e.g., libcamera, Picamera2, OpenCV).\nCost-effectiveness: sufficient resolution to distinguish fine yarn details while keeping costs low.\nClose-focus capability: ability to capture sharp images at short distances near the hook area.\nLow power consumption: efficient power usage to minimize the overall system load.\n\nThese requirements guided the evaluation of several acquisition architectures for the Raspberry Pi 3, considering their impact on image quality, latency, software complexity, and mechanical integration.\n\n\n\n\n\n\nThe Raspberry Pi Camera v2.1 connects directly to the Broadcom SoC through the MIPI–CSI interface, a high-speed differential serial bus dedicated to video capture.\nThis direct link offers several advantages for the considered application:\n\nHigh bandwidth and low latency: the pixel stream reaches the processor without traversing the USB or network stack, resulting in reduced jitter and more deterministic timing.\nImage quality and control: the 8 MP sensor, combined with the Raspberry platform’s integrated image signal processor (ISP), provides fine control over exposure, gain, white balance, and frame rate.\nNative integration: the camera is supported via libcamera / Picamera2 and V4L2, with stable pipelines toward OpenCV, TensorFlow Lite, and other vision frameworks.\n\nIn the context of hook-level defect detection, these properties translate into a favorable signal-to-noise ratio and consistent frame characteristics, which are beneficial for detecting subtle differences in yarn configuration.\nThe low and predictable latency also facilitates accurate synchronization between the microswitch event and the captured image, which is critical for reliable inspection.\n\n\n\n\nThe ESP32-CAM module integrates an OV2640 sensor (2 MP) and a microcontroller with on-board Wi-Fi connectivity.\nIn a typical setup, images are captured on the ESP32-CAM and transmitted to the Raspberry Pi for processing, either via Wi-Fi or over a serial link:\n\nWi-Fi: the module sends JPEG or MJPEG frames to a broker or server.\nWiring is simple, but latency and jitter depend on network conditions, buffering, and retransmissions.\nSerial / USB–UART: the module transmits image data in chunks to the Raspberry Pi through a UART–USB bridge.\nThis reduces dependence on the wireless network, but requires application-level protocols for fragmentation, reassembly, and buffering.\n\nThe ESP32-CAM is extremely low cost and can operate as a stand-alone node.\nHowever, compared to a CSI-connected Pi Camera, it provides lower image quality and less precise control over acquisition parameters.\nOn-board compression may obscure fine textile defects, and the less deterministic timing makes it harder to align the acquisition instant with the hook motion.\nFrom a mechanical standpoint, the ESP32-CAM module is also bulkier than the Pi Camera, complicating its integration into the compact 3D-printed frame of the desktop crochet machine.\nOn the positive side, its shorter minimum focus distance can be advantageous for very close-up shots, potentially reducing the need for additional optics.\n\n\n\nIn preliminary experiments with a direct USB–UART connection, the ESP32-CAM was successfully flashed with a MicroPython firmware.\nHowever, upon reboot, the board remained stuck in the bootloader, and the serial output consisted only of unreadable characters or repetitive error messages, never reaching a stable REPL prompt.\nThis behavior prevented the validation of a reliable point-to-point communication channel with the Raspberry Pi and hindered further development of the serial-based approach.\n\n\n\n\nA Wi-Fi-based architecture was also evaluated, in which the ESP32-CAM periodically captured JPEG snapshots and published them to an MQTT topic, while the Raspberry Pi—running a Mosquitto broker—subscribed to the topic, decoded the images, and displayed or stored them locally.\nDespite its conceptual simplicity, this approach suffered from practical issues related to the transmission and reconstruction of the JPEG payloads.\nDecoding errors and corrupted frames frequently occurred, making it impossible to guarantee consistent image delivery for real-time detection.\nGiven these early difficulties and following an iterative, prototype-driven development process, the ESP32-CAM solutions were deemed insufficiently reliable for the timing and robustness requirements of hook-level error detection, and effort was redirected toward more tightly integrated alternatives.\n\n\n\n\n\n\n\nStandard USB webcams offer a ready-to-use and widely available solution, typically with UVC support under Linux.\nHowever, image data must traverse the USB stack, introducing additional overhead compared to CSI and limiting the level of low-level camera control.\nSuch devices are suitable for early prototyping or applications with less stringent latency requirements, but are less attractive when deterministic timing and compact integration are needed.\n\n\n\nThe Raspberry Pi HQ Camera is a 12 MP module with a C/CS mount for interchangeable lenses.\nIt provides superior optical quality and flexibility in terms of focus, focal length, and macro optics, at the cost of higher price and significantly larger size compared to the Pi Camera v2.1.\nThe HQ Camera is therefore more appropriate when extreme close-ups or professional optical control are required, whereas the present work prioritizes low cost and compactness.\n\n\n\n\n\n\nConsidering the functional requirements, the practical experiments with the ESP32-CAM, and the constraints of the crochet machine, the Pi Camera v2.1 connected via the MIPI–CSI interface emerged as the most suitable option.\nIt combines sufficient resolution and close-focus capability with low and deterministic latency, strong software support on the Raspberry Pi 3, and a compact form factor compatible with the 3D-printed camera mount described in Section @sec:camera_mount.\nThis configuration is therefore adopted as the reference acquisition system for the error detection pipeline."
+  },
+  {
+    "objectID": "error-camera.html#selection-of-the-acquisition-system",
+    "href": "error-camera.html#selection-of-the-acquisition-system",
+    "title": "",
+    "section": "",
+    "text": "The acquisition system plays a central role in the proposed error detection pipeline, as it must provide close-up images of the hook region at every relevant movement of the crochet machine.\nIn this work, we start from a commercially available circular crochet loom intended for hobby use and adapt it into an automated system through a set of mechanical and electronic modifications.\nThis choice allows us to preserve the low-cost and accessible nature of the original tool while enabling precise synchronization and repeatable inspection of each hook.\n\n\n\nOverview of the circular crochet loom.\n\n\nA hardware microswitch mounted on the modified loom generates a synchronization signal that marks the exact moment in the hook’s motion when the yarn configuration becomes informative.\nThis signal is used by the Raspberry Pi 3 Model B+ to trigger image acquisition in real time.\nAt each trigger, the system inspects the hook to verify that the yarn—regardless of its color, thickness, or texture—assumes the expected “U”-shaped configuration around the base of the hook.\nAny configuration that does not match this pattern is classified as an error.\nWhen an anomaly is detected, the system immediately stops the motor driving the process and displays a diagnostic message indicating the index of the affected hook.\nAn example close-up of the inspected region is reported in these two figures.\n\n\n\n\n\nExamples of correct and defective yarn configuration.\n\n\n\n\n\n\n\n\n\nThe primary objective of the acquisition system is to enable automatic, hook-level monitoring of the knitting process on a low-cost embedded platform.\nTo meet this goal, the choice of camera and interface must satisfy the following requirements:\n\nCompatibility with Raspberry Pi 3: use of natively supported interfaces and libraries.\nEase of software integration: availability of well-established computer vision libraries (e.g., libcamera, Picamera2, OpenCV).\nCost-effectiveness: sufficient resolution to distinguish fine yarn details while keeping costs low.\nClose-focus capability: ability to capture sharp images at short distances near the hook area.\nLow power consumption: efficient power usage to minimize the overall system load.\n\nThese requirements guided the evaluation of several acquisition architectures for the Raspberry Pi 3, considering their impact on image quality, latency, software complexity, and mechanical integration.\n\n\n\n\n\n\nThe Raspberry Pi Camera v2.1 connects directly to the Broadcom SoC through the MIPI–CSI interface, a high-speed differential serial bus dedicated to video capture.\nThis direct link offers several advantages for the considered application:\n\nHigh bandwidth and low latency: the pixel stream reaches the processor without traversing the USB or network stack, resulting in reduced jitter and more deterministic timing.\nImage quality and control: the 8 MP sensor, combined with the Raspberry platform’s integrated image signal processor (ISP), provides fine control over exposure, gain, white balance, and frame rate.\nNative integration: the camera is supported via libcamera / Picamera2 and V4L2, with stable pipelines toward OpenCV, TensorFlow Lite, and other vision frameworks.\n\nIn the context of hook-level defect detection, these properties translate into a favorable signal-to-noise ratio and consistent frame characteristics, which are beneficial for detecting subtle differences in yarn configuration.\nThe low and predictable latency also facilitates accurate synchronization between the microswitch event and the captured image, which is critical for reliable inspection.\n\n\n\n\nThe ESP32-CAM module integrates an OV2640 sensor (2 MP) and a microcontroller with on-board Wi-Fi connectivity.\nIn a typical setup, images are captured on the ESP32-CAM and transmitted to the Raspberry Pi for processing, either via Wi-Fi or over a serial link:\n\nWi-Fi: the module sends JPEG or MJPEG frames to a broker or server.\nWiring is simple, but latency and jitter depend on network conditions, buffering, and retransmissions.\nSerial / USB–UART: the module transmits image data in chunks to the Raspberry Pi through a UART–USB bridge.\nThis reduces dependence on the wireless network, but requires application-level protocols for fragmentation, reassembly, and buffering.\n\nThe ESP32-CAM is extremely low cost and can operate as a stand-alone node.\nHowever, compared to a CSI-connected Pi Camera, it provides lower image quality and less precise control over acquisition parameters.\nOn-board compression may obscure fine textile defects, and the less deterministic timing makes it harder to align the acquisition instant with the hook motion.\nFrom a mechanical standpoint, the ESP32-CAM module is also bulkier than the Pi Camera, complicating its integration into the compact 3D-printed frame of the desktop crochet machine.\nOn the positive side, its shorter minimum focus distance can be advantageous for very close-up shots, potentially reducing the need for additional optics.\n\n\n\nIn preliminary experiments with a direct USB–UART connection, the ESP32-CAM was successfully flashed with a MicroPython firmware.\nHowever, upon reboot, the board remained stuck in the bootloader, and the serial output consisted only of unreadable characters or repetitive error messages, never reaching a stable REPL prompt.\nThis behavior prevented the validation of a reliable point-to-point communication channel with the Raspberry Pi and hindered further development of the serial-based approach.\n\n\n\n\nA Wi-Fi-based architecture was also evaluated, in which the ESP32-CAM periodically captured JPEG snapshots and published them to an MQTT topic, while the Raspberry Pi—running a Mosquitto broker—subscribed to the topic, decoded the images, and displayed or stored them locally.\nDespite its conceptual simplicity, this approach suffered from practical issues related to the transmission and reconstruction of the JPEG payloads.\nDecoding errors and corrupted frames frequently occurred, making it impossible to guarantee consistent image delivery for real-time detection.\nGiven these early difficulties and following an iterative, prototype-driven development process, the ESP32-CAM solutions were deemed insufficiently reliable for the timing and robustness requirements of hook-level error detection, and effort was redirected toward more tightly integrated alternatives.\n\n\n\n\n\n\n\nStandard USB webcams offer a ready-to-use and widely available solution, typically with UVC support under Linux.\nHowever, image data must traverse the USB stack, introducing additional overhead compared to CSI and limiting the level of low-level camera control.\nSuch devices are suitable for early prototyping or applications with less stringent latency requirements, but are less attractive when deterministic timing and compact integration are needed.\n\n\n\nThe Raspberry Pi HQ Camera is a 12 MP module with a C/CS mount for interchangeable lenses.\nIt provides superior optical quality and flexibility in terms of focus, focal length, and macro optics, at the cost of higher price and significantly larger size compared to the Pi Camera v2.1.\nThe HQ Camera is therefore more appropriate when extreme close-ups or professional optical control are required, whereas the present work prioritizes low cost and compactness.\n\n\n\n\n\n\nConsidering the functional requirements, the practical experiments with the ESP32-CAM, and the constraints of the crochet machine, the Pi Camera v2.1 connected via the MIPI–CSI interface emerged as the most suitable option.\nIt combines sufficient resolution and close-focus capability with low and deterministic latency, strong software support on the Raspberry Pi 3, and a compact form factor compatible with the 3D-printed camera mount described in Section @sec:camera_mount.\nThis configuration is therefore adopted as the reference acquisition system for the error detection pipeline."
+  },
+  {
+    "objectID": "error-camera.html#d-camera-mount",
+    "href": "error-camera.html#d-camera-mount",
+    "title": "",
+    "section": "- 3D Camera Mount",
+    "text": "- 3D Camera Mount\nMechanical support, 3D printing, working distance, and CAD notes."
+  },
+  {
+    "objectID": "error-camera.html#error-recognition-code",
+    "href": "error-camera.html#error-recognition-code",
+    "title": "",
+    "section": "- Error Recognition — Code",
+    "text": "- Error Recognition — Code\nAlgorithms, model/code structure, data flow, and deployment notes."
+  },
+  {
+    "objectID": "error-camera.html#results-efficiency",
+    "href": "error-camera.html#results-efficiency",
+    "title": "",
+    "section": "- Results & Efficiency",
+    "text": "- Results & Efficiency\nDatasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget."
+  },
+  {
+    "objectID": "error-camera.html#conclusions-and-future-works",
+    "href": "error-camera.html#conclusions-and-future-works",
+    "title": "",
+    "section": "- Conclusions and Future Works",
+    "text": "- Conclusions and Future Works"
+  },
+  {
+    "objectID": "error-camera.html#overview",
+    "href": "error-camera.html#overview",
+    "title": "",
+    "section": "- Overview",
+    "text": "- Overview"
+  },
+  {
+    "objectID": "components.html",
+    "href": "components.html",
+    "title": "Components",
+    "section": "",
+    "text": "Key Components\n\nMotors, drivers, sensors\nCamera & lighting\nMCU & wiring"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "control-system.html",
+    "href": "control-system.html",
+    "title": "Control System",
+    "section": "",
+    "text": "Overview\n\nReal-time control loops\nVision-based thread detection\nSafety & states"
+  },
+  {
+    "objectID": "error-code.html",
+    "href": "error-code.html",
+    "title": "",
+    "section": "",
+    "text": "The image acquisition and error-recognition pipeline is implemented in Python and runs directly on the Raspberry Pi 3.\nThe system operates in a fully event-driven manner: each activation of the microswitch triggers an image capture, an immediate crop of the region of interest (ROI), and a real-time evaluation of the yarn configuration using a log-likelihood ratio (LLR) classifier.\n\n\n\nTo train and evaluate the classifier, a dedicated dataset of cropped hook images was collected directly from the machine.\nAt present, the dataset includes three yarn colors:\n\nlight blue\npurple\nfuchsia\n\nAlthough these colors appear visually quite different in RGB, their behavior after preprocessing (grayscale conversion, CLAHE enhancement, ROI masking) is not uniform.\nPreliminary qualitative inspection suggested that the fuchsia yarn could be challenging due to its visual similarity to the pink background of the machine.\nHowever, subsequent experiments revealed that raw chromatic contrast is not the primary factor affecting detectability in the proposed NCC–LLR pipeline.\nAfter grayscale conversion, the light blue yarn becomes closer in intensity to the machine background, resulting in lower separability between correct and defective configurations.\nConversely, the fuchsia yarn exhibits stronger and more consistent local texture variations within the discriminative ROI, which makes the LLR scores for (H_0) and (H_1) more distinct despite its low RGB contrast.\nThe purple yarn displays intermediate behavior, with moderate grayscale separability.\nTo further probe the limits of the method, additional experiments were conducted using a pale pink yarn whose color is almost indistinguishable from the background.\nUnder this condition, neither the NCC-based similarity nor the CLAHE-enhanced preprocessing provided sufficient discriminative information for reliable classification, and the LLR method consistently failed to separate the two hypotheses.\nThis extreme low-contrast scenario is therefore considered out of scope for the current handcrafted method and highlights the need for future solutions based on learned or color-invariant features.\n\n\n Light blue\n\n Purple\n\n Fuchsia\n\n\n\n\n Pale pink (failure)\n\n\nFigure: Examples of yarn colors used in the dataset.\nThe pale pink yarn is almost indistinguishable from the machine background and cannot be reliably detected by the current method.\n\n\n\n\nUpon a rising edge from the microswitch (handled via the gpiozero library), the software captures a still image using the Picamera 2.1 interface.\nSince only a small portion of the full frame contains the hook region, the image is immediately cropped according to a predefined ROI, specified either in relative coordinates or in absolute pixel values.\nThis cropping stage reduces computational cost and increases robustness by ensuring that the classifier operates on a stable and consistent portion of the scene.\nBoundary checks are applied to avoid invalid crops in case of slight camera misalignment, which is important due to the sub-centimeter positioning precision required for hook-level inspection.\n\n\n\n\nThe LLR classifier relies on two prototype images:\n\na positive prototype representing correct yarn engagement;\na negative prototype representing a hook that has failed to catch the yarn.\n\nThese prototypes are computed as the median of small training sets of positive and negative examples.\nBefore prototype computation, images undergo grayscale conversion, Gaussian denoising, and light contrast equalization using CLAHE, improving robustness to illumination variability and sensor noise.\n\n\n\n\nThe LLR classifier does not operate on the entire cropped image, but only within a discriminative region of interest (ROI).\nThis ROI is defined by a soft mask computed offline using a separate Python script (build_mean_diff_mask.py), which analyzes pre-cropped patches of both positive and negative examples.\nThe script takes as input two sets of images: a positive set (--pos) and a negative set (--neg).\nAll images are converted to grayscale, denoised, equalized with CLAHE, and resized to a common resolution of (76 ) pixels.\nFor each pixel location, the script computes a Fisher-like separability score:\n\\[\nS(i,j) \\propto\n\\frac{|\\mu_{\\text{pos}}(i,j) - \\mu_{\\text{neg}}(i,j)|}\n{\\sigma_{\\text{pos}}(i,j) + \\sigma_{\\text{neg}}(i,j) + \\varepsilon}\n\\]\nThe resulting score map is normalized to ([0,1]) and restricted to a fixed rectangular zone corresponding to the physical region where the yarn intersects the hook.\nOutside this area, the mask is set to zero so that the LLR classifier ignores those pixels.\nTo preserve local texture, the soft score map (S) is optionally smoothed with a bilateral filter.\nA global threshold is then selected using Otsu’s method, producing a hard binary mask.\nThe script saves: - the soft mask (mask_soft.png) - the hard mask (mask_hard_otsu.png) - a visualization of the rectangular ROI\nAt runtime, the soft mask is used as a per-pixel weighting function in the NCC computation:\n\\[\ns_{\\text{pos}} = \\text{NCC}(I, \\mu_{\\text{pos}}; \\text{mask}), \\qquad\ns_{\\text{neg}} = \\text{NCC}(I, \\mu_{\\text{neg}}; \\text{mask})\n\\]\nAmong the available yarn colors, the fuchsia yarn was specifically included to demonstrate that the proposed method does not rely on RGB contrast.\nDespite its visual similarity to the background, the preprocessing pipeline enables reliable detection.\n\n\n mask_soft.png\n\n mask_hard_otsu.png\n\n\nFigure: Visualization of the ROI masks used during computation.\n\n\n\n\nFor each cropped image, the classifier computes two normalized cross-correlation (NCC) scores:\n\\[\ns_{\\text{pos}}, \\quad s_{\\text{neg}}\n\\]\nThe decision variable is defined as:\n\\[\nLLR = s_{\\text{pos}} - s_{\\text{neg}}\n\\]\nA threshold on the LLR score is selected to minimize false negatives, which are more detrimental than false positives in this application.\nIf the threshold is not satisfied, the hook is classified as defective and an immediate stop command is issued.\n\n\n\n\nThe complete implementation—including synchronized image capture, ROI extraction, preprocessing, prototype generation, and real-time LLR evaluation—is available at:\nhttps://github.com/AlessiaRinaldi/error_recognition_knitting_machine"
+  },
+  {
+    "objectID": "error-code.html#error-detection-software-and-implementation",
+    "href": "error-code.html#error-detection-software-and-implementation",
+    "title": "",
+    "section": "",
+    "text": "The image acquisition and error-recognition pipeline is implemented in Python and runs directly on the Raspberry Pi 3.\nThe system operates in a fully event-driven manner: each activation of the microswitch triggers an image capture, an immediate crop of the region of interest (ROI), and a real-time evaluation of the yarn configuration using a log-likelihood ratio (LLR) classifier.\n\n\n\nTo train and evaluate the classifier, a dedicated dataset of cropped hook images was collected directly from the machine.\nAt present, the dataset includes three yarn colors:\n\nlight blue\npurple\nfuchsia\n\nAlthough these colors appear visually quite different in RGB, their behavior after preprocessing (grayscale conversion, CLAHE enhancement, ROI masking) is not uniform.\nPreliminary qualitative inspection suggested that the fuchsia yarn could be challenging due to its visual similarity to the pink background of the machine.\nHowever, subsequent experiments revealed that raw chromatic contrast is not the primary factor affecting detectability in the proposed NCC–LLR pipeline.\nAfter grayscale conversion, the light blue yarn becomes closer in intensity to the machine background, resulting in lower separability between correct and defective configurations.\nConversely, the fuchsia yarn exhibits stronger and more consistent local texture variations within the discriminative ROI, which makes the LLR scores for (H_0) and (H_1) more distinct despite its low RGB contrast.\nThe purple yarn displays intermediate behavior, with moderate grayscale separability.\nTo further probe the limits of the method, additional experiments were conducted using a pale pink yarn whose color is almost indistinguishable from the background.\nUnder this condition, neither the NCC-based similarity nor the CLAHE-enhanced preprocessing provided sufficient discriminative information for reliable classification, and the LLR method consistently failed to separate the two hypotheses.\nThis extreme low-contrast scenario is therefore considered out of scope for the current handcrafted method and highlights the need for future solutions based on learned or color-invariant features.\n\n\n Light blue\n\n Purple\n\n Fuchsia\n\n\n\n\n Pale pink (failure)\n\n\nFigure: Examples of yarn colors used in the dataset.\nThe pale pink yarn is almost indistinguishable from the machine background and cannot be reliably detected by the current method.\n\n\n\n\nUpon a rising edge from the microswitch (handled via the gpiozero library), the software captures a still image using the Picamera 2.1 interface.\nSince only a small portion of the full frame contains the hook region, the image is immediately cropped according to a predefined ROI, specified either in relative coordinates or in absolute pixel values.\nThis cropping stage reduces computational cost and increases robustness by ensuring that the classifier operates on a stable and consistent portion of the scene.\nBoundary checks are applied to avoid invalid crops in case of slight camera misalignment, which is important due to the sub-centimeter positioning precision required for hook-level inspection.\n\n\n\n\nThe LLR classifier relies on two prototype images:\n\na positive prototype representing correct yarn engagement;\na negative prototype representing a hook that has failed to catch the yarn.\n\nThese prototypes are computed as the median of small training sets of positive and negative examples.\nBefore prototype computation, images undergo grayscale conversion, Gaussian denoising, and light contrast equalization using CLAHE, improving robustness to illumination variability and sensor noise.\n\n\n\n\nThe LLR classifier does not operate on the entire cropped image, but only within a discriminative region of interest (ROI).\nThis ROI is defined by a soft mask computed offline using a separate Python script (build_mean_diff_mask.py), which analyzes pre-cropped patches of both positive and negative examples.\nThe script takes as input two sets of images: a positive set (--pos) and a negative set (--neg).\nAll images are converted to grayscale, denoised, equalized with CLAHE, and resized to a common resolution of (76 ) pixels.\nFor each pixel location, the script computes a Fisher-like separability score:\n\\[\nS(i,j) \\propto\n\\frac{|\\mu_{\\text{pos}}(i,j) - \\mu_{\\text{neg}}(i,j)|}\n{\\sigma_{\\text{pos}}(i,j) + \\sigma_{\\text{neg}}(i,j) + \\varepsilon}\n\\]\nThe resulting score map is normalized to ([0,1]) and restricted to a fixed rectangular zone corresponding to the physical region where the yarn intersects the hook.\nOutside this area, the mask is set to zero so that the LLR classifier ignores those pixels.\nTo preserve local texture, the soft score map (S) is optionally smoothed with a bilateral filter.\nA global threshold is then selected using Otsu’s method, producing a hard binary mask.\nThe script saves: - the soft mask (mask_soft.png) - the hard mask (mask_hard_otsu.png) - a visualization of the rectangular ROI\nAt runtime, the soft mask is used as a per-pixel weighting function in the NCC computation:\n\\[\ns_{\\text{pos}} = \\text{NCC}(I, \\mu_{\\text{pos}}; \\text{mask}), \\qquad\ns_{\\text{neg}} = \\text{NCC}(I, \\mu_{\\text{neg}}; \\text{mask})\n\\]\nAmong the available yarn colors, the fuchsia yarn was specifically included to demonstrate that the proposed method does not rely on RGB contrast.\nDespite its visual similarity to the background, the preprocessing pipeline enables reliable detection.\n\n\n mask_soft.png\n\n mask_hard_otsu.png\n\n\nFigure: Visualization of the ROI masks used during computation.\n\n\n\n\nFor each cropped image, the classifier computes two normalized cross-correlation (NCC) scores:\n\\[\ns_{\\text{pos}}, \\quad s_{\\text{neg}}\n\\]\nThe decision variable is defined as:\n\\[\nLLR = s_{\\text{pos}} - s_{\\text{neg}}\n\\]\nA threshold on the LLR score is selected to minimize false negatives, which are more detrimental than false positives in this application.\nIf the threshold is not satisfied, the hook is classified as defective and an immediate stop command is issued.\n\n\n\n\nThe complete implementation—including synchronized image capture, ROI extraction, preprocessing, prototype generation, and real-time LLR evaluation—is available at:\nhttps://github.com/AlessiaRinaldi/error_recognition_knitting_machine"
+  },
+  {
+    "objectID": "error-code.html#results-efficiency",
+    "href": "error-code.html#results-efficiency",
+    "title": "",
+    "section": "- Results & Efficiency",
+    "text": "- Results & Efficiency\nDatasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget."
+  },
+  {
+    "objectID": "error-code.html#conclusions-and-future-works",
+    "href": "error-code.html#conclusions-and-future-works",
+    "title": "",
+    "section": "- Conclusions and Future Works",
+    "text": "- Conclusions and Future Works"
+  },
+  {
+    "objectID": "error-code.html#overview",
+    "href": "error-code.html#overview",
+    "title": "",
+    "section": "- Overview",
+    "text": "- Overview"
+  },
+  {
+    "objectID": "error-code.html#selection-of-the-acquisition-system-for-error-detection",
+    "href": "error-code.html#selection-of-the-acquisition-system-for-error-detection",
+    "title": "",
+    "section": "- Selection of the Acquisition System for Error Detection",
+    "text": "- Selection of the Acquisition System for Error Detection\nRequirements, sensor & lens selection, lighting, sync, and mounting constraints."
+  },
+  {
+    "objectID": "error-code.html#d-camera-mount",
+    "href": "error-code.html#d-camera-mount",
+    "title": "",
+    "section": "- 3D Camera Mount",
+    "text": "- 3D Camera Mount\nMechanical support, 3D printing, working distance, and CAD notes."
+  },
+  {
+    "objectID": "error-mount.html",
+    "href": "error-mount.html",
+    "title": "",
+    "section": "",
+    "text": "The camera mounting solution combines a commercially available __magnetic-base stand_ with a custom 3D-printed support designed specifically for the Raspberry Pi Camera module.\nThe magnetic base provides a rigid and highly stable foundation, while allowing fine manual adjustment in height, angle, and lateral position through its articulated arm.\n\n\nA custom holder for the Raspberry Pi Camera v2.1 was designed in Autodesk Fusion 360 and fabricated using fused deposition modeling (FDM) with PLA filament on a Bambu Lab A1 Mini 3D printer.\nThe printed part encloses the camera PCB and incorporates a series of mounting holes and a pin that fits into the threaded end of the magnetic base arm.\n\n\n\nWhile the magnetic stand and the 3D-printed camera holder provide sufficient stability for prototyping, the overall stiffness of the structure is not optimal yet.\nSmall shifts caused by machine vibration or accidental contact can slightly alter the camera pose over time, affecting the exact position of the region of interest in the image.\nImproving the mechanical stability of the mounting solution is therefore an important direction for future work, with the goal of achieving fully repeatable alignment over long acquisition periods.\nA CAD rendering of the printed holder is shown in Figure.\n\n\n\n\n\nFront of the 3D structure\n\n\n\n\n\n\nBack of the 3D structure"
+  },
+  {
+    "objectID": "error-mount.html#sec:camera_mount",
+    "href": "error-mount.html#sec:camera_mount",
+    "title": "",
+    "section": "",
+    "text": "The camera mounting solution combines a commercially available __magnetic-base stand_ with a custom 3D-printed support designed specifically for the Raspberry Pi Camera module.\nThe magnetic base provides a rigid and highly stable foundation, while allowing fine manual adjustment in height, angle, and lateral position through its articulated arm.\n\n\nA custom holder for the Raspberry Pi Camera v2.1 was designed in Autodesk Fusion 360 and fabricated using fused deposition modeling (FDM) with PLA filament on a Bambu Lab A1 Mini 3D printer.\nThe printed part encloses the camera PCB and incorporates a series of mounting holes and a pin that fits into the threaded end of the magnetic base arm.\n\n\n\nWhile the magnetic stand and the 3D-printed camera holder provide sufficient stability for prototyping, the overall stiffness of the structure is not optimal yet.\nSmall shifts caused by machine vibration or accidental contact can slightly alter the camera pose over time, affecting the exact position of the region of interest in the image.\nImproving the mechanical stability of the mounting solution is therefore an important direction for future work, with the goal of achieving fully repeatable alignment over long acquisition periods.\nA CAD rendering of the printed holder is shown in Figure.\n\n\n\n\n\nFront of the 3D structure\n\n\n\n\n\n\nBack of the 3D structure"
+  },
+  {
+    "objectID": "error-mount.html#error-recognition-code",
+    "href": "error-mount.html#error-recognition-code",
+    "title": "",
+    "section": "- Error Recognition — Code",
+    "text": "- Error Recognition — Code\nAlgorithms, model/code structure, data flow, and deployment notes."
+  },
+  {
+    "objectID": "error-mount.html#results-efficiency",
+    "href": "error-mount.html#results-efficiency",
+    "title": "",
+    "section": "- Results & Efficiency",
+    "text": "- Results & Efficiency\nDatasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget."
+  },
+  {
+    "objectID": "error-mount.html#conclusions-and-future-works",
+    "href": "error-mount.html#conclusions-and-future-works",
+    "title": "",
+    "section": "- Conclusions and Future Works",
+    "text": "- Conclusions and Future Works"
+  },
+  {
+    "objectID": "error-mount.html#overview",
+    "href": "error-mount.html#overview",
+    "title": "",
+    "section": "- Overview",
+    "text": "- Overview"
+  },
+  {
+    "objectID": "error-mount.html#selection-of-the-acquisition-system-for-error-detection",
+    "href": "error-mount.html#selection-of-the-acquisition-system-for-error-detection",
+    "title": "",
+    "section": "- Selection of the Acquisition System for Error Detection",
+    "text": "- Selection of the Acquisition System for Error Detection\nRequirements, sensor & lens selection, lighting, sync, and mounting constraints."
+  },
+  {
+    "objectID": "error-results.html",
+    "href": "error-results.html",
+    "title": "",
+    "section": "",
+    "text": "The performance of the proposed LLR-based detector was evaluated within the binary hypothesis-testing framework commonly adopted in supervised signal detection:\n\\[\nH_0: \\text{“U-shape” of the yarn}, \\qquad\nH_1: \\text{hole or missing yarn}.\n\\]\nAt each microswitch activation, the system acquires a cropped hook image, computes the log-likelihood ratio:\n\\[\nLLR = s_{\\text{pos}} - s_{\\text{neg}},\n\\]\nand compares it to a fixed threshold to decide between (H_0) and (H_1). This setting is equivalent to a classical detector with probabilities of detection and false alarm (P_D) and (P_F), as described in supervised signal detection and ROC analysis.\nTo obtain an unbiased estimate of performance, the dataset was randomly partitioned into three non-overlapping subsets:\n\nTraining set: used exclusively to build the positive and negative prototypes and the discriminative ROI mask.\nIt consists of 39 positive images and 27 negative images, balanced across the three yarn colors.\nValidation set: 208 images, used only for threshold selection and operating-point tuning.\nTest set: 771 images, used only for the final performance evaluation.\n\n\n\n\n\nDuring validation, the classifier was evaluated using (LLR = 0).\nWith this configuration, at least one false alarm occurred, which is unacceptable in the real operating scenario: actual defects are extremely rare, and even a single false alarm would trigger an unnecessary machine stop.\nFollowing a Neyman–Pearson design criterion, the decision threshold was adjusted to obtain a false-alarm rate as close as possible to zero on the validation set, even at the expense of increased false negatives.\nThis led to the selection of\n\\[\nLLR_{\\text{thr}} = -0.035,\n\\]\nwhich was kept fixed for the final evaluation on the independent test set.\n\n\n\n\nOnce the threshold was fixed, the detector was evaluated on the independent test set of 771 images.\n\n\n\n\nPredicted (H_0)\nPredicted (H_1)\n\n\n\n\nTrue (H_0) (no defect)\nTN = 633\nFP = 0\n\n\nTrue (H_1) (defect)\nFN = 20\nTP = 118\n\n\n\nTable. Confusion matrix on the test set (771 images).\nFrom these values:\n\\[\n\\begin{aligned}\n\\text{Accuracy} &= \\frac{TP + TN}{TP + TN + FP + FN}\n= \\frac{751}{771} \\approx 97.4\\%, \\\\\nP_D &= \\frac{TP}{TP + FN}\n= \\frac{118}{138} \\approx 85.5\\%, \\\\\nP_F &= \\frac{FP}{FP + TN} \\approx 0\\%, \\\\\n\\text{Specificity} &= \\frac{TN}{TN + FP} \\approx 100\\%.\n\\end{aligned}\n\\]\nThus, the operating point enforces (P_F ) and accepts a moderate increase in missed detections\n(P_M = 1 - P_D), consistent with a minimum-risk design in which unnecessary machine stops are far more costly than occasional missed defects.\n\n\n\n\nPerformance was further analyzed by grouping test images by yarn color.\n\n\n\n\n\n\nPredicted (H_0)\nPredicted (H_1)\n\n\n\n\nTrue (H_0)\nTN = 322\nFP = 0\n\n\nTrue (H_1)\nFN = 3\nTP = 48\n\n\n\n\\[\n\\mathrm{ACC} \\approx 99.2\\%, \\quad\n\\mathrm{TPR} \\approx 94.1\\%, \\quad\n\\mathrm{FPR} \\approx 0\\%.\n\\]\n\n\n\n\n\n\n\nPredicted (H_0)\nPredicted (H_1)\n\n\n\n\nTrue (H_0)\nTN = 193\nFP = 0\n\n\nTrue (H_1)\nFN = 8\nTP = 37\n\n\n\n\\[\n\\mathrm{ACC} \\approx 96.6\\%, \\quad\n\\mathrm{TPR} \\approx 82.2\\%, \\quad\n\\mathrm{FPR} \\approx 0\\%.\n\\]\n\n\n\n\n\n\n\nPredicted (H_0)\nPredicted (H_1)\n\n\n\n\nTrue (H_0)\nTN = 118\nFP = 0\n\n\nTrue (H_1)\nFN = 9\nTP = 33\n\n\n\n\\[\n\\mathrm{ACC} \\approx 94.4\\%, \\quad\n\\mathrm{TPR} \\approx 78.6\\%, \\quad\n\\mathrm{FPR} \\approx 0\\%.\n\\]\nInterestingly, the best performance is obtained for the fuchsia yarn, despite its visual similarity to the pink background. Conversely, the light blue yarn yields the lowest detection probability, as it is closest to the background in grayscale and generates less contrast within the ROI.\nThis behavior reflects the fact that separability depends not on raw color contrast, but on the stability of local texture and intensity patterns after preprocessing.\n\n\n\n\n\nThe pale pink yarn was not included in training, validation, or test sets, as it does not belong to normal operating conditions. In this edge case, more than 32% of samples were misclassified, and the LLR distributions of (H_0) and (H_1) overlap almost completely.\nThis confirms that extreme low-contrast conditions lie outside the operational domain of the method and motivates future extensions based on learned or contrast-invariant features.\n\n\n\n\nThe complete acquisition and detection pipeline runs directly on the Raspberry Pi 3 and is triggered by the microswitch. The microswitch is activated approximately every (0.42,), corresponding to an inspection rate of\n\\[\nf_{\\text{inspect}} \\approx 2.4 \\ \\text{inspections/s}.\n\\]\nAt each trigger, a full-resolution image is captured (1280×960 px), cropped to a (76 ) ROI, and processed through preprocessing, NCC computation, and LLR evaluation.\nThe total processing time per trigger is well below the inter-trigger interval, and no triggers were missed during testing. The effective inspection rate is therefore limited by the machine mechanics rather than by computation.\nThe available computational margin enables multi-sample decision fusion strategies (e.g., majority voting or LLR averaging), which could reduce missed detections while maintaining the strict constraint (P_F )."
+  },
+  {
+    "objectID": "error-results.html#experimental-evaluation-and-results",
+    "href": "error-results.html#experimental-evaluation-and-results",
+    "title": "",
+    "section": "",
+    "text": "The performance of the proposed LLR-based detector was evaluated within the binary hypothesis-testing framework commonly adopted in supervised signal detection:\n\\[\nH_0: \\text{“U-shape” of the yarn}, \\qquad\nH_1: \\text{hole or missing yarn}.\n\\]\nAt each microswitch activation, the system acquires a cropped hook image, computes the log-likelihood ratio:\n\\[\nLLR = s_{\\text{pos}} - s_{\\text{neg}},\n\\]\nand compares it to a fixed threshold to decide between (H_0) and (H_1). This setting is equivalent to a classical detector with probabilities of detection and false alarm (P_D) and (P_F), as described in supervised signal detection and ROC analysis.\nTo obtain an unbiased estimate of performance, the dataset was randomly partitioned into three non-overlapping subsets:\n\nTraining set: used exclusively to build the positive and negative prototypes and the discriminative ROI mask.\nIt consists of 39 positive images and 27 negative images, balanced across the three yarn colors.\nValidation set: 208 images, used only for threshold selection and operating-point tuning.\nTest set: 771 images, used only for the final performance evaluation.\n\n\n\n\n\nDuring validation, the classifier was evaluated using (LLR = 0).\nWith this configuration, at least one false alarm occurred, which is unacceptable in the real operating scenario: actual defects are extremely rare, and even a single false alarm would trigger an unnecessary machine stop.\nFollowing a Neyman–Pearson design criterion, the decision threshold was adjusted to obtain a false-alarm rate as close as possible to zero on the validation set, even at the expense of increased false negatives.\nThis led to the selection of\n\\[\nLLR_{\\text{thr}} = -0.035,\n\\]\nwhich was kept fixed for the final evaluation on the independent test set.\n\n\n\n\nOnce the threshold was fixed, the detector was evaluated on the independent test set of 771 images.\n\n\n\n\nPredicted (H_0)\nPredicted (H_1)\n\n\n\n\nTrue (H_0) (no defect)\nTN = 633\nFP = 0\n\n\nTrue (H_1) (defect)\nFN = 20\nTP = 118\n\n\n\nTable. Confusion matrix on the test set (771 images).\nFrom these values:\n\\[\n\\begin{aligned}\n\\text{Accuracy} &= \\frac{TP + TN}{TP + TN + FP + FN}\n= \\frac{751}{771} \\approx 97.4\\%, \\\\\nP_D &= \\frac{TP}{TP + FN}\n= \\frac{118}{138} \\approx 85.5\\%, \\\\\nP_F &= \\frac{FP}{FP + TN} \\approx 0\\%, \\\\\n\\text{Specificity} &= \\frac{TN}{TN + FP} \\approx 100\\%.\n\\end{aligned}\n\\]\nThus, the operating point enforces (P_F ) and accepts a moderate increase in missed detections\n(P_M = 1 - P_D), consistent with a minimum-risk design in which unnecessary machine stops are far more costly than occasional missed defects.\n\n\n\n\nPerformance was further analyzed by grouping test images by yarn color.\n\n\n\n\n\n\nPredicted (H_0)\nPredicted (H_1)\n\n\n\n\nTrue (H_0)\nTN = 322\nFP = 0\n\n\nTrue (H_1)\nFN = 3\nTP = 48\n\n\n\n\\[\n\\mathrm{ACC} \\approx 99.2\\%, \\quad\n\\mathrm{TPR} \\approx 94.1\\%, \\quad\n\\mathrm{FPR} \\approx 0\\%.\n\\]\n\n\n\n\n\n\n\nPredicted (H_0)\nPredicted (H_1)\n\n\n\n\nTrue (H_0)\nTN = 193\nFP = 0\n\n\nTrue (H_1)\nFN = 8\nTP = 37\n\n\n\n\\[\n\\mathrm{ACC} \\approx 96.6\\%, \\quad\n\\mathrm{TPR} \\approx 82.2\\%, \\quad\n\\mathrm{FPR} \\approx 0\\%.\n\\]\n\n\n\n\n\n\n\nPredicted (H_0)\nPredicted (H_1)\n\n\n\n\nTrue (H_0)\nTN = 118\nFP = 0\n\n\nTrue (H_1)\nFN = 9\nTP = 33\n\n\n\n\\[\n\\mathrm{ACC} \\approx 94.4\\%, \\quad\n\\mathrm{TPR} \\approx 78.6\\%, \\quad\n\\mathrm{FPR} \\approx 0\\%.\n\\]\nInterestingly, the best performance is obtained for the fuchsia yarn, despite its visual similarity to the pink background. Conversely, the light blue yarn yields the lowest detection probability, as it is closest to the background in grayscale and generates less contrast within the ROI.\nThis behavior reflects the fact that separability depends not on raw color contrast, but on the stability of local texture and intensity patterns after preprocessing.\n\n\n\n\n\nThe pale pink yarn was not included in training, validation, or test sets, as it does not belong to normal operating conditions. In this edge case, more than 32% of samples were misclassified, and the LLR distributions of (H_0) and (H_1) overlap almost completely.\nThis confirms that extreme low-contrast conditions lie outside the operational domain of the method and motivates future extensions based on learned or contrast-invariant features.\n\n\n\n\nThe complete acquisition and detection pipeline runs directly on the Raspberry Pi 3 and is triggered by the microswitch. The microswitch is activated approximately every (0.42,), corresponding to an inspection rate of\n\\[\nf_{\\text{inspect}} \\approx 2.4 \\ \\text{inspections/s}.\n\\]\nAt each trigger, a full-resolution image is captured (1280×960 px), cropped to a (76 ) ROI, and processed through preprocessing, NCC computation, and LLR evaluation.\nThe total processing time per trigger is well below the inter-trigger interval, and no triggers were missed during testing. The effective inspection rate is therefore limited by the machine mechanics rather than by computation.\nThe available computational margin enables multi-sample decision fusion strategies (e.g., majority voting or LLR averaging), which could reduce missed detections while maintaining the strict constraint (P_F )."
+  },
+  {
+    "objectID": "error-results.html#conclusions-and-future-works",
+    "href": "error-results.html#conclusions-and-future-works",
+    "title": "",
+    "section": "- Conclusions and Future Works",
+    "text": "- Conclusions and Future Works"
+  },
+  {
+    "objectID": "error-results.html#overview",
+    "href": "error-results.html#overview",
+    "title": "",
+    "section": "- Overview",
+    "text": "- Overview"
+  },
+  {
+    "objectID": "error-results.html#selection-of-the-acquisition-system-for-error-detection",
+    "href": "error-results.html#selection-of-the-acquisition-system-for-error-detection",
+    "title": "",
+    "section": "- Selection of the Acquisition System for Error Detection",
+    "text": "- Selection of the Acquisition System for Error Detection\nRequirements, sensor & lens selection, lighting, sync, and mounting constraints."
+  },
+  {
+    "objectID": "error-results.html#d-camera-mount",
+    "href": "error-results.html#d-camera-mount",
+    "title": "",
+    "section": "- 3D Camera Mount",
+    "text": "- 3D Camera Mount\nMechanical support, 3D printing, working distance, and CAD notes."
+  },
+  {
+    "objectID": "error-results.html#error-recognition-code",
+    "href": "error-results.html#error-recognition-code",
+    "title": "",
+    "section": "- Error Recognition — Code",
+    "text": "- Error Recognition — Code\nAlgorithms, model/code structure, data flow, and deployment notes."
   }
 ]

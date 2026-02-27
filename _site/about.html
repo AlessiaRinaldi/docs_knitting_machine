@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>About – Automated Crocheting Machine</title>
+<title>About</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -40,7 +40,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-e31584831b205ffbb2d98406f31c2a5b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a0f77ee65cf97054da44f32686a70b00.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,6 +70,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -80,9 +81,6 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    </a>
-    <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Automated Crocheting Machine</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -95,13 +93,44 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-error-recognition" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Error Recognition</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-error-recognition">    
+        <li>
+    <a class="dropdown-item" href="./error-recognition.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./error-camera.html">
+ <span class="dropdown-text">Selection of the Acquisition System for Error Detection</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./error-mount.html">
+ <span class="dropdown-text">3D Camera Mount</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./error-code.html">
+ <span class="dropdown-text">Error Recognition — Code</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./error-results.html">
+ <span class="dropdown-text">Results &amp; Efficiency</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./error-future_work.html">
+ <span class="dropdown-text">Conclusions and Future Works</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="./components.html"> 
 <span class="menu-text">Components</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./control-system.html"> 
-<span class="menu-text">Control</span></a>
+<span class="menu-text">Control System</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -111,14 +140,14 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-page" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -127,7 +156,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-page">
 
     
   
@@ -217,7 +246,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/AlessiaRinaldi\.github\.io\/docs_knitting_machine\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

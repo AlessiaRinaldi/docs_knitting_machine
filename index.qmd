@@ -18,6 +18,9 @@ The objective of this work is to bring the same paradigm to textiles, by develop
 
 ::: {.column width="50%" style="text-align:right;"}
 ![](images/sentro.png){fig-alt="Circular knitting machine" width=90%}
+
+*Image source: [Sentro Official Website](https://www.sentroknittings.com/).*
+:::
 :::
 :::
 
