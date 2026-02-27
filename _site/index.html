@@ -183,6 +183,7 @@ ul.task-list li input[type="checkbox"] {
 <p>The objective of this work is to bring the same paradigm to textiles, by developing an <strong>automated knitting machine</strong> capable of producing knit patterns from a predefined digital design.</p>
 </div><div class="column" style="text-align:right;">
 <p><img src="images/sentro.png" class="img-fluid" style="width:90.0%" alt="Circular knitting machine"></p>
+<p><em>Image source: <a href="https://www.sentroknittings.com/">Sentro Official Website</a>.</em></p>
 </div>
 </div>
 <hr>
@@ -315,7 +316,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/AlessiaRinaldi\.github\.io\/docs_knitting_machine\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

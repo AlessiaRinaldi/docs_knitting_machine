@@ -178,13 +178,7 @@ ul.task-list li input[type="checkbox"] {
 <p>The acquisition system plays a central role in the proposed error detection pipeline, as it must provide close-up images of the hook region at every relevant movement of the crochet machine.<br>
 In this work, we start from a commercially available circular crochet loom intended for hobby use and adapt it into an automated system through a set of mechanical and electronic modifications.<br>
 This choice allows us to preserve the low-cost and accessible nature of the original tool while enabling precise synchronization and repeatable inspection of each hook.</p>
-<div id="fig:loom_overview" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="images/SENTRO.png" class="img-fluid figure-img" style="width:50.0%"></p>
-<figcaption>Overview of the circular crochet loom.</figcaption>
-</figure>
-</div>
-<p>A hardware microswitch mounted on the modified loom generates a synchronization signal that marks the exact moment in the hook’s motion when the yarn configuration becomes informative.<br>
+<p><img src="images/sentro.png" id="fig:loom_overview" class="img-fluid quarto-figure quarto-figure-center anchored" style="width:50.0%" alt="Overview of the circular crochet loom. Source: Sentro Official Website."> A hardware microswitch mounted on the modified loom generates a synchronization signal that marks the exact moment in the hook’s motion when the yarn configuration becomes informative.<br>
 This signal is used by the Raspberry Pi 3 Model B+ to trigger image acquisition in real time.<br>
 At each trigger, the system inspects the hook to verify that the yarn—regardless of its color, thickness, or texture—assumes the expected <strong>“U”-shaped</strong> configuration around the base of the hook.<br>
 Any configuration that does not match this pattern is classified as an error.</p>
@@ -383,7 +377,7 @@ This configuration is therefore adopted as the reference acquisition system for 
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/AlessiaRinaldi\.github\.io\/docs_knitting_machine\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
