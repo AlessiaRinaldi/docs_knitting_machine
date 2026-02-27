@@ -1,0 +1,277 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap');
+
+/* ============================================================
+   COLOR PALETTE
+   ============================================================ */
+:root {
+  --vinaccia: #7b2d43;
+  --vinaccia-dark: #5e1f33;
+  --rosa-chiaro: #fff5f8;
+  --rosa-navbar: #f8dfe5;
+}
+
+/* ============================================================
+   General page style
+   ============================================================ */
+body {
+  background-color: var(--rosa-chiaro);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #333;
+  line-height: 1.7;
+  margin: 0;
+  padding: 0;
+}
+
+/* ============================================================
+   Headings
+   ============================================================ */
+h1, h2, h3, h4 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #3b3b3b;
+  letter-spacing: 0.2px;
+}
+
+/* ============================================================
+   Navbar customization
+   ============================================================ */
+.navbar {
+  background-color: var(--rosa-navbar) !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  font-size: 1rem;
+  letter-spacing: 0.3px;
+}
+
+/* ============================================================
+   Links
+   ============================================================ */
+a {
+  color: #b30059;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+a:hover {
+  color: #800040;
+  text-decoration: underline;
+}
+
+/* ============================================================
+   Main content layout
+   ============================================================ */
+main.content {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 2.5em 6vw;
+  margin: 0;
+  max-width: 100%;
+}
+
+/* lascia spazio al margine destro occupato dalla sidebar fissa */
+@media (min-width: 1200px) {
+  #quarto-content {
+    margin-right: 20rem;
+  }
+}
+
+/* ============================================================
+   RIGHT "On this page" SIDEBAR
+   ============================================================ */
+@media (min-width: 1200px) {
+  #quarto-margin-sidebar {
+    background: #ffffff !important;
+    position: fixed !important;
+    top: 56px;
+    right: 0;
+    bottom: 0;
+    width: 20rem;
+    overflow-y: auto;
+    border-left: 2px solid #f2cbdc;
+    box-shadow: -4px 0 8px rgba(0,0,0,0.05);
+    padding: 1rem 1.25rem;
+  }
+
+  #quarto-margin-sidebar .sidebar-title {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #800040;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+  }
+
+  #quarto-margin-sidebar a {
+    color: #333;
+  }
+  #quarto-margin-sidebar a:hover {
+    color: #a13766;
+    text-decoration: underline;
+  }
+}
+
+/* comportamento mobile/tablet */
+@media (max-width: 1199.98px) {
+  #quarto-margin-sidebar {
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(6px);
+    border-left: 3px solid #f0c9da;
+    padding-left: 1em;
+    position: static !important;
+    width: auto;
+    box-shadow: none;
+  }
+}
+
+/* ============================================================
+   Tables
+   ============================================================ */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 1.5em;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+th, td {
+  border: 1px solid #e6cfd9;
+  padding: 0.75em;
+}
+th {
+  background-color: var(--rosa-navbar);
+  color: #333;
+}
+
+/* ============================================================
+   Code blocks
+   ============================================================ */
+pre, code {
+  background-color: #fff0f6;
+  border-radius: 6px;
+  padding: 0.3em 0.6em;
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+footer {
+  background: var(--rosa-navbar);
+  color: #555;
+  text-align: center;
+  padding: 1em 0;
+  margin-top: 2em;
+  font-size: 0.9em;
+}
+
+/* ============================================================
+   FORCE FULL-WIDTH LAYOUT
+   ============================================================ */
+:root {
+  --content-max-width: 100% !important;
+}
+
+.quarto-container,
+.page-columns,
+.content,
+.container,
+.container-lg,
+.container-xl,
+.container-xxl {
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  padding-left: 3vw !important;
+  padding-right: 3vw !important;
+}
+
+#quarto-content {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* ============================================================
+   CALLOUTS (Project Sections) — VINACCIA THEME
+   ============================================================ */
+.callout-note {
+  border-left: 4px solid var(--vinaccia);
+}
+
+.callout-note > .callout-header {
+  background-color: var(--vinaccia);
+  color: white;
+  font-weight: 600;
+}
+
+.callout-note a {
+  color: var(--vinaccia);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.callout-note a:hover {
+  color: var(--vinaccia-dark);
+  text-decoration: underline;
+}
+/* ============================================================
+   QUARTO CALLOUT NOTE — force vinaccia (override Bootstrap vars)
+   ============================================================ */
+.callout.callout-note {
+  --callout-color: var(--vinaccia) !important;   /* colore principale (prima era blu) */
+  border-left-color: var(--vinaccia) !important;
+}
+
+/* Barra/header del callout (la fascia azzurra in alto) */
+.callout.callout-note > .callout-header {
+  background-color: rgba(123, 45, 67, 0.10) !important;
+}
+
+/* Titolo del callout */
+.callout.callout-note .callout-title-container {
+  color: var(--vinaccia) !important;
+  font-weight: 700;
+}
+
+/* Icona “i” (cerchietto azzurro) */
+.callout.callout-note .callout-icon-container,
+.callout.callout-note .callout-icon-container i {
+  color: var(--vinaccia) !important;
+}
+/*///////////////////////////////////////////////////////////////////////////////////*/
+
+
+/* ============================================================
+   SEARCH RESULTS (barra di ricerca)
+   ============================================================ */
+
+/* Cambia il colore della selezione dei risultati */
+.aa-Item[aria-selected="true"] {
+  background-color: rgba(123, 45, 67, 0.2) !important;  /* Colore selezionato per i risultati */
+  color: var(--vinaccia) !important; /* Testo vinaccia per la selezione */
+}
+
+/* Cambia la lente di ricerca attiva */
+.navbar .aa-InputWrapperPrefix {
+  color: var(--vinaccia) !important; /* Colore vinaccia per la lente di ricerca */
+}
+
+/* Risultati della ricerca su hover o selezione */
+.aa-Item:hover, .aa-Item[aria-selected="true"] {
+  background-color: rgba(123, 45, 67, 0.25) !important;  /* Sfondo più scuro quando hover o selezione */
+}
+
+/* ============================================================
+   "ON THIS PAGE" (TOC) — Cambia il colore dei link attivi
+   ============================================================ */
+
+/* Quando la sezione è selezionata mentre si scorre */
+#quarto-margin-sidebar .active > a {
+  color: var(--vinaccia) !important;
+  font-weight: 600;
+}
+
+/* Colore del link della sezione che si evidenzia mentre scorre */
+#quarto-margin-sidebar .active > a::before {
+  background-color: var(--vinaccia) !important;
+}
+
+/* Hover su un link nella sidebar */
+#quarto-margin-sidebar a:hover {
+  color: var(--vinaccia-dark) !important;
+}
