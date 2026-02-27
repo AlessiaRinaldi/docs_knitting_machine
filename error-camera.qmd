@@ -4,7 +4,7 @@ The acquisition system plays a central role in the proposed error detection pipe
 In this work, we start from a commercially available circular crochet loom intended for hobby use and adapt it into an automated system through a set of mechanical and electronic modifications.  
 This choice allows us to preserve the low-cost and accessible nature of the original tool while enabling precise synchronization and repeatable inspection of each hook.
 
-![Overview of the circular crochet loom. Source: Sentro Official Website(https://www.sentroknittings.com/)](images/sentro.png){#fig:loom_overview width=50% fig-align="center"}
+![Overview of the circular crochet loom. Source: [Sentro Official Website]](https://www.sentroknittings.com/).(images/sentro.png){#fig:loom_overview width=50% fig-align="center"}
 
 A hardware microswitch mounted on the modified loom generates a synchronization signal that marks the exact moment in the hook’s motion when the yarn configuration becomes informative.  
 This signal is used by the Raspberry Pi 3 Model B+ to trigger image acquisition in real time.  
