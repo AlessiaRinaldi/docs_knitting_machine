@@ -28,6 +28,8 @@ website:
         href: components.qmd
       - text: Control System
         href: control-system.qmd
+      - text: Display Interface
+        href: display-interface.qmd
 
 format:
   html:

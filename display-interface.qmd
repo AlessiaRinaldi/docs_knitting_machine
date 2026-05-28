@@ -1,0 +1,632 @@
+---
+title: "Display Interface — GFX HAT"
+---
+
+# Display Interface — GFX HAT
+
+## Overview
+
+The machine interface is implemented with a **Pimoroni GFX HAT** connected to the Raspberry Pi 3. The board combines:
+
+- a 128 × 64 monochrome LCD display;
+- six capacitive touch buttons;
+- RGB backlighting;
+- six button indicator LEDs.
+
+The display is used as a small human-machine interface (HMI): the user can select a `.png` pattern stored on a USB drive, prepare the yarns, start or stop the process, check the progress percentage, and receive interruption messages.
+
+The user interface is implemented in:
+
+```text
+gfxhat_pattern_ui.py
+```
+
+At the current prototype stage, the program can already be tested in **demo mode**: the progress bar and all alarm screens can be checked without connecting the motors, the ESP32, or the error-recognition pipeline.
+
+> The current script manages the display workflow and the USB pattern selection. Motor actuation and real camera-triggered alerts must later be connected through the `MachineController` methods and the notification functions already provided in the script.
+
+---
+
+## System Role
+
+The Raspberry Pi is responsible for the high-level interface and vision tasks, while the ESP32 will manage time-critical motion control.
+
+```text
+PC user
+└── Pattern Editor → saves one or more .png files on a USB drive
+
+Knitting machine
+├── Raspberry Pi 3
+│   ├── GFX HAT interface
+│   ├── USB pattern loading
+│   ├── Pi Camera error recognition
+│   └── progress and alarm management
+│
+└── ESP32
+    ├── stepper motor driver
+    ├── three colour-selection servos
+    └── synchronization microswitch
+```
+
+In the final system, the ESP32 will inform the Raspberry Pi whenever a synchronized control instant is reached. The Raspberry Pi can then run the vision check and update the interface.
+
+---
+
+## GFX HAT and Pi Camera Connection
+
+The GFX HAT and the Pi Camera can be used at the same time because they are connected through different interfaces:
+
+```text
+GFX HAT   → Raspberry Pi GPIO header
+Pi Camera → Raspberry Pi CSI camera connector
+```
+
+The GFX HAT uses both **SPI** and **I²C** communication. According to the Pimoroni pinout documentation, it requires 5 V and 3.3 V power, uses 7 GPIO communication pins, and includes the I²C devices `CAP1166` for the touch buttons and `SN3218` for the RGB backlight.
+
+If the HAT is mounted directly on the Raspberry Pi and obstructs the camera flat cable, the display can be connected through a **40-pin GPIO extension cable** or an extra-tall stacking header. This also allows the display to be installed on the external control panel of the machine, while the Raspberry Pi remains protected inside the enclosure.
+
+### Minimum Wiring when the Display is Remote
+
+When using individual wires instead of a full 40-pin extension cable, connect the following pins:
+
+| Function | Raspberry Pi GPIO | Physical pin |
+|---|---:|---:|
+| 3.3 V power | 3V3 | 1 |
+| 5 V power | 5V | 2 |
+| Ground | GND | 6 |
+| Touch/backlight data | GPIO 2 / SDA | 3 |
+| Touch/backlight clock | GPIO 3 / SCL | 5 |
+| LCD data | GPIO 10 / SPI MOSI | 19 |
+| LCD clock | GPIO 11 / SPI SCLK | 23 |
+| LCD chip select | GPIO 8 / SPI CE0 | 24 |
+| LCD reset | GPIO 5 | 29 |
+| LCD data/command | GPIO 6 | 31 |
+
+A full 40-pin GPIO extension cable is recommended over individual jumper wires, since it reduces wiring errors and preserves the correct pin orientation.
+
+---
+
+## Interface Workflow
+
+The interface implements the following workflow:
+
+```text
+USB drive inserted
+        ↓
+Select a PNG pattern using the touch buttons
+        ↓
+Selected pattern is copied locally to the Raspberry Pi
+        ↓
+"INSERIRE I FILATI" screen
+        ↓
+User presses AVVIA
+        ↓
+Progress screen with percentage and completed cycles
+        ↓
+Possible interruptions:
+    - "ERRORE RISCONTRATO"
+    - "TAGLIARE IL FILO"
+        ↓
+User corrects the problem and presses AVVIA to resume
+        ↓
+"LAVORO COMPLETATO"
+```
+
+Once a file is selected, it is copied from the USB drive to:
+
+```text
+~/automated_knitting_machine/patterns/current_pattern.png
+```
+
+This prevents an accidental USB removal from interrupting a process that has already started.
+
+---
+
+## Touch Button Mapping
+
+The six GFX HAT touch buttons are used as follows:
+
+| Touch button | Function in the user interface |
+|---|---|
+| `UP` | Move to the previous `.png` file |
+| `DOWN` | Move to the next `.png` file |
+| `SELECT` | Confirm the selected pattern |
+| `PLUS` | Refresh the USB list / start / resume |
+| `MINUS` | Stop the process |
+| `BACK` | Return to the pattern menu |
+
+During **demo mode**, two buttons are additionally used to simulate machine events while the progress screen is active:
+
+| Touch button | Demo action |
+|---|---|
+| `BACK` | Simulate `ERRORE RISCONTRATO` |
+| `SELECT` | Simulate `TAGLIARE IL FILO` |
+
+---
+
+## Interface Screens
+
+### Pattern Selection
+
+When the program starts, it reads the `.png` files contained in the mounted USB folder and displays a scrollable list:
+
+```text
+SELEZIONA PNG
+
+> cuore.png
+  righe.png
+  fiore.png
+
+^v SPOSTA  OK SEL  + REF
+```
+
+If no PNG file is found, the interface displays:
+
+```text
+NESSUN FILE PNG
+INSERIRE USB
+
++ AGGIORNA
+```
+
+### Yarn Preparation
+
+After selecting a pattern, the user is asked to insert the correct yarns:
+
+```text
+PATTERN SELEZIONATO
+cuore.png
+
+INSERIRE
+I FILATI
+
++ AVVIA    < MENU
+```
+
+### Processing Screen
+
+Once the job starts, the display shows its status and progress:
+
+```text
+cuore.png
+
+IN LAVORAZIONE
+
+[ progress bar ]
+
+36%   18/50
+
+- STOP
+```
+
+### Interruption Screens
+
+When the vision system detects a defect, the program can call:
+
+```python
+app.notify_error()
+```
+
+The interface then shows:
+
+```text
+ERRORE
+RISCONTRATO
+
+FERMO AL 36%
+
++ RIPRENDI  < MENU
+```
+
+When a colour-distance condition requires manual yarn cutting, the program can call:
+
+```python
+app.notify_cut_thread()
+```
+
+The interface then shows:
+
+```text
+TAGLIARE
+IL FILO
+
+FERMO AL 36%
+
++ RIPRENDI  < MENU
+```
+
+In both cases, the user can resolve the problem and press `PLUS` to resume.
+
+---
+
+## Raspberry Pi Setup
+
+The current Raspberry Pi is used in **headless mode**, through SSH. Therefore, all installation and testing steps are executed from the terminal.
+
+### 1. Enable SPI and I²C
+
+The GFX HAT needs both SPI and I²C enabled.
+
+Connect to the Raspberry Pi through SSH and run:
+
+```bash
+sudo raspi-config
+```
+
+Navigate to:
+
+```text
+Interface Options
+├── SPI → Enable
+└── I2C → Enable
+```
+
+Then reboot:
+
+```bash
+sudo reboot
+```
+
+After reconnecting through SSH, SPI can be checked with:
+
+```bash
+ls /dev/spidev*
+```
+
+The I²C bus can be checked by installing `i2c-tools` and scanning bus 1:
+
+```bash
+sudo apt update
+sudo apt install -y i2c-tools
+sudo i2cdetect -y 1
+```
+
+With the GFX HAT connected, the touch controller and backlight controller are expected at addresses:
+
+```text
+0x2c  → CAP1166 touch controller
+0x54  → SN3218 RGB backlight controller
+```
+
+---
+
+## Python Environment and Library Installation
+
+Because recent Raspberry Pi OS versions protect the system Python environment, the project uses a Python virtual environment.
+
+Install the required system packages:
+
+```bash
+sudo apt update
+sudo apt install -y python3-venv python3-pil python3-rpi.gpio python3-spidev python3-smbus i2c-tools
+```
+
+Create the virtual environment, if it does not already exist:
+
+```bash
+python3 -m venv --system-site-packages ~/venvs/uncinetto
+```
+
+Activate it:
+
+```bash
+source ~/venvs/uncinetto/bin/activate
+```
+
+The terminal prompt should now start with:
+
+```text
+(uncinetto)
+```
+
+Install the GFX HAT Python library inside the virtual environment:
+
+```bash
+python -m pip install --upgrade pip
+python -m pip install gfxhat
+```
+
+The Pimoroni `gfxhat` package installs the Python interface to the LCD, RGB backlight and touch controls; its package dependencies include the `cap1xxx` and `sn3218` drivers.
+
+---
+
+## USB Drive Setup
+
+The user creates the pattern on a personal computer using the Pattern Editor and saves one or more `.png` files to a USB drive.
+
+Example USB content:
+
+```text
+USB_DRIVE/
+├── cuore.png
+├── fiore.png
+└── righe.png
+```
+
+### 1. Identify the USB Partition
+
+Insert the USB drive into the Raspberry Pi and run:
+
+```bash
+lsblk
+```
+
+In the current prototype test, the USB drive was recognized as:
+
+```text
+sda
+└─sda1
+```
+
+Therefore, the partition to mount is:
+
+```text
+/dev/sda1
+```
+
+### 2. Mount the USB Drive
+
+Create a fixed mount directory:
+
+```bash
+sudo mkdir -p /mnt/pattern_usb
+```
+
+Mount the USB partition:
+
+```bash
+sudo mount /dev/sda1 /mnt/pattern_usb
+```
+
+If the terminal displays the following warning:
+
+```text
+mount: (hint) your fstab has been modified, but systemd still uses
+       the old version; use 'systemctl daemon-reload' to reload.
+```
+
+run:
+
+```bash
+sudo systemctl daemon-reload
+```
+
+Then verify that the USB drive is correctly mounted:
+
+```bash
+findmnt /mnt/pattern_usb
+ls -lah /mnt/pattern_usb
+```
+
+The `.png` files should appear in the directory listing.
+
+### 3. Safely Remove the USB Drive
+
+Before physically removing the USB drive, stop the program and unmount it:
+
+```bash
+sudo umount /mnt/pattern_usb
+```
+
+---
+
+## Running `gfxhat_pattern_ui.py`
+
+In the current prototype, the script is stored in the user home directory:
+
+```text
+/home/aless/gfxhat_pattern_ui.py
+```
+
+Activate the environment before running it:
+
+```bash
+source ~/venvs/uncinetto/bin/activate
+```
+
+### Demo Mode
+
+Demo mode is used to test the display, the USB file selection, the touch buttons, the progress screen and the two interruption screens without starting any real actuator:
+
+```bash
+python3 ~/gfxhat_pattern_ui.py --usb-dir /mnt/pattern_usb --demo
+```
+
+Test sequence:
+
+```text
+UP / DOWN  → browse the available PNG files
+SELECT     → choose one PNG file
+PLUS       → start the simulated process
+MINUS      → stop the process
+PLUS       → resume the process
+BACK       → simulate "ERRORE RISCONTRATO" while running
+SELECT     → simulate "TAGLIARE IL FILO" while running
+```
+
+In demo mode, the progress percentage automatically increases until the completion screen is displayed.
+
+### Real Mode
+
+The program can also be started without the simulator:
+
+```bash
+python3 ~/gfxhat_pattern_ui.py --usb-dir /mnt/pattern_usb
+```
+
+In this mode, the interface operates normally, but the progress percentage will not increase until the real machine-control code sends progress events.
+
+---
+
+## Software Integration with the Machine
+
+The interface code already exposes the methods required by the future control pipeline.
+
+### Progress Update
+
+The real control code must notify the interface whenever a cycle or a row is completed:
+
+```python
+app.notify_progress(completed_cycles, total_cycles)
+```
+
+Example:
+
+```python
+app.notify_progress(18, 50)
+```
+
+The display will report:
+
+```text
+36%   18/50
+```
+
+### Error Recognition Alert
+
+When the Raspberry Pi camera classifier detects an error in the yarn or in the manufactured structure, the vision code must call:
+
+```python
+app.notify_error()
+```
+
+This opens the `ERRORE RISCONTRATO` screen and requests a pause of the machine.
+
+### Long-Distance Yarn Cut Alert
+
+When the pattern-processing logic detects a distance that requires manual cutting of a yarn, it must call:
+
+```python
+app.notify_cut_thread()
+```
+
+This opens the `TAGLIARE IL FILO` screen.
+
+### Completion Event
+
+When the machine completes the selected pattern, the controller must call:
+
+```python
+app.notify_done()
+```
+
+### ESP32 Communication
+
+The class:
+
+```python
+MachineController
+```
+
+contains the methods that will later be connected to the ESP32 through USB serial communication:
+
+```python
+start()
+stop()
+pause()
+resume()
+```
+
+At present these methods only print terminal messages. In the final control system, they will send real commands to the ESP32, which will control the stepper motor, the three servos and the synchronization microswitch.
+
+---
+
+## Compatibility Fix: `lcd.contrast()`
+
+During the first execution on the Raspberry Pi, the following error occurred:
+
+```text
+AttributeError: module 'gfxhat.lcd' has no attribute 'contrast'
+```
+
+The error was generated by this line in `GfxScreen.__init__()`:
+
+```python
+lcd.contrast(42)
+```
+
+Some installed versions of the `gfxhat` Python library do not expose the `contrast()` function through `gfxhat.lcd`. To keep the application compatible with both versions, the script was corrected as follows:
+
+```python
+lcd.clear()
+if hasattr(lcd, "contrast"):
+    lcd.contrast(42)
+self.set_backlight((0, 40, 70))
+```
+
+With this modification, contrast is set only when the function is available; otherwise, the program continues normally using the default contrast.
+
+---
+
+## Troubleshooting
+
+### No PNG Files Are Displayed
+
+Check that the USB drive is mounted and contains `.png` files directly in its root folder:
+
+```bash
+findmnt /mnt/pattern_usb
+ls -lah /mnt/pattern_usb
+```
+
+Then press the `PLUS` touch button on the file-selection screen to refresh the list.
+
+### `ModuleNotFoundError: No module named 'gfxhat'`
+
+Activate the correct virtual environment and install the package:
+
+```bash
+source ~/venvs/uncinetto/bin/activate
+python -m pip install gfxhat
+```
+
+### Display or Touch Buttons Do Not Respond
+
+Verify that SPI and I²C are enabled:
+
+```bash
+ls /dev/spidev*
+sudo i2cdetect -y 1
+```
+
+The I²C scan should identify the GFX HAT control devices at `0x2c` and `0x54`. Also verify the GPIO cable orientation if the HAT is connected through an extension cable.
+
+### `AttributeError: module 'gfxhat.lcd' has no attribute 'contrast'`
+
+Make sure that the initialization of `GfxScreen` contains the compatibility condition:
+
+```python
+lcd.clear()
+if hasattr(lcd, "contrast"):
+    lcd.contrast(42)
+self.set_backlight((0, 40, 70))
+```
+
+### USB Removal
+
+Do not remove the USB drive while it is still mounted. Once the program is stopped, run:
+
+```bash
+sudo umount /mnt/pattern_usb
+```
+
+---
+
+## Future Development
+
+The GFX HAT interface already defines the complete expected operator workflow. The following integrations remain to be completed:
+
+- connection of `MachineController` to the ESP32 through USB serial communication;
+- update of the progress counter from the physical synchronization events;
+- connection of the Pi Camera recognition output to `notify_error()`;
+- detection of long yarn distances and activation of `notify_cut_thread()`;
+- automatic start of the user interface when the Raspberry Pi is powered on.
+
+---
+
+## References
+
+- [Pimoroni GFX HAT Python library](https://github.com/pimoroni/gfx-hat)
+- [Pimoroni GFX HAT GPIO pinout](https://pinout.xyz/pinout/gfx_hat)
+- [Raspberry Pi configuration documentation](https://www.raspberrypi.com/documentation/computers/configuration.html)
+- [Raspberry Pi camera documentation](https://www.raspberrypi.com/documentation/accessories/camera.html)

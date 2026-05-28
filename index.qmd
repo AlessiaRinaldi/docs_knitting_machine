@@ -60,4 +60,12 @@ Actuation, logic, and synchronization of the machine.
 :::
 
 :::
+::: {.callout-note}
+### Display Interface — GFX HAT  
+Pattern selection, machine status visualization and operator interaction through the Pimoroni GFX HAT.
+
+[Open →](display-interface.qmd)
+:::
+
+:::
 :::
