@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/index.html</loc>
-    <lastmod>2026-02-27T10:18:08.188Z</lastmod>
+    <lastmod>2026-05-28T09:24:20.477Z</lastmod>
   </url>
   <url>
     <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/error-recognition.html</loc>
@@ -17,16 +17,20 @@
     <lastmod>2026-02-27T10:24:41.308Z</lastmod>
   </url>
   <url>
-    <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/components.html</loc>
-    <lastmod>2026-02-27T09:40:01.213Z</lastmod>
+    <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/control-system.html</loc>
+    <lastmod>2026-02-27T09:40:01.215Z</lastmod>
   </url>
   <url>
     <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/about.html</loc>
     <lastmod>2026-02-27T09:39:57.080Z</lastmod>
   </url>
   <url>
-    <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/control-system.html</loc>
-    <lastmod>2026-02-27T09:40:01.215Z</lastmod>
+    <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/components.html</loc>
+    <lastmod>2026-02-27T09:40:01.213Z</lastmod>
+  </url>
+  <url>
+    <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/display-interface.html</loc>
+    <lastmod>2026-05-28T09:03:21.102Z</lastmod>
   </url>
   <url>
     <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/error-code.html</loc>
