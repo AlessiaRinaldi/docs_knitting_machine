@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>error-mount</title>
+<title>Stepper Motor Control — Planned Development – Automated Knitting Machine</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -81,6 +81,9 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Automated Knitting Machine</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -213,78 +216,101 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#sec:camera_mount" id="toc-sec:camera_mount" class="nav-link active" data-scroll-target="#sec\:camera_mount">Mechanical Design of the Camera Mount</a>
+  <li><a href="#stepper-motor-control-planned-development" id="toc-stepper-motor-control-planned-development" class="nav-link active" data-scroll-target="#stepper-motor-control-planned-development">Stepper Motor Control — Planned Development</a>
   <ul>
-  <li><a href="#custom-3d-printed-camera-holder" id="toc-custom-3d-printed-camera-holder" class="nav-link" data-scroll-target="#custom-3d-printed-camera-holder">Custom 3D-Printed Camera Holder</a></li>
-  <li><a href="#stability-considerations-and-limitations" id="toc-stability-considerations-and-limitations" class="nav-link" data-scroll-target="#stability-considerations-and-limitations">Stability Considerations and Limitations</a></li>
+  <li><a href="#current-status" id="toc-current-status" class="nav-link" data-scroll-target="#current-status">Current Status</a></li>
+  <li><a href="#planned-role" id="toc-planned-role" class="nav-link" data-scroll-target="#planned-role">Planned Role</a></li>
+  <li><a href="#planned-protocol-extension" id="toc-planned-protocol-extension" class="nav-link" data-scroll-target="#planned-protocol-extension">Planned Protocol Extension</a></li>
+  <li><a href="#related-pages" id="toc-related-pages" class="nav-link" data-scroll-target="#related-pages">Related Pages</a></li>
   </ul></li>
-  <li><a href="#error-recognition-code" id="toc-error-recognition-code" class="nav-link" data-scroll-target="#error-recognition-code">- <strong>Error Recognition — Code</strong></a></li>
-  <li><a href="#results-efficiency" id="toc-results-efficiency" class="nav-link" data-scroll-target="#results-efficiency">- <strong>Results &amp; Efficiency</strong></a></li>
-  <li><a href="#conclusions-and-future-works" id="toc-conclusions-and-future-works" class="nav-link" data-scroll-target="#conclusions-and-future-works">- <strong>Conclusions and Future Works</strong></a></li>
-  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">- <strong>Overview</strong></a></li>
-  <li><a href="#selection-of-the-acquisition-system-for-error-detection" id="toc-selection-of-the-acquisition-system-for-error-detection" class="nav-link" data-scroll-target="#selection-of-the-acquisition-system-for-error-detection">- <strong>Selection of the Acquisition System for Error Detection</strong></a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content column-page-left" id="quarto-document-content">
 
-
-
-
-<section id="sec:camera_mount" class="level2">
-<h2 class="anchored" data-anchor-id="sec:camera_mount">Mechanical Design of the Camera Mount</h2>
-<p>The camera mounting solution combines a commercially available __magnetic-base stand_ with a <strong>custom 3D-printed support</strong> designed specifically for the Raspberry Pi Camera module.<br>
-The magnetic base provides a <strong>rigid</strong> and <strong>highly stable foundation</strong>, while allowing fine manual adjustment in height, angle, and lateral position through its articulated arm.</p>
-<section id="custom-3d-printed-camera-holder" class="level3">
-<h3 class="anchored" data-anchor-id="custom-3d-printed-camera-holder">Custom 3D-Printed Camera Holder</h3>
-<p>A custom holder for the Raspberry Pi Camera v2.1 was designed in <strong>Autodesk Fusion 360</strong> and fabricated using fused deposition modeling (FDM) with <strong>PLA filament</strong> on a <strong>Bambu Lab A1 Mini 3D printer</strong>.<br>
-The printed part encloses the camera PCB and incorporates a series of mounting holes and a pin that fits into the threaded end of the magnetic base arm.</p>
-</section>
-<section id="stability-considerations-and-limitations" class="level3">
-<h3 class="anchored" data-anchor-id="stability-considerations-and-limitations">Stability Considerations and Limitations</h3>
-<p>While the magnetic stand and the 3D-printed camera holder provide sufficient <strong>stability</strong> for prototyping, the overall <strong>stiffness</strong> of the structure is <strong>not optimal yet</strong>.<br>
-Small shifts caused by machine <strong>vibration</strong> or accidental contact can slightly <strong>alter the camera pose</strong> over time, affecting the exact position of the <strong>region of interest</strong> in the image.<br>
-Improving the mechanical stability of the mounting solution is therefore an <strong>important direction</strong> for future work, with the goal of achieving <strong>fully repeatable alignment</strong> over long acquisition periods.</p>
-<p>A <strong>CAD rendering</strong> of the printed holder is shown in Figure.</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div id="fig:front" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="images/3d_front.png" class="img-fluid figure-img"></p>
-<figcaption>Front of the 3D structure</figcaption>
-</figure>
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Stepper Motor Control — Planned Development</h1>
 </div>
-</div><div class="column" style="width:50%;">
-<div id="fig:back" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="images/3d_back.png" class="img-fluid figure-img"></p>
-<figcaption>Back of the 3D structure</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="error-recognition-code" class="level2">
-<h2 class="anchored" data-anchor-id="error-recognition-code">- <strong><a href="./error-code.html">Error Recognition — Code</a></strong></h2>
-<p>Algorithms, model/code structure, data flow, and deployment notes.</p>
-</section>
-<section id="results-efficiency" class="level2">
-<h2 class="anchored" data-anchor-id="results-efficiency">- <strong><a href="./error-results.html">Results &amp; Efficiency</a></strong></h2>
-<p>Datasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget.</p>
-</section>
-<section id="conclusions-and-future-works" class="level2">
-<h2 class="anchored" data-anchor-id="conclusions-and-future-works">- <strong><a href="./error-future_work.html">Conclusions and Future Works</a></strong></h2>
-</section>
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">- <strong><a href="./error-recognition.html">Overview</a></strong></h2>
-</section>
-<section id="selection-of-the-acquisition-system-for-error-detection" class="level2">
-<h2 class="anchored" data-anchor-id="selection-of-the-acquisition-system-for-error-detection">- <strong><a href="./error-camera.html">Selection of the Acquisition System for Error Detection</a></strong></h2>
-<p>Requirements, sensor &amp; lens selection, lighting, sync, and mounting constraints.</p>
 
 
+
+<div class="quarto-title-meta column-page-left">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="stepper-motor-control-planned-development" class="level1">
+<h1>Stepper Motor Control — Planned Development</h1>
+<section id="current-status" class="level2">
+<h2 class="anchored" data-anchor-id="current-status">Current Status</h2>
+<p>The tested firmware currently controls:</p>
+<ul>
+<li>the three colour-selection servomotors;</li>
+<li>the synchronization microswitch;</li>
+<li>USB serial communication with the Raspberry Pi.</li>
+</ul>
+<p>A main stepper motor for driving the knitting-machine motion is not yet part of the integrated tested firmware.</p>
+</section>
+<section id="planned-role" class="level2">
+<h2 class="anchored" data-anchor-id="planned-role">Planned Role</h2>
+<p>The stepper subsystem is expected to:</p>
+<ul>
+<li>rotate or advance the knitting mechanism;</li>
+<li>support start, pause and safe stop commands;</li>
+<li>remain synchronized with the colour-selection commands;</li>
+<li>allow the error-recognition subsystem to stop the process when a defect is detected.</li>
+</ul>
+</section>
+<section id="planned-protocol-extension" class="level2">
+<h2 class="anchored" data-anchor-id="planned-protocol-extension">Planned Protocol Extension</h2>
+<p>Possible additional serial commands are:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Command</th>
+<th>Intended function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>START_MOTOR</code></td>
+<td>Start the main motion</td>
+</tr>
+<tr class="even">
+<td><code>STOP_MOTOR</code></td>
+<td>Stop safely after an alarm or operator request</td>
+</tr>
+<tr class="odd">
+<td><code>RESUME_MOTOR</code></td>
+<td>Resume the process</td>
+</tr>
+<tr class="even">
+<td><code>HOME</code></td>
+<td>Move the mechanism to a reference state, if required</td>
+</tr>
+</tbody>
+</table>
+<p>These commands are not yet implemented and must be validated after the motor driver and electrical architecture are finalized.</p>
+</section>
+<section id="related-pages" class="level2">
+<h2 class="anchored" data-anchor-id="related-pages">Related Pages</h2>
+<ul>
+<li><a href="./esp32-actuation.html">ESP32 and Actuation</a></li>
+<li><a href="./wiring-power.html">Wiring and Power Supply</a></li>
+<li><a href="./future-developments.html">Future Developments</a></li>
+</ul>
+
+
+</section>
 </section>
 
 </main> <!-- /main -->

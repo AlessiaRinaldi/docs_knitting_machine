@@ -1,0 +1,95 @@
+---
+title: "Troubleshooting"
+---
+
+# Troubleshooting
+
+## Common Issues
+
+| Problem | Likely cause | Solution |
+|---|---|---|
+| No PNG files appear on the display | USB flash drive detected but not mounted | Mount `/dev/sda1` in `/mnt/pattern_usb` |
+| ESP32 is not detected | Wrong serial device selected | List ports and use `/dev/ttyUSB0` when available |
+| `lcd.contrast()` error | Installed `gfxhat` library has no `contrast()` method | Guard the call with `hasattr(lcd, "contrast")` |
+| Arduino compilation reports `redefinition` | Two complete `.ino` files are in the same sketch folder | Put `servo_switch_usb.ino` in its own folder |
+| Servos do not move | External 5 V supply is off or wiring is incomplete | Verify DC-DC supply, signal pins and common ground |
+| Microswitch does not generate advancement | Connected to `NC` or wrong GPIO | Use `COM → GND`, `NO → GPIO25` |
+| Display works but progress does not increase | No `NEXT` message received from ESP32 | Check microswitch and USB serial connection |
+
+## USB Flash Drive Not Visible
+
+Check the storage device:
+
+```bash
+lsblk -o NAME,SIZE,FSTYPE,LABEL,MOUNTPOINTS,MODEL
+```
+
+In the tested setup, the pattern flash drive appears as:
+
+```text
+/dev/sda1
+```
+
+If no mount point is shown, mount it:
+
+```bash
+sudo mkdir -p /mnt/pattern_usb
+sudo mount /dev/sda1 /mnt/pattern_usb
+ls -lah /mnt/pattern_usb
+```
+
+The PNG files must be directly inside `/mnt/pattern_usb`.
+
+## ESP32 Serial Port
+
+List serial devices:
+
+```bash
+python3 -m serial.tools.list_ports -v
+```
+
+The tested ESP32 CP2102 bridge appears as:
+
+```text
+/dev/ttyUSB0
+```
+
+Use it when launching the interface:
+
+```bash
+python3 /home/aless/gfxhat_pattern_ui_usb.py --usb-dir /mnt/pattern_usb --port /dev/ttyUSB0
+```
+
+## GFX HAT Contrast Compatibility
+
+If the program stops with:
+
+```text
+AttributeError: module 'gfxhat.lcd' has no attribute 'contrast'
+```
+
+replace the unconditional call with:
+
+```python
+lcd.clear()
+if hasattr(lcd, "contrast"):
+    lcd.contrast(42)
+self.set_backlight((0, 40, 70))
+```
+
+## Arduino Redefinition Error
+
+Each Arduino sketch must be placed in its own directory:
+
+```text
+servo_switch_usb/
+└── servo_switch_usb.ino
+```
+
+Do not keep the former firmware `.ino` in the same directory as the new USB-controlled sketch.
+
+## Related Pages
+
+- [Operating the Machine](operating-machine.qmd)
+- [Display Interface — GFX HAT](display-interface.qmd)
+- [ESP32 and Actuation](esp32-actuation.qmd)

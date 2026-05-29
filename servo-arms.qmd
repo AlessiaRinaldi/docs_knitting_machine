@@ -1,0 +1,84 @@
+---
+title: "3D-Printed Servo Arms"
+---
+
+# 3D-Printed Servo Arms
+
+## Design Objective
+
+Three custom mechanical arms were designed to connect the servomotors to the yarn-selection mechanism. Each arm converts the angular position of one servo into the displacement required to activate or release one colour channel.
+
+The use of custom components makes it possible to:
+
+- adapt the actuator geometry to the machine structure;
+- obtain repeatable motion for the three yarn channels;
+- reproduce the mechanism through 3D printing;
+- calibrate mechanical movement through firmware angles.
+
+## Servo Association
+
+| Mechanical actuator | Electrical actuator | ESP32 command |
+|---|---|---|
+| Yarn-selection arm 1 | Servo 1 on GPIO13 | `C1` |
+| Yarn-selection arm 2 | Servo 2 on GPIO14 | `C2` |
+| Yarn-selection arm 3 | Servo 3 on GPIO27 | `C3` |
+
+## Active and Inactive Positions
+
+The firmware defines two positions for each printed arm:
+
+- `DOWN`: inactive position, used when the corresponding yarn channel is not selected;
+- `UP`: active position, used when that yarn channel must participate in the current pixel.
+
+At the current calibration stage the initial values are:
+
+| Arm | `DOWN` | `UP` |
+|---|---:|---:|
+| Arm 1 | 60° | 140° |
+| Arm 2 | 60° | 140° |
+| Arm 3 | 60° | 140° |
+
+These values are initial experimental settings and should be refined after final assembly.
+
+## Recommended Assembly and Calibration Procedure
+
+1. Keep yarns disconnected during the first powered test.
+2. Power the servo supply and run a command that sends all servos to `DOWN`.
+3. Mount each printed arm in the intended inactive orientation.
+4. Send `C1`, `C2` and `C3` individually.
+5. Check that each arm moves without collisions or excessive mechanical force.
+6. Modify the `UP_n` and `DOWN_n` angles in `servo_switch_usb.ino` if necessary.
+7. Repeat the test with the complete three-arm assembly.
+8. Connect the yarns only after safe motion has been confirmed.
+
+## Images to Add
+
+Store photographs and CAD renders in:
+
+```text
+images/servo_arms/
+├── cad_model.png
+├── printed_arm.jpg
+├── mounted_arm.jpg
+└── complete_module.jpg
+```
+
+After adding the images to the repository, uncomment or adapt the following blocks:
+
+```markdown
+<!--
+![](images/servo_arms/cad_model.png){fig-alt="CAD model of the servo arm" width=65%}
+
+![](images/servo_arms/complete_module.jpg){fig-alt="Complete three-servo selection module" width=65%}
+-->
+```
+
+## Safety Note
+
+During first tests, the printed arms must be free to move and must not be forced against a mechanical stop. A blocked servo can draw excessive current and damage the actuator or the printed part.
+
+## Related Pages
+
+- [ESP32 and Actuation](esp32-actuation.qmd)
+- [Wiring and Power Supply](wiring-power.qmd)
+- [Components Overview](components.qmd)

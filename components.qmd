@@ -1,8 +1,45 @@
 ---
-title: Components
+title: "Components Overview"
 ---
 
-# Key Components
-- Motors, drivers, sensors
-- Camera & lighting
-- MCU & wiring
+# Components Overview
+
+## Main Electronic and Mechanical Components
+
+| Component | Function in the prototype |
+|---|---|
+| Raspberry Pi 3 | High-level control, display interface, PNG interpretation and vision pipeline |
+| Pimoroni GFX HAT | Embedded LCD and touch-button user interface |
+| ESP32 | Direct servomotor control and microswitch acquisition |
+| Three servomotors | Physical selection of the three yarn channels |
+| 3D-printed servo arms | Custom mechanical interfaces for yarn selection |
+| Microswitch | Synchronization event for pattern advancement |
+| Raspberry Pi Camera | Image acquisition for the error-recognition subsystem |
+| 3D-printed camera mount | Repeatable camera positioning near the hook region |
+| External DC-DC converter | Regulated 5 V supply dedicated to the servomotors |
+| USB flash drive | Transfer of PNG pattern files to the Raspberry Pi |
+
+## Component Grouping
+
+### User Interface and High-Level Processing
+
+- [Display Interface — GFX HAT](display-interface.qmd)
+- [Raspberry Pi Application](raspberry-control.qmd)
+
+### Low-Level Control and Actuation
+
+- [ESP32 and Actuation](esp32-actuation.qmd)
+- [Wiring and Power Supply](wiring-power.qmd)
+- [Stepper Motor — Planned Development](stepper-motor.qmd)
+
+### Mechanical Components
+
+- [3D-Printed Servo Arms](servo-arms.qmd)
+- [3D Camera Mount](error-mount.qmd)
+
+### Visual Monitoring
+
+- [Error Recognition Overview](error-recognition.qmd)
+- [Acquisition System](error-camera.qmd)
+- [Algorithm and Code](error-code.qmd)
+- [Results and Efficiency](error-results.qmd)

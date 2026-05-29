@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>error-mount</title>
+<title>Pattern Editor</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -213,78 +213,143 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#sec:camera_mount" id="toc-sec:camera_mount" class="nav-link active" data-scroll-target="#sec\:camera_mount">Mechanical Design of the Camera Mount</a>
+  <li><a href="#pattern-editor" id="toc-pattern-editor" class="nav-link active" data-scroll-target="#pattern-editor">Pattern Editor</a>
   <ul>
-  <li><a href="#custom-3d-printed-camera-holder" id="toc-custom-3d-printed-camera-holder" class="nav-link" data-scroll-target="#custom-3d-printed-camera-holder">Custom 3D-Printed Camera Holder</a></li>
-  <li><a href="#stability-considerations-and-limitations" id="toc-stability-considerations-and-limitations" class="nav-link" data-scroll-target="#stability-considerations-and-limitations">Stability Considerations and Limitations</a></li>
+  <li><a href="#purpose" id="toc-purpose" class="nav-link" data-scroll-target="#purpose">Purpose</a></li>
+  <li><a href="#workflow" id="toc-workflow" class="nav-link" data-scroll-target="#workflow">Workflow</a></li>
+  <li><a href="#pattern-constraints" id="toc-pattern-constraints" class="nav-link" data-scroll-target="#pattern-constraints">Pattern Constraints</a></li>
+  <li><a href="#automatic-colour-association" id="toc-automatic-colour-association" class="nav-link" data-scroll-target="#automatic-colour-association">Automatic Colour Association</a></li>
+  <li><a href="#transfer-to-the-machine" id="toc-transfer-to-the-machine" class="nav-link" data-scroll-target="#transfer-to-the-machine">Transfer to the Machine</a></li>
+  <li><a href="#related-pages" id="toc-related-pages" class="nav-link" data-scroll-target="#related-pages">Related Pages</a></li>
   </ul></li>
-  <li><a href="#error-recognition-code" id="toc-error-recognition-code" class="nav-link" data-scroll-target="#error-recognition-code">- <strong>Error Recognition — Code</strong></a></li>
-  <li><a href="#results-efficiency" id="toc-results-efficiency" class="nav-link" data-scroll-target="#results-efficiency">- <strong>Results &amp; Efficiency</strong></a></li>
-  <li><a href="#conclusions-and-future-works" id="toc-conclusions-and-future-works" class="nav-link" data-scroll-target="#conclusions-and-future-works">- <strong>Conclusions and Future Works</strong></a></li>
-  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">- <strong>Overview</strong></a></li>
-  <li><a href="#selection-of-the-acquisition-system-for-error-detection" id="toc-selection-of-the-acquisition-system-for-error-detection" class="nav-link" data-scroll-target="#selection-of-the-acquisition-system-for-error-detection">- <strong>Selection of the Acquisition System for Error Detection</strong></a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content column-page-left" id="quarto-document-content">
 
-
-
-
-<section id="sec:camera_mount" class="level2">
-<h2 class="anchored" data-anchor-id="sec:camera_mount">Mechanical Design of the Camera Mount</h2>
-<p>The camera mounting solution combines a commercially available __magnetic-base stand_ with a <strong>custom 3D-printed support</strong> designed specifically for the Raspberry Pi Camera module.<br>
-The magnetic base provides a <strong>rigid</strong> and <strong>highly stable foundation</strong>, while allowing fine manual adjustment in height, angle, and lateral position through its articulated arm.</p>
-<section id="custom-3d-printed-camera-holder" class="level3">
-<h3 class="anchored" data-anchor-id="custom-3d-printed-camera-holder">Custom 3D-Printed Camera Holder</h3>
-<p>A custom holder for the Raspberry Pi Camera v2.1 was designed in <strong>Autodesk Fusion 360</strong> and fabricated using fused deposition modeling (FDM) with <strong>PLA filament</strong> on a <strong>Bambu Lab A1 Mini 3D printer</strong>.<br>
-The printed part encloses the camera PCB and incorporates a series of mounting holes and a pin that fits into the threaded end of the magnetic base arm.</p>
-</section>
-<section id="stability-considerations-and-limitations" class="level3">
-<h3 class="anchored" data-anchor-id="stability-considerations-and-limitations">Stability Considerations and Limitations</h3>
-<p>While the magnetic stand and the 3D-printed camera holder provide sufficient <strong>stability</strong> for prototyping, the overall <strong>stiffness</strong> of the structure is <strong>not optimal yet</strong>.<br>
-Small shifts caused by machine <strong>vibration</strong> or accidental contact can slightly <strong>alter the camera pose</strong> over time, affecting the exact position of the <strong>region of interest</strong> in the image.<br>
-Improving the mechanical stability of the mounting solution is therefore an <strong>important direction</strong> for future work, with the goal of achieving <strong>fully repeatable alignment</strong> over long acquisition periods.</p>
-<p>A <strong>CAD rendering</strong> of the printed holder is shown in Figure.</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div id="fig:front" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="images/3d_front.png" class="img-fluid figure-img"></p>
-<figcaption>Front of the 3D structure</figcaption>
-</figure>
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Pattern Editor</h1>
 </div>
-</div><div class="column" style="width:50%;">
-<div id="fig:back" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="images/3d_back.png" class="img-fluid figure-img"></p>
-<figcaption>Back of the 3D structure</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="error-recognition-code" class="level2">
-<h2 class="anchored" data-anchor-id="error-recognition-code">- <strong><a href="./error-code.html">Error Recognition — Code</a></strong></h2>
-<p>Algorithms, model/code structure, data flow, and deployment notes.</p>
-</section>
-<section id="results-efficiency" class="level2">
-<h2 class="anchored" data-anchor-id="results-efficiency">- <strong><a href="./error-results.html">Results &amp; Efficiency</a></strong></h2>
-<p>Datasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget.</p>
-</section>
-<section id="conclusions-and-future-works" class="level2">
-<h2 class="anchored" data-anchor-id="conclusions-and-future-works">- <strong><a href="./error-future_work.html">Conclusions and Future Works</a></strong></h2>
-</section>
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">- <strong><a href="./error-recognition.html">Overview</a></strong></h2>
-</section>
-<section id="selection-of-the-acquisition-system-for-error-detection" class="level2">
-<h2 class="anchored" data-anchor-id="selection-of-the-acquisition-system-for-error-detection">- <strong><a href="./error-camera.html">Selection of the Acquisition System for Error Detection</a></strong></h2>
-<p>Requirements, sensor &amp; lens selection, lighting, sync, and mounting constraints.</p>
 
 
+
+<div class="quarto-title-meta column-page-left">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="pattern-editor" class="level1">
+<h1>Pattern Editor</h1>
+<section id="purpose" class="level2">
+<h2 class="anchored" data-anchor-id="purpose">Purpose</h2>
+<p>The Pattern Editor is the user-side tool used to create the textile pattern before running the machine. The user draws a three-colour image and exports it as a <code>.png</code> file, which is then transferred to the Raspberry Pi through a USB flash drive.</p>
+</section>
+<section id="workflow" class="level2">
+<h2 class="anchored" data-anchor-id="workflow">Workflow</h2>
+<pre class="text"><code>Open the Pattern Editor
+        ↓
+Draw the desired three-colour pattern
+        ↓
+Export the image as a PNG file
+        ↓
+Copy the PNG file to the USB flash drive
+        ↓
+Select the file from the machine display</code></pre>
+</section>
+<section id="pattern-constraints" class="level2">
+<h2 class="anchored" data-anchor-id="pattern-constraints">Pattern Constraints</h2>
+<p>The current control software accepts patterns with the following properties:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>File format</td>
+<td><code>.png</code></td>
+</tr>
+<tr class="even">
+<td>Image width</td>
+<td>Exactly 48 pixels</td>
+</tr>
+<tr class="odd">
+<td>Number of colours</td>
+<td>Exactly 3 distinct RGB colours</td>
+</tr>
+<tr class="even">
+<td>USB storage location</td>
+<td>Files stored directly in the root folder of the USB drive</td>
+</tr>
+</tbody>
+</table>
+<p>The image height is not fixed: it determines the length of the produced pattern.</p>
+</section>
+<section id="automatic-colour-association" class="level2">
+<h2 class="anchored" data-anchor-id="automatic-colour-association">Automatic Colour Association</h2>
+<p>When a pattern is started, the Raspberry Pi reads the image pixels in sequence and associates the three colours to the three servo-controlled yarn channels in order of first occurrence:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Colour order in the PNG</th>
+<th>Command sent to ESP32</th>
+<th>Yarn actuator</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>First distinct colour found</td>
+<td><code>C1</code></td>
+<td>Servo 1</td>
+</tr>
+<tr class="even">
+<td>Second distinct colour found</td>
+<td><code>C2</code></td>
+<td>Servo 2</td>
+</tr>
+<tr class="odd">
+<td>Third distinct colour found</td>
+<td><code>C3</code></td>
+<td>Servo 3</td>
+</tr>
+</tbody>
+</table>
+<p>Before starting production, the user must place the real yarns according to the colour-to-servo mapping shown in the Raspberry Pi terminal.</p>
+</section>
+<section id="transfer-to-the-machine" class="level2">
+<h2 class="anchored" data-anchor-id="transfer-to-the-machine">Transfer to the Machine</h2>
+<p>Store the exported PNG files directly on the USB flash drive:</p>
+<pre class="text"><code>USB_DRIVE/
+├── pattern_01.png
+├── pattern_02.png
+└── pattern_03.png</code></pre>
+<p>The machine interface will list these files on the GFX HAT display.</p>
+</section>
+<section id="related-pages" class="level2">
+<h2 class="anchored" data-anchor-id="related-pages">Related Pages</h2>
+<ul>
+<li><a href="./operating-machine.html">Operating the Machine</a></li>
+<li><a href="./display-interface.html">Display Interface — GFX HAT</a></li>
+<li><a href="./control-system.html">Control System Overview</a></li>
+</ul>
+
+
+</section>
 </section>
 
 </main> <!-- /main -->

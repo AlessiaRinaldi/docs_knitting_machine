@@ -2,40 +2,71 @@ project:
   type: website
   output-dir: _site
 
+
 website:
   #title: "Automated Knitting Machine"
   navbar:
-    background: "#f8dfe5"   # rosa molto tenue
-    foreground: "#4a4a4a"   # testo grigio scuro
+    background: "#f8dfe5"
+    foreground: "#4a4a4a"
     left:
-      - text: Home
+      - text: "Home"
         href: index.qmd
-      - text: Error Recognition
+
+      - text: "User Guide"
         menu:
-          - text: Overview
-            href: error-recognition.qmd
-          - text: Selection of the Acquisition System for Error Detection
-            href: error-camera.qmd
-          - text: 3D Camera Mount
+          - text: "Pattern Editor"
+            href: pattern-editor.qmd
+          - text: "Operating the Machine"
+            href: operating-machine.qmd
+
+      - text: "Control System"
+        menu:
+          - text: "System Overview"
+            href: control-system.qmd
+          - text: "Display Interface — GFX HAT"
+            href: display-interface.qmd
+          - text: "Raspberry Pi Application"
+            href: raspberry-control.qmd
+          - text: "ESP32 and Actuation"
+            href: esp32-actuation.qmd
+          - text: "Stepper Motor — Planned Development"
+            href: stepper-motor.qmd
+          - text: "Wiring and Power Supply"
+            href: wiring-power.qmd
+          - text: "Troubleshooting"
+            href: troubleshooting.qmd
+
+      - text: "Mechanical Design"
+        menu:
+          - text: "Components Overview"
+            href: components.qmd
+          - text: "3D-Printed Servo Arms"
+            href: servo-arms.qmd
+          - text: "3D Camera Mount"
             href: error-mount.qmd
-          - text: Error Recognition — Code
+
+      - text: "Error Recognition"
+        menu:
+          - text: "Overview"
+            href: error-recognition.qmd
+          - text: "Acquisition System"
+            href: error-camera.qmd
+          - text: "3D Camera Mount"
+            href: error-mount.qmd
+          - text: "Algorithm and Code"
             href: error-code.qmd
-          - text: Results & Efficiency
+          - text: "Results and Efficiency"
             href: error-results.qmd
-          - text: Conclusions and Future Works
+          - text: "Conclusions and Future Works"
             href: error-future_work.qmd
-      - text: Components
-        href: components.qmd
-      - text: Control System
-        href: control-system.qmd
-      - text: Display Interface
-        href: display-interface.qmd
+
+      - text: "Future Developments"
+        href: future-developments.qmd
 
 format:
   html:
-    theme: minty  # alternative: flatly, journal, minty, zephyr, quartz, lumen
+    theme: minty
     css: styles.css
     toc: true
     toc-depth: 4
-    page-layout: full   # <— importante
-
+    page-layout: full

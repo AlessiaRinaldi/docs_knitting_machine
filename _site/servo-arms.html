@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>error-mount</title>
+<title>3D-Printed Servo Arms – Automated Knitting Machine</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -81,6 +116,9 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Automated Knitting Machine</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -213,78 +251,161 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#sec:camera_mount" id="toc-sec:camera_mount" class="nav-link active" data-scroll-target="#sec\:camera_mount">Mechanical Design of the Camera Mount</a>
+  <li><a href="#d-printed-servo-arms" id="toc-d-printed-servo-arms" class="nav-link active" data-scroll-target="#d-printed-servo-arms">3D-Printed Servo Arms</a>
   <ul>
-  <li><a href="#custom-3d-printed-camera-holder" id="toc-custom-3d-printed-camera-holder" class="nav-link" data-scroll-target="#custom-3d-printed-camera-holder">Custom 3D-Printed Camera Holder</a></li>
-  <li><a href="#stability-considerations-and-limitations" id="toc-stability-considerations-and-limitations" class="nav-link" data-scroll-target="#stability-considerations-and-limitations">Stability Considerations and Limitations</a></li>
+  <li><a href="#design-objective" id="toc-design-objective" class="nav-link" data-scroll-target="#design-objective">Design Objective</a></li>
+  <li><a href="#servo-association" id="toc-servo-association" class="nav-link" data-scroll-target="#servo-association">Servo Association</a></li>
+  <li><a href="#active-and-inactive-positions" id="toc-active-and-inactive-positions" class="nav-link" data-scroll-target="#active-and-inactive-positions">Active and Inactive Positions</a></li>
+  <li><a href="#recommended-assembly-and-calibration-procedure" id="toc-recommended-assembly-and-calibration-procedure" class="nav-link" data-scroll-target="#recommended-assembly-and-calibration-procedure">Recommended Assembly and Calibration Procedure</a></li>
+  <li><a href="#images-to-add" id="toc-images-to-add" class="nav-link" data-scroll-target="#images-to-add">Images to Add</a></li>
+  <li><a href="#safety-note" id="toc-safety-note" class="nav-link" data-scroll-target="#safety-note">Safety Note</a></li>
+  <li><a href="#related-pages" id="toc-related-pages" class="nav-link" data-scroll-target="#related-pages">Related Pages</a></li>
   </ul></li>
-  <li><a href="#error-recognition-code" id="toc-error-recognition-code" class="nav-link" data-scroll-target="#error-recognition-code">- <strong>Error Recognition — Code</strong></a></li>
-  <li><a href="#results-efficiency" id="toc-results-efficiency" class="nav-link" data-scroll-target="#results-efficiency">- <strong>Results &amp; Efficiency</strong></a></li>
-  <li><a href="#conclusions-and-future-works" id="toc-conclusions-and-future-works" class="nav-link" data-scroll-target="#conclusions-and-future-works">- <strong>Conclusions and Future Works</strong></a></li>
-  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">- <strong>Overview</strong></a></li>
-  <li><a href="#selection-of-the-acquisition-system-for-error-detection" id="toc-selection-of-the-acquisition-system-for-error-detection" class="nav-link" data-scroll-target="#selection-of-the-acquisition-system-for-error-detection">- <strong>Selection of the Acquisition System for Error Detection</strong></a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content column-page-left" id="quarto-document-content">
 
-
-
-
-<section id="sec:camera_mount" class="level2">
-<h2 class="anchored" data-anchor-id="sec:camera_mount">Mechanical Design of the Camera Mount</h2>
-<p>The camera mounting solution combines a commercially available __magnetic-base stand_ with a <strong>custom 3D-printed support</strong> designed specifically for the Raspberry Pi Camera module.<br>
-The magnetic base provides a <strong>rigid</strong> and <strong>highly stable foundation</strong>, while allowing fine manual adjustment in height, angle, and lateral position through its articulated arm.</p>
-<section id="custom-3d-printed-camera-holder" class="level3">
-<h3 class="anchored" data-anchor-id="custom-3d-printed-camera-holder">Custom 3D-Printed Camera Holder</h3>
-<p>A custom holder for the Raspberry Pi Camera v2.1 was designed in <strong>Autodesk Fusion 360</strong> and fabricated using fused deposition modeling (FDM) with <strong>PLA filament</strong> on a <strong>Bambu Lab A1 Mini 3D printer</strong>.<br>
-The printed part encloses the camera PCB and incorporates a series of mounting holes and a pin that fits into the threaded end of the magnetic base arm.</p>
-</section>
-<section id="stability-considerations-and-limitations" class="level3">
-<h3 class="anchored" data-anchor-id="stability-considerations-and-limitations">Stability Considerations and Limitations</h3>
-<p>While the magnetic stand and the 3D-printed camera holder provide sufficient <strong>stability</strong> for prototyping, the overall <strong>stiffness</strong> of the structure is <strong>not optimal yet</strong>.<br>
-Small shifts caused by machine <strong>vibration</strong> or accidental contact can slightly <strong>alter the camera pose</strong> over time, affecting the exact position of the <strong>region of interest</strong> in the image.<br>
-Improving the mechanical stability of the mounting solution is therefore an <strong>important direction</strong> for future work, with the goal of achieving <strong>fully repeatable alignment</strong> over long acquisition periods.</p>
-<p>A <strong>CAD rendering</strong> of the printed holder is shown in Figure.</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div id="fig:front" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="images/3d_front.png" class="img-fluid figure-img"></p>
-<figcaption>Front of the 3D structure</figcaption>
-</figure>
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">3D-Printed Servo Arms</h1>
 </div>
-</div><div class="column" style="width:50%;">
-<div id="fig:back" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="images/3d_back.png" class="img-fluid figure-img"></p>
-<figcaption>Back of the 3D structure</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="error-recognition-code" class="level2">
-<h2 class="anchored" data-anchor-id="error-recognition-code">- <strong><a href="./error-code.html">Error Recognition — Code</a></strong></h2>
-<p>Algorithms, model/code structure, data flow, and deployment notes.</p>
-</section>
-<section id="results-efficiency" class="level2">
-<h2 class="anchored" data-anchor-id="results-efficiency">- <strong><a href="./error-results.html">Results &amp; Efficiency</a></strong></h2>
-<p>Datasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget.</p>
-</section>
-<section id="conclusions-and-future-works" class="level2">
-<h2 class="anchored" data-anchor-id="conclusions-and-future-works">- <strong><a href="./error-future_work.html">Conclusions and Future Works</a></strong></h2>
-</section>
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">- <strong><a href="./error-recognition.html">Overview</a></strong></h2>
-</section>
-<section id="selection-of-the-acquisition-system-for-error-detection" class="level2">
-<h2 class="anchored" data-anchor-id="selection-of-the-acquisition-system-for-error-detection">- <strong><a href="./error-camera.html">Selection of the Acquisition System for Error Detection</a></strong></h2>
-<p>Requirements, sensor &amp; lens selection, lighting, sync, and mounting constraints.</p>
 
 
+
+<div class="quarto-title-meta column-page-left">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="d-printed-servo-arms" class="level1">
+<h1>3D-Printed Servo Arms</h1>
+<section id="design-objective" class="level2">
+<h2 class="anchored" data-anchor-id="design-objective">Design Objective</h2>
+<p>Three custom mechanical arms were designed to connect the servomotors to the yarn-selection mechanism. Each arm converts the angular position of one servo into the displacement required to activate or release one colour channel.</p>
+<p>The use of custom components makes it possible to:</p>
+<ul>
+<li>adapt the actuator geometry to the machine structure;</li>
+<li>obtain repeatable motion for the three yarn channels;</li>
+<li>reproduce the mechanism through 3D printing;</li>
+<li>calibrate mechanical movement through firmware angles.</li>
+</ul>
+</section>
+<section id="servo-association" class="level2">
+<h2 class="anchored" data-anchor-id="servo-association">Servo Association</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Mechanical actuator</th>
+<th>Electrical actuator</th>
+<th>ESP32 command</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Yarn-selection arm 1</td>
+<td>Servo 1 on GPIO13</td>
+<td><code>C1</code></td>
+</tr>
+<tr class="even">
+<td>Yarn-selection arm 2</td>
+<td>Servo 2 on GPIO14</td>
+<td><code>C2</code></td>
+</tr>
+<tr class="odd">
+<td>Yarn-selection arm 3</td>
+<td>Servo 3 on GPIO27</td>
+<td><code>C3</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="active-and-inactive-positions" class="level2">
+<h2 class="anchored" data-anchor-id="active-and-inactive-positions">Active and Inactive Positions</h2>
+<p>The firmware defines two positions for each printed arm:</p>
+<ul>
+<li><code>DOWN</code>: inactive position, used when the corresponding yarn channel is not selected;</li>
+<li><code>UP</code>: active position, used when that yarn channel must participate in the current pixel.</li>
+</ul>
+<p>At the current calibration stage the initial values are:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Arm</th>
+<th style="text-align: right;"><code>DOWN</code></th>
+<th style="text-align: right;"><code>UP</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Arm 1</td>
+<td style="text-align: right;">60°</td>
+<td style="text-align: right;">140°</td>
+</tr>
+<tr class="even">
+<td>Arm 2</td>
+<td style="text-align: right;">60°</td>
+<td style="text-align: right;">140°</td>
+</tr>
+<tr class="odd">
+<td>Arm 3</td>
+<td style="text-align: right;">60°</td>
+<td style="text-align: right;">140°</td>
+</tr>
+</tbody>
+</table>
+<p>These values are initial experimental settings and should be refined after final assembly.</p>
+</section>
+<section id="recommended-assembly-and-calibration-procedure" class="level2">
+<h2 class="anchored" data-anchor-id="recommended-assembly-and-calibration-procedure">Recommended Assembly and Calibration Procedure</h2>
+<ol type="1">
+<li>Keep yarns disconnected during the first powered test.</li>
+<li>Power the servo supply and run a command that sends all servos to <code>DOWN</code>.</li>
+<li>Mount each printed arm in the intended inactive orientation.</li>
+<li>Send <code>C1</code>, <code>C2</code> and <code>C3</code> individually.</li>
+<li>Check that each arm moves without collisions or excessive mechanical force.</li>
+<li>Modify the <code>UP_n</code> and <code>DOWN_n</code> angles in <code>servo_switch_usb.ino</code> if necessary.</li>
+<li>Repeat the test with the complete three-arm assembly.</li>
+<li>Connect the yarns only after safe motion has been confirmed.</li>
+</ol>
+</section>
+<section id="images-to-add" class="level2">
+<h2 class="anchored" data-anchor-id="images-to-add">Images to Add</h2>
+<p>Store photographs and CAD renders in:</p>
+<pre class="text"><code>images/servo_arms/
+├── cad_model.png
+├── printed_arm.jpg
+├── mounted_arm.jpg
+└── complete_module.jpg</code></pre>
+<p>After adding the images to the repository, uncomment or adapt the following blocks:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">![](images/servo_arms/cad_model.png){fig-alt="CAD model of the servo arm" width=65%}</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">![](images/servo_arms/complete_module.jpg){fig-alt="Complete three-servo selection module" width=65%}</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="safety-note" class="level2">
+<h2 class="anchored" data-anchor-id="safety-note">Safety Note</h2>
+<p>During first tests, the printed arms must be free to move and must not be forced against a mechanical stop. A blocked servo can draw excessive current and damage the actuator or the printed part.</p>
+</section>
+<section id="related-pages" class="level2">
+<h2 class="anchored" data-anchor-id="related-pages">Related Pages</h2>
+<ul>
+<li><a href="./esp32-actuation.html">ESP32 and Actuation</a></li>
+<li><a href="./wiring-power.html">Wiring and Power Supply</a></li>
+<li><a href="./components.html">Components Overview</a></li>
+</ul>
+
+
+</section>
 </section>
 
 </main> <!-- /main -->

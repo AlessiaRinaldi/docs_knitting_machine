@@ -1,0 +1,100 @@
+---
+title: "Raspberry Pi Application"
+---
+
+# Raspberry Pi Application
+
+## Role of the Raspberry Pi
+
+The Raspberry Pi implements the high-level control layer of the prototype. It is responsible for:
+
+- displaying the operator interface through the GFX HAT;
+- reading PNG files from the USB flash drive;
+- copying the selected pattern to local storage;
+- validating the PNG dimensions and number of colours;
+- mapping RGB colours to the commands `C1`, `C2` and `C3`;
+- communicating with the ESP32 through USB serial;
+- displaying the current processing progress;
+- hosting the error-recognition pipeline.
+
+## Integrated Script
+
+The active user-interface and machine-control program is:
+
+```text
+gfxhat_pattern_ui_usb.py
+```
+
+### Main Software Classes
+
+| Class | Responsibility |
+|---|---|
+| `GfxScreen` | LCD drawing, progress bar, touch LEDs and RGB backlight |
+| `PatternApp` | Interface states, touch events, file discovery and screen rendering |
+| `UsbMachineController` | PNG validation, serial port, ESP32 messages and progress |
+| `DemoController` | Interface simulation without real ESP32 actuation |
+
+## Pattern Processing
+
+The Raspberry Pi checks that the selected image:
+
+- is a valid image readable as RGB;
+- has width equal to 48 pixels;
+- contains exactly three distinct colours.
+
+The image pixels are read sequentially. The first distinct colour is mapped to `C1`, the second to `C2`, and the third to `C3`.
+
+## USB Serial Communication
+
+The Raspberry Pi connects to the ESP32 using:
+
+```text
+/dev/ttyUSB0
+115200 baud
+```
+
+The serial-reading loop is executed in a worker thread. In this way, waiting for the physical microswitch does not freeze the display interface or the capacitive buttons.
+
+## Raspberry Pi Commands
+
+### Virtual Environment
+
+```bash
+source /home/aless/venvs/uncinetto/bin/activate
+```
+
+### Detect the ESP32 Port
+
+```bash
+python3 -m serial.tools.list_ports -v
+```
+
+### Mount the Pattern USB Drive
+
+```bash
+sudo mkdir -p /mnt/pattern_usb
+sudo mount /dev/sda1 /mnt/pattern_usb
+ls -lah /mnt/pattern_usb
+```
+
+### Start the Integrated Application
+
+```bash
+python3 /home/aless/gfxhat_pattern_ui_usb.py --usb-dir /mnt/pattern_usb --port /dev/ttyUSB0
+```
+
+## Vision Integration
+
+The error-recognition algorithm is executed on the Raspberry Pi and is designed to inspect the yarn configuration near the hook. The interface already provides the event:
+
+```python
+app.notify_error()
+```
+
+The final closed-loop step is to connect this recognition event to the physical machine pause/stop behavior.
+
+## Related Pages
+
+- [Display Interface — GFX HAT](display-interface.qmd)
+- [ESP32 and Actuation](esp32-actuation.qmd)
+- [Error Recognition Overview](error-recognition.qmd)

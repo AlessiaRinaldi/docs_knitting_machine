@@ -1,0 +1,88 @@
+---
+title: "Wiring and Power Supply"
+---
+
+# Wiring and Power Supply
+
+## Complete Connection Diagram
+
+```text
+Raspberry Pi
+  │
+  │ USB / micro-USB cable
+  ▼
+ESP32
+  ├── GPIO13 ── Servo 1 signal
+  ├── GPIO14 ── Servo 2 signal
+  ├── GPIO27 ── Servo 3 signal
+  ├── GPIO25 ── Microswitch NO
+  └── GND    ── Microswitch COM
+       │
+       └──────── GND external DC-DC supply
+
+External regulated DC-DC supply: 5 V
+  ├── +5 V ── Servo 1/2/3 power wires
+  └── GND  ── Servo 1/2/3 ground wires
+```
+
+## Raspberry Pi and ESP32
+
+The ESP32 is connected to the Raspberry Pi using its USB cable. This connection provides:
+
+- electrical power for the ESP32 development board;
+- the USB serial communication channel used by `gfxhat_pattern_ui_usb.py`.
+
+In the tested setup, the ESP32 is detected as:
+
+```text
+/dev/ttyUSB0
+```
+
+## Servomotor Supply
+
+The three servomotors must be powered by the external regulated 5 V DC-DC supply.
+
+| Servo connection | Wiring |
+|---|---|
+| Servo signal 1 | ESP32 GPIO13 |
+| Servo signal 2 | ESP32 GPIO14 |
+| Servo signal 3 | ESP32 GPIO27 |
+| Servo positive supply | External DC-DC `+5 V` |
+| Servo ground | External DC-DC `GND` |
+
+Do not supply the servomotors from the Raspberry Pi or ESP32 board.
+
+## Common Ground
+
+A common electrical reference is required for the ESP32 PWM signals to be interpreted correctly by the servomotors:
+
+```text
+GND DC-DC = GND servomotors = GND ESP32 = GND Raspberry Pi through USB
+```
+
+The external DC-DC `+5 V` is connected to the servomotors only; it must not be connected to the ESP32 power input while the board is already powered through USB.
+
+## Microswitch
+
+For a three-terminal microswitch:
+
+| Terminal | Connection |
+|---|---|
+| `COM` | ESP32 GND |
+| `NO` | ESP32 GPIO25 |
+| `NC` | Not connected |
+
+## Recommended Power-On Procedure
+
+1. Verify all signal and ground connections with the servo supply off.
+2. Ensure the printed servo arms can move without collision.
+3. Connect the ESP32 to the Raspberry Pi through USB.
+4. Turn on the external 5 V servo supply.
+5. Launch the Raspberry Pi application.
+6. Select a PNG and press `AVVIA`.
+
+## Related Pages
+
+- [Operating the Machine](operating-machine.qmd)
+- [ESP32 and Actuation](esp32-actuation.qmd)
+- [Troubleshooting](troubleshooting.qmd)

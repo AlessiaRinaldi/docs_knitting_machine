@@ -1,0 +1,116 @@
+---
+title: "ESP32 and Actuation"
+---
+
+# ESP32 and Actuation
+
+## Role of the ESP32
+
+The ESP32 implements the low-level actuation layer. It directly controls the three yarn-selection servomotors and acquires the synchronization microswitch.
+
+The firmware file is:
+
+```text
+servo_switch_usb.ino
+```
+
+## GPIO Assignment
+
+| Function | ESP32 GPIO |
+|---|---:|
+| Servo 1 signal | GPIO13 |
+| Servo 2 signal | GPIO14 |
+| Servo 3 signal | GPIO27 |
+| Microswitch input | GPIO25 |
+
+## Three-Servo Selection Logic
+
+Only one servo channel is active for each pixel:
+
+| Command | Servo 1 | Servo 2 | Servo 3 |
+|---|---|---|---|
+| `C1` | `UP` | `DOWN` | `DOWN` |
+| `C2` | `DOWN` | `UP` | `DOWN` |
+| `C3` | `DOWN` | `DOWN` | `UP` |
+| `DOWN` | `DOWN` | `DOWN` | `DOWN` |
+
+Initial experimental calibration values are:
+
+```cpp
+const int UP_1 = 140;
+const int DOWN_1 = 60;
+
+const int UP_2 = 140;
+const int DOWN_2 = 60;
+
+const int UP_3 = 140;
+const int DOWN_3 = 60;
+```
+
+These angles must be calibrated after mounting the custom [3D-Printed Servo Arms](servo-arms.qmd).
+
+## Microswitch Synchronization
+
+The three-terminal microswitch is connected using its normally open contact:
+
+| Microswitch terminal | Connection |
+|---|---|
+| `COM` | ESP32 GND |
+| `NO` | ESP32 GPIO25 |
+| `NC` | Not connected |
+
+The firmware uses the internal pull-up resistor:
+
+```cpp
+pinMode(pinMicroswitch, INPUT_PULLUP);
+```
+
+Therefore the input is `HIGH` at rest and becomes `LOW` when the switch is pressed. A 50 ms debounce filter prevents one physical press from generating multiple events.
+
+## USB Serial Protocol
+
+The ESP32 is connected to the Raspberry Pi through a USB cable. The cable powers the ESP32 board and carries serial messages; the servomotors are supplied separately.
+
+The communication speed is:
+
+```text
+115200 baud
+```
+
+### Messages Received by the ESP32
+
+| Message | Effect |
+|---|---|
+| `C1` | Select colour channel 1 |
+| `C2` | Select colour channel 2 |
+| `C3` | Select colour channel 3 |
+| `DOWN` | Release all three channels |
+
+### Messages Sent by the ESP32
+
+| Message | Meaning |
+|---|---|
+| `READY` | Initialization completed |
+| `NEXT` | Valid microswitch press detected |
+| `OK:C1`, `OK:C2`, `OK:C3` | Requested servo position applied |
+| `OK:DOWN` | All servos set to inactive position |
+| `ERR:...` | Invalid serial command received |
+
+## Arduino Project Organization
+
+Arduino compiles all `.ino` files located in one sketch directory. The active firmware must therefore be kept in its own folder:
+
+```text
+servo/
+└── servo_switch_usb/
+    └── servo_switch_usb.ino
+```
+
+Do not keep a previous complete sketch in the same folder, otherwise duplicated definitions of `setup()`, `loop()` and servo objects will prevent compilation.
+
+## Related Pages
+
+- [Control System Overview](control-system.qmd)
+- [3D-Printed Servo Arms](servo-arms.qmd)
+- [Wiring and Power Supply](wiring-power.qmd)
+- [Stepper Motor — Planned Development](stepper-motor.qmd)

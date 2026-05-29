@@ -1,0 +1,67 @@
+---
+title: "Pattern Editor"
+---
+
+# Pattern Editor
+
+## Purpose
+
+The Pattern Editor is the user-side tool used to create the textile pattern before running the machine. The user draws a three-colour image and exports it as a `.png` file, which is then transferred to the Raspberry Pi through a USB flash drive.
+
+## Workflow
+
+```text
+Open the Pattern Editor
+        ↓
+Draw the desired three-colour pattern
+        ↓
+Export the image as a PNG file
+        ↓
+Copy the PNG file to the USB flash drive
+        ↓
+Select the file from the machine display
+```
+
+## Pattern Constraints
+
+The current control software accepts patterns with the following properties:
+
+| Parameter | Requirement |
+|---|---|
+| File format | `.png` |
+| Image width | Exactly 48 pixels |
+| Number of colours | Exactly 3 distinct RGB colours |
+| USB storage location | Files stored directly in the root folder of the USB drive |
+
+The image height is not fixed: it determines the length of the produced pattern.
+
+## Automatic Colour Association
+
+When a pattern is started, the Raspberry Pi reads the image pixels in sequence and associates the three colours to the three servo-controlled yarn channels in order of first occurrence:
+
+| Colour order in the PNG | Command sent to ESP32 | Yarn actuator |
+|---|---|---|
+| First distinct colour found | `C1` | Servo 1 |
+| Second distinct colour found | `C2` | Servo 2 |
+| Third distinct colour found | `C3` | Servo 3 |
+
+Before starting production, the user must place the real yarns according to the colour-to-servo mapping shown in the Raspberry Pi terminal.
+
+## Transfer to the Machine
+
+Store the exported PNG files directly on the USB flash drive:
+
+```text
+USB_DRIVE/
+├── pattern_01.png
+├── pattern_02.png
+└── pattern_03.png
+```
+
+The machine interface will list these files on the GFX HAT display.
+
+## Related Pages
+
+- [Operating the Machine](operating-machine.qmd)
+- [Display Interface — GFX HAT](display-interface.qmd)
+- [Control System Overview](control-system.qmd)

@@ -1,0 +1,4 @@
+QMD package generated.
+Pages included: 20
+QMD links checked: OK - no missing local .qmd targets
+Error-results content: preserved with threshold, test set, per-colour analysis, OOD case and runtime discussion.

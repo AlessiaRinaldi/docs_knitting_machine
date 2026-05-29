@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>error-results</title>
+<title>Results and Efficiency – Automated Knitting Machine</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -111,6 +111,9 @@ window.Quarto = {
       <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
     </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Automated Knitting Machine</span>
+    </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -123,6 +126,75 @@ window.Quarto = {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-user-guide" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">User Guide</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-user-guide">    
+        <li>
+    <a class="dropdown-item" href="./pattern-editor.html">
+ <span class="dropdown-text">Pattern Editor</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./operating-machine.html">
+ <span class="dropdown-text">Operating the Machine</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-control-system" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Control System</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-control-system">    
+        <li>
+    <a class="dropdown-item" href="./control-system.html">
+ <span class="dropdown-text">System Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./display-interface.html">
+ <span class="dropdown-text">Display Interface — GFX HAT</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./raspberry-control.html">
+ <span class="dropdown-text">Raspberry Pi Application</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./esp32-actuation.html">
+ <span class="dropdown-text">ESP32 and Actuation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./stepper-motor.html">
+ <span class="dropdown-text">Stepper Motor — Planned Development</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./wiring-power.html">
+ <span class="dropdown-text">Wiring and Power Supply</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./troubleshooting.html">
+ <span class="dropdown-text">Troubleshooting</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-mechanical-design" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Mechanical Design</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-mechanical-design">    
+        <li>
+    <a class="dropdown-item" href="./components.html">
+ <span class="dropdown-text">Components Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./servo-arms.html">
+ <span class="dropdown-text">3D-Printed Servo Arms</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./error-mount.html">
+ <span class="dropdown-text">3D Camera Mount</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-error-recognition" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Error Recognition</span>
     </a>
@@ -133,7 +205,7 @@ window.Quarto = {
   </li>  
         <li>
     <a class="dropdown-item" href="./error-camera.html">
- <span class="dropdown-text">Selection of the Acquisition System for Error Detection</span></a>
+ <span class="dropdown-text">Acquisition System</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./error-mount.html">
@@ -141,11 +213,11 @@ window.Quarto = {
   </li>  
         <li>
     <a class="dropdown-item" href="./error-code.html">
- <span class="dropdown-text">Error Recognition — Code</span></a>
+ <span class="dropdown-text">Algorithm and Code</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./error-results.html">
- <span class="dropdown-text">Results &amp; Efficiency</span></a>
+ <span class="dropdown-text">Results and Efficiency</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./error-future_work.html">
@@ -154,12 +226,8 @@ window.Quarto = {
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./components.html"> 
-<span class="menu-text">Components</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./control-system.html"> 
-<span class="menu-text">Control System</span></a>
+    <a class="nav-link" href="./future-developments.html"> 
+<span class="menu-text">Future Developments</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -180,36 +248,49 @@ window.Quarto = {
   <li><a href="#experimental-evaluation-and-results" id="toc-experimental-evaluation-and-results" class="nav-link active" data-scroll-target="#experimental-evaluation-and-results">Experimental Evaluation and Results</a>
   <ul>
   <li><a href="#experimental-protocol" id="toc-experimental-protocol" class="nav-link" data-scroll-target="#experimental-protocol">Experimental Protocol</a></li>
-  <li><a href="#threshold-selection-with-validation-set" id="toc-threshold-selection-with-validation-set" class="nav-link" data-scroll-target="#threshold-selection-with-validation-set">Threshold Selection with Validation Set</a></li>
+  <li><a href="#dataset-split" id="toc-dataset-split" class="nav-link" data-scroll-target="#dataset-split">Dataset Split</a></li>
+  <li><a href="#threshold-selection-with-the-validation-set" id="toc-threshold-selection-with-the-validation-set" class="nav-link" data-scroll-target="#threshold-selection-with-the-validation-set">Threshold Selection with the Validation Set</a></li>
   <li><a href="#test-set-performance" id="toc-test-set-performance" class="nav-link" data-scroll-target="#test-set-performance">Test-Set Performance</a></li>
-  <li><a href="#per-color-performance-analysis" id="toc-per-color-performance-analysis" class="nav-link" data-scroll-target="#per-color-performance-analysis">Per-Color Performance Analysis</a>
+  <li><a href="#per-colour-performance-analysis" id="toc-per-colour-performance-analysis" class="nav-link" data-scroll-target="#per-colour-performance-analysis">Per-Colour Performance Analysis</a>
   <ul class="collapse">
-  <li><a href="#fuchsia-373-images" id="toc-fuchsia-373-images" class="nav-link" data-scroll-target="#fuchsia-373-images">Fuchsia (373 images)</a></li>
-  <li><a href="#purple-238-images" id="toc-purple-238-images" class="nav-link" data-scroll-target="#purple-238-images">Purple (238 images)</a></li>
-  <li><a href="#light-blue-160-images" id="toc-light-blue-160-images" class="nav-link" data-scroll-target="#light-blue-160-images">Light Blue (160 images)</a></li>
+  <li><a href="#fuchsia-yarn-373-images" id="toc-fuchsia-yarn-373-images" class="nav-link" data-scroll-target="#fuchsia-yarn-373-images">Fuchsia Yarn — 373 images</a></li>
+  <li><a href="#purple-yarn-238-images" id="toc-purple-yarn-238-images" class="nav-link" data-scroll-target="#purple-yarn-238-images">Purple Yarn — 238 images</a></li>
+  <li><a href="#light-blue-yarn-160-images" id="toc-light-blue-yarn-160-images" class="nav-link" data-scroll-target="#light-blue-yarn-160-images">Light Blue Yarn — 160 images</a></li>
   </ul></li>
-  <li><a href="#out-of-distribution-failure-case-pale-pink-yarn" id="toc-out-of-distribution-failure-case-pale-pink-yarn" class="nav-link" data-scroll-target="#out-of-distribution-failure-case-pale-pink-yarn">Out-of-Distribution Failure Case (Pale Pink Yarn)</a></li>
+  <li><a href="#out-of-distribution-failure-case" id="toc-out-of-distribution-failure-case" class="nav-link" data-scroll-target="#out-of-distribution-failure-case">Out-of-Distribution Failure Case</a></li>
   <li><a href="#real-time-operation-on-raspberry-pi-3" id="toc-real-time-operation-on-raspberry-pi-3" class="nav-link" data-scroll-target="#real-time-operation-on-raspberry-pi-3">Real-Time Operation on Raspberry Pi 3</a></li>
+  <li><a href="#related-pages" id="toc-related-pages" class="nav-link" data-scroll-target="#related-pages">Related Pages</a></li>
   </ul></li>
-  <li><a href="#conclusions-and-future-works" id="toc-conclusions-and-future-works" class="nav-link" data-scroll-target="#conclusions-and-future-works">- <strong>Conclusions and Future Works</strong></a></li>
-  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">- <strong>Overview</strong></a></li>
-  <li><a href="#selection-of-the-acquisition-system-for-error-detection" id="toc-selection-of-the-acquisition-system-for-error-detection" class="nav-link" data-scroll-target="#selection-of-the-acquisition-system-for-error-detection">- <strong>Selection of the Acquisition System for Error Detection</strong></a></li>
-  <li><a href="#d-camera-mount" id="toc-d-camera-mount" class="nav-link" data-scroll-target="#d-camera-mount">- <strong>3D Camera Mount</strong></a></li>
-  <li><a href="#error-recognition-code" id="toc-error-recognition-code" class="nav-link" data-scroll-target="#error-recognition-code">- <strong>Error Recognition — Code</strong></a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Results and Efficiency</h1>
+</div>
 
 
 
+<div class="quarto-title-meta column-page-left">
 
-<section id="experimental-evaluation-and-results" class="level2">
-<h2 class="anchored" data-anchor-id="experimental-evaluation-and-results">Experimental Evaluation and Results</h2>
-<section id="experimental-protocol" class="level3">
-<h3 class="anchored" data-anchor-id="experimental-protocol">Experimental Protocol</h3>
-<p>The performance of the proposed LLR-based detector was evaluated within the binary hypothesis-testing framework commonly adopted in supervised signal detection:</p>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="experimental-evaluation-and-results" class="level1">
+<h1>Experimental Evaluation and Results</h1>
+<section id="experimental-protocol" class="level2">
+<h2 class="anchored" data-anchor-id="experimental-protocol">Experimental Protocol</h2>
+<p>The performance of the proposed LLR-based detector was evaluated within the binary hypothesis-testing framework:</p>
 <p><span class="math display">\[
 H_0: \text{“U-shape” of the yarn}, \qquad
 H_1: \text{hole or missing yarn}.
@@ -218,199 +299,213 @@ H_1: \text{hole or missing yarn}.
 <p><span class="math display">\[
 LLR = s_{\text{pos}} - s_{\text{neg}},
 \]</span></p>
-<p>and compares it to a fixed threshold to decide between (H_0) and (H_1). This setting is equivalent to a classical detector with probabilities of detection and false alarm (P_D) and (P_F), as described in supervised signal detection and ROC analysis.</p>
-<p>To obtain an unbiased estimate of performance, the dataset was randomly partitioned into three non-overlapping subsets:</p>
-<ul>
-<li><strong>Training set</strong>: used exclusively to build the positive and negative prototypes and the discriminative ROI mask.<br>
-It consists of 39 positive images and 27 negative images, balanced across the three yarn colors.</li>
-<li><strong>Validation set</strong>: 208 images, used only for threshold selection and operating-point tuning.</li>
-<li><strong>Test set</strong>: 771 images, used only for the final performance evaluation.</li>
-</ul>
-<hr>
+<p>and compares it to a fixed threshold to decide between (H_0) and (H_1).</p>
 </section>
-<section id="threshold-selection-with-validation-set" class="level3">
-<h3 class="anchored" data-anchor-id="threshold-selection-with-validation-set">Threshold Selection with Validation Set</h3>
-<p>During validation, the classifier was evaluated using (LLR = 0).<br>
-With this configuration, at least one false alarm occurred, which is unacceptable in the real operating scenario: actual defects are extremely rare, and even a single false alarm would trigger an unnecessary machine stop.</p>
-<p>Following a <strong>Neyman–Pearson design criterion</strong>, the decision threshold was adjusted to obtain a false-alarm rate as close as possible to zero on the validation set, even at the expense of increased false negatives.<br>
-This led to the selection of</p>
-<p><span class="math display">\[
-LLR_{\text{thr}} = -0.035,
-\]</span></p>
-<p>which was kept fixed for the final evaluation on the independent test set.</p>
-<hr>
-</section>
-<section id="test-set-performance" class="level3">
-<h3 class="anchored" data-anchor-id="test-set-performance">Test-Set Performance</h3>
-<p>Once the threshold was fixed, the detector was evaluated on the independent test set of 771 images.</p>
+<section id="dataset-split" class="level2">
+<h2 class="anchored" data-anchor-id="dataset-split">Dataset Split</h2>
+<p>To obtain an unbiased performance estimate, the dataset was divided into three non-overlapping subsets:</p>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
 <thead>
 <tr class="header">
-<th></th>
-<th>Predicted (H_0)</th>
-<th>Predicted (H_1)</th>
+<th>Subset</th>
+<th>Use</th>
+<th>Composition</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>True (H_0)</strong> (no defect)</td>
-<td>TN = 633</td>
-<td>FP = 0</td>
+<td>Training set</td>
+<td>Positive/negative prototypes and discriminative ROI mask</td>
+<td>39 positive and 27 negative images</td>
 </tr>
 <tr class="even">
-<td><strong>True (H_1)</strong> (defect)</td>
-<td>FN = 20</td>
-<td>TP = 118</td>
+<td>Validation set</td>
+<td>Threshold selection and operating-point tuning</td>
+<td>208 images</td>
+</tr>
+<tr class="odd">
+<td>Test set</td>
+<td>Final independent evaluation</td>
+<td>771 images</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Table.</strong> Confusion matrix on the test set (771 images).</p>
+</section>
+<section id="threshold-selection-with-the-validation-set" class="level2">
+<h2 class="anchored" data-anchor-id="threshold-selection-with-the-validation-set">Threshold Selection with the Validation Set</h2>
+<p>With the initial threshold (LLR = 0), at least one false alarm occurred. Since a false alarm would unnecessarily stop the real machine, the threshold was adjusted following a Neyman–Pearson criterion, prioritizing a false-alarm rate as close as possible to zero.</p>
+<p>The selected threshold was:</p>
+<p><span class="math display">\[
+LLR_{\text{thr}} = -0.035
+\]</span></p>
+<p>This threshold was then kept fixed during the final independent test.</p>
+</section>
+<section id="test-set-performance" class="level2">
+<h2 class="anchored" data-anchor-id="test-set-performance">Test-Set Performance</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: right;">Predicted (H_0)</th>
+<th style="text-align: right;">Predicted (H_1)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>True (H_0)</strong> — no defect</td>
+<td style="text-align: right;">TN = 633</td>
+<td style="text-align: right;">FP = 0</td>
+</tr>
+<tr class="even">
+<td><strong>True (H_1)</strong> — defect</td>
+<td style="text-align: right;">FN = 20</td>
+<td style="text-align: right;">TP = 118</td>
+</tr>
+</tbody>
+</table>
 <p>From these values:</p>
 <p><span class="math display">\[
-\begin{aligned}
-\text{Accuracy} &amp;= \frac{TP + TN}{TP + TN + FP + FN}
-= \frac{751}{771} \approx 97.4\%, \\
-P_D &amp;= \frac{TP}{TP + FN}
-= \frac{118}{138} \approx 85.5\%, \\
-P_F &amp;= \frac{FP}{FP + TN} \approx 0\%, \\
-\text{Specificity} &amp;= \frac{TN}{TN + FP} \approx 100\%.
-\end{aligned}
+\text{Accuracy} =
+\frac{TP + TN}{TP + TN + FP + FN}
+= \frac{751}{771}
+\approx 97.4\%
 \]</span></p>
-<p>Thus, the operating point enforces (P_F ) and accepts a moderate increase in missed detections</p>
-<p>(P_M = 1 - P_D), consistent with a minimum-risk design in which unnecessary machine stops are far more costly than occasional missed defects.</p>
-<hr>
+<p><span class="math display">\[
+P_D =
+\frac{TP}{TP + FN}
+= \frac{118}{138}
+\approx 85.5\%
+\]</span></p>
+<p><span class="math display">\[
+P_F =
+\frac{FP}{FP + TN}
+\approx 0\%, \qquad
+\text{Specificity} \approx 100\%
+\]</span></p>
+<p>The selected operating point therefore minimizes unnecessary stops while accepting a moderate number of missed detections.</p>
 </section>
-<section id="per-color-performance-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="per-color-performance-analysis">Per-Color Performance Analysis</h3>
-<p>Performance was further analyzed by grouping test images by yarn color.</p>
-<section id="fuchsia-373-images" class="level4">
-<h4 class="anchored" data-anchor-id="fuchsia-373-images">Fuchsia (373 images)</h4>
+<section id="per-colour-performance-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="per-colour-performance-analysis">Per-Colour Performance Analysis</h2>
+<section id="fuchsia-yarn-373-images" class="level3">
+<h3 class="anchored" data-anchor-id="fuchsia-yarn-373-images">Fuchsia Yarn — 373 images</h3>
 <table class="caption-top table">
 <thead>
 <tr class="header">
 <th></th>
-<th>Predicted (H_0)</th>
-<th>Predicted (H_1)</th>
+<th style="text-align: right;">Predicted (H_0)</th>
+<th style="text-align: right;">Predicted (H_1)</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>True (H_0)</td>
-<td>TN = 322</td>
-<td>FP = 0</td>
+<td style="text-align: right;">TN = 322</td>
+<td style="text-align: right;">FP = 0</td>
 </tr>
 <tr class="even">
 <td>True (H_1)</td>
-<td>FN = 3</td>
-<td>TP = 48</td>
+<td style="text-align: right;">FN = 3</td>
+<td style="text-align: right;">TP = 48</td>
 </tr>
 </tbody>
 </table>
 <p><span class="math display">\[
-\mathrm{ACC} \approx 99.2\%, \quad
-\mathrm{TPR} \approx 94.1\%, \quad
-\mathrm{FPR} \approx 0\%.
+\mathrm{ACC} \approx 99.2\%, \qquad
+\mathrm{TPR} \approx 94.1\%, \qquad
+\mathrm{FPR} \approx 0\%
 \]</span></p>
 </section>
-<section id="purple-238-images" class="level4">
-<h4 class="anchored" data-anchor-id="purple-238-images">Purple (238 images)</h4>
+<section id="purple-yarn-238-images" class="level3">
+<h3 class="anchored" data-anchor-id="purple-yarn-238-images">Purple Yarn — 238 images</h3>
 <table class="caption-top table">
 <thead>
 <tr class="header">
 <th></th>
-<th>Predicted (H_0)</th>
-<th>Predicted (H_1)</th>
+<th style="text-align: right;">Predicted (H_0)</th>
+<th style="text-align: right;">Predicted (H_1)</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>True (H_0)</td>
-<td>TN = 193</td>
-<td>FP = 0</td>
+<td style="text-align: right;">TN = 193</td>
+<td style="text-align: right;">FP = 0</td>
 </tr>
 <tr class="even">
 <td>True (H_1)</td>
-<td>FN = 8</td>
-<td>TP = 37</td>
+<td style="text-align: right;">FN = 8</td>
+<td style="text-align: right;">TP = 37</td>
 </tr>
 </tbody>
 </table>
 <p><span class="math display">\[
-\mathrm{ACC} \approx 96.6\%, \quad
-\mathrm{TPR} \approx 82.2\%, \quad
-\mathrm{FPR} \approx 0\%.
+\mathrm{ACC} \approx 96.6\%, \qquad
+\mathrm{TPR} \approx 82.2\%, \qquad
+\mathrm{FPR} \approx 0\%
 \]</span></p>
 </section>
-<section id="light-blue-160-images" class="level4">
-<h4 class="anchored" data-anchor-id="light-blue-160-images">Light Blue (160 images)</h4>
+<section id="light-blue-yarn-160-images" class="level3">
+<h3 class="anchored" data-anchor-id="light-blue-yarn-160-images">Light Blue Yarn — 160 images</h3>
 <table class="caption-top table">
 <thead>
 <tr class="header">
 <th></th>
-<th>Predicted (H_0)</th>
-<th>Predicted (H_1)</th>
+<th style="text-align: right;">Predicted (H_0)</th>
+<th style="text-align: right;">Predicted (H_1)</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>True (H_0)</td>
-<td>TN = 118</td>
-<td>FP = 0</td>
+<td style="text-align: right;">TN = 118</td>
+<td style="text-align: right;">FP = 0</td>
 </tr>
 <tr class="even">
 <td>True (H_1)</td>
-<td>FN = 9</td>
-<td>TP = 33</td>
+<td style="text-align: right;">FN = 9</td>
+<td style="text-align: right;">TP = 33</td>
 </tr>
 </tbody>
 </table>
 <p><span class="math display">\[
-\mathrm{ACC} \approx 94.4\%, \quad
-\mathrm{TPR} \approx 78.6\%, \quad
-\mathrm{FPR} \approx 0\%.
+\mathrm{ACC} \approx 94.4\%, \qquad
+\mathrm{TPR} \approx 78.6\%, \qquad
+\mathrm{FPR} \approx 0\%
 \]</span></p>
-<p>Interestingly, the best performance is obtained for the <strong>fuchsia</strong> yarn, despite its visual similarity to the pink background. Conversely, the <strong>light blue</strong> yarn yields the lowest detection probability, as it is closest to the background in grayscale and generates less contrast within the ROI.</p>
-<p>This behavior reflects the fact that separability depends not on raw color contrast, but on the stability of local texture and intensity patterns after preprocessing.</p>
-<hr>
+<p>The best performance is obtained for the fuchsia yarn. The light blue yarn has the lowest detection probability, since its grayscale appearance is closer to the background and it creates less contrast in the region of interest.</p>
 </section>
 </section>
-<section id="out-of-distribution-failure-case-pale-pink-yarn" class="level3">
-<h3 class="anchored" data-anchor-id="out-of-distribution-failure-case-pale-pink-yarn">Out-of-Distribution Failure Case (Pale Pink Yarn)</h3>
-<p>The pale pink yarn was not included in training, validation, or test sets, as it does not belong to normal operating conditions. In this edge case, more than <strong>32%</strong> of samples were misclassified, and the LLR distributions of (H_0) and (H_1) overlap almost completely.</p>
-<p>This confirms that extreme low-contrast conditions lie outside the operational domain of the method and motivates future extensions based on learned or contrast-invariant features.</p>
-<hr>
+<section id="out-of-distribution-failure-case" class="level2">
+<h2 class="anchored" data-anchor-id="out-of-distribution-failure-case">Out-of-Distribution Failure Case</h2>
+<p>A pale pink yarn was considered as an out-of-distribution case, since it was not included in training, validation or test sets. In this condition, more than 32% of samples were misclassified and the (H_0) and (H_1) LLR distributions overlapped substantially.</p>
+<p>This result indicates that extremely low-contrast yarn/background combinations lie outside the current operating domain and require more robust or learned features.</p>
 </section>
-<section id="real-time-operation-on-raspberry-pi-3" class="level3">
-<h3 class="anchored" data-anchor-id="real-time-operation-on-raspberry-pi-3">Real-Time Operation on Raspberry Pi 3</h3>
-<p>The complete acquisition and detection pipeline runs directly on the <strong>Raspberry Pi 3</strong> and is triggered by the microswitch. The microswitch is activated approximately every (0.42,), corresponding to an inspection rate of</p>
+<section id="real-time-operation-on-raspberry-pi-3" class="level2">
+<h2 class="anchored" data-anchor-id="real-time-operation-on-raspberry-pi-3">Real-Time Operation on Raspberry Pi 3</h2>
+<p>The complete acquisition and detection pipeline runs directly on the Raspberry Pi 3 and is triggered by the synchronization event. During the error-recognition experiments, the event interval was approximately (0.42,), corresponding to an inspection rate of:</p>
 <p><span class="math display">\[
-f_{\text{inspect}} \approx 2.4 \ \text{inspections/s}.
+f_{\text{inspect}} \approx 2.4 \ \text{inspections/s}
 \]</span></p>
-<p>At each trigger, a full-resolution image is captured (1280×960 px), cropped to a (76 ) ROI, and processed through preprocessing, NCC computation, and LLR evaluation.</p>
-<p>The total processing time per trigger is well below the inter-trigger interval, and no triggers were missed during testing. The effective inspection rate is therefore limited by the machine mechanics rather than by computation.</p>
-<p>The available computational margin enables <strong>multi-sample decision fusion</strong> strategies (e.g., majority voting or LLR averaging), which could reduce missed detections while maintaining the strict constraint (P_F ).</p>
-<hr>
+<p>At each trigger, a full-resolution image is captured, cropped to a (76 ) region of interest and processed through preprocessing, normalized cross-correlation scoring and LLR evaluation.</p>
+<p>The processing time remains below the interval between consecutive synchronization events. The available computational margin also enables future multi-frame decision fusion strategies, such as majority voting or LLR averaging.</p>
 </section>
-</section>
-<section id="conclusions-and-future-works" class="level2">
-<h2 class="anchored" data-anchor-id="conclusions-and-future-works">- <strong><a href="./error-future_work.html">Conclusions and Future Works</a></strong></h2>
-</section>
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">- <strong><a href="./error-recognition.html">Overview</a></strong></h2>
-</section>
-<section id="selection-of-the-acquisition-system-for-error-detection" class="level2">
-<h2 class="anchored" data-anchor-id="selection-of-the-acquisition-system-for-error-detection">- <strong><a href="./error-camera.html">Selection of the Acquisition System for Error Detection</a></strong></h2>
-<p>Requirements, sensor &amp; lens selection, lighting, sync, and mounting constraints.</p>
-</section>
-<section id="d-camera-mount" class="level2">
-<h2 class="anchored" data-anchor-id="d-camera-mount">- <strong><a href="./error-mount.html">3D Camera Mount</a></strong></h2>
-<p>Mechanical support, 3D printing, working distance, and CAD notes.</p>
-</section>
-<section id="error-recognition-code" class="level2">
-<h2 class="anchored" data-anchor-id="error-recognition-code">- <strong><a href="./error-code.html">Error Recognition — Code</a></strong></h2>
-<p>Algorithms, model/code structure, data flow, and deployment notes.</p>
+<section id="related-pages" class="level2">
+<h2 class="anchored" data-anchor-id="related-pages">Related Pages</h2>
+<ul>
+<li><a href="./error-recognition.html">Error Recognition Overview</a></li>
+<li><a href="./error-camera.html">Selection of the Acquisition System</a></li>
+<li><a href="./error-mount.html">3D Camera Mount</a></li>
+<li><a href="./error-code.html">Algorithm and Code</a></li>
+<li><a href="./error-future_work.html">Conclusions and Future Works</a></li>
+</ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -487,7 +582,7 @@ f_{\text{inspect}} \approx 2.4 \ \text{inspections/s}.
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/AlessiaRinaldi\.github\.io\/docs_knitting_machine\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

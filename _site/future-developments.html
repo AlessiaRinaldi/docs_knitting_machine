@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>error-mount</title>
+<title>Future Developments</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -194,7 +194,7 @@ ul.task-list li input[type="checkbox"] {
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./future-developments.html"> 
+    <a class="nav-link active" href="./future-developments.html" aria-current="page"> 
 <span class="menu-text">Future Developments</span></a>
   </li>  
 </ul>
@@ -213,78 +213,119 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#sec:camera_mount" id="toc-sec:camera_mount" class="nav-link active" data-scroll-target="#sec\:camera_mount">Mechanical Design of the Camera Mount</a>
+  <li><a href="#future-developments" id="toc-future-developments" class="nav-link active" data-scroll-target="#future-developments">Future Developments</a>
   <ul>
-  <li><a href="#custom-3d-printed-camera-holder" id="toc-custom-3d-printed-camera-holder" class="nav-link" data-scroll-target="#custom-3d-printed-camera-holder">Custom 3D-Printed Camera Holder</a></li>
-  <li><a href="#stability-considerations-and-limitations" id="toc-stability-considerations-and-limitations" class="nav-link" data-scroll-target="#stability-considerations-and-limitations">Stability Considerations and Limitations</a></li>
+  <li><a href="#implemented-prototype-functions" id="toc-implemented-prototype-functions" class="nav-link" data-scroll-target="#implemented-prototype-functions">Implemented Prototype Functions</a></li>
+  <li><a href="#next-integration-steps" id="toc-next-integration-steps" class="nav-link" data-scroll-target="#next-integration-steps">Next Integration Steps</a></li>
+  <li><a href="#target-closed-loop-architecture" id="toc-target-closed-loop-architecture" class="nav-link" data-scroll-target="#target-closed-loop-architecture">Target Closed-Loop Architecture</a></li>
+  <li><a href="#related-pages" id="toc-related-pages" class="nav-link" data-scroll-target="#related-pages">Related Pages</a></li>
   </ul></li>
-  <li><a href="#error-recognition-code" id="toc-error-recognition-code" class="nav-link" data-scroll-target="#error-recognition-code">- <strong>Error Recognition — Code</strong></a></li>
-  <li><a href="#results-efficiency" id="toc-results-efficiency" class="nav-link" data-scroll-target="#results-efficiency">- <strong>Results &amp; Efficiency</strong></a></li>
-  <li><a href="#conclusions-and-future-works" id="toc-conclusions-and-future-works" class="nav-link" data-scroll-target="#conclusions-and-future-works">- <strong>Conclusions and Future Works</strong></a></li>
-  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">- <strong>Overview</strong></a></li>
-  <li><a href="#selection-of-the-acquisition-system-for-error-detection" id="toc-selection-of-the-acquisition-system-for-error-detection" class="nav-link" data-scroll-target="#selection-of-the-acquisition-system-for-error-detection">- <strong>Selection of the Acquisition System for Error Detection</strong></a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content column-page-left" id="quarto-document-content">
 
-
-
-
-<section id="sec:camera_mount" class="level2">
-<h2 class="anchored" data-anchor-id="sec:camera_mount">Mechanical Design of the Camera Mount</h2>
-<p>The camera mounting solution combines a commercially available __magnetic-base stand_ with a <strong>custom 3D-printed support</strong> designed specifically for the Raspberry Pi Camera module.<br>
-The magnetic base provides a <strong>rigid</strong> and <strong>highly stable foundation</strong>, while allowing fine manual adjustment in height, angle, and lateral position through its articulated arm.</p>
-<section id="custom-3d-printed-camera-holder" class="level3">
-<h3 class="anchored" data-anchor-id="custom-3d-printed-camera-holder">Custom 3D-Printed Camera Holder</h3>
-<p>A custom holder for the Raspberry Pi Camera v2.1 was designed in <strong>Autodesk Fusion 360</strong> and fabricated using fused deposition modeling (FDM) with <strong>PLA filament</strong> on a <strong>Bambu Lab A1 Mini 3D printer</strong>.<br>
-The printed part encloses the camera PCB and incorporates a series of mounting holes and a pin that fits into the threaded end of the magnetic base arm.</p>
-</section>
-<section id="stability-considerations-and-limitations" class="level3">
-<h3 class="anchored" data-anchor-id="stability-considerations-and-limitations">Stability Considerations and Limitations</h3>
-<p>While the magnetic stand and the 3D-printed camera holder provide sufficient <strong>stability</strong> for prototyping, the overall <strong>stiffness</strong> of the structure is <strong>not optimal yet</strong>.<br>
-Small shifts caused by machine <strong>vibration</strong> or accidental contact can slightly <strong>alter the camera pose</strong> over time, affecting the exact position of the <strong>region of interest</strong> in the image.<br>
-Improving the mechanical stability of the mounting solution is therefore an <strong>important direction</strong> for future work, with the goal of achieving <strong>fully repeatable alignment</strong> over long acquisition periods.</p>
-<p>A <strong>CAD rendering</strong> of the printed holder is shown in Figure.</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div id="fig:front" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="images/3d_front.png" class="img-fluid figure-img"></p>
-<figcaption>Front of the 3D structure</figcaption>
-</figure>
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Future Developments</h1>
 </div>
-</div><div class="column" style="width:50%;">
-<div id="fig:back" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="images/3d_back.png" class="img-fluid figure-img"></p>
-<figcaption>Back of the 3D structure</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="error-recognition-code" class="level2">
-<h2 class="anchored" data-anchor-id="error-recognition-code">- <strong><a href="./error-code.html">Error Recognition — Code</a></strong></h2>
-<p>Algorithms, model/code structure, data flow, and deployment notes.</p>
-</section>
-<section id="results-efficiency" class="level2">
-<h2 class="anchored" data-anchor-id="results-efficiency">- <strong><a href="./error-results.html">Results &amp; Efficiency</a></strong></h2>
-<p>Datasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget.</p>
-</section>
-<section id="conclusions-and-future-works" class="level2">
-<h2 class="anchored" data-anchor-id="conclusions-and-future-works">- <strong><a href="./error-future_work.html">Conclusions and Future Works</a></strong></h2>
-</section>
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">- <strong><a href="./error-recognition.html">Overview</a></strong></h2>
-</section>
-<section id="selection-of-the-acquisition-system-for-error-detection" class="level2">
-<h2 class="anchored" data-anchor-id="selection-of-the-acquisition-system-for-error-detection">- <strong><a href="./error-camera.html">Selection of the Acquisition System for Error Detection</a></strong></h2>
-<p>Requirements, sensor &amp; lens selection, lighting, sync, and mounting constraints.</p>
 
 
+
+<div class="quarto-title-meta column-page-left">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="future-developments" class="level1">
+<h1>Future Developments</h1>
+<section id="implemented-prototype-functions" class="level2">
+<h2 class="anchored" data-anchor-id="implemented-prototype-functions">Implemented Prototype Functions</h2>
+<p>The current development stage includes:</p>
+<ul>
+<li>creation and export of three-colour PNG patterns;</li>
+<li>embedded file selection through the GFX HAT display;</li>
+<li>PNG validation and colour-to-servo mapping on the Raspberry Pi;</li>
+<li>USB serial communication between Raspberry Pi and ESP32;</li>
+<li>direct control of three yarn-selection servomotors;</li>
+<li>microswitch-based pattern advancement;</li>
+<li>custom 3D-designed servo arms;</li>
+<li>a separately evaluated error-recognition pipeline.</li>
+</ul>
+</section>
+<section id="next-integration-steps" class="level2">
+<h2 class="anchored" data-anchor-id="next-integration-steps">Next Integration Steps</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Development</th>
+<th>Objective</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Connect <code>notify_error()</code> to the real workflow</td>
+<td>Pause the actuation when the vision detector identifies a defect</td>
+</tr>
+<tr class="even">
+<td>Integrate main stepper motor control</td>
+<td>Automate the complete machine motion</td>
+</tr>
+<tr class="odd">
+<td>Add alarm-safe stop/resume commands</td>
+<td>Coordinate servo and motor movement after an error</td>
+</tr>
+<tr class="even">
+<td>Complete servo-arm calibration</td>
+<td>Define validated <code>UP</code> and <code>DOWN</code> angles after final assembly</td>
+</tr>
+<tr class="odd">
+<td>Publish CAD/STL files and photographs</td>
+<td>Document mechanical reproducibility</td>
+</tr>
+<tr class="even">
+<td>Automatic program launch</td>
+<td>Start the interface automatically when the Raspberry Pi boots</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="target-closed-loop-architecture" class="level2">
+<h2 class="anchored" data-anchor-id="target-closed-loop-architecture">Target Closed-Loop Architecture</h2>
+<pre class="text"><code>PNG Pattern Selection
+        ↓
+Raspberry Pi Control Application
+        ↓
+ESP32 Actuation ── Servo and future Stepper Motion
+        ↓
+Hook-Level Camera Inspection
+        ↓
+Error Detection on Raspberry Pi
+        ↓
+Automatic Pause / Operator Feedback</code></pre>
+</section>
+<section id="related-pages" class="level2">
+<h2 class="anchored" data-anchor-id="related-pages">Related Pages</h2>
+<ul>
+<li><a href="./control-system.html">Control System Overview</a></li>
+<li><a href="./stepper-motor.html">Stepper Motor — Planned Development</a></li>
+<li><a href="./error-future_work.html">Error Recognition Conclusions</a></li>
+</ul>
+
+
+</section>
 </section>
 
 </main> <!-- /main -->

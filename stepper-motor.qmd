@@ -1,0 +1,43 @@
+---
+title: "Stepper Motor Control — Planned Development"
+---
+
+# Stepper Motor Control — Planned Development
+
+## Current Status
+
+The tested firmware currently controls:
+
+- the three colour-selection servomotors;
+- the synchronization microswitch;
+- USB serial communication with the Raspberry Pi.
+
+A main stepper motor for driving the knitting-machine motion is not yet part of the integrated tested firmware.
+
+## Planned Role
+
+The stepper subsystem is expected to:
+
+- rotate or advance the knitting mechanism;
+- support start, pause and safe stop commands;
+- remain synchronized with the colour-selection commands;
+- allow the error-recognition subsystem to stop the process when a defect is detected.
+
+## Planned Protocol Extension
+
+Possible additional serial commands are:
+
+| Command | Intended function |
+|---|---|
+| `START_MOTOR` | Start the main motion |
+| `STOP_MOTOR` | Stop safely after an alarm or operator request |
+| `RESUME_MOTOR` | Resume the process |
+| `HOME` | Move the mechanism to a reference state, if required |
+
+These commands are not yet implemented and must be validated after the motor driver and electrical architecture are finalized.
+
+## Related Pages
+
+- [ESP32 and Actuation](esp32-actuation.qmd)
+- [Wiring and Power Supply](wiring-power.qmd)
+- [Future Developments](future-developments.qmd)

@@ -1,0 +1,1682 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Display Interface and Three-Colour Servo Control – Automated Knitting Machine</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-a0f77ee65cf97054da44f32686a70b00.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Automated Knitting Machine</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-user-guide" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">User Guide</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-user-guide">    
+        <li>
+    <a class="dropdown-item" href="./pattern-editor.html">
+ <span class="dropdown-text">Pattern Editor</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./operating-machine.qmd">
+ <span class="dropdown-text">Operating the Machine</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-control-system" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Control System</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-control-system">    
+        <li>
+    <a class="dropdown-item" href="./control-system.html">
+ <span class="dropdown-text">System Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./display-interface.html">
+ <span class="dropdown-text">Raspberry Pi and Display</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./raspberry-control.qmd">
+ <span class="dropdown-text">Integrated Raspberry Pi Application</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./esp32-actuation.qmd">
+ <span class="dropdown-text">ESP32 and Actuation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./wiring-power.qmd">
+ <span class="dropdown-text">Wiring and Power Supply</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./troubleshooting.qmd">
+ <span class="dropdown-text">Troubleshooting</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-mechanical-design" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Mechanical Design</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-mechanical-design">    
+        <li>
+    <a class="dropdown-item" href="./components.html">
+ <span class="dropdown-text">Components Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./servo-arms.qmd">
+ <span class="dropdown-text">3D-Printed Servo Arms</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./error-mount.html">
+ <span class="dropdown-text">3D Camera Mount</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-error-recognition" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Error Recognition</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-error-recognition">    
+        <li>
+    <a class="dropdown-item" href="./error-recognition.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./error-camera.html">
+ <span class="dropdown-text">Selection of the Acquisition System</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./error-code.html">
+ <span class="dropdown-text">Algorithm and Code</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./error-results.html">
+ <span class="dropdown-text">Results &amp; Efficiency</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./error-future_work.html">
+ <span class="dropdown-text">Conclusions and Future Works</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#display-interface-and-three-colour-servo-control" id="toc-display-interface-and-three-colour-servo-control" class="nav-link active" data-scroll-target="#display-interface-and-three-colour-servo-control">Display Interface and Three-Colour Servo Control</a>
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#system-architecture" id="toc-system-architecture" class="nav-link" data-scroll-target="#system-architecture">System Architecture</a></li>
+  <li><a href="#pimoroni-gfx-hat-interface" id="toc-pimoroni-gfx-hat-interface" class="nav-link" data-scroll-target="#pimoroni-gfx-hat-interface">Pimoroni GFX HAT Interface</a>
+  <ul class="collapse">
+  <li><a href="#interface-states" id="toc-interface-states" class="nav-link" data-scroll-target="#interface-states">Interface States</a></li>
+  <li><a href="#touch-button-mapping" id="toc-touch-button-mapping" class="nav-link" data-scroll-target="#touch-button-mapping">Touch Button Mapping</a></li>
+  </ul></li>
+  <li><a href="#operator-workflow" id="toc-operator-workflow" class="nav-link" data-scroll-target="#operator-workflow">Operator Workflow</a></li>
+  <li><a href="#png-pattern-format" id="toc-png-pattern-format" class="nav-link" data-scroll-target="#png-pattern-format">PNG Pattern Format</a>
+  <ul class="collapse">
+  <li><a href="#required-pattern-constraints" id="toc-required-pattern-constraints" class="nav-link" data-scroll-target="#required-pattern-constraints">Required Pattern Constraints</a></li>
+  <li><a href="#colour-to-servo-mapping" id="toc-colour-to-servo-mapping" class="nav-link" data-scroll-target="#colour-to-servo-mapping">Colour-to-Servo Mapping</a></li>
+  </ul></li>
+  <li><a href="#three-servo-colour-selection-mechanism" id="toc-three-servo-colour-selection-mechanism" class="nav-link" data-scroll-target="#three-servo-colour-selection-mechanism">Three-Servo Colour Selection Mechanism</a></li>
+  <li><a href="#d-designed-servo-arms" id="toc-d-designed-servo-arms" class="nav-link" data-scroll-target="#d-designed-servo-arms">3D-Designed Servo Arms</a>
+  <ul class="collapse">
+  <li><a href="#mechanical-integration" id="toc-mechanical-integration" class="nav-link" data-scroll-target="#mechanical-integration">Mechanical Integration</a></li>
+  <li><a href="#cad-and-manufacturing-files" id="toc-cad-and-manufacturing-files" class="nav-link" data-scroll-target="#cad-and-manufacturing-files">CAD and Manufacturing Files</a></li>
+  </ul></li>
+  <li><a href="#esp32-firmware" id="toc-esp32-firmware" class="nav-link" data-scroll-target="#esp32-firmware">ESP32 Firmware</a>
+  <ul class="collapse">
+  <li><a href="#microswitch-connection" id="toc-microswitch-connection" class="nav-link" data-scroll-target="#microswitch-connection">Microswitch Connection</a></li>
+  <li><a href="#arduino-sketch-folder" id="toc-arduino-sketch-folder" class="nav-link" data-scroll-target="#arduino-sketch-folder">Arduino Sketch Folder</a></li>
+  </ul></li>
+  <li><a href="#raspberry-piesp32-communication" id="toc-raspberry-piesp32-communication" class="nav-link" data-scroll-target="#raspberry-piesp32-communication">Raspberry Pi–ESP32 Communication</a>
+  <ul class="collapse">
+  <li><a href="#serial-protocol" id="toc-serial-protocol" class="nav-link" data-scroll-target="#serial-protocol">Serial Protocol</a>
+  <ul class="collapse">
+  <li><a href="#commands-sent-by-raspberry-pi-to-esp32" id="toc-commands-sent-by-raspberry-pi-to-esp32" class="nav-link" data-scroll-target="#commands-sent-by-raspberry-pi-to-esp32">Commands sent by Raspberry Pi to ESP32</a></li>
+  <li><a href="#messages-sent-by-esp32-to-raspberry-pi" id="toc-messages-sent-by-esp32-to-raspberry-pi" class="nav-link" data-scroll-target="#messages-sent-by-esp32-to-raspberry-pi">Messages sent by ESP32 to Raspberry Pi</a></li>
+  </ul></li>
+  <li><a href="#synchronization-logic" id="toc-synchronization-logic" class="nav-link" data-scroll-target="#synchronization-logic">Synchronization Logic</a></li>
+  </ul></li>
+  <li><a href="#electrical-connections" id="toc-electrical-connections" class="nav-link" data-scroll-target="#electrical-connections">Electrical Connections</a>
+  <ul class="collapse">
+  <li><a href="#signal-wiring" id="toc-signal-wiring" class="nav-link" data-scroll-target="#signal-wiring">Signal Wiring</a></li>
+  <li><a href="#power-wiring" id="toc-power-wiring" class="nav-link" data-scroll-target="#power-wiring">Power Wiring</a></li>
+  </ul></li>
+  <li><a href="#raspberry-pi-software-setup" id="toc-raspberry-pi-software-setup" class="nav-link" data-scroll-target="#raspberry-pi-software-setup">Raspberry Pi Software Setup</a>
+  <ul class="collapse">
+  <li><a href="#enable-the-required-interfaces" id="toc-enable-the-required-interfaces" class="nav-link" data-scroll-target="#enable-the-required-interfaces">Enable the Required Interfaces</a></li>
+  <li><a href="#python-virtual-environment" id="toc-python-virtual-environment" class="nav-link" data-scroll-target="#python-virtual-environment">Python Virtual Environment</a></li>
+  <li><a href="#compatibility-with-lcd.contrast" id="toc-compatibility-with-lcd.contrast" class="nav-link" data-scroll-target="#compatibility-with-lcd.contrast">Compatibility with <code>lcd.contrast()</code></a></li>
+  </ul></li>
+  <li><a href="#usb-flash-drive-setup" id="toc-usb-flash-drive-setup" class="nav-link" data-scroll-target="#usb-flash-drive-setup">USB Flash Drive Setup</a>
+  <ul class="collapse">
+  <li><a href="#manual-mount" id="toc-manual-mount" class="nav-link" data-scroll-target="#manual-mount">Manual Mount</a></li>
+  <li><a href="#optional-automatic-mount" id="toc-optional-automatic-mount" class="nav-link" data-scroll-target="#optional-automatic-mount">Optional Automatic Mount</a></li>
+  <li><a href="#safe-removal" id="toc-safe-removal" class="nav-link" data-scroll-target="#safe-removal">Safe Removal</a></li>
+  </ul></li>
+  <li><a href="#running-the-application" id="toc-running-the-application" class="nav-link" data-scroll-target="#running-the-application">Running the Application</a>
+  <ul class="collapse">
+  <li><a href="#identify-the-esp32-serial-port" id="toc-identify-the-esp32-serial-port" class="nav-link" data-scroll-target="#identify-the-esp32-serial-port">Identify the ESP32 Serial Port</a></li>
+  <li><a href="#demo-mode" id="toc-demo-mode" class="nav-link" data-scroll-target="#demo-mode">Demo Mode</a></li>
+  <li><a href="#real-operation-mode" id="toc-real-operation-mode" class="nav-link" data-scroll-target="#real-operation-mode">Real Operation Mode</a></li>
+  </ul></li>
+  <li><a href="#software-structure-of-gfxhat_pattern_ui_usb.py" id="toc-software-structure-of-gfxhat_pattern_ui_usb.py" class="nav-link" data-scroll-target="#software-structure-of-gfxhat_pattern_ui_usb.py">Software Structure of <code>gfxhat_pattern_ui_usb.py</code></a>
+  <ul class="collapse">
+  <li><a href="#gfxscreen" id="toc-gfxscreen" class="nav-link" data-scroll-target="#gfxscreen"><code>GfxScreen</code></a></li>
+  <li><a href="#patternapp" id="toc-patternapp" class="nav-link" data-scroll-target="#patternapp"><code>PatternApp</code></a></li>
+  <li><a href="#usbmachinecontroller" id="toc-usbmachinecontroller" class="nav-link" data-scroll-target="#usbmachinecontroller"><code>UsbMachineController</code></a></li>
+  <li><a href="#democontroller" id="toc-democontroller" class="nav-link" data-scroll-target="#democontroller"><code>DemoController</code></a></li>
+  </ul></li>
+  <li><a href="#pause-and-resume-behaviour" id="toc-pause-and-resume-behaviour" class="nav-link" data-scroll-target="#pause-and-resume-behaviour">Pause and Resume Behaviour</a></li>
+  <li><a href="#calibration-and-first-test-procedure" id="toc-calibration-and-first-test-procedure" class="nav-link" data-scroll-target="#calibration-and-first-test-procedure">Calibration and First Test Procedure</a>
+  <ul class="collapse">
+  <li><a href="#servo-calibration" id="toc-servo-calibration" class="nav-link" data-scroll-target="#servo-calibration">Servo Calibration</a></li>
+  <li><a href="#microswitch-test" id="toc-microswitch-test" class="nav-link" data-scroll-target="#microswitch-test">Microswitch Test</a></li>
+  </ul></li>
+  <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a>
+  <ul class="collapse">
+  <li><a href="#no-png-files-appear-on-the-display" id="toc-no-png-files-appear-on-the-display" class="nav-link" data-scroll-target="#no-png-files-appear-on-the-display">No PNG Files Appear on the Display</a></li>
+  <li><a href="#esp32-is-not-detected" id="toc-esp32-is-not-detected" class="nav-link" data-scroll-target="#esp32-is-not-detected">ESP32 Is Not Detected</a></li>
+  <li><a href="#display-starts-with-a-lcd.contrast-error" id="toc-display-starts-with-a-lcd.contrast-error" class="nav-link" data-scroll-target="#display-starts-with-a-lcd.contrast-error">Display Starts with a <code>lcd.contrast()</code> Error</a></li>
+  <li><a href="#servo-arms-do-not-move" id="toc-servo-arms-do-not-move" class="nav-link" data-scroll-target="#servo-arms-do-not-move">Servo Arms Do Not Move</a></li>
+  <li><a href="#microswitch-does-not-advance-the-pattern" id="toc-microswitch-does-not-advance-the-pattern" class="nav-link" data-scroll-target="#microswitch-does-not-advance-the-pattern">Microswitch Does Not Advance the Pattern</a></li>
+  <li><a href="#esp32-firmware-fails-to-compile-with-redefinition-errors" id="toc-esp32-firmware-fails-to-compile-with-redefinition-errors" class="nav-link" data-scroll-target="#esp32-firmware-fails-to-compile-with-redefinition-errors">ESP32 Firmware Fails to Compile with “redefinition” Errors</a></li>
+  <li><a href="#the-machine-stops-but-the-main-rotation-continues" id="toc-the-machine-stops-but-the-main-rotation-continues" class="nav-link" data-scroll-target="#the-machine-stops-but-the-main-rotation-continues">The Machine Stops but the Main Rotation Continues</a></li>
+  </ul></li>
+  <li><a href="#current-results-and-next-developments" id="toc-current-results-and-next-developments" class="nav-link" data-scroll-target="#current-results-and-next-developments">Current Results and Next Developments</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Display Interface and Three-Colour Servo Control</h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-page-left">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="display-interface-and-three-colour-servo-control" class="level1">
+<h1>Display Interface and Three-Colour Servo Control</h1>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>The current prototype integrates the operator interface, pattern loading and three-colour yarn actuation in a single control workflow.</p>
+<p>A <strong>Pimoroni GFX HAT</strong> is mounted on the Raspberry Pi and acts as the local human-machine interface (HMI). Through its LCD display and capacitive touch buttons, the user can:</p>
+<ul>
+<li>browse the <code>.png</code> patterns stored on a USB flash drive;</li>
+<li>select the pattern to be manufactured;</li>
+<li>start, pause and resume the process;</li>
+<li>monitor the completion percentage;</li>
+<li>receive status or alarm messages.</li>
+</ul>
+<p>The real-control application is implemented in:</p>
+<pre class="text"><code>gfxhat_pattern_ui_usb.py</code></pre>
+<p>Unlike the initial display-only prototype, the current script is directly connected to the ESP32 through a USB serial connection. The Raspberry Pi interprets the selected pattern and sends the required colour command, while the ESP32 drives the three servomotors and reads the synchronization microswitch.</p>
+<blockquote class="blockquote">
+<p><strong>Current implementation status.</strong> Pattern selection, display interaction, USB communication with the ESP32, microswitch synchronization and three-servo actuation are implemented. The camera-based error-recognition output and the automatic yarn-cut notification screen are already supported by the interface, but are not yet connected to the physical process in the present test setup.</p>
+</blockquote>
+<hr>
+</section>
+<section id="system-architecture" class="level2">
+<h2 class="anchored" data-anchor-id="system-architecture">System Architecture</h2>
+<p>The control system is divided into a high-level Raspberry Pi layer and a low-level ESP32 actuation layer.</p>
+<pre class="text"><code>Personal computer
+└── Pattern Editor
+    └── .png patterns saved on USB flash drive
+
+Automated knitting machine
+├── Raspberry Pi
+│   ├── Pimoroni GFX HAT display and touch interface
+│   ├── USB flash drive pattern loading
+│   ├── PNG validation and pixel-to-colour conversion
+│   ├── Progress visualization
+│   └── USB serial communication with ESP32
+│
+└── ESP32
+    ├── Servo 1: colour-selection actuator 1
+    ├── Servo 2: colour-selection actuator 2
+    ├── Servo 3: colour-selection actuator 3
+    ├── 3D-designed servo arms
+    └── Synchronization microswitch</code></pre>
+<p>The communication between the Raspberry Pi and the ESP32 no longer uses the Raspberry Pi UART header pins. The ESP32 is connected to the Raspberry Pi through its USB cable, which provides:</p>
+<ul>
+<li>power supply for the ESP32 board;</li>
+<li>USB-to-serial communication between Raspberry Pi and ESP32.</li>
+</ul>
+<p>The servomotors are powered separately by an external regulated 5 V DC-DC supply.</p>
+<hr>
+</section>
+<section id="pimoroni-gfx-hat-interface" class="level2">
+<h2 class="anchored" data-anchor-id="pimoroni-gfx-hat-interface">Pimoroni GFX HAT Interface</h2>
+<p>The Pimoroni GFX HAT combines:</p>
+<ul>
+<li>a 128 × 64 monochrome LCD;</li>
+<li>six capacitive touch buttons;</li>
+<li>RGB backlighting;</li>
+<li>six indicator LEDs associated with the touch buttons.</li>
+</ul>
+<p>In this project it is used as an embedded user interface mounted directly on the Raspberry Pi. The screen provides immediate information about the current process state, while the touch buttons allow the user to operate the machine without an external keyboard or monitor.</p>
+<p>The interface is controlled by the <code>GfxScreen</code> and <code>PatternApp</code> classes in <code>gfxhat_pattern_ui_usb.py</code>.</p>
+<section id="interface-states" class="level3">
+<h3 class="anchored" data-anchor-id="interface-states">Interface States</h3>
+<p>The application implements the following states:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>State</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>SELECT_FILE</code></td>
+<td>Lists the PNG patterns found on the USB drive</td>
+</tr>
+<tr class="even">
+<td><code>INSERT_YARNS</code></td>
+<td>Confirms the selected pattern and asks the user to prepare the yarns</td>
+</tr>
+<tr class="odd">
+<td><code>RUNNING</code></td>
+<td>Shows pattern progress during the real manufacturing sequence</td>
+</tr>
+<tr class="even">
+<td><code>STOPPED</code></td>
+<td>Pauses the actuation while preserving the current position in the pattern</td>
+</tr>
+<tr class="odd">
+<td><code>ALERT</code></td>
+<td>Displays an error or manual-intervention message</td>
+</tr>
+<tr class="even">
+<td><code>DONE</code></td>
+<td>Indicates that the selected pattern has been completed</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="touch-button-mapping" class="level3">
+<h3 class="anchored" data-anchor-id="touch-button-mapping">Touch Button Mapping</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Touch button</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>UP</code></td>
+<td>Select previous PNG file</td>
+</tr>
+<tr class="even">
+<td><code>DOWN</code></td>
+<td>Select next PNG file</td>
+</tr>
+<tr class="odd">
+<td><code>SELECT</code></td>
+<td>Confirm the selected file</td>
+</tr>
+<tr class="even">
+<td><code>PLUS</code></td>
+<td>Refresh file list / start / resume</td>
+</tr>
+<tr class="odd">
+<td><code>MINUS</code></td>
+<td>Pause the current process</td>
+</tr>
+<tr class="even">
+<td><code>BACK</code></td>
+<td>Return to the pattern-selection menu</td>
+</tr>
+</tbody>
+</table>
+<p>When the application is executed in demo mode, <code>BACK</code> and <code>SELECT</code> can also be used to simulate the alert screens without actuating the motors.</p>
+<hr>
+</section>
+</section>
+<section id="operator-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="operator-workflow">Operator Workflow</h2>
+<p>The complete real-operation sequence is:</p>
+<pre class="text"><code>Insert USB flash drive containing PNG patterns
+        ↓
+Power on Raspberry Pi, ESP32 and servo power supply
+        ↓
+Launch gfxhat_pattern_ui_usb.py
+        ↓
+Select a PNG file from the GFX HAT screen
+        ↓
+Selected PNG is copied locally on the Raspberry Pi
+        ↓
+Display shows: "INSERIRE I FILATI"
+        ↓
+User presses PLUS / AVVIA
+        ↓
+Raspberry Pi validates the PNG and opens the USB serial connection
+        ↓
+The first colour-selection servo command is sent to the ESP32
+        ↓
+Each microswitch press produces a NEXT message
+        ↓
+Raspberry Pi advances to the next pixel and updates the progress bar
+        ↓
+At the end of the pattern, all servos are moved to their DOWN position
+        ↓
+Display shows: "LAVORO COMPLETATO"</code></pre>
+<p>When a PNG file is selected, the script copies it from the USB drive to a local working file:</p>
+<pre class="text"><code>~/automated_knitting_machine/patterns/current_pattern.png</code></pre>
+<p>This prevents removal of the USB flash drive from interrupting a process after the pattern has already been selected.</p>
+<hr>
+</section>
+<section id="png-pattern-format" class="level2">
+<h2 class="anchored" data-anchor-id="png-pattern-format">PNG Pattern Format</h2>
+<p>The selected image is validated before actuation begins.</p>
+<section id="required-pattern-constraints" class="level3">
+<h3 class="anchored" data-anchor-id="required-pattern-constraints">Required Pattern Constraints</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>Required value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>File format</td>
+<td><code>.png</code></td>
+</tr>
+<tr class="even">
+<td>Width</td>
+<td>Exactly 48 pixels</td>
+</tr>
+<tr class="odd">
+<td>Number of colours</td>
+<td>Exactly 3 distinct RGB colours</td>
+</tr>
+<tr class="even">
+<td>File location on USB drive</td>
+<td>Directly in the mounted USB root directory</td>
+</tr>
+</tbody>
+</table>
+<p>The image height determines the total number of processed rows, while the total number of actuator updates corresponds to:</p>
+<pre class="text"><code>total pixels = width × height</code></pre>
+</section>
+<section id="colour-to-servo-mapping" class="level3">
+<h3 class="anchored" data-anchor-id="colour-to-servo-mapping">Colour-to-Servo Mapping</h3>
+<p>The three RGB colours are automatically associated with the three servo commands in order of first appearance while scanning the image:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>First occurrence in PNG</th>
+<th>Command</th>
+<th>Actuator</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>First colour found</td>
+<td><code>C1</code></td>
+<td>Servo 1</td>
+</tr>
+<tr class="even">
+<td>Second colour found</td>
+<td><code>C2</code></td>
+<td>Servo 2</td>
+</tr>
+<tr class="odd">
+<td>Third colour found</td>
+<td><code>C3</code></td>
+<td>Servo 3</td>
+</tr>
+</tbody>
+</table>
+<p>The pixels are read sequentially from the image. For each current pixel, only the servo associated with the corresponding colour is moved to its active position, while the other two servos remain in their inactive position.</p>
+<blockquote class="blockquote">
+<p>Before starting the physical process, the operator must verify that the real yarn colours placed on the three servo mechanisms correspond to the automatically generated RGB-to-servo mapping printed in the terminal.</p>
+</blockquote>
+<hr>
+</section>
+</section>
+<section id="three-servo-colour-selection-mechanism" class="level2">
+<h2 class="anchored" data-anchor-id="three-servo-colour-selection-mechanism">Three-Servo Colour Selection Mechanism</h2>
+<p>The colour-selection subsystem consists of three servomotors, each associated with one yarn or colour channel.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Servo</th>
+<th style="text-align: right;">ESP32 signal pin</th>
+<th>Command</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Servo 1</td>
+<td style="text-align: right;">GPIO13</td>
+<td><code>C1</code></td>
+</tr>
+<tr class="even">
+<td>Servo 2</td>
+<td style="text-align: right;">GPIO14</td>
+<td><code>C2</code></td>
+</tr>
+<tr class="odd">
+<td>Servo 3</td>
+<td style="text-align: right;">GPIO27</td>
+<td><code>C3</code></td>
+</tr>
+</tbody>
+</table>
+<p>For each pixel, the ESP32 receives one colour command and sets the actuator positions so that one channel is active at a time:</p>
+<pre class="text"><code>C1 → Servo 1 UP, Servo 2 DOWN, Servo 3 DOWN
+C2 → Servo 1 DOWN, Servo 2 UP, Servo 3 DOWN
+C3 → Servo 1 DOWN, Servo 2 DOWN, Servo 3 UP
+DOWN → all servos DOWN</code></pre>
+<p>The initial experimental positions used in the firmware are:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Servo</th>
+<th style="text-align: right;">Active position (<code>UP</code>)</th>
+<th style="text-align: right;">Inactive position (<code>DOWN</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Servo 1</td>
+<td style="text-align: right;">140°</td>
+<td style="text-align: right;">60°</td>
+</tr>
+<tr class="even">
+<td>Servo 2</td>
+<td style="text-align: right;">140°</td>
+<td style="text-align: right;">60°</td>
+</tr>
+<tr class="odd">
+<td>Servo 3</td>
+<td style="text-align: right;">140°</td>
+<td style="text-align: right;">60°</td>
+</tr>
+</tbody>
+</table>
+<p>These angles are calibration values and must be adjusted according to the final mounting position, servo horn orientation, printed arm geometry and the required yarn displacement.</p>
+<hr>
+</section>
+<section id="d-designed-servo-arms" class="level2">
+<h2 class="anchored" data-anchor-id="d-designed-servo-arms">3D-Designed Servo Arms</h2>
+<p>To mechanically transfer servo rotation to the yarn-selection elements, three dedicated arms were designed in 3D and mounted on the servomotors.</p>
+<p>The purpose of the designed components is to:</p>
+<ul>
+<li>provide a repeatable connection between each servo shaft and the moving selection element;</li>
+<li>convert the servo angular rotation into the required mechanical displacement;</li>
+<li>keep the three yarn channels geometrically consistent;</li>
+<li>allow the angular limits to be calibrated without modifying the electronic architecture;</li>
+<li>make the mechanical components easy to reproduce through 3D printing.</li>
+</ul>
+<section id="mechanical-integration" class="level3">
+<h3 class="anchored" data-anchor-id="mechanical-integration">Mechanical Integration</h3>
+<p>Each printed arm must be mounted on its corresponding servo horn and oriented consistently before the firmware limits are calibrated.</p>
+<p>A recommended assembly procedure is:</p>
+<ol type="1">
+<li>keep the printed arm disconnected from the yarn-guiding mechanism;</li>
+<li>power the servo electronics and send the <code>DOWN</code> command;</li>
+<li>mount the arm in the intended inactive orientation;</li>
+<li>send the corresponding active command (<code>C1</code>, <code>C2</code> or <code>C3</code>);</li>
+<li>verify that the motion is unobstructed and reaches the desired displacement;</li>
+<li>adjust <code>UP_n</code> and <code>DOWN_n</code> in the ESP32 firmware if necessary;</li>
+<li>repeat the procedure for all three actuators before attaching yarns.</li>
+</ol>
+</section>
+<section id="cad-and-manufacturing-files" class="level3">
+<h3 class="anchored" data-anchor-id="cad-and-manufacturing-files">CAD and Manufacturing Files</h3>
+<p>The CAD model and exported printing files can be stored in a dedicated mechanical folder, for example:</p>
+<pre class="text"><code>mechanics/
+└── servo_arms/
+    ├── servo_arm_source_file
+    ├── servo_arm_left.stl
+    ├── servo_arm_centre.stl
+    ├── servo_arm_right.stl
+    └── assembly_render.png</code></pre>
+<p>Suggested images to include in this documentation page are:</p>
+<ul>
+<li>a CAD render of the three designed arms;</li>
+<li>a printed arm mounted on one servomotor;</li>
+<li>a photograph of the complete three-servo selection module;</li>
+<li>a detail view showing the active and inactive positions.</li>
+</ul>
+<blockquote class="blockquote">
+<p><strong>Mechanical safety note.</strong> The first powered tests should be performed without yarn tension and without obstructing the printed arms. If a servo stalls against a mechanical stop, disconnect the actuator supply and recalibrate the angles before continuing.</p>
+</blockquote>
+<hr>
+</section>
+</section>
+<section id="esp32-firmware" class="level2">
+<h2 class="anchored" data-anchor-id="esp32-firmware">ESP32 Firmware</h2>
+<p>The ESP32 firmware is implemented in:</p>
+<pre class="text"><code>servo_switch_usb.ino</code></pre>
+<p>The ESP32 is responsible for:</p>
+<ul>
+<li>generating the servo commands through the <code>ESP32Servo</code> library;</li>
+<li>reading the microswitch;</li>
+<li>debouncing the microswitch signal;</li>
+<li>receiving actuation commands from the Raspberry Pi;</li>
+<li>notifying the Raspberry Pi when the next synchronized control instant occurs.</li>
+</ul>
+<section id="microswitch-connection" class="level3">
+<h3 class="anchored" data-anchor-id="microswitch-connection">Microswitch Connection</h3>
+<p>The microswitch has three terminals: <code>COM</code>, <code>NO</code> and <code>NC</code>. Only <code>COM</code> and <code>NO</code> are used.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Microswitch terminal</th>
+<th>ESP32 connection</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>COM</code></td>
+<td>GND</td>
+</tr>
+<tr class="even">
+<td><code>NO</code></td>
+<td>GPIO25</td>
+</tr>
+<tr class="odd">
+<td><code>NC</code></td>
+<td>Not connected</td>
+</tr>
+</tbody>
+</table>
+<p>The firmware configures the input as:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pinMode<span class="op">(</span>pinMicroswitch<span class="op">,</span> INPUT_PULLUP<span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Therefore:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Microswitch state</th>
+<th>GPIO25 value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Not pressed</td>
+<td><code>HIGH</code></td>
+<td>No advancement event</td>
+</tr>
+<tr class="even">
+<td>Pressed</td>
+<td><code>LOW</code></td>
+<td>Send <code>NEXT</code> to Raspberry Pi</td>
+</tr>
+</tbody>
+</table>
+<p>A software debounce interval of 50 ms is applied so that one physical press generates only one valid advancement message.</p>
+</section>
+<section id="arduino-sketch-folder" class="level3">
+<h3 class="anchored" data-anchor-id="arduino-sketch-folder">Arduino Sketch Folder</h3>
+<p>Arduino compiles all <code>.ino</code> files inside the same sketch folder together. For this reason, the new firmware must be kept in its own sketch directory:</p>
+<pre class="text"><code>servo/
+├── uart_switch_3servo_png/
+│   └── uart_switch_3servo_png.ino
+│
+└── servo_switch_usb/
+    └── servo_switch_usb.ino</code></pre>
+<p>Only <code>servo_switch_usb/servo_switch_usb.ino</code> must be opened and uploaded for the USB-controlled prototype.</p>
+<hr>
+</section>
+</section>
+<section id="raspberry-piesp32-communication" class="level2">
+<h2 class="anchored" data-anchor-id="raspberry-piesp32-communication">Raspberry Pi–ESP32 Communication</h2>
+<p>The Raspberry Pi and ESP32 communicate over the USB cable connected to the ESP32 micro-USB port.</p>
+<p>In the tested configuration, the ESP32 is enumerated by the Raspberry Pi as:</p>
+<pre class="text"><code>/dev/ttyUSB0</code></pre>
+<p>The communication baud rate is:</p>
+<pre class="text"><code>115200 baud</code></pre>
+<p>The value must be identical in the two programs:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Raspberry Pi: gfxhat_pattern_ui_usb.py</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>BAUD_RATE <span class="op">=</span> <span class="dv">115200</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ESP32: servo_switch_usb.ino</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>Serial<span class="op">.</span>begin<span class="op">(</span><span class="dv">115200</span><span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="serial-protocol" class="level3">
+<h3 class="anchored" data-anchor-id="serial-protocol">Serial Protocol</h3>
+<section id="commands-sent-by-raspberry-pi-to-esp32" class="level4">
+<h4 class="anchored" data-anchor-id="commands-sent-by-raspberry-pi-to-esp32">Commands sent by Raspberry Pi to ESP32</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Message</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>C1</code></td>
+<td>Activate colour channel 1</td>
+</tr>
+<tr class="even">
+<td><code>C2</code></td>
+<td>Activate colour channel 2</td>
+</tr>
+<tr class="odd">
+<td><code>C3</code></td>
+<td>Activate colour channel 3</td>
+</tr>
+<tr class="even">
+<td><code>DOWN</code></td>
+<td>Move all three servo arms to the inactive position</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="messages-sent-by-esp32-to-raspberry-pi" class="level4">
+<h4 class="anchored" data-anchor-id="messages-sent-by-esp32-to-raspberry-pi">Messages sent by ESP32 to Raspberry Pi</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Message</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>READY</code></td>
+<td>ESP32 has completed initialization</td>
+</tr>
+<tr class="even">
+<td><code>NEXT</code></td>
+<td>Microswitch press detected; current pixel is complete</td>
+</tr>
+<tr class="odd">
+<td><code>OK:C1</code></td>
+<td>Command <code>C1</code> received and applied</td>
+</tr>
+<tr class="even">
+<td><code>OK:C2</code></td>
+<td>Command <code>C2</code> received and applied</td>
+</tr>
+<tr class="odd">
+<td><code>OK:C3</code></td>
+<td>Command <code>C3</code> received and applied</td>
+</tr>
+<tr class="even">
+<td><code>OK:DOWN</code></td>
+<td>All servo arms moved to the inactive position</td>
+</tr>
+<tr class="odd">
+<td><code>ERR:...</code></td>
+<td>Invalid or malformed command received</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="synchronization-logic" class="level3">
+<h3 class="anchored" data-anchor-id="synchronization-logic">Synchronization Logic</h3>
+<p>When the user presses <code>AVVIA</code>, the Raspberry Pi immediately sends the colour command corresponding to the first pixel. After that:</p>
+<ol type="1">
+<li>the current colour is physically selected by the servo mechanism;</li>
+<li>a machine cycle reaches the synchronization point;</li>
+<li>the microswitch is pressed;</li>
+<li>the ESP32 sends <code>NEXT</code>;</li>
+<li>the Raspberry Pi marks the current pixel as completed;</li>
+<li>the progress bar is updated;</li>
+<li>the command for the following pixel is sent.</li>
+</ol>
+<p>At the last valid <code>NEXT</code>, the application completes the progress counter, sends the servos to <code>DOWN</code> during controller shutdown and shows the completion screen.</p>
+<hr>
+</section>
+</section>
+<section id="electrical-connections" class="level2">
+<h2 class="anchored" data-anchor-id="electrical-connections">Electrical Connections</h2>
+<section id="signal-wiring" class="level3">
+<h3 class="anchored" data-anchor-id="signal-wiring">Signal Wiring</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Element</th>
+<th>Connection</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>GFX HAT</td>
+<td>Mounted on Raspberry Pi GPIO header</td>
+</tr>
+<tr class="even">
+<td>ESP32 USB port</td>
+<td>Raspberry Pi USB port</td>
+</tr>
+<tr class="odd">
+<td>Servo 1 signal</td>
+<td>ESP32 GPIO13</td>
+</tr>
+<tr class="even">
+<td>Servo 2 signal</td>
+<td>ESP32 GPIO14</td>
+</tr>
+<tr class="odd">
+<td>Servo 3 signal</td>
+<td>ESP32 GPIO27</td>
+</tr>
+<tr class="even">
+<td>Microswitch <code>NO</code></td>
+<td>ESP32 GPIO25</td>
+</tr>
+<tr class="odd">
+<td>Microswitch <code>COM</code></td>
+<td>ESP32 GND</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="power-wiring" class="level3">
+<h3 class="anchored" data-anchor-id="power-wiring">Power Wiring</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Element</th>
+<th>Power source</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Raspberry Pi</td>
+<td>Raspberry Pi power adapter</td>
+</tr>
+<tr class="even">
+<td>ESP32</td>
+<td>Raspberry Pi through USB cable</td>
+</tr>
+<tr class="odd">
+<td>Three servomotors</td>
+<td>External regulated 5 V DC-DC supply</td>
+</tr>
+<tr class="even">
+<td>GFX HAT</td>
+<td>Raspberry Pi GPIO header</td>
+</tr>
+</tbody>
+</table>
+<p>The servomotors must not be powered from the Raspberry Pi GPIO header or from the ESP32 board. Their current demand can be significantly higher than the current required for signal control.</p>
+<p>A common ground is mandatory:</p>
+<pre class="text"><code>GND DC-DC supply = GND servos = GND ESP32 = GND Raspberry Pi through USB</code></pre>
+<p>The positive 5 V output of the external DC-DC supply must be connected only to the servomotor power lines, not to the ESP32 power pin while the ESP32 is already powered through USB.</p>
+<hr>
+</section>
+</section>
+<section id="raspberry-pi-software-setup" class="level2">
+<h2 class="anchored" data-anchor-id="raspberry-pi-software-setup">Raspberry Pi Software Setup</h2>
+<section id="enable-the-required-interfaces" class="level3">
+<h3 class="anchored" data-anchor-id="enable-the-required-interfaces">Enable the Required Interfaces</h3>
+<p>The GFX HAT uses SPI for the LCD and I²C for its touch/backlight devices. Enable both Raspberry Pi interfaces:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> raspi-config</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Then navigate to:</p>
+<pre class="text"><code>Interface Options
+├── SPI → Enable
+└── I2C → Enable</code></pre>
+<p>Reboot the Raspberry Pi:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> reboot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="python-virtual-environment" class="level3">
+<h3 class="anchored" data-anchor-id="python-virtual-environment">Python Virtual Environment</h3>
+<p>The project uses a virtual environment stored at:</p>
+<pre class="text"><code>/home/aless/venvs/uncinetto</code></pre>
+<p>Activate it with:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> /home/aless/venvs/uncinetto/bin/activate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The terminal prompt should begin with:</p>
+<pre class="text"><code>(uncinetto)</code></pre>
+<p>Install or verify the required Python packages inside the environment:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install pillow pyserial gfxhat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Check the imports:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-c</span> <span class="st">"from PIL import Image; import serial; from gfxhat import lcd, touch, backlight; print('Librerie OK')"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="compatibility-with-lcd.contrast" class="level3">
+<h3 class="anchored" data-anchor-id="compatibility-with-lcd.contrast">Compatibility with <code>lcd.contrast()</code></h3>
+<p>On the tested Raspberry Pi installation, the installed <code>gfxhat</code> package did not expose <code>lcd.contrast()</code>, resulting in:</p>
+<pre class="text"><code>AttributeError: module 'gfxhat.lcd' has no attribute 'contrast'</code></pre>
+<p>To preserve compatibility with different versions of the library, the display initialization must use:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>lcd.clear()</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">hasattr</span>(lcd, <span class="st">"contrast"</span>):</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    lcd.contrast(<span class="dv">42</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="va">self</span>.set_backlight((<span class="dv">0</span>, <span class="dv">40</span>, <span class="dv">70</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>In this way, the application configures the contrast when supported, while still starting correctly when the method is absent.</p>
+<hr>
+</section>
+</section>
+<section id="usb-flash-drive-setup" class="level2">
+<h2 class="anchored" data-anchor-id="usb-flash-drive-setup">USB Flash Drive Setup</h2>
+<p>The patterns are stored directly in the root directory of a USB flash drive:</p>
+<pre class="text"><code>USB NICOLE/
+├── cuore.png
+├── fiore.png
+└── righe.png</code></pre>
+<p>In the tested setup the flash drive is recognized as:</p>
+<pre class="text"><code>/dev/sda1</code></pre>
+<p>while the ESP32 serial communication device is:</p>
+<pre class="text"><code>/dev/ttyUSB0</code></pre>
+<p>These are two separate USB devices: <code>/dev/sda1</code> contains the PNG files, whereas <code>/dev/ttyUSB0</code> is used to exchange control messages with the ESP32.</p>
+<section id="manual-mount" class="level3">
+<h3 class="anchored" data-anchor-id="manual-mount">Manual Mount</h3>
+<p>Create the mount point once:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir <span class="at">-p</span> /mnt/pattern_usb</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Mount the flash drive:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mount /dev/sda1 /mnt/pattern_usb</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Verify that the PNG files are visible:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lah</span> /mnt/pattern_usb</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="optional-automatic-mount" class="level3">
+<h3 class="anchored" data-anchor-id="optional-automatic-mount">Optional Automatic Mount</h3>
+<p>To avoid manually mounting the same USB flash drive after each reboot, obtain its UUID:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> blkid /dev/sda1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Then add a corresponding entry to <code>/etc/fstab</code>, replacing <code>YOUR_UUID</code> with the actual UUID:</p>
+<pre class="text"><code>UUID=YOUR_UUID  /mnt/pattern_usb  vfat  defaults,nofail,x-systemd.automount,uid=aless,gid=aless,umask=022  0  0</code></pre>
+<p>Reload the configuration:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl daemon-reload</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="safe-removal" class="level3">
+<h3 class="anchored" data-anchor-id="safe-removal">Safe Removal</h3>
+<p>Before removing the flash drive, stop the application and unmount it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> umount /mnt/pattern_usb</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="running-the-application" class="level2">
+<h2 class="anchored" data-anchor-id="running-the-application">Running the Application</h2>
+<section id="identify-the-esp32-serial-port" class="level3">
+<h3 class="anchored" data-anchor-id="identify-the-esp32-serial-port">Identify the ESP32 Serial Port</h3>
+<p>With the ESP32 connected to the Raspberry Pi through USB:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> serial.tools.list_ports <span class="at">-v</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>In the tested configuration the result includes:</p>
+<pre class="text"><code>/dev/ttyUSB0
+    CP2102 USB to UART Bridge Controller</code></pre>
+</section>
+<section id="demo-mode" class="level3">
+<h3 class="anchored" data-anchor-id="demo-mode">Demo Mode</h3>
+<p>Demo mode verifies the screen, file-selection navigation and progress display without moving the servo mechanisms:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> /home/aless/venvs/uncinetto/bin/activate</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> /home/aless/gfxhat_pattern_ui_usb.py <span class="at">--usb-dir</span> /mnt/pattern_usb <span class="at">--demo</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="real-operation-mode" class="level3">
+<h3 class="anchored" data-anchor-id="real-operation-mode">Real Operation Mode</h3>
+<p>For real communication with the ESP32:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> /home/aless/venvs/uncinetto/bin/activate</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> /home/aless/gfxhat_pattern_ui_usb.py <span class="at">--usb-dir</span> /mnt/pattern_usb <span class="at">--port</span> /dev/ttyUSB0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The real test should be performed only after checking:</p>
+<ul>
+<li>the three servos are powered by the external 5 V supply;</li>
+<li>the external supply ground is connected to ESP32 ground;</li>
+<li>the printed servo arms can move freely;</li>
+<li>the microswitch is wired to <code>COM</code> and <code>NO</code>;</li>
+<li>the selected PNG is 48 pixels wide and contains exactly three colours.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="software-structure-of-gfxhat_pattern_ui_usb.py" class="level2">
+<h2 class="anchored" data-anchor-id="software-structure-of-gfxhat_pattern_ui_usb.py">Software Structure of <code>gfxhat_pattern_ui_usb.py</code></h2>
+<p>The integrated Raspberry Pi application is organized into four main parts.</p>
+<section id="gfxscreen" class="level3">
+<h3 class="anchored" data-anchor-id="gfxscreen"><code>GfxScreen</code></h3>
+<p>Handles:</p>
+<ul>
+<li>LCD rendering;</li>
+<li>RGB backlight configuration;</li>
+<li>active touch-button LEDs;</li>
+<li>progress bar display;</li>
+<li>screen cleanup on application exit.</li>
+</ul>
+</section>
+<section id="patternapp" class="level3">
+<h3 class="anchored" data-anchor-id="patternapp"><code>PatternApp</code></h3>
+<p>Handles:</p>
+<ul>
+<li>state transitions of the user interface;</li>
+<li>USB pattern discovery and selection;</li>
+<li>local pattern copy;</li>
+<li>touch-button events;</li>
+<li>screen rendering;</li>
+<li>progress and alert events.</li>
+</ul>
+</section>
+<section id="usbmachinecontroller" class="level3">
+<h3 class="anchored" data-anchor-id="usbmachinecontroller"><code>UsbMachineController</code></h3>
+<p>Handles the real machine control logic:</p>
+<ul>
+<li>PNG validation;</li>
+<li>RGB-to-servo command mapping;</li>
+<li>USB serial port opening;</li>
+<li>serial message exchange with the ESP32;</li>
+<li>progress advancement after each <code>NEXT</code>;</li>
+<li>servo deactivation on pause, completion or shutdown.</li>
+</ul>
+<p>The serial reading loop runs in a separate worker thread. This prevents the graphical interface from freezing while it waits for a physical microswitch event.</p>
+</section>
+<section id="democontroller" class="level3">
+<h3 class="anchored" data-anchor-id="democontroller"><code>DemoController</code></h3>
+<p>Simulates progress without using the ESP32 or actuators and is used to verify the interface before hardware tests.</p>
+<hr>
+</section>
+</section>
+<section id="pause-and-resume-behaviour" class="level2">
+<h2 class="anchored" data-anchor-id="pause-and-resume-behaviour">Pause and Resume Behaviour</h2>
+<p>When the operator presses <code>MINUS</code> during operation:</p>
+<ol type="1">
+<li>the interface enters the <code>STOPPED</code> state;</li>
+<li>the Raspberry Pi sends <code>DOWN</code> to the ESP32;</li>
+<li>all three printed servo arms return to the inactive position;</li>
+<li>the current pixel index is preserved;</li>
+<li>any <code>NEXT</code> event generated while paused is ignored.</li>
+</ol>
+<p>When the operator presses <code>PLUS</code> to resume:</p>
+<ol type="1">
+<li>the application returns to the <code>RUNNING</code> state;</li>
+<li>the command corresponding to the current pixel is sent again;</li>
+<li>processing continues from the preserved pattern position.</li>
+</ol>
+<blockquote class="blockquote">
+<p>The current pause function controls the three colour-selection servo mechanisms. If a separate main machine motor is introduced, its stop and resume commands must be added to the ESP32 firmware and to the serial protocol.</p>
+</blockquote>
+<hr>
+</section>
+<section id="calibration-and-first-test-procedure" class="level2">
+<h2 class="anchored" data-anchor-id="calibration-and-first-test-procedure">Calibration and First Test Procedure</h2>
+<section id="servo-calibration" class="level3">
+<h3 class="anchored" data-anchor-id="servo-calibration">Servo Calibration</h3>
+<p>Before attaching yarns or applying mechanical load:</p>
+<ol type="1">
+<li>upload <code>servo_switch_usb.ino</code> to the ESP32;</li>
+<li>connect the ESP32 to the Raspberry Pi through USB;</li>
+<li>connect the three servos to the ESP32 signal pins and to the external 5 V supply;</li>
+<li>connect all grounds;</li>
+<li>mount the 3D-printed arms without forcing them against the structure;</li>
+<li>start a simple three-colour PNG pattern;</li>
+<li>observe the <code>UP</code> and <code>DOWN</code> positions of each arm;</li>
+<li>adjust the angle constants in the ESP32 firmware where necessary:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> UP_1 <span class="op">=</span> <span class="dv">140</span><span class="op">;</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> DOWN_1 <span class="op">=</span> <span class="dv">60</span><span class="op">;</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> UP_2 <span class="op">=</span> <span class="dv">140</span><span class="op">;</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> DOWN_2 <span class="op">=</span> <span class="dv">60</span><span class="op">;</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> UP_3 <span class="op">=</span> <span class="dv">140</span><span class="op">;</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> DOWN_3 <span class="op">=</span> <span class="dv">60</span><span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="microswitch-test" class="level3">
+<h3 class="anchored" data-anchor-id="microswitch-test">Microswitch Test</h3>
+<p>With the real application running:</p>
+<ol type="1">
+<li>select the pattern and press <code>AVVIA</code>;</li>
+<li>verify that one servo moves for the first pixel;</li>
+<li>manually press the microswitch once;</li>
+<li>verify in the terminal that <code>NEXT</code> is received;</li>
+<li>verify that the display counter increments;</li>
+<li>verify that the next servo configuration is selected.</li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="troubleshooting" class="level2">
+<h2 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h2>
+<section id="no-png-files-appear-on-the-display" class="level3">
+<h3 class="anchored" data-anchor-id="no-png-files-appear-on-the-display">No PNG Files Appear on the Display</h3>
+<p>Check whether the flash drive is mounted:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lsblk</span> <span class="at">-o</span> NAME,SIZE,FSTYPE,LABEL,MOUNTPOINTS,MODEL</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="ex">findmnt</span> /mnt/pattern_usb</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lah</span> /mnt/pattern_usb</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If <code>/dev/sda1</code> is visible but has no mount point:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mount /dev/sda1 /mnt/pattern_usb</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ensure that the <code>.png</code> files are directly inside <code>/mnt/pattern_usb</code>, not inside an additional subfolder.</p>
+</section>
+<section id="esp32-is-not-detected" class="level3">
+<h3 class="anchored" data-anchor-id="esp32-is-not-detected">ESP32 Is Not Detected</h3>
+<p>List serial devices:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> serial.tools.list_ports <span class="at">-v</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The tested ESP32 USB-to-UART bridge appears as <code>/dev/ttyUSB0</code>. Use the detected path with the <code>--port</code> argument.</p>
+</section>
+<section id="display-starts-with-a-lcd.contrast-error" class="level3">
+<h3 class="anchored" data-anchor-id="display-starts-with-a-lcd.contrast-error">Display Starts with a <code>lcd.contrast()</code> Error</h3>
+<p>Use the compatibility check in <code>GfxScreen.__init__()</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>lcd.clear()</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">hasattr</span>(lcd, <span class="st">"contrast"</span>):</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>    lcd.contrast(<span class="dv">42</span>)</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="va">self</span>.set_backlight((<span class="dv">0</span>, <span class="dv">40</span>, <span class="dv">70</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="servo-arms-do-not-move" class="level3">
+<h3 class="anchored" data-anchor-id="servo-arms-do-not-move">Servo Arms Do Not Move</h3>
+<p>Check:</p>
+<ul>
+<li>external 5 V servo supply is switched on;</li>
+<li>servo signal pins match GPIO13, GPIO14 and GPIO27;</li>
+<li>DC-DC ground is connected to ESP32 ground;</li>
+<li>the arms are not mechanically blocked;</li>
+<li>the ESP32 has the correct <code>servo_switch_usb.ino</code> firmware.</li>
+</ul>
+</section>
+<section id="microswitch-does-not-advance-the-pattern" class="level3">
+<h3 class="anchored" data-anchor-id="microswitch-does-not-advance-the-pattern">Microswitch Does Not Advance the Pattern</h3>
+<p>Check:</p>
+<ul>
+<li><code>COM</code> is connected to ESP32 GND;</li>
+<li><code>NO</code> is connected to ESP32 GPIO25;</li>
+<li><code>NC</code> is not being used by mistake;</li>
+<li>the terminal shows <code>NEXT</code> when the switch is pressed.</li>
+</ul>
+</section>
+<section id="esp32-firmware-fails-to-compile-with-redefinition-errors" class="level3">
+<h3 class="anchored" data-anchor-id="esp32-firmware-fails-to-compile-with-redefinition-errors">ESP32 Firmware Fails to Compile with “redefinition” Errors</h3>
+<p>Do not store both the former sketch and the new USB firmware in the same Arduino sketch folder. Arduino compiles every <code>.ino</code> file contained in one sketch directory.</p>
+<p>Correct structure:</p>
+<pre class="text"><code>servo_switch_usb/
+└── servo_switch_usb.ino</code></pre>
+</section>
+<section id="the-machine-stops-but-the-main-rotation-continues" class="level3">
+<h3 class="anchored" data-anchor-id="the-machine-stops-but-the-main-rotation-continues">The Machine Stops but the Main Rotation Continues</h3>
+<p>The present implementation pauses the three servo selector arms only. Stopping a future main drive motor requires an additional motor-control command in the ESP32 firmware.</p>
+<hr>
+</section>
+</section>
+<section id="current-results-and-next-developments" class="level2">
+<h2 class="anchored" data-anchor-id="current-results-and-next-developments">Current Results and Next Developments</h2>
+<p>At the present development stage, the system provides a complete interaction chain for three-colour servo selection:</p>
+<ul>
+<li>pattern selection through an embedded display;</li>
+<li>PNG pattern validation;</li>
+<li>USB serial command transmission;</li>
+<li>mechanical colour selection using three servos and custom 3D-designed arms;</li>
+<li>event-based advancement through the ESP32 microswitch;</li>
+<li>visual progress feedback to the operator;</li>
+<li>pause, resume and safe actuator release through the <code>DOWN</code> command.</li>
+</ul>
+<p>The following extensions remain to be integrated:</p>
+<ul>
+<li>connection of the camera-based error-recognition classifier to <code>notify_error()</code>;</li>
+<li>automatic detection of conditions requiring a manual yarn cut through <code>notify_cut_thread()</code>;</li>
+<li>control of the main knitting-machine drive, if automated actuation is introduced;</li>
+<li>final calibration of servo angles after complete mechanical assembly;</li>
+<li>publication of the CAD/STL files and assembly images for the printed servo arms;</li>
+<li>automatic application startup at Raspberry Pi boot.</li>
+</ul>
+<hr>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ul>
+<li><a href="https://github.com/pimoroni/gfx-hat">Pimoroni GFX HAT Python library</a></li>
+<li><a href="https://docs.pimoroni.com/gfxhat/">Pimoroni GFX HAT function reference</a></li>
+<li><a href="https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html">Arduino ESP32 GPIO API documentation</a></li>
+<li><a href="https://pyserial.readthedocs.io/en/latest/">pySerial documentation</a></li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

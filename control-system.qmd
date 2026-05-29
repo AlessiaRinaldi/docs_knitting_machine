@@ -1,8 +1,76 @@
 ---
-title: Control System
+title: "Control System Overview"
 ---
 
-# Overview
-- Real-time control loops
-- Vision-based thread detection
-- Safety & states
+# Control System Overview
+
+## Architecture
+
+The prototype is organized into two processing levels:
+
+- the **Raspberry Pi**, which implements the user interface, reads and validates PNG patterns, manages process progress and hosts the error-recognition pipeline;
+- the **ESP32**, which directly controls the three servomotors and reads the synchronization microswitch.
+
+```text
+Pattern Editor on PC
+        │
+        │ PNG file on USB flash drive
+        ▼
+Raspberry Pi + GFX HAT
+        │
+        │ USB serial protocol: C1, C2, C3, DOWN
+        ▼
+ESP32
+   ├── Servo 1 + 3D-printed arm
+   ├── Servo 2 + 3D-printed arm
+   ├── Servo 3 + 3D-printed arm
+   └── Microswitch ── NEXT event
+```
+
+The camera-based error-recognition pipeline also runs on the Raspberry Pi. Its integration with the real servo-control workflow remains a next development step.
+
+## Implemented Control Sequence
+
+```text
+User selects a PNG file
+        ↓
+Raspberry Pi copies and validates the selected pattern
+        ↓
+User presses AVVIA
+        ↓
+Raspberry Pi sends the command for the first pixel
+        ↓
+ESP32 positions one of the three servo arms
+        ↓
+Microswitch is physically activated
+        ↓
+ESP32 sends NEXT
+        ↓
+Raspberry Pi updates progress and sends the next command
+        ↓
+End of image: DOWN command and completion screen
+```
+
+## Current Status
+
+| Function | Status |
+|---|---|
+| Pattern creation and PNG export | Implemented |
+| PNG selection through the GFX HAT | Implemented |
+| USB flash drive pattern loading | Implemented |
+| Raspberry Pi–ESP32 USB serial communication | Implemented |
+| Three-servo colour selection | Implemented |
+| Microswitch synchronization on ESP32 | Implemented |
+| Three-dimensional servo arms | Designed; add photographs/test results when available |
+| Error recognition algorithm | Documented and tested separately |
+| Error-recognition alarm connected to real actuation | To be integrated |
+| Main stepper motor control | Planned development |
+
+## Subsystem Documentation
+
+- [Display Interface — GFX HAT](display-interface.qmd)
+- [Raspberry Pi Application](raspberry-control.qmd)
+- [ESP32 and Actuation](esp32-actuation.qmd)
+- [Wiring and Power Supply](wiring-power.qmd)
+- [3D-Printed Servo Arms](servo-arms.qmd)
+- [Error Recognition](error-recognition.qmd)

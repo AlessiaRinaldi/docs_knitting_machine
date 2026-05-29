@@ -1,0 +1,51 @@
+---
+title: "Future Developments"
+---
+
+# Future Developments
+
+## Implemented Prototype Functions
+
+The current development stage includes:
+
+- creation and export of three-colour PNG patterns;
+- embedded file selection through the GFX HAT display;
+- PNG validation and colour-to-servo mapping on the Raspberry Pi;
+- USB serial communication between Raspberry Pi and ESP32;
+- direct control of three yarn-selection servomotors;
+- microswitch-based pattern advancement;
+- custom 3D-designed servo arms;
+- a separately evaluated error-recognition pipeline.
+
+## Next Integration Steps
+
+| Development | Objective |
+|---|---|
+| Connect `notify_error()` to the real workflow | Pause the actuation when the vision detector identifies a defect |
+| Integrate main stepper motor control | Automate the complete machine motion |
+| Add alarm-safe stop/resume commands | Coordinate servo and motor movement after an error |
+| Complete servo-arm calibration | Define validated `UP` and `DOWN` angles after final assembly |
+| Publish CAD/STL files and photographs | Document mechanical reproducibility |
+| Automatic program launch | Start the interface automatically when the Raspberry Pi boots |
+
+## Target Closed-Loop Architecture
+
+```text
+PNG Pattern Selection
+        ↓
+Raspberry Pi Control Application
+        ↓
+ESP32 Actuation ── Servo and future Stepper Motion
+        ↓
+Hook-Level Camera Inspection
+        ↓
+Error Detection on Raspberry Pi
+        ↓
+Automatic Pause / Operator Feedback
+```
+
+## Related Pages
+
+- [Control System Overview](control-system.qmd)
+- [Stepper Motor — Planned Development](stepper-motor.qmd)
+- [Error Recognition Conclusions](error-future_work.qmd)

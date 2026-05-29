@@ -23,6 +23,7 @@ The objective of this work is to bring the same paradigm to textiles, by develop
 :::
 :::
 
+
 ---
 
 ## Project Sections
@@ -31,10 +32,11 @@ The objective of this work is to bring the same paradigm to textiles, by develop
 ::: {.column width="33%"}
 
 ::: {.callout-note}
-### Error recognition  
-Real-time detection of defects and anomalies during operation.  
+### User Guide
 
-[Open →](error-recognition.qmd)
+Create a PNG pattern and operate the prototype through the embedded display.
+
+[Open →](operating-machine.qmd)
 :::
 
 :::
@@ -42,29 +44,49 @@ Real-time detection of defects and anomalies during operation.
 ::: {.column width="33%"}
 
 ::: {.callout-note}
-### Components  
-Mechanical, electronic, and sensing elements of the platform.  
+### Control System
+
+Raspberry Pi, GFX HAT, ESP32, servo control and serial synchronization.
+
+[Open →](control-system.qmd)
+:::
+
+:::
+
+::: {.column width="33%"}
+
+::: {.callout-note}
+### Error Recognition
+
+Real-time visual detection of yarn engagement defects.
+
+[Open →](error-recognition.qmd)
+:::
+
+:::
+:::
+
+::: {.columns}
+::: {.column width="50%"}
+
+::: {.callout-note}
+### Mechanical Design
+
+Three-dimensional components, including the servo arms and camera support.
 
 [Open →](components.qmd)
 :::
 
 :::
 
-::: {.column width="33%"}
+::: {.column width="50%"}
 
 ::: {.callout-note}
-### Control System  
-Actuation, logic, and synchronization of the machine.  
+### Current Development Status
 
-[Open →](control-system.qmd)
-:::
+Implemented functions and planned next steps.
 
-:::
-::: {.callout-note}
-### Display Interface — GFX HAT  
-Pattern selection, machine status visualization and operator interaction through the Pimoroni GFX HAT.
-
-[Open →](display-interface.qmd)
+[Open →](future-developments.qmd)
 :::
 
 :::

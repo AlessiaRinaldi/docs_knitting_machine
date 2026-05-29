@@ -1,33 +1,33 @@
+---
+title: "Error Recognition — Conclusions and Future Works"
+---
 
-## Conclusions and Future Work
+# Conclusions and Future Works
 
-This work presented a complete real-time vision system for hook-level error detection on an automated crochet machine, implemented on a Raspberry Pi 3 using a lightweight LLR-based classifier.
+The developed error-recognition pipeline implements real-time hook-level visual inspection on a Raspberry Pi 3 using a lightweight LLR-based classifier.
 
-The system achieves high accuracy with an operating point tending toward zero false alarms, reaching approximately **97.4% accuracy** and **85% detection probability** on a test set of 771 images.
+On the independent test set of 771 images, the selected operating point achieves approximately:
 
-Future work will investigate:
+| Metric | Value |
+|---|---:|
+| Accuracy | 97.4% |
+| Detection probability | 85.5% |
+| False-alarm probability | Approximately 0% |
 
-- multi-frame decision fusion,
+## Future Work
 
-- learned feature representations (e.g., lightweight CNNs),
+The next developments for the vision subsystem are:
 
-- improved mechanical stability and camera alignment.
+- multi-frame decision fusion;
+- learned feature representations, such as lightweight CNNs;
+- improved mechanical stability and camera alignment;
+- integration of the detected alarm with the real ESP32/machine control workflow.
 
-Overall, the results demonstrate that **low-cost embedded vision** can support reliable, real-time quality control on textile machines, with promising extensions toward more robust and general solutions.
+## Related Pages
 
-
-## - **[Overview](error-recognition.qmd)**  
-
-## - **[Selection of the Acquisition System for Error Detection](error-camera.qmd)**  
-  Requirements, sensor & lens selection, lighting, sync, and mounting constraints.
-
-## - **[3D Camera Mount](error-mount.qmd)**  
-  Mechanical support, 3D printing, working distance, and CAD notes.
-
-  
-## - **[Error Recognition — Code](error-code.qmd)**  
-  Algorithms, model/code structure, data flow, and deployment notes.
-
-
-## - **[Results & Efficiency](error-results.qmd)**  
-  Datasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget.
+- [Error Recognition Overview](error-recognition.qmd)
+- [Acquisition System](error-camera.qmd)
+- [3D Camera Mount](error-mount.qmd)
+- [Algorithm and Code](error-code.qmd)
+- [Results and Efficiency](error-results.qmd)
+- [Future Developments of the Complete Machine](future-developments.qmd)

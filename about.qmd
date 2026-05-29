@@ -2,4 +2,8 @@
 title: "About"
 ---
 
-About this site
+# About This Project
+
+This website documents the design and implementation of an automated knitting-machine prototype, including pattern creation, embedded control, mechanical components and visual error recognition.
+
+Return to the [Home Page](index.qmd).
