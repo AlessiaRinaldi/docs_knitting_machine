@@ -129,6 +129,75 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-user-guide" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">User Guide</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-user-guide">    
+        <li>
+    <a class="dropdown-item" href="./pattern-editor.html">
+ <span class="dropdown-text">Pattern Editor</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./operating-machine.html">
+ <span class="dropdown-text">Operating the Machine</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-control-system" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Control System</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-control-system">    
+        <li>
+    <a class="dropdown-item" href="./control-system.html">
+ <span class="dropdown-text">System Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./display-interface.html">
+ <span class="dropdown-text">Display Interface — GFX HAT</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./raspberry-control.html">
+ <span class="dropdown-text">Raspberry Pi Application</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./esp32-actuation.html">
+ <span class="dropdown-text">ESP32 and Actuation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./stepper-motor.html">
+ <span class="dropdown-text">Stepper Motor — Planned Development</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./wiring-power.html">
+ <span class="dropdown-text">Wiring and Power Supply</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./troubleshooting.html">
+ <span class="dropdown-text">Troubleshooting</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-mechanical-design" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Mechanical Design</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-mechanical-design">    
+        <li>
+    <a class="dropdown-item" href="./components.html">
+ <span class="dropdown-text">Components Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./servo-arms.html">
+ <span class="dropdown-text">3D-Printed Servo Arms</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./error-mount.html">
+ <span class="dropdown-text">3D Camera Mount</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-error-recognition" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Error Recognition</span>
     </a>
@@ -139,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="./error-camera.html">
- <span class="dropdown-text">Selection of the Acquisition System for Error Detection</span></a>
+ <span class="dropdown-text">Acquisition System</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./error-mount.html">
@@ -147,11 +216,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="./error-code.html">
- <span class="dropdown-text">Error Recognition — Code</span></a>
+ <span class="dropdown-text">Algorithm and Code</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./error-results.html">
- <span class="dropdown-text">Results &amp; Efficiency</span></a>
+ <span class="dropdown-text">Results and Efficiency</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./error-future_work.html">
@@ -160,16 +229,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./components.html"> 
-<span class="menu-text">Components</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./control-system.html"> 
-<span class="menu-text">Control System</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="./display-interface.html" aria-current="page"> 
-<span class="menu-text">Display Interface</span></a>
+    <a class="nav-link" href="./future-developments.html"> 
+<span class="menu-text">Future Developments</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -190,54 +251,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#display-interface-gfx-hat" id="toc-display-interface-gfx-hat" class="nav-link active" data-scroll-target="#display-interface-gfx-hat">Display Interface — GFX HAT</a>
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#system-role" id="toc-system-role" class="nav-link" data-scroll-target="#system-role">System Role</a></li>
-  <li><a href="#gfx-hat-and-pi-camera-connection" id="toc-gfx-hat-and-pi-camera-connection" class="nav-link" data-scroll-target="#gfx-hat-and-pi-camera-connection">GFX HAT and Pi Camera Connection</a>
-  <ul class="collapse">
-  <li><a href="#minimum-wiring-when-the-display-is-remote" id="toc-minimum-wiring-when-the-display-is-remote" class="nav-link" data-scroll-target="#minimum-wiring-when-the-display-is-remote">Minimum Wiring when the Display is Remote</a></li>
-  </ul></li>
-  <li><a href="#interface-workflow" id="toc-interface-workflow" class="nav-link" data-scroll-target="#interface-workflow">Interface Workflow</a></li>
-  <li><a href="#touch-button-mapping" id="toc-touch-button-mapping" class="nav-link" data-scroll-target="#touch-button-mapping">Touch Button Mapping</a></li>
-  <li><a href="#interface-screens" id="toc-interface-screens" class="nav-link" data-scroll-target="#interface-screens">Interface Screens</a>
+  <li><a href="#screens-and-buttons" id="toc-screens-and-buttons" class="nav-link" data-scroll-target="#screens-and-buttons">Screens and Buttons</a>
   <ul class="collapse">
   <li><a href="#pattern-selection" id="toc-pattern-selection" class="nav-link" data-scroll-target="#pattern-selection">Pattern Selection</a></li>
   <li><a href="#yarn-preparation" id="toc-yarn-preparation" class="nav-link" data-scroll-target="#yarn-preparation">Yarn Preparation</a></li>
-  <li><a href="#processing-screen" id="toc-processing-screen" class="nav-link" data-scroll-target="#processing-screen">Processing Screen</a></li>
-  <li><a href="#interruption-screens" id="toc-interruption-screens" class="nav-link" data-scroll-target="#interruption-screens">Interruption Screens</a></li>
+  <li><a href="#running-state" id="toc-running-state" class="nav-link" data-scroll-target="#running-state">Running State</a></li>
+  <li><a href="#stopped-and-completed-states" id="toc-stopped-and-completed-states" class="nav-link" data-scroll-target="#stopped-and-completed-states">Stopped and Completed States</a></li>
   </ul></li>
-  <li><a href="#raspberry-pi-setup" id="toc-raspberry-pi-setup" class="nav-link" data-scroll-target="#raspberry-pi-setup">Raspberry Pi Setup</a>
-  <ul class="collapse">
-  <li><a href="#enable-spi-and-i²c" id="toc-enable-spi-and-i²c" class="nav-link" data-scroll-target="#enable-spi-and-i²c">1. Enable SPI and I²C</a></li>
-  </ul></li>
-  <li><a href="#python-environment-and-library-installation" id="toc-python-environment-and-library-installation" class="nav-link" data-scroll-target="#python-environment-and-library-installation">Python Environment and Library Installation</a></li>
-  <li><a href="#usb-drive-setup" id="toc-usb-drive-setup" class="nav-link" data-scroll-target="#usb-drive-setup">USB Drive Setup</a>
-  <ul class="collapse">
-  <li><a href="#identify-the-usb-partition" id="toc-identify-the-usb-partition" class="nav-link" data-scroll-target="#identify-the-usb-partition">1. Identify the USB Partition</a></li>
-  <li><a href="#mount-the-usb-drive" id="toc-mount-the-usb-drive" class="nav-link" data-scroll-target="#mount-the-usb-drive">2. Mount the USB Drive</a></li>
-  <li><a href="#safely-remove-the-usb-drive" id="toc-safely-remove-the-usb-drive" class="nav-link" data-scroll-target="#safely-remove-the-usb-drive">3. Safely Remove the USB Drive</a></li>
-  </ul></li>
-  <li><a href="#running-gfxhat_pattern_ui.py" id="toc-running-gfxhat_pattern_ui.py" class="nav-link" data-scroll-target="#running-gfxhat_pattern_ui.py">Running <code>gfxhat_pattern_ui.py</code></a>
+  <li><a href="#application-states" id="toc-application-states" class="nav-link" data-scroll-target="#application-states">Application States</a></li>
+  <li><a href="#usb-pattern-selection" id="toc-usb-pattern-selection" class="nav-link" data-scroll-target="#usb-pattern-selection">USB Pattern Selection</a></li>
+  <li><a href="#running-the-display" id="toc-running-the-display" class="nav-link" data-scroll-target="#running-the-display">Running the Display</a>
   <ul class="collapse">
   <li><a href="#demo-mode" id="toc-demo-mode" class="nav-link" data-scroll-target="#demo-mode">Demo Mode</a></li>
   <li><a href="#real-mode" id="toc-real-mode" class="nav-link" data-scroll-target="#real-mode">Real Mode</a></li>
   </ul></li>
-  <li><a href="#software-integration-with-the-machine" id="toc-software-integration-with-the-machine" class="nav-link" data-scroll-target="#software-integration-with-the-machine">Software Integration with the Machine</a>
-  <ul class="collapse">
-  <li><a href="#progress-update" id="toc-progress-update" class="nav-link" data-scroll-target="#progress-update">Progress Update</a></li>
-  <li><a href="#error-recognition-alert" id="toc-error-recognition-alert" class="nav-link" data-scroll-target="#error-recognition-alert">Error Recognition Alert</a></li>
-  <li><a href="#long-distance-yarn-cut-alert" id="toc-long-distance-yarn-cut-alert" class="nav-link" data-scroll-target="#long-distance-yarn-cut-alert">Long-Distance Yarn Cut Alert</a></li>
-  <li><a href="#completion-event" id="toc-completion-event" class="nav-link" data-scroll-target="#completion-event">Completion Event</a></li>
-  <li><a href="#esp32-communication" id="toc-esp32-communication" class="nav-link" data-scroll-target="#esp32-communication">ESP32 Communication</a></li>
-  </ul></li>
-  <li><a href="#compatibility-fix-lcd.contrast" id="toc-compatibility-fix-lcd.contrast" class="nav-link" data-scroll-target="#compatibility-fix-lcd.contrast">Compatibility Fix: <code>lcd.contrast()</code></a></li>
-  <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a>
-  <ul class="collapse">
-  <li><a href="#no-png-files-are-displayed" id="toc-no-png-files-are-displayed" class="nav-link" data-scroll-target="#no-png-files-are-displayed">No PNG Files Are Displayed</a></li>
-  <li><a href="#modulenotfounderror-no-module-named-gfxhat" id="toc-modulenotfounderror-no-module-named-gfxhat" class="nav-link" data-scroll-target="#modulenotfounderror-no-module-named-gfxhat"><code>ModuleNotFoundError: No module named 'gfxhat'</code></a></li>
-  <li><a href="#display-or-touch-buttons-do-not-respond" id="toc-display-or-touch-buttons-do-not-respond" class="nav-link" data-scroll-target="#display-or-touch-buttons-do-not-respond">Display or Touch Buttons Do Not Respond</a></li>
-  <li><a href="#attributeerror-module-gfxhat.lcd-has-no-attribute-contrast" id="toc-attributeerror-module-gfxhat.lcd-has-no-attribute-contrast" class="nav-link" data-scroll-target="#attributeerror-module-gfxhat.lcd-has-no-attribute-contrast"><code>AttributeError: module 'gfxhat.lcd' has no attribute 'contrast'</code></a></li>
-  <li><a href="#usb-removal" id="toc-usb-removal" class="nav-link" data-scroll-target="#usb-removal">USB Removal</a></li>
-  </ul></li>
-  <li><a href="#future-development" id="toc-future-development" class="nav-link" data-scroll-target="#future-development">Future Development</a></li>
+  <li><a href="#compatibility-note-lcd-contrast" id="toc-compatibility-note-lcd-contrast" class="nav-link" data-scroll-target="#compatibility-note-lcd-contrast">Compatibility Note: LCD Contrast</a></li>
+  <li><a href="#future-alert-integration" id="toc-future-alert-integration" class="nav-link" data-scroll-target="#future-alert-integration">Future Alert Integration</a></li>
+  <li><a href="#related-pages" id="toc-related-pages" class="nav-link" data-scroll-target="#related-pages">Related Pages</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul></li>
   </ul>
@@ -269,223 +299,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Display Interface — GFX HAT</h1>
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>The machine interface is implemented with a <strong>Pimoroni GFX HAT</strong> connected to the Raspberry Pi 3. The board combines:</p>
+<p>The operator interface is implemented with a <strong>Pimoroni GFX HAT</strong> connected to the Raspberry Pi. The board provides:</p>
 <ul>
-<li>a 128 × 64 monochrome LCD display;</li>
+<li>a 128 × 64 monochrome LCD;</li>
 <li>six capacitive touch buttons;</li>
 <li>RGB backlighting;</li>
 <li>six button indicator LEDs.</li>
 </ul>
-<p>The display is used as a small human-machine interface (HMI): the user can select a <code>.png</code> pattern stored on a USB drive, prepare the yarns, start or stop the process, check the progress percentage, and receive interruption messages.</p>
-<p>The user interface is implemented in:</p>
-<pre class="text"><code>gfxhat_pattern_ui.py</code></pre>
-<p>At the current prototype stage, the program can already be tested in <strong>demo mode</strong>: the progress bar and all alarm screens can be checked without connecting the motors, the ESP32, or the error-recognition pipeline.</p>
-<blockquote class="blockquote">
-<p>The current script manages the display workflow and the USB pattern selection. Motor actuation and real camera-triggered alerts must later be connected through the <code>MachineController</code> methods and the notification functions already provided in the script.</p>
-</blockquote>
-<hr>
+<p>The interface is controlled by the integrated script:</p>
+<pre class="text"><code>gfxhat_pattern_ui_usb.py</code></pre>
+<p>This script no longer acts only as a display demonstration: in real mode it selects the PNG pattern, opens the USB serial port to the ESP32, sends colour commands and updates progress when the ESP32 reports a microswitch event.</p>
 </section>
-<section id="system-role" class="level2">
-<h2 class="anchored" data-anchor-id="system-role">System Role</h2>
-<p>The Raspberry Pi is responsible for the high-level interface and vision tasks, while the ESP32 will manage time-critical motion control.</p>
-<pre class="text"><code>PC user
-└── Pattern Editor → saves one or more .png files on a USB drive
-
-Knitting machine
-├── Raspberry Pi 3
-│   ├── GFX HAT interface
-│   ├── USB pattern loading
-│   ├── Pi Camera error recognition
-│   └── progress and alarm management
-│
-└── ESP32
-    ├── stepper motor driver
-    ├── three colour-selection servos
-    └── synchronization microswitch</code></pre>
-<p>In the final system, the ESP32 will inform the Raspberry Pi whenever a synchronized control instant is reached. The Raspberry Pi can then run the vision check and update the interface.</p>
-<hr>
-</section>
-<section id="gfx-hat-and-pi-camera-connection" class="level2">
-<h2 class="anchored" data-anchor-id="gfx-hat-and-pi-camera-connection">GFX HAT and Pi Camera Connection</h2>
-<p>The GFX HAT and the Pi Camera can be used at the same time because they are connected through different interfaces:</p>
-<pre class="text"><code>GFX HAT   → Raspberry Pi GPIO header
-Pi Camera → Raspberry Pi CSI camera connector</code></pre>
-<p>The GFX HAT uses both <strong>SPI</strong> and <strong>I²C</strong> communication. According to the Pimoroni pinout documentation, it requires 5 V and 3.3 V power, uses 7 GPIO communication pins, and includes the I²C devices <code>CAP1166</code> for the touch buttons and <code>SN3218</code> for the RGB backlight.</p>
-<p>If the HAT is mounted directly on the Raspberry Pi and obstructs the camera flat cable, the display can be connected through a <strong>40-pin GPIO extension cable</strong> or an extra-tall stacking header. This also allows the display to be installed on the external control panel of the machine, while the Raspberry Pi remains protected inside the enclosure.</p>
-<section id="minimum-wiring-when-the-display-is-remote" class="level3">
-<h3 class="anchored" data-anchor-id="minimum-wiring-when-the-display-is-remote">Minimum Wiring when the Display is Remote</h3>
-<p>When using individual wires instead of a full 40-pin extension cable, connect the following pins:</p>
+<section id="screens-and-buttons" class="level2">
+<h2 class="anchored" data-anchor-id="screens-and-buttons">Screens and Buttons</h2>
+<section id="pattern-selection" class="level3">
+<h3 class="anchored" data-anchor-id="pattern-selection">Pattern Selection</h3>
+<pre class="text"><code>SELEZIONA PNG
+&gt; cuore.png
+  righe.png
+  fiore.png
+^v SPOSTA  OK SEL  + REF</code></pre>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>Function</th>
-<th style="text-align: right;">Raspberry Pi GPIO</th>
-<th style="text-align: right;">Physical pin</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>3.3 V power</td>
-<td style="text-align: right;">3V3</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr class="even">
-<td>5 V power</td>
-<td style="text-align: right;">5V</td>
-<td style="text-align: right;">2</td>
-</tr>
-<tr class="odd">
-<td>Ground</td>
-<td style="text-align: right;">GND</td>
-<td style="text-align: right;">6</td>
-</tr>
-<tr class="even">
-<td>Touch/backlight data</td>
-<td style="text-align: right;">GPIO 2 / SDA</td>
-<td style="text-align: right;">3</td>
-</tr>
-<tr class="odd">
-<td>Touch/backlight clock</td>
-<td style="text-align: right;">GPIO 3 / SCL</td>
-<td style="text-align: right;">5</td>
-</tr>
-<tr class="even">
-<td>LCD data</td>
-<td style="text-align: right;">GPIO 10 / SPI MOSI</td>
-<td style="text-align: right;">19</td>
-</tr>
-<tr class="odd">
-<td>LCD clock</td>
-<td style="text-align: right;">GPIO 11 / SPI SCLK</td>
-<td style="text-align: right;">23</td>
-</tr>
-<tr class="even">
-<td>LCD chip select</td>
-<td style="text-align: right;">GPIO 8 / SPI CE0</td>
-<td style="text-align: right;">24</td>
-</tr>
-<tr class="odd">
-<td>LCD reset</td>
-<td style="text-align: right;">GPIO 5</td>
-<td style="text-align: right;">29</td>
-</tr>
-<tr class="even">
-<td>LCD data/command</td>
-<td style="text-align: right;">GPIO 6</td>
-<td style="text-align: right;">31</td>
-</tr>
-</tbody>
-</table>
-<p>A full 40-pin GPIO extension cable is recommended over individual jumper wires, since it reduces wiring errors and preserves the correct pin orientation.</p>
-<hr>
-</section>
-</section>
-<section id="interface-workflow" class="level2">
-<h2 class="anchored" data-anchor-id="interface-workflow">Interface Workflow</h2>
-<p>The interface implements the following workflow:</p>
-<pre class="text"><code>USB drive inserted
-        ↓
-Select a PNG pattern using the touch buttons
-        ↓
-Selected pattern is copied locally to the Raspberry Pi
-        ↓
-"INSERIRE I FILATI" screen
-        ↓
-User presses AVVIA
-        ↓
-Progress screen with percentage and completed cycles
-        ↓
-Possible interruptions:
-    - "ERRORE RISCONTRATO"
-    - "TAGLIARE IL FILO"
-        ↓
-User corrects the problem and presses AVVIA to resume
-        ↓
-"LAVORO COMPLETATO"</code></pre>
-<p>Once a file is selected, it is copied from the USB drive to:</p>
-<pre class="text"><code>~/automated_knitting_machine/patterns/current_pattern.png</code></pre>
-<p>This prevents an accidental USB removal from interrupting a process that has already started.</p>
-<hr>
-</section>
-<section id="touch-button-mapping" class="level2">
-<h2 class="anchored" data-anchor-id="touch-button-mapping">Touch Button Mapping</h2>
-<p>The six GFX HAT touch buttons are used as follows:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Touch button</th>
-<th>Function in the user interface</th>
+<th>Button</th>
+<th>Action</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><code>UP</code></td>
-<td>Move to the previous <code>.png</code> file</td>
+<td>Previous PNG file</td>
 </tr>
 <tr class="even">
 <td><code>DOWN</code></td>
-<td>Move to the next <code>.png</code> file</td>
+<td>Next PNG file</td>
 </tr>
 <tr class="odd">
 <td><code>SELECT</code></td>
-<td>Confirm the selected pattern</td>
+<td>Confirm selected pattern</td>
 </tr>
 <tr class="even">
 <td><code>PLUS</code></td>
-<td>Refresh the USB list / start / resume</td>
-</tr>
-<tr class="odd">
-<td><code>MINUS</code></td>
-<td>Stop the process</td>
-</tr>
-<tr class="even">
-<td><code>BACK</code></td>
-<td>Return to the pattern menu</td>
+<td>Refresh USB file list</td>
 </tr>
 </tbody>
 </table>
-<p>During <strong>demo mode</strong>, two buttons are additionally used to simulate machine events while the progress screen is active:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Touch button</th>
-<th>Demo action</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>BACK</code></td>
-<td>Simulate <code>ERRORE RISCONTRATO</code></td>
-</tr>
-<tr class="even">
-<td><code>SELECT</code></td>
-<td>Simulate <code>TAGLIARE IL FILO</code></td>
-</tr>
-</tbody>
-</table>
-<hr>
-</section>
-<section id="interface-screens" class="level2">
-<h2 class="anchored" data-anchor-id="interface-screens">Interface Screens</h2>
-<section id="pattern-selection" class="level3">
-<h3 class="anchored" data-anchor-id="pattern-selection">Pattern Selection</h3>
-<p>When the program starts, it reads the <code>.png</code> files contained in the mounted USB folder and displays a scrollable list:</p>
-<pre class="text"><code>SELEZIONA PNG
-
-&gt; cuore.png
-  righe.png
-  fiore.png
-
-^v SPOSTA  OK SEL  + REF</code></pre>
-<p>If no PNG file is found, the interface displays:</p>
-<pre class="text"><code>NESSUN FILE PNG
-INSERIRE USB
-
-+ AGGIORNA</code></pre>
 </section>
 <section id="yarn-preparation" class="level3">
 <h3 class="anchored" data-anchor-id="yarn-preparation">Yarn Preparation</h3>
-<p>After selecting a pattern, the user is asked to insert the correct yarns:</p>
 <pre class="text"><code>PATTERN SELEZIONATO
 cuore.png
 
@@ -493,269 +355,119 @@ INSERIRE
 I FILATI
 
 + AVVIA    &lt; MENU</code></pre>
+<p><code>PLUS</code> starts the real processing sequence; <code>BACK</code> returns to pattern selection.</p>
 </section>
-<section id="processing-screen" class="level3">
-<h3 class="anchored" data-anchor-id="processing-screen">Processing Screen</h3>
-<p>Once the job starts, the display shows its status and progress:</p>
+<section id="running-state" class="level3">
+<h3 class="anchored" data-anchor-id="running-state">Running State</h3>
 <pre class="text"><code>cuore.png
-
 IN LAVORAZIONE
 
 [ progress bar ]
 
 36%   18/50
-
 - STOP</code></pre>
+<p>In real mode the counter advances when the ESP32 sends <code>NEXT</code> after a microswitch press.</p>
 </section>
-<section id="interruption-screens" class="level3">
-<h3 class="anchored" data-anchor-id="interruption-screens">Interruption Screens</h3>
-<p>When the vision system detects a defect, the program can call:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>app.notify_error()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The interface then shows:</p>
-<pre class="text"><code>ERRORE
-RISCONTRATO
-
-FERMO AL 36%
-
-+ RIPRENDI  &lt; MENU</code></pre>
-<p>When a colour-distance condition requires manual yarn cutting, the program can call:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>app.notify_cut_thread()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The interface then shows:</p>
-<pre class="text"><code>TAGLIARE
-IL FILO
-
-FERMO AL 36%
-
-+ RIPRENDI  &lt; MENU</code></pre>
-<p>In both cases, the user can resolve the problem and press <code>PLUS</code> to resume.</p>
-<hr>
+<section id="stopped-and-completed-states" class="level3">
+<h3 class="anchored" data-anchor-id="stopped-and-completed-states">Stopped and Completed States</h3>
+<p>The operator can pause the colour-selection mechanism with <code>MINUS</code>, resume with <code>PLUS</code>, or return to the menu with <code>BACK</code>. At the end of the pattern the completion screen is displayed.</p>
 </section>
 </section>
-<section id="raspberry-pi-setup" class="level2">
-<h2 class="anchored" data-anchor-id="raspberry-pi-setup">Raspberry Pi Setup</h2>
-<p>The current Raspberry Pi is used in <strong>headless mode</strong>, through SSH. Therefore, all installation and testing steps are executed from the terminal.</p>
-<section id="enable-spi-and-i²c" class="level3">
-<h3 class="anchored" data-anchor-id="enable-spi-and-i²c">1. Enable SPI and I²C</h3>
-<p>The GFX HAT needs both SPI and I²C enabled.</p>
-<p>Connect to the Raspberry Pi through SSH and run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> raspi-config</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Navigate to:</p>
-<pre class="text"><code>Interface Options
-├── SPI → Enable
-└── I2C → Enable</code></pre>
-<p>Then reboot:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> reboot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>After reconnecting through SSH, SPI can be checked with:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /dev/spidev<span class="pp">*</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The I²C bus can be checked by installing <code>i2c-tools</code> and scanning bus 1:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> i2c-tools</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> i2cdetect <span class="at">-y</span> 1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>With the GFX HAT connected, the touch controller and backlight controller are expected at addresses:</p>
-<pre class="text"><code>0x2c  → CAP1166 touch controller
-0x54  → SN3218 RGB backlight controller</code></pre>
-<hr>
+<section id="application-states" class="level2">
+<h2 class="anchored" data-anchor-id="application-states">Application States</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>State</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>SELECT_FILE</code></td>
+<td>Lists <code>.png</code> files available on the mounted USB drive</td>
+</tr>
+<tr class="even">
+<td><code>INSERT_YARNS</code></td>
+<td>Requests the operator to prepare yarns before actuation</td>
+</tr>
+<tr class="odd">
+<td><code>RUNNING</code></td>
+<td>Displays the real progress of the selected pattern</td>
+</tr>
+<tr class="even">
+<td><code>STOPPED</code></td>
+<td>Keeps the current pattern position while servos are released</td>
+</tr>
+<tr class="odd">
+<td><code>ALERT</code></td>
+<td>Prepared screen for an error or yarn-cut request</td>
+</tr>
+<tr class="even">
+<td><code>DONE</code></td>
+<td>Reports successful completion</td>
+</tr>
+</tbody>
+</table>
 </section>
+<section id="usb-pattern-selection" class="level2">
+<h2 class="anchored" data-anchor-id="usb-pattern-selection">USB Pattern Selection</h2>
+<p>The PNG files are stored directly in the root folder of the USB flash drive. In the current setup, the drive is mounted at:</p>
+<pre class="text"><code>/mnt/pattern_usb</code></pre>
+<p>When a pattern is selected, it is copied locally to:</p>
+<pre class="text"><code>~/automated_knitting_machine/patterns/current_pattern.png</code></pre>
 </section>
-<section id="python-environment-and-library-installation" class="level2">
-<h2 class="anchored" data-anchor-id="python-environment-and-library-installation">Python Environment and Library Installation</h2>
-<p>Because recent Raspberry Pi OS versions protect the system Python environment, the project uses a Python virtual environment.</p>
-<p>Install the required system packages:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> python3-venv python3-pil python3-rpi.gpio python3-spidev python3-smbus i2c-tools</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Create the virtual environment, if it does not already exist:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv <span class="at">--system-site-packages</span> ~/venvs/uncinetto</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Activate it:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/venvs/uncinetto/bin/activate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The terminal prompt should now start with:</p>
-<pre class="text"><code>(uncinetto)</code></pre>
-<p>Install the GFX HAT Python library inside the virtual environment:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">--upgrade</span> pip</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install gfxhat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The Pimoroni <code>gfxhat</code> package installs the Python interface to the LCD, RGB backlight and touch controls; its package dependencies include the <code>cap1xxx</code> and <code>sn3218</code> drivers.</p>
-<hr>
-</section>
-<section id="usb-drive-setup" class="level2">
-<h2 class="anchored" data-anchor-id="usb-drive-setup">USB Drive Setup</h2>
-<p>The user creates the pattern on a personal computer using the Pattern Editor and saves one or more <code>.png</code> files to a USB drive.</p>
-<p>Example USB content:</p>
-<pre class="text"><code>USB_DRIVE/
-├── cuore.png
-├── fiore.png
-└── righe.png</code></pre>
-<section id="identify-the-usb-partition" class="level3">
-<h3 class="anchored" data-anchor-id="identify-the-usb-partition">1. Identify the USB Partition</h3>
-<p>Insert the USB drive into the Raspberry Pi and run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lsblk</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>In the current prototype test, the USB drive was recognized as:</p>
-<pre class="text"><code>sda
-└─sda1</code></pre>
-<p>Therefore, the partition to mount is:</p>
-<pre class="text"><code>/dev/sda1</code></pre>
-</section>
-<section id="mount-the-usb-drive" class="level3">
-<h3 class="anchored" data-anchor-id="mount-the-usb-drive">2. Mount the USB Drive</h3>
-<p>Create a fixed mount directory:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir <span class="at">-p</span> /mnt/pattern_usb</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Mount the USB partition:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mount /dev/sda1 /mnt/pattern_usb</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>If the terminal displays the following warning:</p>
-<pre class="text"><code>mount: (hint) your fstab has been modified, but systemd still uses
-       the old version; use 'systemctl daemon-reload' to reload.</code></pre>
-<p>run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl daemon-reload</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Then verify that the USB drive is correctly mounted:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="ex">findmnt</span> /mnt/pattern_usb</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lah</span> /mnt/pattern_usb</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The <code>.png</code> files should appear in the directory listing.</p>
-</section>
-<section id="safely-remove-the-usb-drive" class="level3">
-<h3 class="anchored" data-anchor-id="safely-remove-the-usb-drive">3. Safely Remove the USB Drive</h3>
-<p>Before physically removing the USB drive, stop the program and unmount it:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> umount /mnt/pattern_usb</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<hr>
-</section>
-</section>
-<section id="running-gfxhat_pattern_ui.py" class="level2">
-<h2 class="anchored" data-anchor-id="running-gfxhat_pattern_ui.py">Running <code>gfxhat_pattern_ui.py</code></h2>
-<p>In the current prototype, the script is stored in the user home directory:</p>
-<pre class="text"><code>/home/aless/gfxhat_pattern_ui.py</code></pre>
-<p>Activate the environment before running it:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/venvs/uncinetto/bin/activate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="running-the-display" class="level2">
+<h2 class="anchored" data-anchor-id="running-the-display">Running the Display</h2>
 <section id="demo-mode" class="level3">
 <h3 class="anchored" data-anchor-id="demo-mode">Demo Mode</h3>
-<p>Demo mode is used to test the display, the USB file selection, the touch buttons, the progress screen and the two interruption screens without starting any real actuator:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> ~/gfxhat_pattern_ui.py <span class="at">--usb-dir</span> /mnt/pattern_usb <span class="at">--demo</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Test sequence:</p>
-<pre class="text"><code>UP / DOWN  → browse the available PNG files
-SELECT     → choose one PNG file
-PLUS       → start the simulated process
-MINUS      → stop the process
-PLUS       → resume the process
-BACK       → simulate "ERRORE RISCONTRATO" while running
-SELECT     → simulate "TAGLIARE IL FILO" while running</code></pre>
-<p>In demo mode, the progress percentage automatically increases until the completion screen is displayed.</p>
+<p>Demo mode tests the UI without moving the motors:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> /home/aless/venvs/uncinetto/bin/activate</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> /home/aless/gfxhat_pattern_ui_usb.py <span class="at">--usb-dir</span> /mnt/pattern_usb <span class="at">--demo</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="real-mode" class="level3">
 <h3 class="anchored" data-anchor-id="real-mode">Real Mode</h3>
-<p>The program can also be started without the simulator:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> ~/gfxhat_pattern_ui.py <span class="at">--usb-dir</span> /mnt/pattern_usb</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>In this mode, the interface operates normally, but the progress percentage will not increase until the real machine-control code sends progress events.</p>
-<hr>
+<p>Real mode communicates with the ESP32, detected in the tested setup at <code>/dev/ttyUSB0</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> /home/aless/venvs/uncinetto/bin/activate</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> /home/aless/gfxhat_pattern_ui_usb.py <span class="at">--usb-dir</span> /mnt/pattern_usb <span class="at">--port</span> /dev/ttyUSB0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="software-integration-with-the-machine" class="level2">
-<h2 class="anchored" data-anchor-id="software-integration-with-the-machine">Software Integration with the Machine</h2>
-<p>The interface code already exposes the methods required by the future control pipeline.</p>
-<section id="progress-update" class="level3">
-<h3 class="anchored" data-anchor-id="progress-update">Progress Update</h3>
-<p>The real control code must notify the interface whenever a cycle or a row is completed:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>app.notify_progress(completed_cycles, total_cycles)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Example:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>app.notify_progress(<span class="dv">18</span>, <span class="dv">50</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The display will report:</p>
-<pre class="text"><code>36%   18/50</code></pre>
+<section id="compatibility-note-lcd-contrast" class="level2">
+<h2 class="anchored" data-anchor-id="compatibility-note-lcd-contrast">Compatibility Note: LCD Contrast</h2>
+<p>During initial tests the installed <code>gfxhat</code> library did not expose <code>lcd.contrast()</code>. The robust display initialization is:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>lcd.clear()</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">hasattr</span>(lcd, <span class="st">"contrast"</span>):</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    lcd.contrast(<span class="dv">42</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="va">self</span>.set_backlight((<span class="dv">0</span>, <span class="dv">40</span>, <span class="dv">70</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This allows the program to run with library versions that do not implement the contrast method.</p>
 </section>
-<section id="error-recognition-alert" class="level3">
-<h3 class="anchored" data-anchor-id="error-recognition-alert">Error Recognition Alert</h3>
-<p>When the Raspberry Pi camera classifier detects an error in the yarn or in the manufactured structure, the vision code must call:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>app.notify_error()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>This opens the <code>ERRORE RISCONTRATO</code> screen and requests a pause of the machine.</p>
-</section>
-<section id="long-distance-yarn-cut-alert" class="level3">
-<h3 class="anchored" data-anchor-id="long-distance-yarn-cut-alert">Long-Distance Yarn Cut Alert</h3>
-<p>When the pattern-processing logic detects a distance that requires manual cutting of a yarn, it must call:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>app.notify_cut_thread()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>This opens the <code>TAGLIARE IL FILO</code> screen.</p>
-</section>
-<section id="completion-event" class="level3">
-<h3 class="anchored" data-anchor-id="completion-event">Completion Event</h3>
-<p>When the machine completes the selected pattern, the controller must call:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>app.notify_done()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="esp32-communication" class="level3">
-<h3 class="anchored" data-anchor-id="esp32-communication">ESP32 Communication</h3>
-<p>The class:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>MachineController</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>contains the methods that will later be connected to the ESP32 through USB serial communication:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>start()</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>stop()</span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>pause()</span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>resume()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>At present these methods only print terminal messages. In the final control system, they will send real commands to the ESP32, which will control the stepper motor, the three servos and the synchronization microswitch.</p>
-<hr>
-</section>
-</section>
-<section id="compatibility-fix-lcd.contrast" class="level2">
-<h2 class="anchored" data-anchor-id="compatibility-fix-lcd.contrast">Compatibility Fix: <code>lcd.contrast()</code></h2>
-<p>During the first execution on the Raspberry Pi, the following error occurred:</p>
-<pre class="text"><code>AttributeError: module 'gfxhat.lcd' has no attribute 'contrast'</code></pre>
-<p>The error was generated by this line in <code>GfxScreen.__init__()</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>lcd.contrast(<span class="dv">42</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Some installed versions of the <code>gfxhat</code> Python library do not expose the <code>contrast()</code> function through <code>gfxhat.lcd</code>. To keep the application compatible with both versions, the script was corrected as follows:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>lcd.clear()</span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">hasattr</span>(lcd, <span class="st">"contrast"</span>):</span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>    lcd.contrast(<span class="dv">42</span>)</span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="va">self</span>.set_backlight((<span class="dv">0</span>, <span class="dv">40</span>, <span class="dv">70</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>With this modification, contrast is set only when the function is available; otherwise, the program continues normally using the default contrast.</p>
-<hr>
-</section>
-<section id="troubleshooting" class="level2">
-<h2 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h2>
-<section id="no-png-files-are-displayed" class="level3">
-<h3 class="anchored" data-anchor-id="no-png-files-are-displayed">No PNG Files Are Displayed</h3>
-<p>Check that the USB drive is mounted and contains <code>.png</code> files directly in its root folder:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="ex">findmnt</span> /mnt/pattern_usb</span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lah</span> /mnt/pattern_usb</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Then press the <code>PLUS</code> touch button on the file-selection screen to refresh the list.</p>
-</section>
-<section id="modulenotfounderror-no-module-named-gfxhat" class="level3">
-<h3 class="anchored" data-anchor-id="modulenotfounderror-no-module-named-gfxhat"><code>ModuleNotFoundError: No module named 'gfxhat'</code></h3>
-<p>Activate the correct virtual environment and install the package:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/venvs/uncinetto/bin/activate</span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install gfxhat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="display-or-touch-buttons-do-not-respond" class="level3">
-<h3 class="anchored" data-anchor-id="display-or-touch-buttons-do-not-respond">Display or Touch Buttons Do Not Respond</h3>
-<p>Verify that SPI and I²C are enabled:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /dev/spidev<span class="pp">*</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> i2cdetect <span class="at">-y</span> 1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The I²C scan should identify the GFX HAT control devices at <code>0x2c</code> and <code>0x54</code>. Also verify the GPIO cable orientation if the HAT is connected through an extension cable.</p>
-</section>
-<section id="attributeerror-module-gfxhat.lcd-has-no-attribute-contrast" class="level3">
-<h3 class="anchored" data-anchor-id="attributeerror-module-gfxhat.lcd-has-no-attribute-contrast"><code>AttributeError: module 'gfxhat.lcd' has no attribute 'contrast'</code></h3>
-<p>Make sure that the initialization of <code>GfxScreen</code> contains the compatibility condition:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>lcd.clear()</span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">hasattr</span>(lcd, <span class="st">"contrast"</span>):</span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>    lcd.contrast(<span class="dv">42</span>)</span>
-<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="va">self</span>.set_backlight((<span class="dv">0</span>, <span class="dv">40</span>, <span class="dv">70</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="usb-removal" class="level3">
-<h3 class="anchored" data-anchor-id="usb-removal">USB Removal</h3>
-<p>Do not remove the USB drive while it is still mounted. Once the program is stopped, run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> umount /mnt/pattern_usb</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<hr>
-</section>
-</section>
-<section id="future-development" class="level2">
-<h2 class="anchored" data-anchor-id="future-development">Future Development</h2>
-<p>The GFX HAT interface already defines the complete expected operator workflow. The following integrations remain to be completed:</p>
+<section id="future-alert-integration" class="level2">
+<h2 class="anchored" data-anchor-id="future-alert-integration">Future Alert Integration</h2>
+<p>The interface already includes screens for:</p>
 <ul>
-<li>connection of <code>MachineController</code> to the ESP32 through USB serial communication;</li>
-<li>update of the progress counter from the physical synchronization events;</li>
-<li>connection of the Pi Camera recognition output to <code>notify_error()</code>;</li>
-<li>detection of long yarn distances and activation of <code>notify_cut_thread()</code>;</li>
-<li>automatic start of the user interface when the Raspberry Pi is powered on.</li>
+<li><code>ERRORE RISCONTRATO</code>;</li>
+<li><code>TAGLIARE IL FILO</code>.</li>
 </ul>
-<hr>
+<p>The visual error-recognition algorithm is documented in <a href="./error-recognition.html">Error Recognition</a>. Connecting its output to the real actuator pause command remains an integration task.</p>
+</section>
+<section id="related-pages" class="level2">
+<h2 class="anchored" data-anchor-id="related-pages">Related Pages</h2>
+<ul>
+<li><a href="./operating-machine.html">Operating the Machine</a></li>
+<li><a href="./raspberry-control.html">Raspberry Pi Application</a></li>
+<li><a href="./esp32-actuation.html">ESP32 and Actuation</a></li>
+<li><a href="./troubleshooting.html">Troubleshooting</a></li>
+</ul>
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
 <ul>
 <li><a href="https://github.com/pimoroni/gfx-hat">Pimoroni GFX HAT Python library</a></li>
 <li><a href="https://pinout.xyz/pinout/gfx_hat">Pimoroni GFX HAT GPIO pinout</a></li>
-<li><a href="https://www.raspberrypi.com/documentation/computers/configuration.html">Raspberry Pi configuration documentation</a></li>
-<li><a href="https://www.raspberrypi.com/documentation/accessories/camera.html">Raspberry Pi camera documentation</a></li>
 </ul>
 
 

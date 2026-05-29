@@ -1,47 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/wiring-power.html</loc>
+    <lastmod>2026-05-29T12:07:16.888Z</lastmod>
+  </url>
+  <url>
+    <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/stepper-motor.html</loc>
+    <lastmod>2026-05-29T12:07:16.868Z</lastmod>
+  </url>
+  <url>
+    <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/README_COPY_INTO_REPOSITORY.html</loc>
+    <lastmod>2026-05-29T12:07:16.686Z</lastmod>
+  </url>
+  <url>
+    <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/pattern-editor.html</loc>
+    <lastmod>2026-05-29T12:07:16.824Z</lastmod>
+  </url>
+  <url>
     <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/index.html</loc>
-    <lastmod>2026-05-28T09:24:20.477Z</lastmod>
+    <lastmod>2026-05-29T12:18:10.899Z</lastmod>
+  </url>
+  <url>
+    <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/esp32-actuation.html</loc>
+    <lastmod>2026-05-29T12:07:16.795Z</lastmod>
   </url>
   <url>
     <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/error-recognition.html</loc>
-    <lastmod>2026-02-27T09:40:01.219Z</lastmod>
+    <lastmod>2026-05-29T12:07:16.777Z</lastmod>
   </url>
   <url>
     <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/error-future_work.html</loc>
-    <lastmod>2026-02-27T09:40:01.219Z</lastmod>
+    <lastmod>2026-05-29T12:07:16.761Z</lastmod>
   </url>
   <url>
     <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/error-camera.html</loc>
-    <lastmod>2026-02-27T10:24:41.308Z</lastmod>
-  </url>
-  <url>
-    <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/control-system.html</loc>
-    <lastmod>2026-02-27T09:40:01.215Z</lastmod>
-  </url>
-  <url>
-    <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/about.html</loc>
-    <lastmod>2026-02-27T09:39:57.080Z</lastmod>
-  </url>
-  <url>
-    <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/components.html</loc>
-    <lastmod>2026-02-27T09:40:01.213Z</lastmod>
+    <lastmod>2026-05-29T12:07:16.745Z</lastmod>
   </url>
   <url>
     <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/display-interface.html</loc>
-    <lastmod>2026-05-28T09:03:21.102Z</lastmod>
+    <lastmod>2026-05-29T12:07:16.737Z</lastmod>
+  </url>
+  <url>
+    <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/components.html</loc>
+    <lastmod>2026-05-29T12:07:16.718Z</lastmod>
+  </url>
+  <url>
+    <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/about.html</loc>
+    <lastmod>2026-05-29T12:07:16.698Z</lastmod>
+  </url>
+  <url>
+    <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/control-system.html</loc>
+    <lastmod>2026-05-29T12:07:16.718Z</lastmod>
+  </url>
+  <url>
+    <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/display-interfaface.html</loc>
+    <lastmod>2026-05-29T11:55:16.265Z</lastmod>
   </url>
   <url>
     <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/error-code.html</loc>
-    <lastmod>2026-02-27T09:40:01.219Z</lastmod>
+    <lastmod>2026-05-29T12:07:16.756Z</lastmod>
   </url>
   <url>
     <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/error-mount.html</loc>
-    <lastmod>2026-02-27T09:40:01.219Z</lastmod>
+    <lastmod>2026-05-29T12:07:16.769Z</lastmod>
   </url>
   <url>
     <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/error-results.html</loc>
-    <lastmod>2026-02-27T09:40:01.219Z</lastmod>
+    <lastmod>2026-05-29T12:07:16.789Z</lastmod>
+  </url>
+  <url>
+    <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/future-developments.html</loc>
+    <lastmod>2026-05-29T12:07:16.795Z</lastmod>
+  </url>
+  <url>
+    <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/operating-machine.html</loc>
+    <lastmod>2026-05-29T12:07:16.824Z</lastmod>
+  </url>
+  <url>
+    <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/raspberry-control.html</loc>
+    <lastmod>2026-05-29T12:07:16.848Z</lastmod>
+  </url>
+  <url>
+    <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/servo-arms.html</loc>
+    <lastmod>2026-05-29T12:07:16.856Z</lastmod>
+  </url>
+  <url>
+    <loc>https://AlessiaRinaldi.github.io/docs_knitting_machine/troubleshooting.html</loc>
+    <lastmod>2026-05-29T12:07:16.880Z</lastmod>
   </url>
 </urlset>

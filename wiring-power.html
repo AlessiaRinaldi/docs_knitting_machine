@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>error-mount</title>
+<title>Wiring and Power Supply</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -213,78 +213,160 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#sec:camera_mount" id="toc-sec:camera_mount" class="nav-link active" data-scroll-target="#sec\:camera_mount">Mechanical Design of the Camera Mount</a>
+  <li><a href="#wiring-and-power-supply" id="toc-wiring-and-power-supply" class="nav-link active" data-scroll-target="#wiring-and-power-supply">Wiring and Power Supply</a>
   <ul>
-  <li><a href="#custom-3d-printed-camera-holder" id="toc-custom-3d-printed-camera-holder" class="nav-link" data-scroll-target="#custom-3d-printed-camera-holder">Custom 3D-Printed Camera Holder</a></li>
-  <li><a href="#stability-considerations-and-limitations" id="toc-stability-considerations-and-limitations" class="nav-link" data-scroll-target="#stability-considerations-and-limitations">Stability Considerations and Limitations</a></li>
+  <li><a href="#complete-connection-diagram" id="toc-complete-connection-diagram" class="nav-link" data-scroll-target="#complete-connection-diagram">Complete Connection Diagram</a></li>
+  <li><a href="#raspberry-pi-and-esp32" id="toc-raspberry-pi-and-esp32" class="nav-link" data-scroll-target="#raspberry-pi-and-esp32">Raspberry Pi and ESP32</a></li>
+  <li><a href="#servomotor-supply" id="toc-servomotor-supply" class="nav-link" data-scroll-target="#servomotor-supply">Servomotor Supply</a></li>
+  <li><a href="#common-ground" id="toc-common-ground" class="nav-link" data-scroll-target="#common-ground">Common Ground</a></li>
+  <li><a href="#microswitch" id="toc-microswitch" class="nav-link" data-scroll-target="#microswitch">Microswitch</a></li>
+  <li><a href="#recommended-power-on-procedure" id="toc-recommended-power-on-procedure" class="nav-link" data-scroll-target="#recommended-power-on-procedure">Recommended Power-On Procedure</a></li>
+  <li><a href="#related-pages" id="toc-related-pages" class="nav-link" data-scroll-target="#related-pages">Related Pages</a></li>
   </ul></li>
-  <li><a href="#error-recognition-code" id="toc-error-recognition-code" class="nav-link" data-scroll-target="#error-recognition-code">- <strong>Error Recognition — Code</strong></a></li>
-  <li><a href="#results-efficiency" id="toc-results-efficiency" class="nav-link" data-scroll-target="#results-efficiency">- <strong>Results &amp; Efficiency</strong></a></li>
-  <li><a href="#conclusions-and-future-works" id="toc-conclusions-and-future-works" class="nav-link" data-scroll-target="#conclusions-and-future-works">- <strong>Conclusions and Future Works</strong></a></li>
-  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">- <strong>Overview</strong></a></li>
-  <li><a href="#selection-of-the-acquisition-system-for-error-detection" id="toc-selection-of-the-acquisition-system-for-error-detection" class="nav-link" data-scroll-target="#selection-of-the-acquisition-system-for-error-detection">- <strong>Selection of the Acquisition System for Error Detection</strong></a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content column-page-left" id="quarto-document-content">
 
-
-
-
-<section id="sec:camera_mount" class="level2">
-<h2 class="anchored" data-anchor-id="sec:camera_mount">Mechanical Design of the Camera Mount</h2>
-<p>The camera mounting solution combines a commercially available __magnetic-base stand_ with a <strong>custom 3D-printed support</strong> designed specifically for the Raspberry Pi Camera module.<br>
-The magnetic base provides a <strong>rigid</strong> and <strong>highly stable foundation</strong>, while allowing fine manual adjustment in height, angle, and lateral position through its articulated arm.</p>
-<section id="custom-3d-printed-camera-holder" class="level3">
-<h3 class="anchored" data-anchor-id="custom-3d-printed-camera-holder">Custom 3D-Printed Camera Holder</h3>
-<p>A custom holder for the Raspberry Pi Camera v2.1 was designed in <strong>Autodesk Fusion 360</strong> and fabricated using fused deposition modeling (FDM) with <strong>PLA filament</strong> on a <strong>Bambu Lab A1 Mini 3D printer</strong>.<br>
-The printed part encloses the camera PCB and incorporates a series of mounting holes and a pin that fits into the threaded end of the magnetic base arm.</p>
-</section>
-<section id="stability-considerations-and-limitations" class="level3">
-<h3 class="anchored" data-anchor-id="stability-considerations-and-limitations">Stability Considerations and Limitations</h3>
-<p>While the magnetic stand and the 3D-printed camera holder provide sufficient <strong>stability</strong> for prototyping, the overall <strong>stiffness</strong> of the structure is <strong>not optimal yet</strong>.<br>
-Small shifts caused by machine <strong>vibration</strong> or accidental contact can slightly <strong>alter the camera pose</strong> over time, affecting the exact position of the <strong>region of interest</strong> in the image.<br>
-Improving the mechanical stability of the mounting solution is therefore an <strong>important direction</strong> for future work, with the goal of achieving <strong>fully repeatable alignment</strong> over long acquisition periods.</p>
-<p>A <strong>CAD rendering</strong> of the printed holder is shown in Figure.</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div id="fig:front" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="images/3d_front.png" class="img-fluid figure-img"></p>
-<figcaption>Front of the 3D structure</figcaption>
-</figure>
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Wiring and Power Supply</h1>
 </div>
-</div><div class="column" style="width:50%;">
-<div id="fig:back" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="images/3d_back.png" class="img-fluid figure-img"></p>
-<figcaption>Back of the 3D structure</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="error-recognition-code" class="level2">
-<h2 class="anchored" data-anchor-id="error-recognition-code">- <strong><a href="./error-code.html">Error Recognition — Code</a></strong></h2>
-<p>Algorithms, model/code structure, data flow, and deployment notes.</p>
-</section>
-<section id="results-efficiency" class="level2">
-<h2 class="anchored" data-anchor-id="results-efficiency">- <strong><a href="./error-results.html">Results &amp; Efficiency</a></strong></h2>
-<p>Datasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget.</p>
-</section>
-<section id="conclusions-and-future-works" class="level2">
-<h2 class="anchored" data-anchor-id="conclusions-and-future-works">- <strong><a href="./error-future_work.html">Conclusions and Future Works</a></strong></h2>
-</section>
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">- <strong><a href="./error-recognition.html">Overview</a></strong></h2>
-</section>
-<section id="selection-of-the-acquisition-system-for-error-detection" class="level2">
-<h2 class="anchored" data-anchor-id="selection-of-the-acquisition-system-for-error-detection">- <strong><a href="./error-camera.html">Selection of the Acquisition System for Error Detection</a></strong></h2>
-<p>Requirements, sensor &amp; lens selection, lighting, sync, and mounting constraints.</p>
 
 
+
+<div class="quarto-title-meta column-page-left">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="wiring-and-power-supply" class="level1">
+<h1>Wiring and Power Supply</h1>
+<section id="complete-connection-diagram" class="level2">
+<h2 class="anchored" data-anchor-id="complete-connection-diagram">Complete Connection Diagram</h2>
+<pre class="text"><code>Raspberry Pi
+  │
+  │ USB / micro-USB cable
+  ▼
+ESP32
+  ├── GPIO13 ── Servo 1 signal
+  ├── GPIO14 ── Servo 2 signal
+  ├── GPIO27 ── Servo 3 signal
+  ├── GPIO25 ── Microswitch NO
+  └── GND    ── Microswitch COM
+       │
+       └──────── GND external DC-DC supply
+
+External regulated DC-DC supply: 5 V
+  ├── +5 V ── Servo 1/2/3 power wires
+  └── GND  ── Servo 1/2/3 ground wires</code></pre>
+</section>
+<section id="raspberry-pi-and-esp32" class="level2">
+<h2 class="anchored" data-anchor-id="raspberry-pi-and-esp32">Raspberry Pi and ESP32</h2>
+<p>The ESP32 is connected to the Raspberry Pi using its USB cable. This connection provides:</p>
+<ul>
+<li>electrical power for the ESP32 development board;</li>
+<li>the USB serial communication channel used by <code>gfxhat_pattern_ui_usb.py</code>.</li>
+</ul>
+<p>In the tested setup, the ESP32 is detected as:</p>
+<pre class="text"><code>/dev/ttyUSB0</code></pre>
+</section>
+<section id="servomotor-supply" class="level2">
+<h2 class="anchored" data-anchor-id="servomotor-supply">Servomotor Supply</h2>
+<p>The three servomotors must be powered by the external regulated 5 V DC-DC supply.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Servo connection</th>
+<th>Wiring</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Servo signal 1</td>
+<td>ESP32 GPIO13</td>
+</tr>
+<tr class="even">
+<td>Servo signal 2</td>
+<td>ESP32 GPIO14</td>
+</tr>
+<tr class="odd">
+<td>Servo signal 3</td>
+<td>ESP32 GPIO27</td>
+</tr>
+<tr class="even">
+<td>Servo positive supply</td>
+<td>External DC-DC <code>+5 V</code></td>
+</tr>
+<tr class="odd">
+<td>Servo ground</td>
+<td>External DC-DC <code>GND</code></td>
+</tr>
+</tbody>
+</table>
+<p>Do not supply the servomotors from the Raspberry Pi or ESP32 board.</p>
+</section>
+<section id="common-ground" class="level2">
+<h2 class="anchored" data-anchor-id="common-ground">Common Ground</h2>
+<p>A common electrical reference is required for the ESP32 PWM signals to be interpreted correctly by the servomotors:</p>
+<pre class="text"><code>GND DC-DC = GND servomotors = GND ESP32 = GND Raspberry Pi through USB</code></pre>
+<p>The external DC-DC <code>+5 V</code> is connected to the servomotors only; it must not be connected to the ESP32 power input while the board is already powered through USB.</p>
+</section>
+<section id="microswitch" class="level2">
+<h2 class="anchored" data-anchor-id="microswitch">Microswitch</h2>
+<p>For a three-terminal microswitch:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Terminal</th>
+<th>Connection</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>COM</code></td>
+<td>ESP32 GND</td>
+</tr>
+<tr class="even">
+<td><code>NO</code></td>
+<td>ESP32 GPIO25</td>
+</tr>
+<tr class="odd">
+<td><code>NC</code></td>
+<td>Not connected</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="recommended-power-on-procedure" class="level2">
+<h2 class="anchored" data-anchor-id="recommended-power-on-procedure">Recommended Power-On Procedure</h2>
+<ol type="1">
+<li>Verify all signal and ground connections with the servo supply off.</li>
+<li>Ensure the printed servo arms can move without collision.</li>
+<li>Connect the ESP32 to the Raspberry Pi through USB.</li>
+<li>Turn on the external 5 V servo supply.</li>
+<li>Launch the Raspberry Pi application.</li>
+<li>Select a PNG and press <code>AVVIA</code>.</li>
+</ol>
+</section>
+<section id="related-pages" class="level2">
+<h2 class="anchored" data-anchor-id="related-pages">Related Pages</h2>
+<ul>
+<li><a href="./operating-machine.html">Operating the Machine</a></li>
+<li><a href="./esp32-actuation.html">ESP32 and Actuation</a></li>
+<li><a href="./troubleshooting.html">Troubleshooting</a></li>
+</ul>
+
+
+</section>
 </section>
 
 </main> <!-- /main -->

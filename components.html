@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Components</title>
+<title>Components Overview</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -94,6 +94,75 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-user-guide" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">User Guide</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-user-guide">    
+        <li>
+    <a class="dropdown-item" href="./pattern-editor.html">
+ <span class="dropdown-text">Pattern Editor</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./operating-machine.html">
+ <span class="dropdown-text">Operating the Machine</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-control-system" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Control System</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-control-system">    
+        <li>
+    <a class="dropdown-item" href="./control-system.html">
+ <span class="dropdown-text">System Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./display-interface.html">
+ <span class="dropdown-text">Display Interface — GFX HAT</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./raspberry-control.html">
+ <span class="dropdown-text">Raspberry Pi Application</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./esp32-actuation.html">
+ <span class="dropdown-text">ESP32 and Actuation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./stepper-motor.html">
+ <span class="dropdown-text">Stepper Motor — Planned Development</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./wiring-power.html">
+ <span class="dropdown-text">Wiring and Power Supply</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./troubleshooting.html">
+ <span class="dropdown-text">Troubleshooting</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-mechanical-design" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Mechanical Design</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-mechanical-design">    
+        <li>
+    <a class="dropdown-item" href="./components.html">
+ <span class="dropdown-text">Components Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./servo-arms.html">
+ <span class="dropdown-text">3D-Printed Servo Arms</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./error-mount.html">
+ <span class="dropdown-text">3D Camera Mount</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-error-recognition" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Error Recognition</span>
     </a>
@@ -104,7 +173,7 @@ ul.task-list li input[type="checkbox"] {
   </li>  
         <li>
     <a class="dropdown-item" href="./error-camera.html">
- <span class="dropdown-text">Selection of the Acquisition System for Error Detection</span></a>
+ <span class="dropdown-text">Acquisition System</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./error-mount.html">
@@ -112,11 +181,11 @@ ul.task-list li input[type="checkbox"] {
   </li>  
         <li>
     <a class="dropdown-item" href="./error-code.html">
- <span class="dropdown-text">Error Recognition — Code</span></a>
+ <span class="dropdown-text">Algorithm and Code</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./error-results.html">
- <span class="dropdown-text">Results &amp; Efficiency</span></a>
+ <span class="dropdown-text">Results and Efficiency</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./error-future_work.html">
@@ -125,16 +194,8 @@ ul.task-list li input[type="checkbox"] {
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link active" href="./components.html" aria-current="page"> 
-<span class="menu-text">Components</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./control-system.html"> 
-<span class="menu-text">Control System</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./display-interface.html"> 
-<span class="menu-text">Display Interface</span></a>
+    <a class="nav-link" href="./future-developments.html"> 
+<span class="menu-text">Future Developments</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -152,7 +213,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#key-components" id="toc-key-components" class="nav-link active" data-scroll-target="#key-components">Key Components</a></li>
+  <li><a href="#components-overview" id="toc-components-overview" class="nav-link active" data-scroll-target="#components-overview">Components Overview</a>
+  <ul>
+  <li><a href="#main-electronic-and-mechanical-components" id="toc-main-electronic-and-mechanical-components" class="nav-link" data-scroll-target="#main-electronic-and-mechanical-components">Main Electronic and Mechanical Components</a></li>
+  <li><a href="#component-grouping" id="toc-component-grouping" class="nav-link" data-scroll-target="#component-grouping">Component Grouping</a>
+  <ul class="collapse">
+  <li><a href="#user-interface-and-high-level-processing" id="toc-user-interface-and-high-level-processing" class="nav-link" data-scroll-target="#user-interface-and-high-level-processing">User Interface and High-Level Processing</a></li>
+  <li><a href="#low-level-control-and-actuation" id="toc-low-level-control-and-actuation" class="nav-link" data-scroll-target="#low-level-control-and-actuation">Low-Level Control and Actuation</a></li>
+  <li><a href="#mechanical-components" id="toc-mechanical-components" class="nav-link" data-scroll-target="#mechanical-components">Mechanical Components</a></li>
+  <li><a href="#visual-monitoring" id="toc-visual-monitoring" class="nav-link" data-scroll-target="#visual-monitoring">Visual Monitoring</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -161,7 +232,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Components</h1>
+<h1 class="title">Components Overview</h1>
 </div>
 
 
@@ -178,15 +249,101 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="key-components" class="level1">
-<h1>Key Components</h1>
+<section id="components-overview" class="level1">
+<h1>Components Overview</h1>
+<section id="main-electronic-and-mechanical-components" class="level2">
+<h2 class="anchored" data-anchor-id="main-electronic-and-mechanical-components">Main Electronic and Mechanical Components</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Function in the prototype</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Raspberry Pi 3</td>
+<td>High-level control, display interface, PNG interpretation and vision pipeline</td>
+</tr>
+<tr class="even">
+<td>Pimoroni GFX HAT</td>
+<td>Embedded LCD and touch-button user interface</td>
+</tr>
+<tr class="odd">
+<td>ESP32</td>
+<td>Direct servomotor control and microswitch acquisition</td>
+</tr>
+<tr class="even">
+<td>Three servomotors</td>
+<td>Physical selection of the three yarn channels</td>
+</tr>
+<tr class="odd">
+<td>3D-printed servo arms</td>
+<td>Custom mechanical interfaces for yarn selection</td>
+</tr>
+<tr class="even">
+<td>Microswitch</td>
+<td>Synchronization event for pattern advancement</td>
+</tr>
+<tr class="odd">
+<td>Raspberry Pi Camera</td>
+<td>Image acquisition for the error-recognition subsystem</td>
+</tr>
+<tr class="even">
+<td>3D-printed camera mount</td>
+<td>Repeatable camera positioning near the hook region</td>
+</tr>
+<tr class="odd">
+<td>External DC-DC converter</td>
+<td>Regulated 5 V supply dedicated to the servomotors</td>
+</tr>
+<tr class="even">
+<td>USB flash drive</td>
+<td>Transfer of PNG pattern files to the Raspberry Pi</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="component-grouping" class="level2">
+<h2 class="anchored" data-anchor-id="component-grouping">Component Grouping</h2>
+<section id="user-interface-and-high-level-processing" class="level3">
+<h3 class="anchored" data-anchor-id="user-interface-and-high-level-processing">User Interface and High-Level Processing</h3>
 <ul>
-<li>Motors, drivers, sensors</li>
-<li>Camera &amp; lighting</li>
-<li>MCU &amp; wiring</li>
+<li><a href="./display-interface.html">Display Interface — GFX HAT</a></li>
+<li><a href="./raspberry-control.html">Raspberry Pi Application</a></li>
+</ul>
+</section>
+<section id="low-level-control-and-actuation" class="level3">
+<h3 class="anchored" data-anchor-id="low-level-control-and-actuation">Low-Level Control and Actuation</h3>
+<ul>
+<li><a href="./esp32-actuation.html">ESP32 and Actuation</a></li>
+<li><a href="./wiring-power.html">Wiring and Power Supply</a></li>
+<li><a href="./stepper-motor.html">Stepper Motor — Planned Development</a></li>
+</ul>
+</section>
+<section id="mechanical-components" class="level3">
+<h3 class="anchored" data-anchor-id="mechanical-components">Mechanical Components</h3>
+<ul>
+<li><a href="./servo-arms.html">3D-Printed Servo Arms</a></li>
+<li><a href="./error-mount.html">3D Camera Mount</a></li>
+</ul>
+</section>
+<section id="visual-monitoring" class="level3">
+<h3 class="anchored" data-anchor-id="visual-monitoring">Visual Monitoring</h3>
+<ul>
+<li><a href="./error-recognition.html">Error Recognition Overview</a></li>
+<li><a href="./error-camera.html">Acquisition System</a></li>
+<li><a href="./error-code.html">Algorithm and Code</a></li>
+<li><a href="./error-results.html">Results and Efficiency</a></li>
 </ul>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->

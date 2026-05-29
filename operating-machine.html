@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>error-mount</title>
+<title>Operating the Machine</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -213,78 +248,194 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#sec:camera_mount" id="toc-sec:camera_mount" class="nav-link active" data-scroll-target="#sec\:camera_mount">Mechanical Design of the Camera Mount</a>
+  <li><a href="#operating-the-machine" id="toc-operating-the-machine" class="nav-link active" data-scroll-target="#operating-the-machine">Operating the Machine</a>
   <ul>
-  <li><a href="#custom-3d-printed-camera-holder" id="toc-custom-3d-printed-camera-holder" class="nav-link" data-scroll-target="#custom-3d-printed-camera-holder">Custom 3D-Printed Camera Holder</a></li>
-  <li><a href="#stability-considerations-and-limitations" id="toc-stability-considerations-and-limitations" class="nav-link" data-scroll-target="#stability-considerations-and-limitations">Stability Considerations and Limitations</a></li>
+  <li><a href="#operator-workflow" id="toc-operator-workflow" class="nav-link" data-scroll-target="#operator-workflow">Operator Workflow</a>
+  <ul class="collapse">
+  <li><a href="#create-the-pattern" id="toc-create-the-pattern" class="nav-link" data-scroll-target="#create-the-pattern">1. Create the Pattern</a></li>
+  <li><a href="#copy-the-pattern-to-the-usb-drive" id="toc-copy-the-pattern-to-the-usb-drive" class="nav-link" data-scroll-target="#copy-the-pattern-to-the-usb-drive">2. Copy the Pattern to the USB Drive</a></li>
+  <li><a href="#prepare-the-hardware" id="toc-prepare-the-hardware" class="nav-link" data-scroll-target="#prepare-the-hardware">3. Prepare the Hardware</a></li>
+  <li><a href="#start-the-application" id="toc-start-the-application" class="nav-link" data-scroll-target="#start-the-application">4. Start the Application</a></li>
+  <li><a href="#select-the-png-from-the-display" id="toc-select-the-png-from-the-display" class="nav-link" data-scroll-target="#select-the-png-from-the-display">5. Select the PNG from the Display</a></li>
+  <li><a href="#insert-the-yarns" id="toc-insert-the-yarns" class="nav-link" data-scroll-target="#insert-the-yarns">6. Insert the Yarns</a></li>
+  <li><a href="#start-production" id="toc-start-production" class="nav-link" data-scroll-target="#start-production">7. Start Production</a></li>
+  <li><a href="#monitor-the-process" id="toc-monitor-the-process" class="nav-link" data-scroll-target="#monitor-the-process">8. Monitor the Process</a></li>
+  <li><a href="#pause-and-resume" id="toc-pause-and-resume" class="nav-link" data-scroll-target="#pause-and-resume">9. Pause and Resume</a></li>
+  <li><a href="#completion" id="toc-completion" class="nav-link" data-scroll-target="#completion">10. Completion</a></li>
   </ul></li>
-  <li><a href="#error-recognition-code" id="toc-error-recognition-code" class="nav-link" data-scroll-target="#error-recognition-code">- <strong>Error Recognition — Code</strong></a></li>
-  <li><a href="#results-efficiency" id="toc-results-efficiency" class="nav-link" data-scroll-target="#results-efficiency">- <strong>Results &amp; Efficiency</strong></a></li>
-  <li><a href="#conclusions-and-future-works" id="toc-conclusions-and-future-works" class="nav-link" data-scroll-target="#conclusions-and-future-works">- <strong>Conclusions and Future Works</strong></a></li>
-  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">- <strong>Overview</strong></a></li>
-  <li><a href="#selection-of-the-acquisition-system-for-error-detection" id="toc-selection-of-the-acquisition-system-for-error-detection" class="nav-link" data-scroll-target="#selection-of-the-acquisition-system-for-error-detection">- <strong>Selection of the Acquisition System for Error Detection</strong></a></li>
+  <li><a href="#current-limitation" id="toc-current-limitation" class="nav-link" data-scroll-target="#current-limitation">Current Limitation</a></li>
+  <li><a href="#related-pages" id="toc-related-pages" class="nav-link" data-scroll-target="#related-pages">Related Pages</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content column-page-left" id="quarto-document-content">
 
-
-
-
-<section id="sec:camera_mount" class="level2">
-<h2 class="anchored" data-anchor-id="sec:camera_mount">Mechanical Design of the Camera Mount</h2>
-<p>The camera mounting solution combines a commercially available __magnetic-base stand_ with a <strong>custom 3D-printed support</strong> designed specifically for the Raspberry Pi Camera module.<br>
-The magnetic base provides a <strong>rigid</strong> and <strong>highly stable foundation</strong>, while allowing fine manual adjustment in height, angle, and lateral position through its articulated arm.</p>
-<section id="custom-3d-printed-camera-holder" class="level3">
-<h3 class="anchored" data-anchor-id="custom-3d-printed-camera-holder">Custom 3D-Printed Camera Holder</h3>
-<p>A custom holder for the Raspberry Pi Camera v2.1 was designed in <strong>Autodesk Fusion 360</strong> and fabricated using fused deposition modeling (FDM) with <strong>PLA filament</strong> on a <strong>Bambu Lab A1 Mini 3D printer</strong>.<br>
-The printed part encloses the camera PCB and incorporates a series of mounting holes and a pin that fits into the threaded end of the magnetic base arm.</p>
-</section>
-<section id="stability-considerations-and-limitations" class="level3">
-<h3 class="anchored" data-anchor-id="stability-considerations-and-limitations">Stability Considerations and Limitations</h3>
-<p>While the magnetic stand and the 3D-printed camera holder provide sufficient <strong>stability</strong> for prototyping, the overall <strong>stiffness</strong> of the structure is <strong>not optimal yet</strong>.<br>
-Small shifts caused by machine <strong>vibration</strong> or accidental contact can slightly <strong>alter the camera pose</strong> over time, affecting the exact position of the <strong>region of interest</strong> in the image.<br>
-Improving the mechanical stability of the mounting solution is therefore an <strong>important direction</strong> for future work, with the goal of achieving <strong>fully repeatable alignment</strong> over long acquisition periods.</p>
-<p>A <strong>CAD rendering</strong> of the printed holder is shown in Figure.</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div id="fig:front" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="images/3d_front.png" class="img-fluid figure-img"></p>
-<figcaption>Front of the 3D structure</figcaption>
-</figure>
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Operating the Machine</h1>
 </div>
-</div><div class="column" style="width:50%;">
-<div id="fig:back" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="images/3d_back.png" class="img-fluid figure-img"></p>
-<figcaption>Back of the 3D structure</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="error-recognition-code" class="level2">
-<h2 class="anchored" data-anchor-id="error-recognition-code">- <strong><a href="./error-code.html">Error Recognition — Code</a></strong></h2>
-<p>Algorithms, model/code structure, data flow, and deployment notes.</p>
-</section>
-<section id="results-efficiency" class="level2">
-<h2 class="anchored" data-anchor-id="results-efficiency">- <strong><a href="./error-results.html">Results &amp; Efficiency</a></strong></h2>
-<p>Datasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget.</p>
-</section>
-<section id="conclusions-and-future-works" class="level2">
-<h2 class="anchored" data-anchor-id="conclusions-and-future-works">- <strong><a href="./error-future_work.html">Conclusions and Future Works</a></strong></h2>
-</section>
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">- <strong><a href="./error-recognition.html">Overview</a></strong></h2>
-</section>
-<section id="selection-of-the-acquisition-system-for-error-detection" class="level2">
-<h2 class="anchored" data-anchor-id="selection-of-the-acquisition-system-for-error-detection">- <strong><a href="./error-camera.html">Selection of the Acquisition System for Error Detection</a></strong></h2>
-<p>Requirements, sensor &amp; lens selection, lighting, sync, and mounting constraints.</p>
 
 
+
+<div class="quarto-title-meta column-page-left">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="operating-the-machine" class="level1">
+<h1>Operating the Machine</h1>
+<section id="operator-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="operator-workflow">Operator Workflow</h2>
+<p>This page describes the procedure followed by the user, from the digital pattern to the running prototype.</p>
+<section id="create-the-pattern" class="level3">
+<h3 class="anchored" data-anchor-id="create-the-pattern">1. Create the Pattern</h3>
+<p>Create a three-colour PNG file with the <a href="./pattern-editor.html">Pattern Editor</a>. The pattern must be 48 pixels wide and contain exactly three RGB colours.</p>
+</section>
+<section id="copy-the-pattern-to-the-usb-drive" class="level3">
+<h3 class="anchored" data-anchor-id="copy-the-pattern-to-the-usb-drive">2. Copy the Pattern to the USB Drive</h3>
+<p>Copy one or more <code>.png</code> files directly into the root folder of the USB flash drive.</p>
+</section>
+<section id="prepare-the-hardware" class="level3">
+<h3 class="anchored" data-anchor-id="prepare-the-hardware">3. Prepare the Hardware</h3>
+<p>Before starting a real test, verify that:</p>
+<ul>
+<li>the Raspberry Pi is powered;</li>
+<li>the ESP32 is connected to the Raspberry Pi through its USB cable;</li>
+<li>the three servomotors are supplied by the external regulated 5 V power supply;</li>
+<li>the DC-DC ground and the ESP32 ground are connected;</li>
+<li>the printed servo arms can move freely;</li>
+<li>the microswitch is connected to the ESP32.</li>
+</ul>
+<p>See <a href="./wiring-power.html">Wiring and Power Supply</a> for the complete connections.</p>
+</section>
+<section id="start-the-application" class="level3">
+<h3 class="anchored" data-anchor-id="start-the-application">4. Start the Application</h3>
+<p>Mount the USB flash drive and run the integrated interface:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> /home/aless/venvs/uncinetto/bin/activate</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mount /dev/sda1 /mnt/pattern_usb</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> /home/aless/gfxhat_pattern_ui_usb.py <span class="at">--usb-dir</span> /mnt/pattern_usb <span class="at">--port</span> /dev/ttyUSB0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="select-the-png-from-the-display" class="level3">
+<h3 class="anchored" data-anchor-id="select-the-png-from-the-display">5. Select the PNG from the Display</h3>
+<p>The display shows the files available on the USB drive:</p>
+<pre class="text"><code>SELEZIONA PNG
+&gt; pattern_01.png
+  pattern_02.png
+  pattern_03.png
+^v SPOSTA  OK SEL  + REF</code></pre>
+<p>Use:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Button</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>UP</code> / <code>DOWN</code></td>
+<td>Browse PNG files</td>
+</tr>
+<tr class="even">
+<td><code>SELECT</code></td>
+<td>Confirm the selected pattern</td>
+</tr>
+<tr class="odd">
+<td><code>PLUS</code></td>
+<td>Refresh the file list</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="insert-the-yarns" class="level3">
+<h3 class="anchored" data-anchor-id="insert-the-yarns">6. Insert the Yarns</h3>
+<p>After file selection, the display shows:</p>
+<pre class="text"><code>PATTERN SELEZIONATO
+pattern_01.png
+
+INSERIRE
+I FILATI
+
++ AVVIA    &lt; MENU</code></pre>
+<p>Place the three yarns consistently with the colour-to-servo mapping generated by the Raspberry Pi.</p>
+</section>
+<section id="start-production" class="level3">
+<h3 class="anchored" data-anchor-id="start-production">7. Start Production</h3>
+<p>Press <code>PLUS</code> (<code>AVVIA</code>). The Raspberry Pi validates the PNG, opens the USB serial communication with the ESP32 and immediately sends the command corresponding to the first pixel.</p>
+</section>
+<section id="monitor-the-process" class="level3">
+<h3 class="anchored" data-anchor-id="monitor-the-process">8. Monitor the Process</h3>
+<p>While the system is running, the display shows:</p>
+<pre class="text"><code>pattern_01.png
+IN LAVORAZIONE
+
+[ progress bar ]
+
+36%   18/50
+- STOP</code></pre>
+<p>Every press of the synchronization microswitch causes the ESP32 to send <code>NEXT</code> to the Raspberry Pi. The Raspberry Pi then updates the percentage and sends the command for the following pixel.</p>
+</section>
+<section id="pause-and-resume" class="level3">
+<h3 class="anchored" data-anchor-id="pause-and-resume">9. Pause and Resume</h3>
+<p>During processing:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Button</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>MINUS</code></td>
+<td>Pause the process and move all servo arms to <code>DOWN</code></td>
+</tr>
+<tr class="even">
+<td><code>PLUS</code></td>
+<td>Resume from the preserved pixel</td>
+</tr>
+<tr class="odd">
+<td><code>BACK</code></td>
+<td>Return to the file-selection menu from the stopped screen</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="completion" class="level3">
+<h3 class="anchored" data-anchor-id="completion">10. Completion</h3>
+<p>At the end of the pattern, all servos are moved to their inactive position and the display shows:</p>
+<pre class="text"><code>LAVORO
+COMPLETATO
+
+[ 100% ]
+
+OK / &lt; MENU</code></pre>
+</section>
+</section>
+<section id="current-limitation" class="level2">
+<h2 class="anchored" data-anchor-id="current-limitation">Current Limitation</h2>
+<p>The current stop/resume implementation acts on the three colour-selection servomotors. Control of an additional main stepper drive is planned but is not part of the tested actuation firmware yet.</p>
+</section>
+<section id="related-pages" class="level2">
+<h2 class="anchored" data-anchor-id="related-pages">Related Pages</h2>
+<ul>
+<li><a href="./pattern-editor.html">Pattern Editor</a></li>
+<li><a href="./display-interface.html">Display Interface — GFX HAT</a></li>
+<li><a href="./esp32-actuation.html">ESP32 and Actuation</a></li>
+<li><a href="./troubleshooting.html">Troubleshooting</a></li>
+</ul>
+
+
+</section>
 </section>
 
 </main> <!-- /main -->

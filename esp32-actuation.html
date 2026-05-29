@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>error-mount</title>
+<title>ESP32 and Actuation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -213,78 +248,248 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#sec:camera_mount" id="toc-sec:camera_mount" class="nav-link active" data-scroll-target="#sec\:camera_mount">Mechanical Design of the Camera Mount</a>
+  <li><a href="#esp32-and-actuation" id="toc-esp32-and-actuation" class="nav-link active" data-scroll-target="#esp32-and-actuation">ESP32 and Actuation</a>
   <ul>
-  <li><a href="#custom-3d-printed-camera-holder" id="toc-custom-3d-printed-camera-holder" class="nav-link" data-scroll-target="#custom-3d-printed-camera-holder">Custom 3D-Printed Camera Holder</a></li>
-  <li><a href="#stability-considerations-and-limitations" id="toc-stability-considerations-and-limitations" class="nav-link" data-scroll-target="#stability-considerations-and-limitations">Stability Considerations and Limitations</a></li>
+  <li><a href="#role-of-the-esp32" id="toc-role-of-the-esp32" class="nav-link" data-scroll-target="#role-of-the-esp32">Role of the ESP32</a></li>
+  <li><a href="#gpio-assignment" id="toc-gpio-assignment" class="nav-link" data-scroll-target="#gpio-assignment">GPIO Assignment</a></li>
+  <li><a href="#three-servo-selection-logic" id="toc-three-servo-selection-logic" class="nav-link" data-scroll-target="#three-servo-selection-logic">Three-Servo Selection Logic</a></li>
+  <li><a href="#microswitch-synchronization" id="toc-microswitch-synchronization" class="nav-link" data-scroll-target="#microswitch-synchronization">Microswitch Synchronization</a></li>
+  <li><a href="#usb-serial-protocol" id="toc-usb-serial-protocol" class="nav-link" data-scroll-target="#usb-serial-protocol">USB Serial Protocol</a>
+  <ul class="collapse">
+  <li><a href="#messages-received-by-the-esp32" id="toc-messages-received-by-the-esp32" class="nav-link" data-scroll-target="#messages-received-by-the-esp32">Messages Received by the ESP32</a></li>
+  <li><a href="#messages-sent-by-the-esp32" id="toc-messages-sent-by-the-esp32" class="nav-link" data-scroll-target="#messages-sent-by-the-esp32">Messages Sent by the ESP32</a></li>
   </ul></li>
-  <li><a href="#error-recognition-code" id="toc-error-recognition-code" class="nav-link" data-scroll-target="#error-recognition-code">- <strong>Error Recognition — Code</strong></a></li>
-  <li><a href="#results-efficiency" id="toc-results-efficiency" class="nav-link" data-scroll-target="#results-efficiency">- <strong>Results &amp; Efficiency</strong></a></li>
-  <li><a href="#conclusions-and-future-works" id="toc-conclusions-and-future-works" class="nav-link" data-scroll-target="#conclusions-and-future-works">- <strong>Conclusions and Future Works</strong></a></li>
-  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">- <strong>Overview</strong></a></li>
-  <li><a href="#selection-of-the-acquisition-system-for-error-detection" id="toc-selection-of-the-acquisition-system-for-error-detection" class="nav-link" data-scroll-target="#selection-of-the-acquisition-system-for-error-detection">- <strong>Selection of the Acquisition System for Error Detection</strong></a></li>
+  <li><a href="#arduino-project-organization" id="toc-arduino-project-organization" class="nav-link" data-scroll-target="#arduino-project-organization">Arduino Project Organization</a></li>
+  <li><a href="#related-pages" id="toc-related-pages" class="nav-link" data-scroll-target="#related-pages">Related Pages</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content column-page-left" id="quarto-document-content">
 
-
-
-
-<section id="sec:camera_mount" class="level2">
-<h2 class="anchored" data-anchor-id="sec:camera_mount">Mechanical Design of the Camera Mount</h2>
-<p>The camera mounting solution combines a commercially available __magnetic-base stand_ with a <strong>custom 3D-printed support</strong> designed specifically for the Raspberry Pi Camera module.<br>
-The magnetic base provides a <strong>rigid</strong> and <strong>highly stable foundation</strong>, while allowing fine manual adjustment in height, angle, and lateral position through its articulated arm.</p>
-<section id="custom-3d-printed-camera-holder" class="level3">
-<h3 class="anchored" data-anchor-id="custom-3d-printed-camera-holder">Custom 3D-Printed Camera Holder</h3>
-<p>A custom holder for the Raspberry Pi Camera v2.1 was designed in <strong>Autodesk Fusion 360</strong> and fabricated using fused deposition modeling (FDM) with <strong>PLA filament</strong> on a <strong>Bambu Lab A1 Mini 3D printer</strong>.<br>
-The printed part encloses the camera PCB and incorporates a series of mounting holes and a pin that fits into the threaded end of the magnetic base arm.</p>
-</section>
-<section id="stability-considerations-and-limitations" class="level3">
-<h3 class="anchored" data-anchor-id="stability-considerations-and-limitations">Stability Considerations and Limitations</h3>
-<p>While the magnetic stand and the 3D-printed camera holder provide sufficient <strong>stability</strong> for prototyping, the overall <strong>stiffness</strong> of the structure is <strong>not optimal yet</strong>.<br>
-Small shifts caused by machine <strong>vibration</strong> or accidental contact can slightly <strong>alter the camera pose</strong> over time, affecting the exact position of the <strong>region of interest</strong> in the image.<br>
-Improving the mechanical stability of the mounting solution is therefore an <strong>important direction</strong> for future work, with the goal of achieving <strong>fully repeatable alignment</strong> over long acquisition periods.</p>
-<p>A <strong>CAD rendering</strong> of the printed holder is shown in Figure.</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div id="fig:front" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="images/3d_front.png" class="img-fluid figure-img"></p>
-<figcaption>Front of the 3D structure</figcaption>
-</figure>
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">ESP32 and Actuation</h1>
 </div>
-</div><div class="column" style="width:50%;">
-<div id="fig:back" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="images/3d_back.png" class="img-fluid figure-img"></p>
-<figcaption>Back of the 3D structure</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="error-recognition-code" class="level2">
-<h2 class="anchored" data-anchor-id="error-recognition-code">- <strong><a href="./error-code.html">Error Recognition — Code</a></strong></h2>
-<p>Algorithms, model/code structure, data flow, and deployment notes.</p>
-</section>
-<section id="results-efficiency" class="level2">
-<h2 class="anchored" data-anchor-id="results-efficiency">- <strong><a href="./error-results.html">Results &amp; Efficiency</a></strong></h2>
-<p>Datasets, metrics (F1, latency, false alarms), ablation studies, and runtime budget.</p>
-</section>
-<section id="conclusions-and-future-works" class="level2">
-<h2 class="anchored" data-anchor-id="conclusions-and-future-works">- <strong><a href="./error-future_work.html">Conclusions and Future Works</a></strong></h2>
-</section>
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">- <strong><a href="./error-recognition.html">Overview</a></strong></h2>
-</section>
-<section id="selection-of-the-acquisition-system-for-error-detection" class="level2">
-<h2 class="anchored" data-anchor-id="selection-of-the-acquisition-system-for-error-detection">- <strong><a href="./error-camera.html">Selection of the Acquisition System for Error Detection</a></strong></h2>
-<p>Requirements, sensor &amp; lens selection, lighting, sync, and mounting constraints.</p>
 
 
+
+<div class="quarto-title-meta column-page-left">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="esp32-and-actuation" class="level1">
+<h1>ESP32 and Actuation</h1>
+<section id="role-of-the-esp32" class="level2">
+<h2 class="anchored" data-anchor-id="role-of-the-esp32">Role of the ESP32</h2>
+<p>The ESP32 implements the low-level actuation layer. It directly controls the three yarn-selection servomotors and acquires the synchronization microswitch.</p>
+<p>The firmware file is:</p>
+<pre class="text"><code>servo_switch_usb.ino</code></pre>
+</section>
+<section id="gpio-assignment" class="level2">
+<h2 class="anchored" data-anchor-id="gpio-assignment">GPIO Assignment</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Function</th>
+<th style="text-align: right;">ESP32 GPIO</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Servo 1 signal</td>
+<td style="text-align: right;">GPIO13</td>
+</tr>
+<tr class="even">
+<td>Servo 2 signal</td>
+<td style="text-align: right;">GPIO14</td>
+</tr>
+<tr class="odd">
+<td>Servo 3 signal</td>
+<td style="text-align: right;">GPIO27</td>
+</tr>
+<tr class="even">
+<td>Microswitch input</td>
+<td style="text-align: right;">GPIO25</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="three-servo-selection-logic" class="level2">
+<h2 class="anchored" data-anchor-id="three-servo-selection-logic">Three-Servo Selection Logic</h2>
+<p>Only one servo channel is active for each pixel:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Command</th>
+<th>Servo 1</th>
+<th>Servo 2</th>
+<th>Servo 3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>C1</code></td>
+<td><code>UP</code></td>
+<td><code>DOWN</code></td>
+<td><code>DOWN</code></td>
+</tr>
+<tr class="even">
+<td><code>C2</code></td>
+<td><code>DOWN</code></td>
+<td><code>UP</code></td>
+<td><code>DOWN</code></td>
+</tr>
+<tr class="odd">
+<td><code>C3</code></td>
+<td><code>DOWN</code></td>
+<td><code>DOWN</code></td>
+<td><code>UP</code></td>
+</tr>
+<tr class="even">
+<td><code>DOWN</code></td>
+<td><code>DOWN</code></td>
+<td><code>DOWN</code></td>
+<td><code>DOWN</code></td>
+</tr>
+</tbody>
+</table>
+<p>Initial experimental calibration values are:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> UP_1 <span class="op">=</span> <span class="dv">140</span><span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> DOWN_1 <span class="op">=</span> <span class="dv">60</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> UP_2 <span class="op">=</span> <span class="dv">140</span><span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> DOWN_2 <span class="op">=</span> <span class="dv">60</span><span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> UP_3 <span class="op">=</span> <span class="dv">140</span><span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> DOWN_3 <span class="op">=</span> <span class="dv">60</span><span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>These angles must be calibrated after mounting the custom <a href="./servo-arms.html">3D-Printed Servo Arms</a>.</p>
+</section>
+<section id="microswitch-synchronization" class="level2">
+<h2 class="anchored" data-anchor-id="microswitch-synchronization">Microswitch Synchronization</h2>
+<p>The three-terminal microswitch is connected using its normally open contact:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Microswitch terminal</th>
+<th>Connection</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>COM</code></td>
+<td>ESP32 GND</td>
+</tr>
+<tr class="even">
+<td><code>NO</code></td>
+<td>ESP32 GPIO25</td>
+</tr>
+<tr class="odd">
+<td><code>NC</code></td>
+<td>Not connected</td>
+</tr>
+</tbody>
+</table>
+<p>The firmware uses the internal pull-up resistor:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pinMode<span class="op">(</span>pinMicroswitch<span class="op">,</span> INPUT_PULLUP<span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Therefore the input is <code>HIGH</code> at rest and becomes <code>LOW</code> when the switch is pressed. A 50 ms debounce filter prevents one physical press from generating multiple events.</p>
+</section>
+<section id="usb-serial-protocol" class="level2">
+<h2 class="anchored" data-anchor-id="usb-serial-protocol">USB Serial Protocol</h2>
+<p>The ESP32 is connected to the Raspberry Pi through a USB cable. The cable powers the ESP32 board and carries serial messages; the servomotors are supplied separately.</p>
+<p>The communication speed is:</p>
+<pre class="text"><code>115200 baud</code></pre>
+<section id="messages-received-by-the-esp32" class="level3">
+<h3 class="anchored" data-anchor-id="messages-received-by-the-esp32">Messages Received by the ESP32</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Message</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>C1</code></td>
+<td>Select colour channel 1</td>
+</tr>
+<tr class="even">
+<td><code>C2</code></td>
+<td>Select colour channel 2</td>
+</tr>
+<tr class="odd">
+<td><code>C3</code></td>
+<td>Select colour channel 3</td>
+</tr>
+<tr class="even">
+<td><code>DOWN</code></td>
+<td>Release all three channels</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="messages-sent-by-the-esp32" class="level3">
+<h3 class="anchored" data-anchor-id="messages-sent-by-the-esp32">Messages Sent by the ESP32</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Message</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>READY</code></td>
+<td>Initialization completed</td>
+</tr>
+<tr class="even">
+<td><code>NEXT</code></td>
+<td>Valid microswitch press detected</td>
+</tr>
+<tr class="odd">
+<td><code>OK:C1</code>, <code>OK:C2</code>, <code>OK:C3</code></td>
+<td>Requested servo position applied</td>
+</tr>
+<tr class="even">
+<td><code>OK:DOWN</code></td>
+<td>All servos set to inactive position</td>
+</tr>
+<tr class="odd">
+<td><code>ERR:...</code></td>
+<td>Invalid serial command received</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="arduino-project-organization" class="level2">
+<h2 class="anchored" data-anchor-id="arduino-project-organization">Arduino Project Organization</h2>
+<p>Arduino compiles all <code>.ino</code> files located in one sketch directory. The active firmware must therefore be kept in its own folder:</p>
+<pre class="text"><code>servo/
+└── servo_switch_usb/
+    └── servo_switch_usb.ino</code></pre>
+<p>Do not keep a previous complete sketch in the same folder, otherwise duplicated definitions of <code>setup()</code>, <code>loop()</code> and servo objects will prevent compilation.</p>
+</section>
+<section id="related-pages" class="level2">
+<h2 class="anchored" data-anchor-id="related-pages">Related Pages</h2>
+<ul>
+<li><a href="./control-system.html">Control System Overview</a></li>
+<li><a href="./servo-arms.html">3D-Printed Servo Arms</a></li>
+<li><a href="./wiring-power.html">Wiring and Power Supply</a></li>
+<li><a href="./stepper-motor.html">Stepper Motor — Planned Development</a></li>
+</ul>
+
+
+</section>
 </section>
 
 </main> <!-- /main -->
