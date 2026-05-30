@@ -2,8 +2,6 @@
 title: "Components Overview"
 ---
 
-# Components Overview
-
 ## Main Electronic and Mechanical Components
 
 | Component | Function in the prototype |

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Display Interface and Three-Colour Servo Control – Automated Knitting Machine</title>
+<title>Display Interface and Three-Colour Servo Control</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -117,9 +117,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Automated Knitting Machine</span>
-    </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -141,7 +138,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Pattern Editor</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./operating-machine.qmd">
+    <a class="dropdown-item" href="./operating-machine.html">
  <span class="dropdown-text">Operating the Machine</span></a>
   </li>  
     </ul>
@@ -157,22 +154,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="./display-interface.html">
- <span class="dropdown-text">Raspberry Pi and Display</span></a>
+ <span class="dropdown-text">Display Interface — GFX HAT</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./raspberry-control.qmd">
- <span class="dropdown-text">Integrated Raspberry Pi Application</span></a>
+    <a class="dropdown-item" href="./raspberry-control.html">
+ <span class="dropdown-text">Raspberry Pi Application</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./esp32-actuation.qmd">
+    <a class="dropdown-item" href="./esp32-actuation.html">
  <span class="dropdown-text">ESP32 and Actuation</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./wiring-power.qmd">
+    <a class="dropdown-item" href="./stepper-motor.html">
+ <span class="dropdown-text">Stepper Motor — Planned Development</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./wiring-power.html">
  <span class="dropdown-text">Wiring and Power Supply</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./troubleshooting.qmd">
+    <a class="dropdown-item" href="./troubleshooting.html">
  <span class="dropdown-text">Troubleshooting</span></a>
   </li>  
     </ul>
@@ -187,7 +188,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Components Overview</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./servo-arms.qmd">
+    <a class="dropdown-item" href="./servo-arms.html">
  <span class="dropdown-text">3D-Printed Servo Arms</span></a>
   </li>  
         <li>
@@ -207,7 +208,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="./error-camera.html">
- <span class="dropdown-text">Selection of the Acquisition System</span></a>
+ <span class="dropdown-text">Acquisition System</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./error-mount.html">
+ <span class="dropdown-text">3D Camera Mount</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./error-code.html">
@@ -215,7 +220,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="./error-results.html">
- <span class="dropdown-text">Results &amp; Efficiency</span></a>
+ <span class="dropdown-text">Results and Efficiency</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./error-future_work.html">
@@ -223,6 +228,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
     </ul>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" href="./future-developments.html"> 
+<span class="menu-text">Future Developments</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -1347,7 +1356,7 @@ DOWN → all servos DOWN</code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/AlessiaRinaldi\.github\.io\/docs_knitting_machine\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

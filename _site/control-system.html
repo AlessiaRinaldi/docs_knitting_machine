@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Control System Overview – Automated Knitting Machine</title>
+<title>Control System Overview</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -82,9 +82,6 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Automated Knitting Machine</span>
-    </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -134,7 +131,7 @@ ul.task-list li input[type="checkbox"] {
   </li>  
         <li>
     <a class="dropdown-item" href="./stepper-motor.html">
- <span class="dropdown-text">Stepper Motor — Planned Development</span></a>
+ <span class="dropdown-text">Stepper Motor</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./wiring-power.html">
@@ -216,13 +213,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#control-system-overview" id="toc-control-system-overview" class="nav-link active" data-scroll-target="#control-system-overview">Control System Overview</a>
-  <ul>
-  <li><a href="#architecture" id="toc-architecture" class="nav-link" data-scroll-target="#architecture">Architecture</a></li>
+  <li><a href="#architecture" id="toc-architecture" class="nav-link active" data-scroll-target="#architecture">Architecture</a></li>
   <li><a href="#implemented-control-sequence" id="toc-implemented-control-sequence" class="nav-link" data-scroll-target="#implemented-control-sequence">Implemented Control Sequence</a></li>
-  <li><a href="#current-status" id="toc-current-status" class="nav-link" data-scroll-target="#current-status">Current Status</a></li>
   <li><a href="#subsystem-documentation" id="toc-subsystem-documentation" class="nav-link" data-scroll-target="#subsystem-documentation">Subsystem Documentation</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -248,14 +241,13 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="control-system-overview" class="level1">
-<h1>Control System Overview</h1>
 <section id="architecture" class="level2">
 <h2 class="anchored" data-anchor-id="architecture">Architecture</h2>
 <p>The prototype is organized into two processing levels:</p>
 <ul>
+<li>the <strong>user computer</strong>, where the PNG pattern is created with the Pattern Editor;</li>
 <li>the <strong>Raspberry Pi</strong>, which implements the user interface, reads and validates PNG patterns, manages process progress and hosts the error-recognition pipeline;</li>
-<li>the <strong>ESP32</strong>, which directly controls the three servomotors and reads the synchronization microswitch.</li>
+<li>the <strong>ESP32</strong>, which directly controls the three servomotors and the stepper motor and reads the synchronization microswitch.</li>
 </ul>
 <pre class="text"><code>Pattern Editor on PC
         │
@@ -269,6 +261,7 @@ ESP32
    ├── Servo 1 + 3D-printed arm
    ├── Servo 2 + 3D-printed arm
    ├── Servo 3 + 3D-printed arm
+   ├── Stepper + Driver + 3D-printed base
    └── Microswitch ── NEXT event</code></pre>
 <p>The camera-based error-recognition pipeline also runs on the Raspberry Pi. Its integration with the real servo-control workflow remains a next development step.</p>
 </section>
@@ -292,63 +285,6 @@ Raspberry Pi updates progress and sends the next command
         ↓
 End of image: DOWN command and completion screen</code></pre>
 </section>
-<section id="current-status" class="level2">
-<h2 class="anchored" data-anchor-id="current-status">Current Status</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Function</th>
-<th>Status</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Pattern creation and PNG export</td>
-<td>Implemented</td>
-</tr>
-<tr class="even">
-<td>PNG selection through the GFX HAT</td>
-<td>Implemented</td>
-</tr>
-<tr class="odd">
-<td>USB flash drive pattern loading</td>
-<td>Implemented</td>
-</tr>
-<tr class="even">
-<td>Raspberry Pi–ESP32 USB serial communication</td>
-<td>Implemented</td>
-</tr>
-<tr class="odd">
-<td>Three-servo colour selection</td>
-<td>Implemented</td>
-</tr>
-<tr class="even">
-<td>Microswitch synchronization on ESP32</td>
-<td>Implemented</td>
-</tr>
-<tr class="odd">
-<td>Three-dimensional servo arms</td>
-<td>Designed; add photographs/test results when available</td>
-</tr>
-<tr class="even">
-<td>Error recognition algorithm</td>
-<td>Documented and tested separately</td>
-</tr>
-<tr class="odd">
-<td>Error-recognition alarm connected to real actuation</td>
-<td>To be integrated</td>
-</tr>
-<tr class="even">
-<td>Main stepper motor control</td>
-<td>Planned development</td>
-</tr>
-</tbody>
-</table>
-</section>
 <section id="subsystem-documentation" class="level2">
 <h2 class="anchored" data-anchor-id="subsystem-documentation">Subsystem Documentation</h2>
 <ul>
@@ -361,7 +297,6 @@ End of image: DOWN command and completion screen</code></pre>
 </ul>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

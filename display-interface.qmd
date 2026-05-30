@@ -2,8 +2,6 @@
 title: "Display Interface — GFX HAT"
 ---
 
-# Display Interface — GFX HAT
-
 ## Overview
 
 The operator interface is implemented with a **Pimoroni GFX HAT** connected to the Raspberry Pi. The board provides:

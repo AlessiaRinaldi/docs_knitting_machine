@@ -2,52 +2,334 @@
 title: "Operating the Machine"
 ---
 
-# Operating the Machine
+This page describes the complete operating procedure of the prototype, from the creation of the digital pattern to the execution of the machine.
 
-## Operator Workflow
+The workflow is divided into two parts:
 
-This page describes the procedure followed by the user, from the digital pattern to the running prototype.
+1. the **user computer**, where the PNG pattern is created with the Pattern Editor;
+2. the **machine**, where the USB drive is inserted and the Raspberry Pi runs the display interface and communicates with the ESP32.
 
-### 1. Create the Pattern
+## Required Software
 
-Create a three-colour PNG file with the [Pattern Editor](pattern-editor.qmd). The pattern must be 48 pixels wide and contain exactly three RGB colours.
+Two different software environments are used:
 
-### 2. Copy the Pattern to the USB Drive
+| Device | Purpose | Main script |
+|---|---|---|
+| User computer | Create the PNG pattern | `pattern_editor_v3_scroll_sidebar.py` |
+| Raspberry Pi inside the machine | Read the USB drive, manage the display and communicate with the ESP32 | `gfxhat_pattern_ui_usb.py` |
 
-Copy one or more `.png` files directly into the root folder of the USB flash drive.
+## 1. Pattern Editor Setup on the User Computer
 
-### 3. Prepare the Hardware
+The user must run the Pattern Editor on their own computer.
+
+The editor is used to create a PNG file compatible with the machine.
+
+### 1.1 Install Python
+
+Install Python 3 on the computer.
+
+To check if Python is installed, open a terminal and run:
+
+```bash
+python --version
+```
+
+or, on some systems:
+
+```bash
+python3 --version
+```
+
+If Python is not installed, install it from the official Python website or through the operating system package manager.
+
+### 1.2 Create a Virtual Environment
+
+Go to the folder where the Pattern Editor script is located.
+
+On Windows:
+
+```powershell
+py -m venv .venv
+.venv\Scripts\activate
+```
+
+On Linux or macOS:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+### 1.3 Install the Required Python Library
+
+The Pattern Editor requires `Pillow` to open and save PNG images.
+
+Install it with:
+
+```bash
+pip install pillow
+```
+
+If the computer uses Linux and the error `No module named tkinter` appears, install Tkinter with:
+
+```bash
+sudo apt install python3-tk
+```
+
+Tkinter is used for the graphical interface of the Pattern Editor.
+
+### 1.4 Run the Pattern Editor
+
+Run the script:
+
+On Windows:
+
+```powershell
+py pattern_editor_v3_scroll_sidebar.py
+```
+
+On Linux or macOS:
+
+```bash
+python3 pattern_editor_v3_scroll_sidebar.py
+```
+
+The Pattern Editor opens a graphical interface where the user can draw the pattern.
+
+The exported PNG must respect the following rules:
+
+- width: **48 pixels**;
+- image format: **RGB PNG**;
+- number of colours: **exactly three**.
+
+The height of the pattern can be chosen by the user according to the number of rows to be produced.
+
+## 2. Create the Pattern
+
+Create a three-colour PNG file with the [Pattern Editor](pattern-editor.qmd).
+
+The pattern must:
+
+- be **48 pixels wide**;
+- be saved as a **PNG RGB image**;
+- contain **three RGB colours**.
+
+When the PNG is saved, the editor also shows the colour-to-command interpretation used by the machine.
+
+The colour mapping is based on the order in which the three colours appear in the PNG file. The Raspberry Pi uses this order to associate the colours with the commands sent to the ESP32.
+
+## 3. Copy the PNG to the USB Drive
+
+After saving the pattern, copy the `.png` file directly into the root folder of the USB flash drive.
+
+Example:
+
+```text
+USB drive
+├── flowers_pattern.png
+├── stars_pattern.png
+└── hearts_pattern.png
+```
+
+The files must not be placed inside subfolders.
+
+When the copy is complete, safely eject the USB drive from the computer.
+
+## 4. Raspberry Pi Software Setup
+
+This setup must be performed on the Raspberry Pi inside the machine.
+
+It is required only the first time the system is configured.
+
+### 4.1 Install the Required System Packages
+
+Open a terminal on the Raspberry Pi and install the required packages:
+
+```bash
+sudo apt update
+sudo apt install -y python3-venv python3-pip
+```
+
+### 4.2 Create the Python Virtual Environment
+
+Create a dedicated virtual environment:
+
+```bash
+mkdir -p /home/aless/venvs
+python3 -m venv /home/aless/venvs/uncinetto
+```
+
+Activate it:
+
+```bash
+source /home/aless/venvs/uncinetto/bin/activate
+```
+
+Upgrade `pip`:
+
+```bash
+pip install --upgrade pip
+```
+
+### 4.3 Install the Required Python Libraries
+
+Install the Python libraries used by the Raspberry Pi interface:
+
+```bash
+pip install pillow pyserial gfxhat
+```
+
+The libraries are used for:
+
+| Library | Purpose |
+|---|---|
+| `pillow` | Opening and validating PNG images |
+| `pyserial` | USB serial communication between Raspberry Pi and ESP32 |
+| `gfxhat` | Managing the GFX HAT display and buttons |
+
+### 4.4 Enable Raspberry Pi Interfaces
+
+The GFX HAT requires the Raspberry Pi hardware interfaces.
+
+Open the configuration menu:
+
+```bash
+sudo raspi-config
+```
+
+Enable:
+
+```text
+Interface Options → I2C → Enable
+Interface Options → SPI → Enable
+```
+
+Then reboot the Raspberry Pi:
+
+```bash
+sudo reboot
+```
+
+### 4.5 Give Serial Permission to the User
+
+To allow the Raspberry Pi user to access the ESP32 through USB serial, add the user to the `dialout` group:
+
+```bash
+sudo usermod -aG dialout $USER
+```
+
+Then reboot:
+
+```bash
+sudo reboot
+```
+
+## 5. Insert the USB Drive into the Machine
+
+After creating the PNG on the user computer, insert the USB flash drive into the machine.
+
+The Raspberry Pi inside the machine will read the PNG files from the USB drive.
+
+## 6. Mount the USB Drive on the Raspberry Pi
+
+Check the device name assigned to the USB drive:
+
+```bash
+lsblk -o NAME,SIZE,FSTYPE,LABEL,MOUNTPOINTS
+```
+
+In the current prototype, the USB drive is usually detected as:
+
+```text
+/dev/sda1
+```
+
+Create the mount folder if it does not already exist:
+
+```bash
+sudo mkdir -p /mnt/pattern_usb
+```
+
+Mount the USB drive:
+
+```bash
+sudo mount /dev/sda1 /mnt/pattern_usb
+```
+
+Check that the PNG files are visible:
+
+```bash
+ls /mnt/pattern_usb
+```
+
+If the USB drive has a different device name, replace `/dev/sda1` with the correct one.
+
+## 7. Prepare the Hardware
 
 Before starting a real test, verify that:
 
 - the Raspberry Pi is powered;
+- the GFX HAT display is connected to the Raspberry Pi;
 - the ESP32 is connected to the Raspberry Pi through its USB cable;
-- the three servomotors are supplied by the external regulated 5 V power supply;
-- the DC-DC ground and the ESP32 ground are connected;
-- the printed servo arms can move freely;
+- the three servomotors and the stepper are supplied by the external power supply;
+- all the GND are connected;
 - the microswitch is connected to the ESP32.
 
 See [Wiring and Power Supply](wiring-power.qmd) for the complete connections.
 
-### 4. Start the Application
+## 8. Find the ESP32 Serial Port
 
-Mount the USB flash drive and run the integrated interface:
+Check which serial port is assigned to the ESP32:
+
+```bash
+ls /dev/ttyUSB*
+```
+
+or:
+
+```bash
+ls /dev/ttyACM*
+```
+
+In the current prototype, the ESP32 is usually available as:
+
+```text
+/dev/ttyUSB0
+```
+
+If the ESP32 appears with a different name, use that port when running the application.
+
+## 9. Start the Raspberry Pi Application
+
+Activate the virtual environment:
 
 ```bash
 source /home/aless/venvs/uncinetto/bin/activate
-sudo mount /dev/sda1 /mnt/pattern_usb
+```
+
+Run the integrated interface:
+
+```bash
 python3 /home/aless/gfxhat_pattern_ui_usb.py --usb-dir /mnt/pattern_usb --port /dev/ttyUSB0
 ```
 
-### 5. Select the PNG from the Display
+If the ESP32 is detected as `/dev/ttyACM0`, use:
+
+```bash
+python3 /home/aless/gfxhat_pattern_ui_usb.py --usb-dir /mnt/pattern_usb --port /dev/ttyACM0
+```
+
+The command starts the Raspberry Pi interface, reads the PNG files from the USB drive and opens the serial communication with the ESP32.
+
+## 10. Select the PNG from the Display
 
 The display shows the files available on the USB drive:
 
 ```text
 SELEZIONA PNG
-> pattern_01.png
-  pattern_02.png
-  pattern_03.png
+> flowers_pattern.png
+  stars_pattern.png
+  hearts_pattern.png
 ^v SPOSTA  OK SEL  + REF
 ```
 
@@ -59,13 +341,13 @@ Use:
 | `SELECT` | Confirm the selected pattern |
 | `PLUS` | Refresh the file list |
 
-### 6. Insert the Yarns
+## 11. Insert the Yarns
 
 After file selection, the display shows:
 
 ```text
 PATTERN SELEZIONATO
-pattern_01.png
+flowers_pattern.png
 
 INSERIRE
 I FILATI
@@ -75,16 +357,24 @@ I FILATI
 
 Place the three yarns consistently with the colour-to-servo mapping generated by the Raspberry Pi.
 
-### 7. Start Production
+## 12. Start Production
 
-Press `PLUS` (`AVVIA`). The Raspberry Pi validates the PNG, opens the USB serial communication with the ESP32 and immediately sends the command corresponding to the first pixel.
+Press `PLUS` (`AVVIA`).
 
-### 8. Monitor the Process
+The Raspberry Pi:
+
+1. validates the PNG file;
+2. checks that the image is 48 pixels wide;
+3. checks that the image contains exactly three RGB colours;
+4. opens the USB serial communication with the ESP32;
+5. sends the command corresponding to the first pixel.
+
+## 13. Monitor the Process
 
 While the system is running, the display shows:
 
 ```text
-pattern_01.png
+flowers_pattern.png
 IN LAVORAZIONE
 
 [ progress bar ]
@@ -93,9 +383,21 @@ IN LAVORAZIONE
 - STOP
 ```
 
-Every press of the synchronization microswitch causes the ESP32 to send `NEXT` to the Raspberry Pi. The Raspberry Pi then updates the percentage and sends the command for the following pixel.
+Every press of the synchronization microswitch causes the ESP32 to send:
 
-### 9. Pause and Resume
+```text
+NEXT
+```
+
+to the Raspberry Pi.
+
+The Raspberry Pi then:
+
+1. moves to the following pixel;
+2. updates the percentage on the display;
+3. sends the next colour-selection command to the ESP32.
+
+## 14. Pause and Resume
 
 During processing:
 
@@ -105,7 +407,9 @@ During processing:
 | `PLUS` | Resume from the preserved pixel |
 | `BACK` | Return to the file-selection menu from the stopped screen |
 
-### 10. Completion
+When the process is paused, the current pixel index is preserved. When the user resumes the process, the system continues from the same position.
+
+## 15. Completion
 
 At the end of the pattern, all servos are moved to their inactive position and the display shows:
 
@@ -118,13 +422,40 @@ COMPLETATO
 OK / < MENU
 ```
 
+The user can then return to the menu and select another PNG file.
+
+## 16. Unmount the USB Drive
+
+Before removing the USB flash drive from the machine, unmount it safely:
+
+```bash
+sudo umount /mnt/pattern_usb
+```
+
+The USB drive can then be physically removed from the Raspberry Pi.
+
 ## Current Limitation
 
-The current stop/resume implementation acts on the three colour-selection servomotors. Control of an additional main stepper drive is planned but is not part of the tested actuation firmware yet.
+The current stop/resume implementation acts on the three colour-selection servomotors.
+
+Control of an additional main stepper drive is planned but is not part of the tested actuation firmware yet.
+
+## Common Commands
+
+| Operation | Command |
+|---|---|
+| Run Pattern Editor on the user computer | `python3 pattern_editor_v3_scroll_sidebar.py` |
+| Activate Raspberry Pi virtual environment | `source /home/aless/venvs/uncinetto/bin/activate` |
+| Check USB drive name | `lsblk -o NAME,SIZE,FSTYPE,LABEL,MOUNTPOINTS` |
+| Mount USB drive on Raspberry Pi | `sudo mount /dev/sda1 /mnt/pattern_usb` |
+| Check ESP32 serial port | `ls /dev/ttyUSB*` |
+| Run machine interface | `python3 /home/aless/gfxhat_pattern_ui_usb.py --usb-dir /mnt/pattern_usb --port /dev/ttyUSB0` |
+| Unmount USB drive | `sudo umount /mnt/pattern_usb` |
 
 ## Related Pages
 
 - [Pattern Editor](pattern-editor.qmd)
 - [Display Interface — GFX HAT](display-interface.qmd)
 - [ESP32 and Actuation](esp32-actuation.qmd)
+- [Wiring and Power Supply](wiring-power.qmd)
 - [Troubleshooting](troubleshooting.qmd)

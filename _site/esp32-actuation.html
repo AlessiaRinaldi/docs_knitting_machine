@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>ESP32 and Actuation – Automated Knitting Machine</title>
+<title>ESP32 and Actuation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -117,9 +117,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Automated Knitting Machine</span>
-    </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -169,7 +166,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="./stepper-motor.html">
- <span class="dropdown-text">Stepper Motor — Planned Development</span></a>
+ <span class="dropdown-text">Stepper Motor</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./wiring-power.html">
@@ -251,20 +248,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#esp32-and-actuation" id="toc-esp32-and-actuation" class="nav-link active" data-scroll-target="#esp32-and-actuation">ESP32 and Actuation</a>
-  <ul>
-  <li><a href="#role-of-the-esp32" id="toc-role-of-the-esp32" class="nav-link" data-scroll-target="#role-of-the-esp32">Role of the ESP32</a></li>
+  <li><a href="#role-of-the-esp32" id="toc-role-of-the-esp32" class="nav-link active" data-scroll-target="#role-of-the-esp32">Role of the ESP32</a></li>
   <li><a href="#gpio-assignment" id="toc-gpio-assignment" class="nav-link" data-scroll-target="#gpio-assignment">GPIO Assignment</a></li>
   <li><a href="#three-servo-selection-logic" id="toc-three-servo-selection-logic" class="nav-link" data-scroll-target="#three-servo-selection-logic">Three-Servo Selection Logic</a></li>
   <li><a href="#microswitch-synchronization" id="toc-microswitch-synchronization" class="nav-link" data-scroll-target="#microswitch-synchronization">Microswitch Synchronization</a></li>
   <li><a href="#usb-serial-protocol" id="toc-usb-serial-protocol" class="nav-link" data-scroll-target="#usb-serial-protocol">USB Serial Protocol</a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#messages-received-by-the-esp32" id="toc-messages-received-by-the-esp32" class="nav-link" data-scroll-target="#messages-received-by-the-esp32">Messages Received by the ESP32</a></li>
   <li><a href="#messages-sent-by-the-esp32" id="toc-messages-sent-by-the-esp32" class="nav-link" data-scroll-target="#messages-sent-by-the-esp32">Messages Sent by the ESP32</a></li>
   </ul></li>
   <li><a href="#arduino-project-organization" id="toc-arduino-project-organization" class="nav-link" data-scroll-target="#arduino-project-organization">Arduino Project Organization</a></li>
   <li><a href="#related-pages" id="toc-related-pages" class="nav-link" data-scroll-target="#related-pages">Related Pages</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -290,8 +284,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="esp32-and-actuation" class="level1">
-<h1>ESP32 and Actuation</h1>
 <section id="role-of-the-esp32" class="level2">
 <h2 class="anchored" data-anchor-id="role-of-the-esp32">Role of the ESP32</h2>
 <p>The ESP32 implements the low-level actuation layer. It directly controls the three yarn-selection servomotors and acquires the synchronization microswitch.</p>
@@ -492,7 +484,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

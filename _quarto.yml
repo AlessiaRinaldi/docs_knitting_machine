@@ -29,7 +29,7 @@ website:
             href: raspberry-control.qmd
           - text: "ESP32 and Actuation"
             href: esp32-actuation.qmd
-          - text: "Stepper Motor — Planned Development"
+          - text: "Stepper Motor"
             href: stepper-motor.qmd
           - text: "Wiring and Power Supply"
             href: wiring-power.qmd

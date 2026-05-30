@@ -2,8 +2,6 @@
 title: "Wiring and Power Supply"
 ---
 
-# Wiring and Power Supply
-
 ## Complete Connection Diagram
 
 ```text

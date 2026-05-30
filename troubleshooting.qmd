@@ -2,8 +2,6 @@
 title: "Troubleshooting"
 ---
 
-# Troubleshooting
-
 ## Common Issues
 
 | Problem | Likely cause | Solution |

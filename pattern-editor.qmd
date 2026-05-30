@@ -2,8 +2,6 @@
 title: "Pattern Editor"
 ---
 
-# Pattern Editor
-
 ## Purpose
 
 The Pattern Editor is the user-side tool used to create the textile pattern before running the machine. The user draws a three-colour image and exports it as a `.png` file, which is then transferred to the Raspberry Pi through a USB flash drive.

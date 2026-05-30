@@ -2,8 +2,6 @@
 title: "Future Developments"
 ---
 
-# Future Developments
-
 ## Implemented Prototype Functions
 
 The current development stage includes:

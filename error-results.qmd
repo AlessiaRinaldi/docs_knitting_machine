@@ -2,8 +2,6 @@
 title: "Results and Efficiency"
 ---
 
-# Experimental Evaluation and Results
-
 ## Experimental Protocol
 
 The performance of the proposed LLR-based detector was evaluated within the binary hypothesis-testing framework:

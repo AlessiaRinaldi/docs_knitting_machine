@@ -2,8 +2,6 @@
 title: "3D-Printed Servo Arms"
 ---
 
-# 3D-Printed Servo Arms
-
 ## Design Objective
 
 Three custom mechanical arms were designed to connect the servomotors to the yarn-selection mechanism. Each arm converts the angular position of one servo into the displacement required to activate or release one colour channel.

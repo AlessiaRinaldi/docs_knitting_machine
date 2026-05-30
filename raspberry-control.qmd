@@ -2,8 +2,6 @@
 title: "Raspberry Pi Application"
 ---
 
-# Raspberry Pi Application
-
 ## Role of the Raspberry Pi
 
 The Raspberry Pi implements the high-level control layer of the prototype. It is responsible for:

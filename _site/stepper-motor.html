@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Stepper Motor Control — Planned Development – Automated Knitting Machine</title>
+<title>Stepper Motor Control</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -82,9 +82,6 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Automated Knitting Machine</span>
-    </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -134,7 +131,7 @@ ul.task-list li input[type="checkbox"] {
   </li>  
         <li>
     <a class="dropdown-item" href="./stepper-motor.html">
- <span class="dropdown-text">Stepper Motor — Planned Development</span></a>
+ <span class="dropdown-text">Stepper Motor</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./wiring-power.html">
@@ -216,13 +213,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#stepper-motor-control-planned-development" id="toc-stepper-motor-control-planned-development" class="nav-link active" data-scroll-target="#stepper-motor-control-planned-development">Stepper Motor Control — Planned Development</a>
-  <ul>
-  <li><a href="#current-status" id="toc-current-status" class="nav-link" data-scroll-target="#current-status">Current Status</a></li>
-  <li><a href="#planned-role" id="toc-planned-role" class="nav-link" data-scroll-target="#planned-role">Planned Role</a></li>
-  <li><a href="#planned-protocol-extension" id="toc-planned-protocol-extension" class="nav-link" data-scroll-target="#planned-protocol-extension">Planned Protocol Extension</a></li>
-  <li><a href="#related-pages" id="toc-related-pages" class="nav-link" data-scroll-target="#related-pages">Related Pages</a></li>
-  </ul></li>
+  <li><a href="#related-pages" id="toc-related-pages" class="nav-link active" data-scroll-target="#related-pages">Related Pages</a></li>
   </ul>
 </nav>
     </div>
@@ -231,7 +222,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Stepper Motor Control — Planned Development</h1>
+<h1 class="title">Stepper Motor Control</h1>
 </div>
 
 
@@ -248,20 +239,6 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="stepper-motor-control-planned-development" class="level1">
-<h1>Stepper Motor Control — Planned Development</h1>
-<section id="current-status" class="level2">
-<h2 class="anchored" data-anchor-id="current-status">Current Status</h2>
-<p>The tested firmware currently controls:</p>
-<ul>
-<li>the three colour-selection servomotors;</li>
-<li>the synchronization microswitch;</li>
-<li>USB serial communication with the Raspberry Pi.</li>
-</ul>
-<p>A main stepper motor for driving the knitting-machine motion is not yet part of the integrated tested firmware.</p>
-</section>
-<section id="planned-role" class="level2">
-<h2 class="anchored" data-anchor-id="planned-role">Planned Role</h2>
 <p>The stepper subsystem is expected to:</p>
 <ul>
 <li>rotate or advance the knitting mechanism;</li>
@@ -269,38 +246,6 @@ ul.task-list li input[type="checkbox"] {
 <li>remain synchronized with the colour-selection commands;</li>
 <li>allow the error-recognition subsystem to stop the process when a defect is detected.</li>
 </ul>
-</section>
-<section id="planned-protocol-extension" class="level2">
-<h2 class="anchored" data-anchor-id="planned-protocol-extension">Planned Protocol Extension</h2>
-<p>Possible additional serial commands are:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Command</th>
-<th>Intended function</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>START_MOTOR</code></td>
-<td>Start the main motion</td>
-</tr>
-<tr class="even">
-<td><code>STOP_MOTOR</code></td>
-<td>Stop safely after an alarm or operator request</td>
-</tr>
-<tr class="odd">
-<td><code>RESUME_MOTOR</code></td>
-<td>Resume the process</td>
-</tr>
-<tr class="even">
-<td><code>HOME</code></td>
-<td>Move the mechanism to a reference state, if required</td>
-</tr>
-</tbody>
-</table>
-<p>These commands are not yet implemented and must be validated after the motor driver and electrical architecture are finalized.</p>
-</section>
 <section id="related-pages" class="level2">
 <h2 class="anchored" data-anchor-id="related-pages">Related Pages</h2>
 <ul>
@@ -310,7 +255,6 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
