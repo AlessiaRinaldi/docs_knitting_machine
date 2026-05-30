@@ -4,7 +4,7 @@
     "href": "wiring-power.html",
     "title": "Wiring and Power Supply",
     "section": "",
-    "text": "Raspberry Pi\n  │\n  │ USB / micro-USB cable\n  ▼\nESP32\n  ├── GPIO13 ── Servo 1 signal\n  ├── GPIO14 ── Servo 2 signal\n  ├── GPIO27 ── Servo 3 signal\n  ├── GPIO25 ── Microswitch NO\n  └── GND    ── Microswitch COM\n       │\n       └──────── GND external DC-DC supply\n\nExternal regulated DC-DC supply: 5 V\n  ├── +5 V ── Servo 1/2/3 power wires\n  └── GND  ── Servo 1/2/3 ground wires\n\n\n\nThe ESP32 is connected to the Raspberry Pi using its USB cable. This connection provides:\n\nelectrical power for the ESP32 development board;\nthe USB serial communication channel used by gfxhat_pattern_ui_usb.py.\n\nIn the tested setup, the ESP32 is detected as:\n/dev/ttyUSB0\n\n\n\nThe three servomotors must be powered by the external regulated 5 V DC-DC supply.\n\n\n\nServo connection\nWiring\n\n\n\n\nServo signal 1\nESP32 GPIO13\n\n\nServo signal 2\nESP32 GPIO14\n\n\nServo signal 3\nESP32 GPIO27\n\n\nServo positive supply\nExternal DC-DC +5 V\n\n\nServo ground\nExternal DC-DC GND\n\n\n\nDo not supply the servomotors from the Raspberry Pi or ESP32 board.\n\n\n\nA common electrical reference is required for the ESP32 PWM signals to be interpreted correctly by the servomotors:\nGND DC-DC = GND servomotors = GND ESP32 = GND Raspberry Pi through USB\nThe external DC-DC +5 V is connected to the servomotors only; it must not be connected to the ESP32 power input while the board is already powered through USB.\n\n\n\nFor a three-terminal microswitch:\n\n\n\nTerminal\nConnection\n\n\n\n\nCOM\nESP32 GND\n\n\nNO\nESP32 GPIO25\n\n\nNC\nNot connected\n\n\n\n\n\n\n\nVerify all signal and ground connections with the servo supply off.\nEnsure the printed servo arms can move without collision.\nConnect the ESP32 to the Raspberry Pi through USB.\nTurn on the external 5 V servo supply.\nLaunch the Raspberry Pi application.\nSelect a PNG and press AVVIA.\n\n\n\n\n\nOperating the Machine\nESP32 and Actuation\nTroubleshooting"
+    "text": "Raspberry Pi\n  │\n  │ USB / micro-USB cable\n  ▼\nESP32\n  ├── GPIO13 ── Servo 1 signal\n  ├── GPIO14 ── Servo 2 signal\n  ├── GPIO27 ── Servo 3 signal\n  ├── GPIO25 ── Microswitch NO\n  └── GND    ── Microswitch COM\n       │\n       └──────── GND external DC-DC supply\n\nExternal regulated DC-DC supply: 5 V\n  ├── +5 V ── Servo 1/2/3 power wires\n  └── GND  ── Servo 1/2/3 ground wires"
   },
   {
     "objectID": "wiring-power.html#complete-connection-diagram",
@@ -17,78 +17,57 @@
     "objectID": "wiring-power.html#raspberry-pi-and-esp32",
     "href": "wiring-power.html#raspberry-pi-and-esp32",
     "title": "Wiring and Power Supply",
-    "section": "",
-    "text": "The ESP32 is connected to the Raspberry Pi using its USB cable. This connection provides:\n\nelectrical power for the ESP32 development board;\nthe USB serial communication channel used by gfxhat_pattern_ui_usb.py.\n\nIn the tested setup, the ESP32 is detected as:\n/dev/ttyUSB0"
+    "section": "Raspberry Pi and ESP32",
+    "text": "Raspberry Pi and ESP32\nThe ESP32 is connected to the Raspberry Pi using its USB cable. This connection provides:\n\nelectrical power for the ESP32 development board;\nthe USB serial communication channel used by gfxhat_pattern_ui_usb.py.\n\nIn the tested setup, the ESP32 is detected as:\n/dev/ttyUSB0"
   },
   {
     "objectID": "wiring-power.html#servomotor-supply",
     "href": "wiring-power.html#servomotor-supply",
     "title": "Wiring and Power Supply",
-    "section": "",
-    "text": "The three servomotors must be powered by the external regulated 5 V DC-DC supply.\n\n\n\nServo connection\nWiring\n\n\n\n\nServo signal 1\nESP32 GPIO13\n\n\nServo signal 2\nESP32 GPIO14\n\n\nServo signal 3\nESP32 GPIO27\n\n\nServo positive supply\nExternal DC-DC +5 V\n\n\nServo ground\nExternal DC-DC GND\n\n\n\nDo not supply the servomotors from the Raspberry Pi or ESP32 board."
+    "section": "Servomotor Supply",
+    "text": "Servomotor Supply\nThe three servomotors must be powered by the external regulated 5 V DC-DC supply.\n\n\n\nServo connection\nWiring\n\n\n\n\nServo signal 1\nESP32 GPIO13\n\n\nServo signal 2\nESP32 GPIO14\n\n\nServo signal 3\nESP32 GPIO27\n\n\nServo positive supply\nExternal DC-DC +5 V\n\n\nServo ground\nExternal DC-DC GND\n\n\n\nDo not supply the servomotors from the Raspberry Pi or ESP32 board."
   },
   {
     "objectID": "wiring-power.html#common-ground",
     "href": "wiring-power.html#common-ground",
     "title": "Wiring and Power Supply",
-    "section": "",
-    "text": "A common electrical reference is required for the ESP32 PWM signals to be interpreted correctly by the servomotors:\nGND DC-DC = GND servomotors = GND ESP32 = GND Raspberry Pi through USB\nThe external DC-DC +5 V is connected to the servomotors only; it must not be connected to the ESP32 power input while the board is already powered through USB."
+    "section": "Common Ground",
+    "text": "Common Ground\nA common electrical reference is required for the ESP32 PWM signals to be interpreted correctly by the servomotors:\nGND DC-DC = GND servomotors = GND ESP32 = GND Raspberry Pi through USB\nThe external DC-DC +5 V is connected to the servomotors only; it must not be connected to the ESP32 power input while the board is already powered through USB."
   },
   {
     "objectID": "wiring-power.html#microswitch",
     "href": "wiring-power.html#microswitch",
     "title": "Wiring and Power Supply",
-    "section": "",
-    "text": "For a three-terminal microswitch:\n\n\n\nTerminal\nConnection\n\n\n\n\nCOM\nESP32 GND\n\n\nNO\nESP32 GPIO25\n\n\nNC\nNot connected"
+    "section": "Microswitch",
+    "text": "Microswitch\nFor a three-terminal microswitch:\n\n\n\nTerminal\nConnection\n\n\n\n\nCOM\nESP32 GND\n\n\nNO\nESP32 GPIO25\n\n\nNC\nNot connected"
   },
   {
     "objectID": "wiring-power.html#recommended-power-on-procedure",
     "href": "wiring-power.html#recommended-power-on-procedure",
     "title": "Wiring and Power Supply",
-    "section": "",
-    "text": "Verify all signal and ground connections with the servo supply off.\nEnsure the printed servo arms can move without collision.\nConnect the ESP32 to the Raspberry Pi through USB.\nTurn on the external 5 V servo supply.\nLaunch the Raspberry Pi application.\nSelect a PNG and press AVVIA."
+    "section": "Recommended Power-On Procedure",
+    "text": "Recommended Power-On Procedure\n\nVerify all signal and ground connections with the servo supply off.\nEnsure the printed servo arms can move without collision.\nConnect the ESP32 to the Raspberry Pi through USB.\nTurn on the external 5 V servo supply.\nLaunch the Raspberry Pi application.\nSelect a PNG and press AVVIA."
   },
   {
     "objectID": "wiring-power.html#related-pages",
     "href": "wiring-power.html#related-pages",
     "title": "Wiring and Power Supply",
-    "section": "",
-    "text": "Operating the Machine\nESP32 and Actuation\nTroubleshooting"
+    "section": "Related Pages",
+    "text": "Related Pages\n\nOperating the Machine\nESP32 and Actuation\nTroubleshooting"
   },
   {
     "objectID": "stepper-motor.html",
     "href": "stepper-motor.html",
-    "title": "Stepper Motor Control — Planned Development",
+    "title": "Stepper Motor Control",
     "section": "",
-    "text": "The tested firmware currently controls:\n\nthe three colour-selection servomotors;\nthe synchronization microswitch;\nUSB serial communication with the Raspberry Pi.\n\nA main stepper motor for driving the knitting-machine motion is not yet part of the integrated tested firmware.\n\n\n\nThe stepper subsystem is expected to:\n\nrotate or advance the knitting mechanism;\nsupport start, pause and safe stop commands;\nremain synchronized with the colour-selection commands;\nallow the error-recognition subsystem to stop the process when a defect is detected.\n\n\n\n\nPossible additional serial commands are:\n\n\n\nCommand\nIntended function\n\n\n\n\nSTART_MOTOR\nStart the main motion\n\n\nSTOP_MOTOR\nStop safely after an alarm or operator request\n\n\nRESUME_MOTOR\nResume the process\n\n\nHOME\nMove the mechanism to a reference state, if required\n\n\n\nThese commands are not yet implemented and must be validated after the motor driver and electrical architecture are finalized.\n\n\n\n\nESP32 and Actuation\nWiring and Power Supply\nFuture Developments"
-  },
-  {
-    "objectID": "stepper-motor.html#current-status",
-    "href": "stepper-motor.html#current-status",
-    "title": "Stepper Motor Control — Planned Development",
-    "section": "",
-    "text": "The tested firmware currently controls:\n\nthe three colour-selection servomotors;\nthe synchronization microswitch;\nUSB serial communication with the Raspberry Pi.\n\nA main stepper motor for driving the knitting-machine motion is not yet part of the integrated tested firmware."
-  },
-  {
-    "objectID": "stepper-motor.html#planned-role",
-    "href": "stepper-motor.html#planned-role",
-    "title": "Stepper Motor Control — Planned Development",
-    "section": "",
-    "text": "The stepper subsystem is expected to:\n\nrotate or advance the knitting mechanism;\nsupport start, pause and safe stop commands;\nremain synchronized with the colour-selection commands;\nallow the error-recognition subsystem to stop the process when a defect is detected."
-  },
-  {
-    "objectID": "stepper-motor.html#planned-protocol-extension",
-    "href": "stepper-motor.html#planned-protocol-extension",
-    "title": "Stepper Motor Control — Planned Development",
-    "section": "",
-    "text": "Possible additional serial commands are:\n\n\n\nCommand\nIntended function\n\n\n\n\nSTART_MOTOR\nStart the main motion\n\n\nSTOP_MOTOR\nStop safely after an alarm or operator request\n\n\nRESUME_MOTOR\nResume the process\n\n\nHOME\nMove the mechanism to a reference state, if required\n\n\n\nThese commands are not yet implemented and must be validated after the motor driver and electrical architecture are finalized."
+    "text": "The stepper subsystem is expected to:"
   },
   {
     "objectID": "stepper-motor.html#related-pages",
     "href": "stepper-motor.html#related-pages",
-    "title": "Stepper Motor Control — Planned Development",
-    "section": "",
-    "text": "ESP32 and Actuation\nWiring and Power Supply\nFuture Developments"
+    "title": "Stepper Motor Control",
+    "section": "Related Pages",
+    "text": "Related Pages\n\nESP32 and Actuation\nWiring and Power Supply\nFuture Developments"
   },
   {
     "objectID": "README_COPY_INTO_REPOSITORY.html",
@@ -130,7 +109,7 @@
     "href": "pattern-editor.html",
     "title": "Pattern Editor",
     "section": "",
-    "text": "The Pattern Editor is the user-side tool used to create the textile pattern before running the machine. The user draws a three-colour image and exports it as a .png file, which is then transferred to the Raspberry Pi through a USB flash drive.\n\n\n\nOpen the Pattern Editor\n        ↓\nDraw the desired three-colour pattern\n        ↓\nExport the image as a PNG file\n        ↓\nCopy the PNG file to the USB flash drive\n        ↓\nSelect the file from the machine display\n\n\n\nThe current control software accepts patterns with the following properties:\n\n\n\n\n\n\n\nParameter\nRequirement\n\n\n\n\nFile format\n.png\n\n\nImage width\nExactly 48 pixels\n\n\nNumber of colours\nExactly 3 distinct RGB colours\n\n\nUSB storage location\nFiles stored directly in the root folder of the USB drive\n\n\n\nThe image height is not fixed: it determines the length of the produced pattern.\n\n\n\nWhen a pattern is started, the Raspberry Pi reads the image pixels in sequence and associates the three colours to the three servo-controlled yarn channels in order of first occurrence:\n\n\n\nColour order in the PNG\nCommand sent to ESP32\nYarn actuator\n\n\n\n\nFirst distinct colour found\nC1\nServo 1\n\n\nSecond distinct colour found\nC2\nServo 2\n\n\nThird distinct colour found\nC3\nServo 3\n\n\n\nBefore starting production, the user must place the real yarns according to the colour-to-servo mapping shown in the Raspberry Pi terminal.\n\n\n\nStore the exported PNG files directly on the USB flash drive:\nUSB_DRIVE/\n├── pattern_01.png\n├── pattern_02.png\n└── pattern_03.png\nThe machine interface will list these files on the GFX HAT display.\n\n\n\n\nOperating the Machine\nDisplay Interface — GFX HAT\nControl System Overview"
+    "text": "The Pattern Editor is the user-side tool used to create the textile pattern before running the machine. The user draws a three-colour image and exports it as a .png file, which is then transferred to the Raspberry Pi through a USB flash drive."
   },
   {
     "objectID": "pattern-editor.html#purpose",
@@ -143,36 +122,36 @@
     "objectID": "pattern-editor.html#workflow",
     "href": "pattern-editor.html#workflow",
     "title": "Pattern Editor",
-    "section": "",
-    "text": "Open the Pattern Editor\n        ↓\nDraw the desired three-colour pattern\n        ↓\nExport the image as a PNG file\n        ↓\nCopy the PNG file to the USB flash drive\n        ↓\nSelect the file from the machine display"
+    "section": "Workflow",
+    "text": "Workflow\nOpen the Pattern Editor\n        ↓\nDraw the desired three-colour pattern\n        ↓\nExport the image as a PNG file\n        ↓\nCopy the PNG file to the USB flash drive\n        ↓\nSelect the file from the machine display"
   },
   {
     "objectID": "pattern-editor.html#pattern-constraints",
     "href": "pattern-editor.html#pattern-constraints",
     "title": "Pattern Editor",
-    "section": "",
-    "text": "The current control software accepts patterns with the following properties:\n\n\n\n\n\n\n\nParameter\nRequirement\n\n\n\n\nFile format\n.png\n\n\nImage width\nExactly 48 pixels\n\n\nNumber of colours\nExactly 3 distinct RGB colours\n\n\nUSB storage location\nFiles stored directly in the root folder of the USB drive\n\n\n\nThe image height is not fixed: it determines the length of the produced pattern."
+    "section": "Pattern Constraints",
+    "text": "Pattern Constraints\nThe current control software accepts patterns with the following properties:\n\n\n\n\n\n\n\nParameter\nRequirement\n\n\n\n\nFile format\n.png\n\n\nImage width\nExactly 48 pixels\n\n\nNumber of colours\nExactly 3 distinct RGB colours\n\n\nUSB storage location\nFiles stored directly in the root folder of the USB drive\n\n\n\nThe image height is not fixed: it determines the length of the produced pattern."
   },
   {
     "objectID": "pattern-editor.html#automatic-colour-association",
     "href": "pattern-editor.html#automatic-colour-association",
     "title": "Pattern Editor",
-    "section": "",
-    "text": "When a pattern is started, the Raspberry Pi reads the image pixels in sequence and associates the three colours to the three servo-controlled yarn channels in order of first occurrence:\n\n\n\nColour order in the PNG\nCommand sent to ESP32\nYarn actuator\n\n\n\n\nFirst distinct colour found\nC1\nServo 1\n\n\nSecond distinct colour found\nC2\nServo 2\n\n\nThird distinct colour found\nC3\nServo 3\n\n\n\nBefore starting production, the user must place the real yarns according to the colour-to-servo mapping shown in the Raspberry Pi terminal."
+    "section": "Automatic Colour Association",
+    "text": "Automatic Colour Association\nWhen a pattern is started, the Raspberry Pi reads the image pixels in sequence and associates the three colours to the three servo-controlled yarn channels in order of first occurrence:\n\n\n\nColour order in the PNG\nCommand sent to ESP32\nYarn actuator\n\n\n\n\nFirst distinct colour found\nC1\nServo 1\n\n\nSecond distinct colour found\nC2\nServo 2\n\n\nThird distinct colour found\nC3\nServo 3\n\n\n\nBefore starting production, the user must place the real yarns according to the colour-to-servo mapping shown in the Raspberry Pi terminal."
   },
   {
     "objectID": "pattern-editor.html#transfer-to-the-machine",
     "href": "pattern-editor.html#transfer-to-the-machine",
     "title": "Pattern Editor",
-    "section": "",
-    "text": "Store the exported PNG files directly on the USB flash drive:\nUSB_DRIVE/\n├── pattern_01.png\n├── pattern_02.png\n└── pattern_03.png\nThe machine interface will list these files on the GFX HAT display."
+    "section": "Transfer to the Machine",
+    "text": "Transfer to the Machine\nStore the exported PNG files directly on the USB flash drive:\nUSB_DRIVE/\n├── pattern_01.png\n├── pattern_02.png\n└── pattern_03.png\nThe machine interface will list these files on the GFX HAT display."
   },
   {
     "objectID": "pattern-editor.html#related-pages",
     "href": "pattern-editor.html#related-pages",
     "title": "Pattern Editor",
-    "section": "",
-    "text": "Operating the Machine\nDisplay Interface — GFX HAT\nControl System Overview"
+    "section": "Related Pages",
+    "text": "Related Pages\n\nOperating the Machine\nDisplay Interface — GFX HAT\nControl System Overview"
   },
   {
     "objectID": "index.html",
@@ -200,7 +179,7 @@
     "href": "esp32-actuation.html",
     "title": "ESP32 and Actuation",
     "section": "",
-    "text": "The ESP32 implements the low-level actuation layer. It directly controls the three yarn-selection servomotors and acquires the synchronization microswitch.\nThe firmware file is:\nservo_switch_usb.ino\n\n\n\n\n\n\nFunction\nESP32 GPIO\n\n\n\n\nServo 1 signal\nGPIO13\n\n\nServo 2 signal\nGPIO14\n\n\nServo 3 signal\nGPIO27\n\n\nMicroswitch input\nGPIO25\n\n\n\n\n\n\nOnly one servo channel is active for each pixel:\n\n\n\nCommand\nServo 1\nServo 2\nServo 3\n\n\n\n\nC1\nUP\nDOWN\nDOWN\n\n\nC2\nDOWN\nUP\nDOWN\n\n\nC3\nDOWN\nDOWN\nUP\n\n\nDOWN\nDOWN\nDOWN\nDOWN\n\n\n\nInitial experimental calibration values are:\nconst int UP_1 = 140;\nconst int DOWN_1 = 60;\n\nconst int UP_2 = 140;\nconst int DOWN_2 = 60;\n\nconst int UP_3 = 140;\nconst int DOWN_3 = 60;\nThese angles must be calibrated after mounting the custom 3D-Printed Servo Arms.\n\n\n\nThe three-terminal microswitch is connected using its normally open contact:\n\n\n\nMicroswitch terminal\nConnection\n\n\n\n\nCOM\nESP32 GND\n\n\nNO\nESP32 GPIO25\n\n\nNC\nNot connected\n\n\n\nThe firmware uses the internal pull-up resistor:\npinMode(pinMicroswitch, INPUT_PULLUP);\nTherefore the input is HIGH at rest and becomes LOW when the switch is pressed. A 50 ms debounce filter prevents one physical press from generating multiple events.\n\n\n\nThe ESP32 is connected to the Raspberry Pi through a USB cable. The cable powers the ESP32 board and carries serial messages; the servomotors are supplied separately.\nThe communication speed is:\n115200 baud\n\n\n\n\n\nMessage\nEffect\n\n\n\n\nC1\nSelect colour channel 1\n\n\nC2\nSelect colour channel 2\n\n\nC3\nSelect colour channel 3\n\n\nDOWN\nRelease all three channels\n\n\n\n\n\n\n\n\n\nMessage\nMeaning\n\n\n\n\nREADY\nInitialization completed\n\n\nNEXT\nValid microswitch press detected\n\n\nOK:C1, OK:C2, OK:C3\nRequested servo position applied\n\n\nOK:DOWN\nAll servos set to inactive position\n\n\nERR:...\nInvalid serial command received\n\n\n\n\n\n\n\nArduino compiles all .ino files located in one sketch directory. The active firmware must therefore be kept in its own folder:\nservo/\n└── servo_switch_usb/\n    └── servo_switch_usb.ino\nDo not keep a previous complete sketch in the same folder, otherwise duplicated definitions of setup(), loop() and servo objects will prevent compilation.\n\n\n\n\nControl System Overview\n3D-Printed Servo Arms\nWiring and Power Supply\nStepper Motor — Planned Development"
+    "text": "The ESP32 implements the low-level actuation layer. It directly controls the three yarn-selection servomotors and acquires the synchronization microswitch.\nThe firmware file is:\nservo_switch_usb.ino"
   },
   {
     "objectID": "esp32-actuation.html#role-of-the-esp32",
@@ -213,43 +192,43 @@
     "objectID": "esp32-actuation.html#gpio-assignment",
     "href": "esp32-actuation.html#gpio-assignment",
     "title": "ESP32 and Actuation",
-    "section": "",
-    "text": "Function\nESP32 GPIO\n\n\n\n\nServo 1 signal\nGPIO13\n\n\nServo 2 signal\nGPIO14\n\n\nServo 3 signal\nGPIO27\n\n\nMicroswitch input\nGPIO25"
+    "section": "GPIO Assignment",
+    "text": "GPIO Assignment\n\n\n\nFunction\nESP32 GPIO\n\n\n\n\nServo 1 signal\nGPIO13\n\n\nServo 2 signal\nGPIO14\n\n\nServo 3 signal\nGPIO27\n\n\nMicroswitch input\nGPIO25"
   },
   {
     "objectID": "esp32-actuation.html#three-servo-selection-logic",
     "href": "esp32-actuation.html#three-servo-selection-logic",
     "title": "ESP32 and Actuation",
-    "section": "",
-    "text": "Only one servo channel is active for each pixel:\n\n\n\nCommand\nServo 1\nServo 2\nServo 3\n\n\n\n\nC1\nUP\nDOWN\nDOWN\n\n\nC2\nDOWN\nUP\nDOWN\n\n\nC3\nDOWN\nDOWN\nUP\n\n\nDOWN\nDOWN\nDOWN\nDOWN\n\n\n\nInitial experimental calibration values are:\nconst int UP_1 = 140;\nconst int DOWN_1 = 60;\n\nconst int UP_2 = 140;\nconst int DOWN_2 = 60;\n\nconst int UP_3 = 140;\nconst int DOWN_3 = 60;\nThese angles must be calibrated after mounting the custom 3D-Printed Servo Arms."
+    "section": "Three-Servo Selection Logic",
+    "text": "Three-Servo Selection Logic\nOnly one servo channel is active for each pixel:\n\n\n\nCommand\nServo 1\nServo 2\nServo 3\n\n\n\n\nC1\nUP\nDOWN\nDOWN\n\n\nC2\nDOWN\nUP\nDOWN\n\n\nC3\nDOWN\nDOWN\nUP\n\n\nDOWN\nDOWN\nDOWN\nDOWN\n\n\n\nInitial experimental calibration values are:\nconst int UP_1 = 140;\nconst int DOWN_1 = 60;\n\nconst int UP_2 = 140;\nconst int DOWN_2 = 60;\n\nconst int UP_3 = 140;\nconst int DOWN_3 = 60;\nThese angles must be calibrated after mounting the custom 3D-Printed Servo Arms."
   },
   {
     "objectID": "esp32-actuation.html#microswitch-synchronization",
     "href": "esp32-actuation.html#microswitch-synchronization",
     "title": "ESP32 and Actuation",
-    "section": "",
-    "text": "The three-terminal microswitch is connected using its normally open contact:\n\n\n\nMicroswitch terminal\nConnection\n\n\n\n\nCOM\nESP32 GND\n\n\nNO\nESP32 GPIO25\n\n\nNC\nNot connected\n\n\n\nThe firmware uses the internal pull-up resistor:\npinMode(pinMicroswitch, INPUT_PULLUP);\nTherefore the input is HIGH at rest and becomes LOW when the switch is pressed. A 50 ms debounce filter prevents one physical press from generating multiple events."
+    "section": "Microswitch Synchronization",
+    "text": "Microswitch Synchronization\nThe three-terminal microswitch is connected using its normally open contact:\n\n\n\nMicroswitch terminal\nConnection\n\n\n\n\nCOM\nESP32 GND\n\n\nNO\nESP32 GPIO25\n\n\nNC\nNot connected\n\n\n\nThe firmware uses the internal pull-up resistor:\npinMode(pinMicroswitch, INPUT_PULLUP);\nTherefore the input is HIGH at rest and becomes LOW when the switch is pressed. A 50 ms debounce filter prevents one physical press from generating multiple events."
   },
   {
     "objectID": "esp32-actuation.html#usb-serial-protocol",
     "href": "esp32-actuation.html#usb-serial-protocol",
     "title": "ESP32 and Actuation",
-    "section": "",
-    "text": "The ESP32 is connected to the Raspberry Pi through a USB cable. The cable powers the ESP32 board and carries serial messages; the servomotors are supplied separately.\nThe communication speed is:\n115200 baud\n\n\n\n\n\nMessage\nEffect\n\n\n\n\nC1\nSelect colour channel 1\n\n\nC2\nSelect colour channel 2\n\n\nC3\nSelect colour channel 3\n\n\nDOWN\nRelease all three channels\n\n\n\n\n\n\n\n\n\nMessage\nMeaning\n\n\n\n\nREADY\nInitialization completed\n\n\nNEXT\nValid microswitch press detected\n\n\nOK:C1, OK:C2, OK:C3\nRequested servo position applied\n\n\nOK:DOWN\nAll servos set to inactive position\n\n\nERR:...\nInvalid serial command received"
+    "section": "USB Serial Protocol",
+    "text": "USB Serial Protocol\nThe ESP32 is connected to the Raspberry Pi through a USB cable. The cable powers the ESP32 board and carries serial messages; the servomotors are supplied separately.\nThe communication speed is:\n115200 baud\n\nMessages Received by the ESP32\n\n\n\nMessage\nEffect\n\n\n\n\nC1\nSelect colour channel 1\n\n\nC2\nSelect colour channel 2\n\n\nC3\nSelect colour channel 3\n\n\nDOWN\nRelease all three channels\n\n\n\n\n\nMessages Sent by the ESP32\n\n\n\nMessage\nMeaning\n\n\n\n\nREADY\nInitialization completed\n\n\nNEXT\nValid microswitch press detected\n\n\nOK:C1, OK:C2, OK:C3\nRequested servo position applied\n\n\nOK:DOWN\nAll servos set to inactive position\n\n\nERR:...\nInvalid serial command received"
   },
   {
     "objectID": "esp32-actuation.html#arduino-project-organization",
     "href": "esp32-actuation.html#arduino-project-organization",
     "title": "ESP32 and Actuation",
-    "section": "",
-    "text": "Arduino compiles all .ino files located in one sketch directory. The active firmware must therefore be kept in its own folder:\nservo/\n└── servo_switch_usb/\n    └── servo_switch_usb.ino\nDo not keep a previous complete sketch in the same folder, otherwise duplicated definitions of setup(), loop() and servo objects will prevent compilation."
+    "section": "Arduino Project Organization",
+    "text": "Arduino Project Organization\nArduino compiles all .ino files located in one sketch directory. The active firmware must therefore be kept in its own folder:\nservo/\n└── servo_switch_usb/\n    └── servo_switch_usb.ino\nDo not keep a previous complete sketch in the same folder, otherwise duplicated definitions of setup(), loop() and servo objects will prevent compilation."
   },
   {
     "objectID": "esp32-actuation.html#related-pages",
     "href": "esp32-actuation.html#related-pages",
     "title": "ESP32 and Actuation",
-    "section": "",
-    "text": "Control System Overview\n3D-Printed Servo Arms\nWiring and Power Supply\nStepper Motor — Planned Development"
+    "section": "Related Pages",
+    "text": "Related Pages\n\nControl System Overview\n3D-Printed Servo Arms\nWiring and Power Supply\nStepper Motor — Planned Development"
   },
   {
     "objectID": "error-recognition.html",
@@ -375,7 +354,7 @@
     "href": "display-interface.html",
     "title": "Display Interface — GFX HAT",
     "section": "",
-    "text": "The operator interface is implemented with a Pimoroni GFX HAT connected to the Raspberry Pi. The board provides:\n\na 128 × 64 monochrome LCD;\nsix capacitive touch buttons;\nRGB backlighting;\nsix button indicator LEDs.\n\nThe interface is controlled by the integrated script:\ngfxhat_pattern_ui_usb.py\nThis script no longer acts only as a display demonstration: in real mode it selects the PNG pattern, opens the USB serial port to the ESP32, sends colour commands and updates progress when the ESP32 reports a microswitch event.\n\n\n\n\n\nSELEZIONA PNG\n&gt; cuore.png\n  righe.png\n  fiore.png\n^v SPOSTA  OK SEL  + REF\n\n\n\nButton\nAction\n\n\n\n\nUP\nPrevious PNG file\n\n\nDOWN\nNext PNG file\n\n\nSELECT\nConfirm selected pattern\n\n\nPLUS\nRefresh USB file list\n\n\n\n\n\n\nPATTERN SELEZIONATO\ncuore.png\n\nINSERIRE\nI FILATI\n\n+ AVVIA    &lt; MENU\nPLUS starts the real processing sequence; BACK returns to pattern selection.\n\n\n\ncuore.png\nIN LAVORAZIONE\n\n[ progress bar ]\n\n36%   18/50\n- STOP\nIn real mode the counter advances when the ESP32 sends NEXT after a microswitch press.\n\n\n\nThe operator can pause the colour-selection mechanism with MINUS, resume with PLUS, or return to the menu with BACK. At the end of the pattern the completion screen is displayed.\n\n\n\n\n\n\n\n\n\n\n\nState\nPurpose\n\n\n\n\nSELECT_FILE\nLists .png files available on the mounted USB drive\n\n\nINSERT_YARNS\nRequests the operator to prepare yarns before actuation\n\n\nRUNNING\nDisplays the real progress of the selected pattern\n\n\nSTOPPED\nKeeps the current pattern position while servos are released\n\n\nALERT\nPrepared screen for an error or yarn-cut request\n\n\nDONE\nReports successful completion\n\n\n\n\n\n\nThe PNG files are stored directly in the root folder of the USB flash drive. In the current setup, the drive is mounted at:\n/mnt/pattern_usb\nWhen a pattern is selected, it is copied locally to:\n~/automated_knitting_machine/patterns/current_pattern.png\n\n\n\n\n\nDemo mode tests the UI without moving the motors:\nsource /home/aless/venvs/uncinetto/bin/activate\npython3 /home/aless/gfxhat_pattern_ui_usb.py --usb-dir /mnt/pattern_usb --demo\n\n\n\nReal mode communicates with the ESP32, detected in the tested setup at /dev/ttyUSB0:\nsource /home/aless/venvs/uncinetto/bin/activate\npython3 /home/aless/gfxhat_pattern_ui_usb.py --usb-dir /mnt/pattern_usb --port /dev/ttyUSB0\n\n\n\n\nDuring initial tests the installed gfxhat library did not expose lcd.contrast(). The robust display initialization is:\nlcd.clear()\nif hasattr(lcd, \"contrast\"):\n    lcd.contrast(42)\nself.set_backlight((0, 40, 70))\nThis allows the program to run with library versions that do not implement the contrast method.\n\n\n\nThe interface already includes screens for:\n\nERRORE RISCONTRATO;\nTAGLIARE IL FILO.\n\nThe visual error-recognition algorithm is documented in Error Recognition. Connecting its output to the real actuator pause command remains an integration task.\n\n\n\n\nOperating the Machine\nRaspberry Pi Application\nESP32 and Actuation\nTroubleshooting\n\n\n\n\n\nPimoroni GFX HAT Python library\nPimoroni GFX HAT GPIO pinout"
+    "text": "The operator interface is implemented with a Pimoroni GFX HAT connected to the Raspberry Pi. The board provides:\n\na 128 × 64 monochrome LCD;\nsix capacitive touch buttons;\nRGB backlighting;\nsix button indicator LEDs.\n\nThe interface is controlled by the integrated script:\ngfxhat_pattern_ui_usb.py\nThis script no longer acts only as a display demonstration: in real mode it selects the PNG pattern, opens the USB serial port to the ESP32, sends colour commands and updates progress when the ESP32 reports a microswitch event."
   },
   {
     "objectID": "display-interface.html#overview",
@@ -388,64 +367,64 @@
     "objectID": "display-interface.html#screens-and-buttons",
     "href": "display-interface.html#screens-and-buttons",
     "title": "Display Interface — GFX HAT",
-    "section": "",
-    "text": "SELEZIONA PNG\n&gt; cuore.png\n  righe.png\n  fiore.png\n^v SPOSTA  OK SEL  + REF\n\n\n\nButton\nAction\n\n\n\n\nUP\nPrevious PNG file\n\n\nDOWN\nNext PNG file\n\n\nSELECT\nConfirm selected pattern\n\n\nPLUS\nRefresh USB file list\n\n\n\n\n\n\nPATTERN SELEZIONATO\ncuore.png\n\nINSERIRE\nI FILATI\n\n+ AVVIA    &lt; MENU\nPLUS starts the real processing sequence; BACK returns to pattern selection.\n\n\n\ncuore.png\nIN LAVORAZIONE\n\n[ progress bar ]\n\n36%   18/50\n- STOP\nIn real mode the counter advances when the ESP32 sends NEXT after a microswitch press.\n\n\n\nThe operator can pause the colour-selection mechanism with MINUS, resume with PLUS, or return to the menu with BACK. At the end of the pattern the completion screen is displayed."
+    "section": "Screens and Buttons",
+    "text": "Screens and Buttons\n\nPattern Selection\nSELEZIONA PNG\n&gt; cuore.png\n  righe.png\n  fiore.png\n^v SPOSTA  OK SEL  + REF\n\n\n\nButton\nAction\n\n\n\n\nUP\nPrevious PNG file\n\n\nDOWN\nNext PNG file\n\n\nSELECT\nConfirm selected pattern\n\n\nPLUS\nRefresh USB file list\n\n\n\n\n\nYarn Preparation\nPATTERN SELEZIONATO\ncuore.png\n\nINSERIRE\nI FILATI\n\n+ AVVIA    &lt; MENU\nPLUS starts the real processing sequence; BACK returns to pattern selection.\n\n\nRunning State\ncuore.png\nIN LAVORAZIONE\n\n[ progress bar ]\n\n36%   18/50\n- STOP\nIn real mode the counter advances when the ESP32 sends NEXT after a microswitch press.\n\n\nStopped and Completed States\nThe operator can pause the colour-selection mechanism with MINUS, resume with PLUS, or return to the menu with BACK. At the end of the pattern the completion screen is displayed."
   },
   {
     "objectID": "display-interface.html#application-states",
     "href": "display-interface.html#application-states",
     "title": "Display Interface — GFX HAT",
-    "section": "",
-    "text": "State\nPurpose\n\n\n\n\nSELECT_FILE\nLists .png files available on the mounted USB drive\n\n\nINSERT_YARNS\nRequests the operator to prepare yarns before actuation\n\n\nRUNNING\nDisplays the real progress of the selected pattern\n\n\nSTOPPED\nKeeps the current pattern position while servos are released\n\n\nALERT\nPrepared screen for an error or yarn-cut request\n\n\nDONE\nReports successful completion"
+    "section": "Application States",
+    "text": "Application States\n\n\n\n\n\n\n\nState\nPurpose\n\n\n\n\nSELECT_FILE\nLists .png files available on the mounted USB drive\n\n\nINSERT_YARNS\nRequests the operator to prepare yarns before actuation\n\n\nRUNNING\nDisplays the real progress of the selected pattern\n\n\nSTOPPED\nKeeps the current pattern position while servos are released\n\n\nALERT\nPrepared screen for an error or yarn-cut request\n\n\nDONE\nReports successful completion"
   },
   {
     "objectID": "display-interface.html#usb-pattern-selection",
     "href": "display-interface.html#usb-pattern-selection",
     "title": "Display Interface — GFX HAT",
-    "section": "",
-    "text": "The PNG files are stored directly in the root folder of the USB flash drive. In the current setup, the drive is mounted at:\n/mnt/pattern_usb\nWhen a pattern is selected, it is copied locally to:\n~/automated_knitting_machine/patterns/current_pattern.png"
+    "section": "USB Pattern Selection",
+    "text": "USB Pattern Selection\nThe PNG files are stored directly in the root folder of the USB flash drive. In the current setup, the drive is mounted at:\n/mnt/pattern_usb\nWhen a pattern is selected, it is copied locally to:\n~/automated_knitting_machine/patterns/current_pattern.png"
   },
   {
     "objectID": "display-interface.html#running-the-display",
     "href": "display-interface.html#running-the-display",
     "title": "Display Interface — GFX HAT",
-    "section": "",
-    "text": "Demo mode tests the UI without moving the motors:\nsource /home/aless/venvs/uncinetto/bin/activate\npython3 /home/aless/gfxhat_pattern_ui_usb.py --usb-dir /mnt/pattern_usb --demo\n\n\n\nReal mode communicates with the ESP32, detected in the tested setup at /dev/ttyUSB0:\nsource /home/aless/venvs/uncinetto/bin/activate\npython3 /home/aless/gfxhat_pattern_ui_usb.py --usb-dir /mnt/pattern_usb --port /dev/ttyUSB0"
+    "section": "Running the Display",
+    "text": "Running the Display\n\nDemo Mode\nDemo mode tests the UI without moving the motors:\nsource /home/aless/venvs/uncinetto/bin/activate\npython3 /home/aless/gfxhat_pattern_ui_usb.py --usb-dir /mnt/pattern_usb --demo\n\n\nReal Mode\nReal mode communicates with the ESP32, detected in the tested setup at /dev/ttyUSB0:\nsource /home/aless/venvs/uncinetto/bin/activate\npython3 /home/aless/gfxhat_pattern_ui_usb.py --usb-dir /mnt/pattern_usb --port /dev/ttyUSB0"
   },
   {
     "objectID": "display-interface.html#compatibility-note-lcd-contrast",
     "href": "display-interface.html#compatibility-note-lcd-contrast",
     "title": "Display Interface — GFX HAT",
-    "section": "",
-    "text": "During initial tests the installed gfxhat library did not expose lcd.contrast(). The robust display initialization is:\nlcd.clear()\nif hasattr(lcd, \"contrast\"):\n    lcd.contrast(42)\nself.set_backlight((0, 40, 70))\nThis allows the program to run with library versions that do not implement the contrast method."
+    "section": "Compatibility Note: LCD Contrast",
+    "text": "Compatibility Note: LCD Contrast\nDuring initial tests the installed gfxhat library did not expose lcd.contrast(). The robust display initialization is:\nlcd.clear()\nif hasattr(lcd, \"contrast\"):\n    lcd.contrast(42)\nself.set_backlight((0, 40, 70))\nThis allows the program to run with library versions that do not implement the contrast method."
   },
   {
     "objectID": "display-interface.html#future-alert-integration",
     "href": "display-interface.html#future-alert-integration",
     "title": "Display Interface — GFX HAT",
-    "section": "",
-    "text": "The interface already includes screens for:\n\nERRORE RISCONTRATO;\nTAGLIARE IL FILO.\n\nThe visual error-recognition algorithm is documented in Error Recognition. Connecting its output to the real actuator pause command remains an integration task."
+    "section": "Future Alert Integration",
+    "text": "Future Alert Integration\nThe interface already includes screens for:\n\nERRORE RISCONTRATO;\nTAGLIARE IL FILO.\n\nThe visual error-recognition algorithm is documented in Error Recognition. Connecting its output to the real actuator pause command remains an integration task."
   },
   {
     "objectID": "display-interface.html#related-pages",
     "href": "display-interface.html#related-pages",
     "title": "Display Interface — GFX HAT",
-    "section": "",
-    "text": "Operating the Machine\nRaspberry Pi Application\nESP32 and Actuation\nTroubleshooting"
+    "section": "Related Pages",
+    "text": "Related Pages\n\nOperating the Machine\nRaspberry Pi Application\nESP32 and Actuation\nTroubleshooting"
   },
   {
     "objectID": "display-interface.html#references",
     "href": "display-interface.html#references",
     "title": "Display Interface — GFX HAT",
-    "section": "",
-    "text": "Pimoroni GFX HAT Python library\nPimoroni GFX HAT GPIO pinout"
+    "section": "References",
+    "text": "References\n\nPimoroni GFX HAT Python library\nPimoroni GFX HAT GPIO pinout"
   },
   {
     "objectID": "components.html",
     "href": "components.html",
     "title": "Components Overview",
     "section": "",
-    "text": "Component\nFunction in the prototype\n\n\n\n\nRaspberry Pi 3\nHigh-level control, display interface, PNG interpretation and vision pipeline\n\n\nPimoroni GFX HAT\nEmbedded LCD and touch-button user interface\n\n\nESP32\nDirect servomotor control and microswitch acquisition\n\n\nThree servomotors\nPhysical selection of the three yarn channels\n\n\n3D-printed servo arms\nCustom mechanical interfaces for yarn selection\n\n\nMicroswitch\nSynchronization event for pattern advancement\n\n\nRaspberry Pi Camera\nImage acquisition for the error-recognition subsystem\n\n\n3D-printed camera mount\nRepeatable camera positioning near the hook region\n\n\nExternal DC-DC converter\nRegulated 5 V supply dedicated to the servomotors\n\n\nUSB flash drive\nTransfer of PNG pattern files to the Raspberry Pi\n\n\n\n\n\n\n\n\n\nDisplay Interface — GFX HAT\nRaspberry Pi Application\n\n\n\n\n\nESP32 and Actuation\nWiring and Power Supply\nStepper Motor — Planned Development\n\n\n\n\n\n3D-Printed Servo Arms\n3D Camera Mount\n\n\n\n\n\nError Recognition Overview\nAcquisition System\nAlgorithm and Code\nResults and Efficiency"
+    "text": "Component\nFunction in the prototype\n\n\n\n\nRaspberry Pi 3\nHigh-level control, display interface, PNG interpretation and vision pipeline\n\n\nPimoroni GFX HAT\nEmbedded LCD and touch-button user interface\n\n\nESP32\nDirect servomotor control and microswitch acquisition\n\n\nThree servomotors\nPhysical selection of the three yarn channels\n\n\n3D-printed servo arms\nCustom mechanical interfaces for yarn selection\n\n\nMicroswitch\nSynchronization event for pattern advancement\n\n\nRaspberry Pi Camera\nImage acquisition for the error-recognition subsystem\n\n\n3D-printed camera mount\nRepeatable camera positioning near the hook region\n\n\nExternal DC-DC converter\nRegulated 5 V supply dedicated to the servomotors\n\n\nUSB flash drive\nTransfer of PNG pattern files to the Raspberry Pi"
   },
   {
     "objectID": "components.html#main-electronic-and-mechanical-components",
@@ -458,8 +437,8 @@
     "objectID": "components.html#component-grouping",
     "href": "components.html#component-grouping",
     "title": "Components Overview",
-    "section": "",
-    "text": "Display Interface — GFX HAT\nRaspberry Pi Application\n\n\n\n\n\nESP32 and Actuation\nWiring and Power Supply\nStepper Motor — Planned Development\n\n\n\n\n\n3D-Printed Servo Arms\n3D Camera Mount\n\n\n\n\n\nError Recognition Overview\nAcquisition System\nAlgorithm and Code\nResults and Efficiency"
+    "section": "Component Grouping",
+    "text": "Component Grouping\n\nUser Interface and High-Level Processing\n\nDisplay Interface — GFX HAT\nRaspberry Pi Application\n\n\n\nLow-Level Control and Actuation\n\nESP32 and Actuation\nWiring and Power Supply\nStepper Motor — Planned Development\n\n\n\nMechanical Components\n\n3D-Printed Servo Arms\n3D Camera Mount\n\n\n\nVisual Monitoring\n\nError Recognition Overview\nAcquisition System\nAlgorithm and Code\nResults and Efficiency"
   },
   {
     "objectID": "about.html",
@@ -473,35 +452,28 @@
     "href": "control-system.html",
     "title": "Control System Overview",
     "section": "",
-    "text": "The prototype is organized into two processing levels:\n\nthe Raspberry Pi, which implements the user interface, reads and validates PNG patterns, manages process progress and hosts the error-recognition pipeline;\nthe ESP32, which directly controls the three servomotors and reads the synchronization microswitch.\n\nPattern Editor on PC\n        │\n        │ PNG file on USB flash drive\n        ▼\nRaspberry Pi + GFX HAT\n        │\n        │ USB serial protocol: C1, C2, C3, DOWN\n        ▼\nESP32\n   ├── Servo 1 + 3D-printed arm\n   ├── Servo 2 + 3D-printed arm\n   ├── Servo 3 + 3D-printed arm\n   └── Microswitch ── NEXT event\nThe camera-based error-recognition pipeline also runs on the Raspberry Pi. Its integration with the real servo-control workflow remains a next development step.\n\n\n\nUser selects a PNG file\n        ↓\nRaspberry Pi copies and validates the selected pattern\n        ↓\nUser presses AVVIA\n        ↓\nRaspberry Pi sends the command for the first pixel\n        ↓\nESP32 positions one of the three servo arms\n        ↓\nMicroswitch is physically activated\n        ↓\nESP32 sends NEXT\n        ↓\nRaspberry Pi updates progress and sends the next command\n        ↓\nEnd of image: DOWN command and completion screen\n\n\n\n\n\n\n\n\n\n\nFunction\nStatus\n\n\n\n\nPattern creation and PNG export\nImplemented\n\n\nPNG selection through the GFX HAT\nImplemented\n\n\nUSB flash drive pattern loading\nImplemented\n\n\nRaspberry Pi–ESP32 USB serial communication\nImplemented\n\n\nThree-servo colour selection\nImplemented\n\n\nMicroswitch synchronization on ESP32\nImplemented\n\n\nThree-dimensional servo arms\nDesigned; add photographs/test results when available\n\n\nError recognition algorithm\nDocumented and tested separately\n\n\nError-recognition alarm connected to real actuation\nTo be integrated\n\n\nMain stepper motor control\nPlanned development\n\n\n\n\n\n\n\nDisplay Interface — GFX HAT\nRaspberry Pi Application\nESP32 and Actuation\nWiring and Power Supply\n3D-Printed Servo Arms\nError Recognition"
+    "text": "The prototype is organized into two processing levels:\n\nthe user computer, where the PNG pattern is created with the Pattern Editor;\nthe Raspberry Pi, which implements the user interface, reads and validates PNG patterns, manages process progress and hosts the error-recognition pipeline;\nthe ESP32, which directly controls the three servomotors and the stepper motor and reads the synchronization microswitch.\n\nPattern Editor on PC\n        │\n        │ PNG file on USB flash drive\n        ▼\nRaspberry Pi + GFX HAT\n        │\n        │ USB serial protocol: C1, C2, C3, DOWN\n        ▼\nESP32\n   ├── Servo 1 + 3D-printed arm\n   ├── Servo 2 + 3D-printed arm\n   ├── Servo 3 + 3D-printed arm\n   ├── Stepper + Driver + 3D-printed base\n   └── Microswitch ── NEXT event\nThe camera-based error-recognition pipeline also runs on the Raspberry Pi. Its integration with the real servo-control workflow remains a next development step."
   },
   {
     "objectID": "control-system.html#architecture",
     "href": "control-system.html#architecture",
     "title": "Control System Overview",
     "section": "",
-    "text": "The prototype is organized into two processing levels:\n\nthe Raspberry Pi, which implements the user interface, reads and validates PNG patterns, manages process progress and hosts the error-recognition pipeline;\nthe ESP32, which directly controls the three servomotors and reads the synchronization microswitch.\n\nPattern Editor on PC\n        │\n        │ PNG file on USB flash drive\n        ▼\nRaspberry Pi + GFX HAT\n        │\n        │ USB serial protocol: C1, C2, C3, DOWN\n        ▼\nESP32\n   ├── Servo 1 + 3D-printed arm\n   ├── Servo 2 + 3D-printed arm\n   ├── Servo 3 + 3D-printed arm\n   └── Microswitch ── NEXT event\nThe camera-based error-recognition pipeline also runs on the Raspberry Pi. Its integration with the real servo-control workflow remains a next development step."
+    "text": "The prototype is organized into two processing levels:\n\nthe user computer, where the PNG pattern is created with the Pattern Editor;\nthe Raspberry Pi, which implements the user interface, reads and validates PNG patterns, manages process progress and hosts the error-recognition pipeline;\nthe ESP32, which directly controls the three servomotors and the stepper motor and reads the synchronization microswitch.\n\nPattern Editor on PC\n        │\n        │ PNG file on USB flash drive\n        ▼\nRaspberry Pi + GFX HAT\n        │\n        │ USB serial protocol: C1, C2, C3, DOWN\n        ▼\nESP32\n   ├── Servo 1 + 3D-printed arm\n   ├── Servo 2 + 3D-printed arm\n   ├── Servo 3 + 3D-printed arm\n   ├── Stepper + Driver + 3D-printed base\n   └── Microswitch ── NEXT event\nThe camera-based error-recognition pipeline also runs on the Raspberry Pi. Its integration with the real servo-control workflow remains a next development step."
   },
   {
     "objectID": "control-system.html#implemented-control-sequence",
     "href": "control-system.html#implemented-control-sequence",
     "title": "Control System Overview",
-    "section": "",
-    "text": "User selects a PNG file\n        ↓\nRaspberry Pi copies and validates the selected pattern\n        ↓\nUser presses AVVIA\n        ↓\nRaspberry Pi sends the command for the first pixel\n        ↓\nESP32 positions one of the three servo arms\n        ↓\nMicroswitch is physically activated\n        ↓\nESP32 sends NEXT\n        ↓\nRaspberry Pi updates progress and sends the next command\n        ↓\nEnd of image: DOWN command and completion screen"
-  },
-  {
-    "objectID": "control-system.html#current-status",
-    "href": "control-system.html#current-status",
-    "title": "Control System Overview",
-    "section": "",
-    "text": "Function\nStatus\n\n\n\n\nPattern creation and PNG export\nImplemented\n\n\nPNG selection through the GFX HAT\nImplemented\n\n\nUSB flash drive pattern loading\nImplemented\n\n\nRaspberry Pi–ESP32 USB serial communication\nImplemented\n\n\nThree-servo colour selection\nImplemented\n\n\nMicroswitch synchronization on ESP32\nImplemented\n\n\nThree-dimensional servo arms\nDesigned; add photographs/test results when available\n\n\nError recognition algorithm\nDocumented and tested separately\n\n\nError-recognition alarm connected to real actuation\nTo be integrated\n\n\nMain stepper motor control\nPlanned development"
+    "section": "Implemented Control Sequence",
+    "text": "Implemented Control Sequence\nUser selects a PNG file\n        ↓\nRaspberry Pi copies and validates the selected pattern\n        ↓\nUser presses AVVIA\n        ↓\nRaspberry Pi sends the command for the first pixel\n        ↓\nESP32 positions one of the three servo arms\n        ↓\nMicroswitch is physically activated\n        ↓\nESP32 sends NEXT\n        ↓\nRaspberry Pi updates progress and sends the next command\n        ↓\nEnd of image: DOWN command and completion screen"
   },
   {
     "objectID": "control-system.html#subsystem-documentation",
     "href": "control-system.html#subsystem-documentation",
     "title": "Control System Overview",
-    "section": "",
-    "text": "Display Interface — GFX HAT\nRaspberry Pi Application\nESP32 and Actuation\nWiring and Power Supply\n3D-Printed Servo Arms\nError Recognition"
+    "section": "Subsystem Documentation",
+    "text": "Subsystem Documentation\n\nDisplay Interface — GFX HAT\nRaspberry Pi Application\nESP32 and Actuation\nWiring and Power Supply\n3D-Printed Servo Arms\nError Recognition"
   },
   {
     "objectID": "display-interfaface.html",
@@ -746,7 +718,7 @@
     "href": "error-results.html",
     "title": "Results and Efficiency",
     "section": "",
-    "text": "The performance of the proposed LLR-based detector was evaluated within the binary hypothesis-testing framework:\n\\[\nH_0: \\text{“U-shape” of the yarn}, \\qquad\nH_1: \\text{hole or missing yarn}.\n\\]\nAt each microswitch activation, the system acquires a cropped hook image, computes the log-likelihood ratio:\n\\[\nLLR = s_{\\text{pos}} - s_{\\text{neg}},\n\\]\nand compares it to a fixed threshold to decide between (H_0) and (H_1).\n\n\n\nTo obtain an unbiased performance estimate, the dataset was divided into three non-overlapping subsets:\n\n\n\n\n\n\n\n\nSubset\nUse\nComposition\n\n\n\n\nTraining set\nPositive/negative prototypes and discriminative ROI mask\n39 positive and 27 negative images\n\n\nValidation set\nThreshold selection and operating-point tuning\n208 images\n\n\nTest set\nFinal independent evaluation\n771 images\n\n\n\n\n\n\nWith the initial threshold (LLR = 0), at least one false alarm occurred. Since a false alarm would unnecessarily stop the real machine, the threshold was adjusted following a Neyman–Pearson criterion, prioritizing a false-alarm rate as close as possible to zero.\nThe selected threshold was:\n\\[\nLLR_{\\text{thr}} = -0.035\n\\]\nThis threshold was then kept fixed during the final independent test.\n\n\n\n\n\n\n\nPredicted (H_0)\nPredicted (H_1)\n\n\n\n\nTrue (H_0) — no defect\nTN = 633\nFP = 0\n\n\nTrue (H_1) — defect\nFN = 20\nTP = 118\n\n\n\nFrom these values:\n\\[\n\\text{Accuracy} =\n\\frac{TP + TN}{TP + TN + FP + FN}\n= \\frac{751}{771}\n\\approx 97.4\\%\n\\]\n\\[\nP_D =\n\\frac{TP}{TP + FN}\n= \\frac{118}{138}\n\\approx 85.5\\%\n\\]\n\\[\nP_F =\n\\frac{FP}{FP + TN}\n\\approx 0\\%, \\qquad\n\\text{Specificity} \\approx 100\\%\n\\]\nThe selected operating point therefore minimizes unnecessary stops while accepting a moderate number of missed detections.\n\n\n\n\n\n\n\n\n\nPredicted (H_0)\nPredicted (H_1)\n\n\n\n\nTrue (H_0)\nTN = 322\nFP = 0\n\n\nTrue (H_1)\nFN = 3\nTP = 48\n\n\n\n\\[\n\\mathrm{ACC} \\approx 99.2\\%, \\qquad\n\\mathrm{TPR} \\approx 94.1\\%, \\qquad\n\\mathrm{FPR} \\approx 0\\%\n\\]\n\n\n\n\n\n\n\nPredicted (H_0)\nPredicted (H_1)\n\n\n\n\nTrue (H_0)\nTN = 193\nFP = 0\n\n\nTrue (H_1)\nFN = 8\nTP = 37\n\n\n\n\\[\n\\mathrm{ACC} \\approx 96.6\\%, \\qquad\n\\mathrm{TPR} \\approx 82.2\\%, \\qquad\n\\mathrm{FPR} \\approx 0\\%\n\\]\n\n\n\n\n\n\n\nPredicted (H_0)\nPredicted (H_1)\n\n\n\n\nTrue (H_0)\nTN = 118\nFP = 0\n\n\nTrue (H_1)\nFN = 9\nTP = 33\n\n\n\n\\[\n\\mathrm{ACC} \\approx 94.4\\%, \\qquad\n\\mathrm{TPR} \\approx 78.6\\%, \\qquad\n\\mathrm{FPR} \\approx 0\\%\n\\]\nThe best performance is obtained for the fuchsia yarn. The light blue yarn has the lowest detection probability, since its grayscale appearance is closer to the background and it creates less contrast in the region of interest.\n\n\n\n\nA pale pink yarn was considered as an out-of-distribution case, since it was not included in training, validation or test sets. In this condition, more than 32% of samples were misclassified and the (H_0) and (H_1) LLR distributions overlapped substantially.\nThis result indicates that extremely low-contrast yarn/background combinations lie outside the current operating domain and require more robust or learned features.\n\n\n\nThe complete acquisition and detection pipeline runs directly on the Raspberry Pi 3 and is triggered by the synchronization event. During the error-recognition experiments, the event interval was approximately (0.42,), corresponding to an inspection rate of:\n\\[\nf_{\\text{inspect}} \\approx 2.4 \\ \\text{inspections/s}\n\\]\nAt each trigger, a full-resolution image is captured, cropped to a (76 ) region of interest and processed through preprocessing, normalized cross-correlation scoring and LLR evaluation.\nThe processing time remains below the interval between consecutive synchronization events. The available computational margin also enables future multi-frame decision fusion strategies, such as majority voting or LLR averaging.\n\n\n\n\nError Recognition Overview\nSelection of the Acquisition System\n3D Camera Mount\nAlgorithm and Code\nConclusions and Future Works"
+    "text": "The performance of the proposed LLR-based detector was evaluated within the binary hypothesis-testing framework:\n\\[\nH_0: \\text{“U-shape” of the yarn}, \\qquad\nH_1: \\text{hole or missing yarn}.\n\\]\nAt each microswitch activation, the system acquires a cropped hook image, computes the log-likelihood ratio:\n\\[\nLLR = s_{\\text{pos}} - s_{\\text{neg}},\n\\]\nand compares it to a fixed threshold to decide between (H_0) and (H_1)."
   },
   {
     "objectID": "error-results.html#experimental-protocol",
@@ -759,57 +731,57 @@
     "objectID": "error-results.html#dataset-split",
     "href": "error-results.html#dataset-split",
     "title": "Results and Efficiency",
-    "section": "",
-    "text": "To obtain an unbiased performance estimate, the dataset was divided into three non-overlapping subsets:\n\n\n\n\n\n\n\n\nSubset\nUse\nComposition\n\n\n\n\nTraining set\nPositive/negative prototypes and discriminative ROI mask\n39 positive and 27 negative images\n\n\nValidation set\nThreshold selection and operating-point tuning\n208 images\n\n\nTest set\nFinal independent evaluation\n771 images"
+    "section": "Dataset Split",
+    "text": "Dataset Split\nTo obtain an unbiased performance estimate, the dataset was divided into three non-overlapping subsets:\n\n\n\n\n\n\n\n\nSubset\nUse\nComposition\n\n\n\n\nTraining set\nPositive/negative prototypes and discriminative ROI mask\n39 positive and 27 negative images\n\n\nValidation set\nThreshold selection and operating-point tuning\n208 images\n\n\nTest set\nFinal independent evaluation\n771 images"
   },
   {
     "objectID": "error-results.html#threshold-selection-with-the-validation-set",
     "href": "error-results.html#threshold-selection-with-the-validation-set",
     "title": "Results and Efficiency",
-    "section": "",
-    "text": "With the initial threshold (LLR = 0), at least one false alarm occurred. Since a false alarm would unnecessarily stop the real machine, the threshold was adjusted following a Neyman–Pearson criterion, prioritizing a false-alarm rate as close as possible to zero.\nThe selected threshold was:\n\\[\nLLR_{\\text{thr}} = -0.035\n\\]\nThis threshold was then kept fixed during the final independent test."
+    "section": "Threshold Selection with the Validation Set",
+    "text": "Threshold Selection with the Validation Set\nWith the initial threshold (LLR = 0), at least one false alarm occurred. Since a false alarm would unnecessarily stop the real machine, the threshold was adjusted following a Neyman–Pearson criterion, prioritizing a false-alarm rate as close as possible to zero.\nThe selected threshold was:\n\\[\nLLR_{\\text{thr}} = -0.035\n\\]\nThis threshold was then kept fixed during the final independent test."
   },
   {
     "objectID": "error-results.html#test-set-performance",
     "href": "error-results.html#test-set-performance",
     "title": "Results and Efficiency",
-    "section": "",
-    "text": "Predicted (H_0)\nPredicted (H_1)\n\n\n\n\nTrue (H_0) — no defect\nTN = 633\nFP = 0\n\n\nTrue (H_1) — defect\nFN = 20\nTP = 118\n\n\n\nFrom these values:\n\\[\n\\text{Accuracy} =\n\\frac{TP + TN}{TP + TN + FP + FN}\n= \\frac{751}{771}\n\\approx 97.4\\%\n\\]\n\\[\nP_D =\n\\frac{TP}{TP + FN}\n= \\frac{118}{138}\n\\approx 85.5\\%\n\\]\n\\[\nP_F =\n\\frac{FP}{FP + TN}\n\\approx 0\\%, \\qquad\n\\text{Specificity} \\approx 100\\%\n\\]\nThe selected operating point therefore minimizes unnecessary stops while accepting a moderate number of missed detections."
+    "section": "Test-Set Performance",
+    "text": "Test-Set Performance\n\n\n\n\nPredicted (H_0)\nPredicted (H_1)\n\n\n\n\nTrue (H_0) — no defect\nTN = 633\nFP = 0\n\n\nTrue (H_1) — defect\nFN = 20\nTP = 118\n\n\n\nFrom these values:\n\\[\n\\text{Accuracy} =\n\\frac{TP + TN}{TP + TN + FP + FN}\n= \\frac{751}{771}\n\\approx 97.4\\%\n\\]\n\\[\nP_D =\n\\frac{TP}{TP + FN}\n= \\frac{118}{138}\n\\approx 85.5\\%\n\\]\n\\[\nP_F =\n\\frac{FP}{FP + TN}\n\\approx 0\\%, \\qquad\n\\text{Specificity} \\approx 100\\%\n\\]\nThe selected operating point therefore minimizes unnecessary stops while accepting a moderate number of missed detections."
   },
   {
     "objectID": "error-results.html#per-colour-performance-analysis",
     "href": "error-results.html#per-colour-performance-analysis",
     "title": "Results and Efficiency",
-    "section": "",
-    "text": "Predicted (H_0)\nPredicted (H_1)\n\n\n\n\nTrue (H_0)\nTN = 322\nFP = 0\n\n\nTrue (H_1)\nFN = 3\nTP = 48\n\n\n\n\\[\n\\mathrm{ACC} \\approx 99.2\\%, \\qquad\n\\mathrm{TPR} \\approx 94.1\\%, \\qquad\n\\mathrm{FPR} \\approx 0\\%\n\\]\n\n\n\n\n\n\n\nPredicted (H_0)\nPredicted (H_1)\n\n\n\n\nTrue (H_0)\nTN = 193\nFP = 0\n\n\nTrue (H_1)\nFN = 8\nTP = 37\n\n\n\n\\[\n\\mathrm{ACC} \\approx 96.6\\%, \\qquad\n\\mathrm{TPR} \\approx 82.2\\%, \\qquad\n\\mathrm{FPR} \\approx 0\\%\n\\]\n\n\n\n\n\n\n\nPredicted (H_0)\nPredicted (H_1)\n\n\n\n\nTrue (H_0)\nTN = 118\nFP = 0\n\n\nTrue (H_1)\nFN = 9\nTP = 33\n\n\n\n\\[\n\\mathrm{ACC} \\approx 94.4\\%, \\qquad\n\\mathrm{TPR} \\approx 78.6\\%, \\qquad\n\\mathrm{FPR} \\approx 0\\%\n\\]\nThe best performance is obtained for the fuchsia yarn. The light blue yarn has the lowest detection probability, since its grayscale appearance is closer to the background and it creates less contrast in the region of interest."
+    "section": "Per-Colour Performance Analysis",
+    "text": "Per-Colour Performance Analysis\n\nFuchsia Yarn — 373 images\n\n\n\n\nPredicted (H_0)\nPredicted (H_1)\n\n\n\n\nTrue (H_0)\nTN = 322\nFP = 0\n\n\nTrue (H_1)\nFN = 3\nTP = 48\n\n\n\n\\[\n\\mathrm{ACC} \\approx 99.2\\%, \\qquad\n\\mathrm{TPR} \\approx 94.1\\%, \\qquad\n\\mathrm{FPR} \\approx 0\\%\n\\]\n\n\nPurple Yarn — 238 images\n\n\n\n\nPredicted (H_0)\nPredicted (H_1)\n\n\n\n\nTrue (H_0)\nTN = 193\nFP = 0\n\n\nTrue (H_1)\nFN = 8\nTP = 37\n\n\n\n\\[\n\\mathrm{ACC} \\approx 96.6\\%, \\qquad\n\\mathrm{TPR} \\approx 82.2\\%, \\qquad\n\\mathrm{FPR} \\approx 0\\%\n\\]\n\n\nLight Blue Yarn — 160 images\n\n\n\n\nPredicted (H_0)\nPredicted (H_1)\n\n\n\n\nTrue (H_0)\nTN = 118\nFP = 0\n\n\nTrue (H_1)\nFN = 9\nTP = 33\n\n\n\n\\[\n\\mathrm{ACC} \\approx 94.4\\%, \\qquad\n\\mathrm{TPR} \\approx 78.6\\%, \\qquad\n\\mathrm{FPR} \\approx 0\\%\n\\]\nThe best performance is obtained for the fuchsia yarn. The light blue yarn has the lowest detection probability, since its grayscale appearance is closer to the background and it creates less contrast in the region of interest."
   },
   {
     "objectID": "error-results.html#out-of-distribution-failure-case",
     "href": "error-results.html#out-of-distribution-failure-case",
     "title": "Results and Efficiency",
-    "section": "",
-    "text": "A pale pink yarn was considered as an out-of-distribution case, since it was not included in training, validation or test sets. In this condition, more than 32% of samples were misclassified and the (H_0) and (H_1) LLR distributions overlapped substantially.\nThis result indicates that extremely low-contrast yarn/background combinations lie outside the current operating domain and require more robust or learned features."
+    "section": "Out-of-Distribution Failure Case",
+    "text": "Out-of-Distribution Failure Case\nA pale pink yarn was considered as an out-of-distribution case, since it was not included in training, validation or test sets. In this condition, more than 32% of samples were misclassified and the (H_0) and (H_1) LLR distributions overlapped substantially.\nThis result indicates that extremely low-contrast yarn/background combinations lie outside the current operating domain and require more robust or learned features."
   },
   {
     "objectID": "error-results.html#real-time-operation-on-raspberry-pi-3",
     "href": "error-results.html#real-time-operation-on-raspberry-pi-3",
     "title": "Results and Efficiency",
-    "section": "",
-    "text": "The complete acquisition and detection pipeline runs directly on the Raspberry Pi 3 and is triggered by the synchronization event. During the error-recognition experiments, the event interval was approximately (0.42,), corresponding to an inspection rate of:\n\\[\nf_{\\text{inspect}} \\approx 2.4 \\ \\text{inspections/s}\n\\]\nAt each trigger, a full-resolution image is captured, cropped to a (76 ) region of interest and processed through preprocessing, normalized cross-correlation scoring and LLR evaluation.\nThe processing time remains below the interval between consecutive synchronization events. The available computational margin also enables future multi-frame decision fusion strategies, such as majority voting or LLR averaging."
+    "section": "Real-Time Operation on Raspberry Pi 3",
+    "text": "Real-Time Operation on Raspberry Pi 3\nThe complete acquisition and detection pipeline runs directly on the Raspberry Pi 3 and is triggered by the synchronization event. During the error-recognition experiments, the event interval was approximately (0.42,), corresponding to an inspection rate of:\n\\[\nf_{\\text{inspect}} \\approx 2.4 \\ \\text{inspections/s}\n\\]\nAt each trigger, a full-resolution image is captured, cropped to a (76 ) region of interest and processed through preprocessing, normalized cross-correlation scoring and LLR evaluation.\nThe processing time remains below the interval between consecutive synchronization events. The available computational margin also enables future multi-frame decision fusion strategies, such as majority voting or LLR averaging."
   },
   {
     "objectID": "error-results.html#related-pages",
     "href": "error-results.html#related-pages",
     "title": "Results and Efficiency",
-    "section": "",
-    "text": "Error Recognition Overview\nSelection of the Acquisition System\n3D Camera Mount\nAlgorithm and Code\nConclusions and Future Works"
+    "section": "Related Pages",
+    "text": "Related Pages\n\nError Recognition Overview\nSelection of the Acquisition System\n3D Camera Mount\nAlgorithm and Code\nConclusions and Future Works"
   },
   {
     "objectID": "future-developments.html",
     "href": "future-developments.html",
     "title": "Future Developments",
     "section": "",
-    "text": "The current development stage includes:\n\ncreation and export of three-colour PNG patterns;\nembedded file selection through the GFX HAT display;\nPNG validation and colour-to-servo mapping on the Raspberry Pi;\nUSB serial communication between Raspberry Pi and ESP32;\ndirect control of three yarn-selection servomotors;\nmicroswitch-based pattern advancement;\ncustom 3D-designed servo arms;\na separately evaluated error-recognition pipeline.\n\n\n\n\n\n\n\n\n\n\n\nDevelopment\nObjective\n\n\n\n\nConnect notify_error() to the real workflow\nPause the actuation when the vision detector identifies a defect\n\n\nIntegrate main stepper motor control\nAutomate the complete machine motion\n\n\nAdd alarm-safe stop/resume commands\nCoordinate servo and motor movement after an error\n\n\nComplete servo-arm calibration\nDefine validated UP and DOWN angles after final assembly\n\n\nPublish CAD/STL files and photographs\nDocument mechanical reproducibility\n\n\nAutomatic program launch\nStart the interface automatically when the Raspberry Pi boots\n\n\n\n\n\n\nPNG Pattern Selection\n        ↓\nRaspberry Pi Control Application\n        ↓\nESP32 Actuation ── Servo and future Stepper Motion\n        ↓\nHook-Level Camera Inspection\n        ↓\nError Detection on Raspberry Pi\n        ↓\nAutomatic Pause / Operator Feedback\n\n\n\n\nControl System Overview\nStepper Motor — Planned Development\nError Recognition Conclusions"
+    "text": "The current development stage includes:\n\ncreation and export of three-colour PNG patterns;\nembedded file selection through the GFX HAT display;\nPNG validation and colour-to-servo mapping on the Raspberry Pi;\nUSB serial communication between Raspberry Pi and ESP32;\ndirect control of three yarn-selection servomotors;\nmicroswitch-based pattern advancement;\ncustom 3D-designed servo arms;\na separately evaluated error-recognition pipeline."
   },
   {
     "objectID": "future-developments.html#implemented-prototype-functions",
@@ -822,57 +794,176 @@
     "objectID": "future-developments.html#next-integration-steps",
     "href": "future-developments.html#next-integration-steps",
     "title": "Future Developments",
-    "section": "",
-    "text": "Development\nObjective\n\n\n\n\nConnect notify_error() to the real workflow\nPause the actuation when the vision detector identifies a defect\n\n\nIntegrate main stepper motor control\nAutomate the complete machine motion\n\n\nAdd alarm-safe stop/resume commands\nCoordinate servo and motor movement after an error\n\n\nComplete servo-arm calibration\nDefine validated UP and DOWN angles after final assembly\n\n\nPublish CAD/STL files and photographs\nDocument mechanical reproducibility\n\n\nAutomatic program launch\nStart the interface automatically when the Raspberry Pi boots"
+    "section": "Next Integration Steps",
+    "text": "Next Integration Steps\n\n\n\n\n\n\n\nDevelopment\nObjective\n\n\n\n\nConnect notify_error() to the real workflow\nPause the actuation when the vision detector identifies a defect\n\n\nIntegrate main stepper motor control\nAutomate the complete machine motion\n\n\nAdd alarm-safe stop/resume commands\nCoordinate servo and motor movement after an error\n\n\nComplete servo-arm calibration\nDefine validated UP and DOWN angles after final assembly\n\n\nPublish CAD/STL files and photographs\nDocument mechanical reproducibility\n\n\nAutomatic program launch\nStart the interface automatically when the Raspberry Pi boots"
   },
   {
     "objectID": "future-developments.html#target-closed-loop-architecture",
     "href": "future-developments.html#target-closed-loop-architecture",
     "title": "Future Developments",
-    "section": "",
-    "text": "PNG Pattern Selection\n        ↓\nRaspberry Pi Control Application\n        ↓\nESP32 Actuation ── Servo and future Stepper Motion\n        ↓\nHook-Level Camera Inspection\n        ↓\nError Detection on Raspberry Pi\n        ↓\nAutomatic Pause / Operator Feedback"
+    "section": "Target Closed-Loop Architecture",
+    "text": "Target Closed-Loop Architecture\nPNG Pattern Selection\n        ↓\nRaspberry Pi Control Application\n        ↓\nESP32 Actuation ── Servo and future Stepper Motion\n        ↓\nHook-Level Camera Inspection\n        ↓\nError Detection on Raspberry Pi\n        ↓\nAutomatic Pause / Operator Feedback"
   },
   {
     "objectID": "future-developments.html#related-pages",
     "href": "future-developments.html#related-pages",
     "title": "Future Developments",
-    "section": "",
-    "text": "Control System Overview\nStepper Motor — Planned Development\nError Recognition Conclusions"
+    "section": "Related Pages",
+    "text": "Related Pages\n\nControl System Overview\nStepper Motor — Planned Development\nError Recognition Conclusions"
   },
   {
     "objectID": "operating-machine.html",
     "href": "operating-machine.html",
     "title": "Operating the Machine",
     "section": "",
-    "text": "This page describes the procedure followed by the user, from the digital pattern to the running prototype.\n\n\nCreate a three-colour PNG file with the Pattern Editor. The pattern must be 48 pixels wide and contain exactly three RGB colours.\n\n\n\nCopy one or more .png files directly into the root folder of the USB flash drive.\n\n\n\nBefore starting a real test, verify that:\n\nthe Raspberry Pi is powered;\nthe ESP32 is connected to the Raspberry Pi through its USB cable;\nthe three servomotors are supplied by the external regulated 5 V power supply;\nthe DC-DC ground and the ESP32 ground are connected;\nthe printed servo arms can move freely;\nthe microswitch is connected to the ESP32.\n\nSee Wiring and Power Supply for the complete connections.\n\n\n\nMount the USB flash drive and run the integrated interface:\nsource /home/aless/venvs/uncinetto/bin/activate\nsudo mount /dev/sda1 /mnt/pattern_usb\npython3 /home/aless/gfxhat_pattern_ui_usb.py --usb-dir /mnt/pattern_usb --port /dev/ttyUSB0\n\n\n\nThe display shows the files available on the USB drive:\nSELEZIONA PNG\n&gt; pattern_01.png\n  pattern_02.png\n  pattern_03.png\n^v SPOSTA  OK SEL  + REF\nUse:\n\n\n\nButton\nAction\n\n\n\n\nUP / DOWN\nBrowse PNG files\n\n\nSELECT\nConfirm the selected pattern\n\n\nPLUS\nRefresh the file list\n\n\n\n\n\n\nAfter file selection, the display shows:\nPATTERN SELEZIONATO\npattern_01.png\n\nINSERIRE\nI FILATI\n\n+ AVVIA    &lt; MENU\nPlace the three yarns consistently with the colour-to-servo mapping generated by the Raspberry Pi.\n\n\n\nPress PLUS (AVVIA). The Raspberry Pi validates the PNG, opens the USB serial communication with the ESP32 and immediately sends the command corresponding to the first pixel.\n\n\n\nWhile the system is running, the display shows:\npattern_01.png\nIN LAVORAZIONE\n\n[ progress bar ]\n\n36%   18/50\n- STOP\nEvery press of the synchronization microswitch causes the ESP32 to send NEXT to the Raspberry Pi. The Raspberry Pi then updates the percentage and sends the command for the following pixel.\n\n\n\nDuring processing:\n\n\n\nButton\nAction\n\n\n\n\nMINUS\nPause the process and move all servo arms to DOWN\n\n\nPLUS\nResume from the preserved pixel\n\n\nBACK\nReturn to the file-selection menu from the stopped screen\n\n\n\n\n\n\nAt the end of the pattern, all servos are moved to their inactive position and the display shows:\nLAVORO\nCOMPLETATO\n\n[ 100% ]\n\nOK / &lt; MENU\n\n\n\n\nThe current stop/resume implementation acts on the three colour-selection servomotors. Control of an additional main stepper drive is planned but is not part of the tested actuation firmware yet.\n\n\n\n\nPattern Editor\nDisplay Interface — GFX HAT\nESP32 and Actuation\nTroubleshooting"
+    "text": "This page describes the complete operating procedure of the prototype, from the creation of the digital pattern to the execution of the machine.\nThe workflow is divided into two parts:"
   },
   {
-    "objectID": "operating-machine.html#operator-workflow",
-    "href": "operating-machine.html#operator-workflow",
+    "objectID": "operating-machine.html#required-software",
+    "href": "operating-machine.html#required-software",
     "title": "Operating the Machine",
-    "section": "",
-    "text": "This page describes the procedure followed by the user, from the digital pattern to the running prototype.\n\n\nCreate a three-colour PNG file with the Pattern Editor. The pattern must be 48 pixels wide and contain exactly three RGB colours.\n\n\n\nCopy one or more .png files directly into the root folder of the USB flash drive.\n\n\n\nBefore starting a real test, verify that:\n\nthe Raspberry Pi is powered;\nthe ESP32 is connected to the Raspberry Pi through its USB cable;\nthe three servomotors are supplied by the external regulated 5 V power supply;\nthe DC-DC ground and the ESP32 ground are connected;\nthe printed servo arms can move freely;\nthe microswitch is connected to the ESP32.\n\nSee Wiring and Power Supply for the complete connections.\n\n\n\nMount the USB flash drive and run the integrated interface:\nsource /home/aless/venvs/uncinetto/bin/activate\nsudo mount /dev/sda1 /mnt/pattern_usb\npython3 /home/aless/gfxhat_pattern_ui_usb.py --usb-dir /mnt/pattern_usb --port /dev/ttyUSB0\n\n\n\nThe display shows the files available on the USB drive:\nSELEZIONA PNG\n&gt; pattern_01.png\n  pattern_02.png\n  pattern_03.png\n^v SPOSTA  OK SEL  + REF\nUse:\n\n\n\nButton\nAction\n\n\n\n\nUP / DOWN\nBrowse PNG files\n\n\nSELECT\nConfirm the selected pattern\n\n\nPLUS\nRefresh the file list\n\n\n\n\n\n\nAfter file selection, the display shows:\nPATTERN SELEZIONATO\npattern_01.png\n\nINSERIRE\nI FILATI\n\n+ AVVIA    &lt; MENU\nPlace the three yarns consistently with the colour-to-servo mapping generated by the Raspberry Pi.\n\n\n\nPress PLUS (AVVIA). The Raspberry Pi validates the PNG, opens the USB serial communication with the ESP32 and immediately sends the command corresponding to the first pixel.\n\n\n\nWhile the system is running, the display shows:\npattern_01.png\nIN LAVORAZIONE\n\n[ progress bar ]\n\n36%   18/50\n- STOP\nEvery press of the synchronization microswitch causes the ESP32 to send NEXT to the Raspberry Pi. The Raspberry Pi then updates the percentage and sends the command for the following pixel.\n\n\n\nDuring processing:\n\n\n\nButton\nAction\n\n\n\n\nMINUS\nPause the process and move all servo arms to DOWN\n\n\nPLUS\nResume from the preserved pixel\n\n\nBACK\nReturn to the file-selection menu from the stopped screen\n\n\n\n\n\n\nAt the end of the pattern, all servos are moved to their inactive position and the display shows:\nLAVORO\nCOMPLETATO\n\n[ 100% ]\n\nOK / &lt; MENU"
+    "section": "Required Software",
+    "text": "Required Software\nTwo different software environments are used:\n\n\n\n\n\n\n\n\nDevice\nPurpose\nMain script\n\n\n\n\nUser computer\nCreate the PNG pattern\npattern_editor_v3_scroll_sidebar.py\n\n\nRaspberry Pi inside the machine\nRead the USB drive, manage the display and communicate with the ESP32\ngfxhat_pattern_ui_usb.py"
+  },
+  {
+    "objectID": "operating-machine.html#pattern-editor-setup-on-the-user-computer",
+    "href": "operating-machine.html#pattern-editor-setup-on-the-user-computer",
+    "title": "Operating the Machine",
+    "section": "1. Pattern Editor Setup on the User Computer",
+    "text": "1. Pattern Editor Setup on the User Computer\nThe user must run the Pattern Editor on their own computer.\nThe editor is used to create a PNG file compatible with the machine.\n\n1.1 Install Python\nInstall Python 3 on the computer.\nTo check if Python is installed, open a terminal and run:\npython --version\nor, on some systems:\npython3 --version\nIf Python is not installed, install it from the official Python website or through the operating system package manager.\n\n\n1.2 Create a Virtual Environment\nGo to the folder where the Pattern Editor script is located.\nOn Windows:\npy -m venv .venv\n.venv\\Scripts\\activate\nOn Linux or macOS:\npython3 -m venv .venv\nsource .venv/bin/activate\n\n\n1.3 Install the Required Python Library\nThe Pattern Editor requires Pillow to open and save PNG images.\nInstall it with:\npip install pillow\nIf the computer uses Linux and the error No module named tkinter appears, install Tkinter with:\nsudo apt install python3-tk\nTkinter is used for the graphical interface of the Pattern Editor.\n\n\n1.4 Run the Pattern Editor\nRun the script:\nOn Windows:\npy pattern_editor_v3_scroll_sidebar.py\nOn Linux or macOS:\npython3 pattern_editor_v3_scroll_sidebar.py\nThe Pattern Editor opens a graphical interface where the user can draw the pattern.\nThe exported PNG must respect the following rules:\n\nwidth: 48 pixels;\nimage format: RGB PNG;\nnumber of colours: exactly three.\n\nThe height of the pattern can be chosen by the user according to the number of rows to be produced."
+  },
+  {
+    "objectID": "operating-machine.html#create-the-pattern",
+    "href": "operating-machine.html#create-the-pattern",
+    "title": "Operating the Machine",
+    "section": "2. Create the Pattern",
+    "text": "2. Create the Pattern\nCreate a three-colour PNG file with the Pattern Editor.\nThe pattern must:\n\nbe 48 pixels wide;\nbe saved as a PNG RGB image;\ncontain three RGB colours.\n\nWhen the PNG is saved, the editor also shows the colour-to-command interpretation used by the machine.\nThe colour mapping is based on the order in which the three colours appear in the PNG file. The Raspberry Pi uses this order to associate the colours with the commands sent to the ESP32."
+  },
+  {
+    "objectID": "operating-machine.html#copy-the-png-to-the-usb-drive",
+    "href": "operating-machine.html#copy-the-png-to-the-usb-drive",
+    "title": "Operating the Machine",
+    "section": "3. Copy the PNG to the USB Drive",
+    "text": "3. Copy the PNG to the USB Drive\nAfter saving the pattern, copy the .png file directly into the root folder of the USB flash drive.\nExample:\nUSB drive\n├── flowers_pattern.png\n├── stars_pattern.png\n└── hearts_pattern.png\nThe files must not be placed inside subfolders.\nWhen the copy is complete, safely eject the USB drive from the computer."
+  },
+  {
+    "objectID": "operating-machine.html#raspberry-pi-software-setup",
+    "href": "operating-machine.html#raspberry-pi-software-setup",
+    "title": "Operating the Machine",
+    "section": "4. Raspberry Pi Software Setup",
+    "text": "4. Raspberry Pi Software Setup\nThis setup must be performed on the Raspberry Pi inside the machine.\nIt is required only the first time the system is configured.\n\n4.1 Install the Required System Packages\nOpen a terminal on the Raspberry Pi and install the required packages:\nsudo apt update\nsudo apt install -y python3-venv python3-pip\n\n\n4.2 Create the Python Virtual Environment\nCreate a dedicated virtual environment:\nmkdir -p /home/aless/venvs\npython3 -m venv /home/aless/venvs/uncinetto\nActivate it:\nsource /home/aless/venvs/uncinetto/bin/activate\nUpgrade pip:\npip install --upgrade pip\n\n\n4.3 Install the Required Python Libraries\nInstall the Python libraries used by the Raspberry Pi interface:\npip install pillow pyserial gfxhat\nThe libraries are used for:\n\n\n\nLibrary\nPurpose\n\n\n\n\npillow\nOpening and validating PNG images\n\n\npyserial\nUSB serial communication between Raspberry Pi and ESP32\n\n\ngfxhat\nManaging the GFX HAT display and buttons\n\n\n\n\n\n4.4 Enable Raspberry Pi Interfaces\nThe GFX HAT requires the Raspberry Pi hardware interfaces.\nOpen the configuration menu:\nsudo raspi-config\nEnable:\nInterface Options → I2C → Enable\nInterface Options → SPI → Enable\nThen reboot the Raspberry Pi:\nsudo reboot\n\n\n4.5 Give Serial Permission to the User\nTo allow the Raspberry Pi user to access the ESP32 through USB serial, add the user to the dialout group:\nsudo usermod -aG dialout $USER\nThen reboot:\nsudo reboot"
+  },
+  {
+    "objectID": "operating-machine.html#insert-the-usb-drive-into-the-machine",
+    "href": "operating-machine.html#insert-the-usb-drive-into-the-machine",
+    "title": "Operating the Machine",
+    "section": "5. Insert the USB Drive into the Machine",
+    "text": "5. Insert the USB Drive into the Machine\nAfter creating the PNG on the user computer, insert the USB flash drive into the machine.\nThe Raspberry Pi inside the machine will read the PNG files from the USB drive."
+  },
+  {
+    "objectID": "operating-machine.html#mount-the-usb-drive-on-the-raspberry-pi",
+    "href": "operating-machine.html#mount-the-usb-drive-on-the-raspberry-pi",
+    "title": "Operating the Machine",
+    "section": "6. Mount the USB Drive on the Raspberry Pi",
+    "text": "6. Mount the USB Drive on the Raspberry Pi\nCheck the device name assigned to the USB drive:\nlsblk -o NAME,SIZE,FSTYPE,LABEL,MOUNTPOINTS\nIn the current prototype, the USB drive is usually detected as:\n/dev/sda1\nCreate the mount folder if it does not already exist:\nsudo mkdir -p /mnt/pattern_usb\nMount the USB drive:\nsudo mount /dev/sda1 /mnt/pattern_usb\nCheck that the PNG files are visible:\nls /mnt/pattern_usb\nIf the USB drive has a different device name, replace /dev/sda1 with the correct one."
+  },
+  {
+    "objectID": "operating-machine.html#prepare-the-hardware",
+    "href": "operating-machine.html#prepare-the-hardware",
+    "title": "Operating the Machine",
+    "section": "7. Prepare the Hardware",
+    "text": "7. Prepare the Hardware\nBefore starting a real test, verify that:\n\nthe Raspberry Pi is powered;\nthe GFX HAT display is connected to the Raspberry Pi;\nthe ESP32 is connected to the Raspberry Pi through its USB cable;\nthe three servomotors and the stepper are supplied by the external power supply;\nall the GND are connected;\nthe microswitch is connected to the ESP32.\n\nSee Wiring and Power Supply for the complete connections."
+  },
+  {
+    "objectID": "operating-machine.html#find-the-esp32-serial-port",
+    "href": "operating-machine.html#find-the-esp32-serial-port",
+    "title": "Operating the Machine",
+    "section": "8. Find the ESP32 Serial Port",
+    "text": "8. Find the ESP32 Serial Port\nCheck which serial port is assigned to the ESP32:\nls /dev/ttyUSB*\nor:\nls /dev/ttyACM*\nIn the current prototype, the ESP32 is usually available as:\n/dev/ttyUSB0\nIf the ESP32 appears with a different name, use that port when running the application."
+  },
+  {
+    "objectID": "operating-machine.html#start-the-raspberry-pi-application",
+    "href": "operating-machine.html#start-the-raspberry-pi-application",
+    "title": "Operating the Machine",
+    "section": "9. Start the Raspberry Pi Application",
+    "text": "9. Start the Raspberry Pi Application\nActivate the virtual environment:\nsource /home/aless/venvs/uncinetto/bin/activate\nRun the integrated interface:\npython3 /home/aless/gfxhat_pattern_ui_usb.py --usb-dir /mnt/pattern_usb --port /dev/ttyUSB0\nIf the ESP32 is detected as /dev/ttyACM0, use:\npython3 /home/aless/gfxhat_pattern_ui_usb.py --usb-dir /mnt/pattern_usb --port /dev/ttyACM0\nThe command starts the Raspberry Pi interface, reads the PNG files from the USB drive and opens the serial communication with the ESP32."
+  },
+  {
+    "objectID": "operating-machine.html#select-the-png-from-the-display",
+    "href": "operating-machine.html#select-the-png-from-the-display",
+    "title": "Operating the Machine",
+    "section": "10. Select the PNG from the Display",
+    "text": "10. Select the PNG from the Display\nThe display shows the files available on the USB drive:\nSELEZIONA PNG\n&gt; flowers_pattern.png\n  stars_pattern.png\n  hearts_pattern.png\n^v SPOSTA  OK SEL  + REF\nUse:\n\n\n\nButton\nAction\n\n\n\n\nUP / DOWN\nBrowse PNG files\n\n\nSELECT\nConfirm the selected pattern\n\n\nPLUS\nRefresh the file list"
+  },
+  {
+    "objectID": "operating-machine.html#insert-the-yarns",
+    "href": "operating-machine.html#insert-the-yarns",
+    "title": "Operating the Machine",
+    "section": "11. Insert the Yarns",
+    "text": "11. Insert the Yarns\nAfter file selection, the display shows:\nPATTERN SELEZIONATO\nflowers_pattern.png\n\nINSERIRE\nI FILATI\n\n+ AVVIA    &lt; MENU\nPlace the three yarns consistently with the colour-to-servo mapping generated by the Raspberry Pi."
+  },
+  {
+    "objectID": "operating-machine.html#start-production",
+    "href": "operating-machine.html#start-production",
+    "title": "Operating the Machine",
+    "section": "12. Start Production",
+    "text": "12. Start Production\nPress PLUS (AVVIA).\nThe Raspberry Pi:\n\nvalidates the PNG file;\nchecks that the image is 48 pixels wide;\nchecks that the image contains exactly three RGB colours;\nopens the USB serial communication with the ESP32;\nsends the command corresponding to the first pixel."
+  },
+  {
+    "objectID": "operating-machine.html#monitor-the-process",
+    "href": "operating-machine.html#monitor-the-process",
+    "title": "Operating the Machine",
+    "section": "13. Monitor the Process",
+    "text": "13. Monitor the Process\nWhile the system is running, the display shows:\nflowers_pattern.png\nIN LAVORAZIONE\n\n[ progress bar ]\n\n36%   18/50\n- STOP\nEvery press of the synchronization microswitch causes the ESP32 to send:\nNEXT\nto the Raspberry Pi.\nThe Raspberry Pi then:\n\nmoves to the following pixel;\nupdates the percentage on the display;\nsends the next colour-selection command to the ESP32."
+  },
+  {
+    "objectID": "operating-machine.html#pause-and-resume",
+    "href": "operating-machine.html#pause-and-resume",
+    "title": "Operating the Machine",
+    "section": "14. Pause and Resume",
+    "text": "14. Pause and Resume\nDuring processing:\n\n\n\nButton\nAction\n\n\n\n\nMINUS\nPause the process and move all servo arms to DOWN\n\n\nPLUS\nResume from the preserved pixel\n\n\nBACK\nReturn to the file-selection menu from the stopped screen\n\n\n\nWhen the process is paused, the current pixel index is preserved. When the user resumes the process, the system continues from the same position."
+  },
+  {
+    "objectID": "operating-machine.html#completion",
+    "href": "operating-machine.html#completion",
+    "title": "Operating the Machine",
+    "section": "15. Completion",
+    "text": "15. Completion\nAt the end of the pattern, all servos are moved to their inactive position and the display shows:\nLAVORO\nCOMPLETATO\n\n[ 100% ]\n\nOK / &lt; MENU\nThe user can then return to the menu and select another PNG file."
+  },
+  {
+    "objectID": "operating-machine.html#unmount-the-usb-drive",
+    "href": "operating-machine.html#unmount-the-usb-drive",
+    "title": "Operating the Machine",
+    "section": "16. Unmount the USB Drive",
+    "text": "16. Unmount the USB Drive\nBefore removing the USB flash drive from the machine, unmount it safely:\nsudo umount /mnt/pattern_usb\nThe USB drive can then be physically removed from the Raspberry Pi."
   },
   {
     "objectID": "operating-machine.html#current-limitation",
     "href": "operating-machine.html#current-limitation",
     "title": "Operating the Machine",
-    "section": "",
-    "text": "The current stop/resume implementation acts on the three colour-selection servomotors. Control of an additional main stepper drive is planned but is not part of the tested actuation firmware yet."
+    "section": "Current Limitation",
+    "text": "Current Limitation\nThe current stop/resume implementation acts on the three colour-selection servomotors.\nControl of an additional main stepper drive is planned but is not part of the tested actuation firmware yet."
+  },
+  {
+    "objectID": "operating-machine.html#common-commands",
+    "href": "operating-machine.html#common-commands",
+    "title": "Operating the Machine",
+    "section": "Common Commands",
+    "text": "Common Commands\n\n\n\n\n\n\n\nOperation\nCommand\n\n\n\n\nRun Pattern Editor on the user computer\npython3 pattern_editor_v3_scroll_sidebar.py\n\n\nActivate Raspberry Pi virtual environment\nsource /home/aless/venvs/uncinetto/bin/activate\n\n\nCheck USB drive name\nlsblk -o NAME,SIZE,FSTYPE,LABEL,MOUNTPOINTS\n\n\nMount USB drive on Raspberry Pi\nsudo mount /dev/sda1 /mnt/pattern_usb\n\n\nCheck ESP32 serial port\nls /dev/ttyUSB*\n\n\nRun machine interface\npython3 /home/aless/gfxhat_pattern_ui_usb.py --usb-dir /mnt/pattern_usb --port /dev/ttyUSB0\n\n\nUnmount USB drive\nsudo umount /mnt/pattern_usb"
   },
   {
     "objectID": "operating-machine.html#related-pages",
     "href": "operating-machine.html#related-pages",
     "title": "Operating the Machine",
-    "section": "",
-    "text": "Pattern Editor\nDisplay Interface — GFX HAT\nESP32 and Actuation\nTroubleshooting"
+    "section": "Related Pages",
+    "text": "Related Pages\n\nPattern Editor\nDisplay Interface — GFX HAT\nESP32 and Actuation\nWiring and Power Supply\nTroubleshooting"
   },
   {
     "objectID": "raspberry-control.html",
     "href": "raspberry-control.html",
     "title": "Raspberry Pi Application",
     "section": "",
-    "text": "The Raspberry Pi implements the high-level control layer of the prototype. It is responsible for:\n\ndisplaying the operator interface through the GFX HAT;\nreading PNG files from the USB flash drive;\ncopying the selected pattern to local storage;\nvalidating the PNG dimensions and number of colours;\nmapping RGB colours to the commands C1, C2 and C3;\ncommunicating with the ESP32 through USB serial;\ndisplaying the current processing progress;\nhosting the error-recognition pipeline.\n\n\n\n\nThe active user-interface and machine-control program is:\ngfxhat_pattern_ui_usb.py\n\n\n\n\n\n\n\n\n\nClass\nResponsibility\n\n\n\n\nGfxScreen\nLCD drawing, progress bar, touch LEDs and RGB backlight\n\n\nPatternApp\nInterface states, touch events, file discovery and screen rendering\n\n\nUsbMachineController\nPNG validation, serial port, ESP32 messages and progress\n\n\nDemoController\nInterface simulation without real ESP32 actuation\n\n\n\n\n\n\n\nThe Raspberry Pi checks that the selected image:\n\nis a valid image readable as RGB;\nhas width equal to 48 pixels;\ncontains exactly three distinct colours.\n\nThe image pixels are read sequentially. The first distinct colour is mapped to C1, the second to C2, and the third to C3.\n\n\n\nThe Raspberry Pi connects to the ESP32 using:\n/dev/ttyUSB0\n115200 baud\nThe serial-reading loop is executed in a worker thread. In this way, waiting for the physical microswitch does not freeze the display interface or the capacitive buttons.\n\n\n\n\n\nsource /home/aless/venvs/uncinetto/bin/activate\n\n\n\npython3 -m serial.tools.list_ports -v\n\n\n\nsudo mkdir -p /mnt/pattern_usb\nsudo mount /dev/sda1 /mnt/pattern_usb\nls -lah /mnt/pattern_usb\n\n\n\npython3 /home/aless/gfxhat_pattern_ui_usb.py --usb-dir /mnt/pattern_usb --port /dev/ttyUSB0\n\n\n\n\nThe error-recognition algorithm is executed on the Raspberry Pi and is designed to inspect the yarn configuration near the hook. The interface already provides the event:\napp.notify_error()\nThe final closed-loop step is to connect this recognition event to the physical machine pause/stop behavior.\n\n\n\n\nDisplay Interface — GFX HAT\nESP32 and Actuation\nError Recognition Overview"
+    "text": "The Raspberry Pi implements the high-level control layer of the prototype. It is responsible for:\n\ndisplaying the operator interface through the GFX HAT;\nreading PNG files from the USB flash drive;\ncopying the selected pattern to local storage;\nvalidating the PNG dimensions and number of colours;\nmapping RGB colours to the commands C1, C2 and C3;\ncommunicating with the ESP32 through USB serial;\ndisplaying the current processing progress;\nhosting the error-recognition pipeline."
   },
   {
     "objectID": "raspberry-control.html#role-of-the-raspberry-pi",
@@ -885,50 +976,50 @@
     "objectID": "raspberry-control.html#integrated-script",
     "href": "raspberry-control.html#integrated-script",
     "title": "Raspberry Pi Application",
-    "section": "",
-    "text": "The active user-interface and machine-control program is:\ngfxhat_pattern_ui_usb.py\n\n\n\n\n\n\n\n\n\nClass\nResponsibility\n\n\n\n\nGfxScreen\nLCD drawing, progress bar, touch LEDs and RGB backlight\n\n\nPatternApp\nInterface states, touch events, file discovery and screen rendering\n\n\nUsbMachineController\nPNG validation, serial port, ESP32 messages and progress\n\n\nDemoController\nInterface simulation without real ESP32 actuation"
+    "section": "Integrated Script",
+    "text": "Integrated Script\nThe active user-interface and machine-control program is:\ngfxhat_pattern_ui_usb.py\n\nMain Software Classes\n\n\n\n\n\n\n\nClass\nResponsibility\n\n\n\n\nGfxScreen\nLCD drawing, progress bar, touch LEDs and RGB backlight\n\n\nPatternApp\nInterface states, touch events, file discovery and screen rendering\n\n\nUsbMachineController\nPNG validation, serial port, ESP32 messages and progress\n\n\nDemoController\nInterface simulation without real ESP32 actuation"
   },
   {
     "objectID": "raspberry-control.html#pattern-processing",
     "href": "raspberry-control.html#pattern-processing",
     "title": "Raspberry Pi Application",
-    "section": "",
-    "text": "The Raspberry Pi checks that the selected image:\n\nis a valid image readable as RGB;\nhas width equal to 48 pixels;\ncontains exactly three distinct colours.\n\nThe image pixels are read sequentially. The first distinct colour is mapped to C1, the second to C2, and the third to C3."
+    "section": "Pattern Processing",
+    "text": "Pattern Processing\nThe Raspberry Pi checks that the selected image:\n\nis a valid image readable as RGB;\nhas width equal to 48 pixels;\ncontains exactly three distinct colours.\n\nThe image pixels are read sequentially. The first distinct colour is mapped to C1, the second to C2, and the third to C3."
   },
   {
     "objectID": "raspberry-control.html#usb-serial-communication",
     "href": "raspberry-control.html#usb-serial-communication",
     "title": "Raspberry Pi Application",
-    "section": "",
-    "text": "The Raspberry Pi connects to the ESP32 using:\n/dev/ttyUSB0\n115200 baud\nThe serial-reading loop is executed in a worker thread. In this way, waiting for the physical microswitch does not freeze the display interface or the capacitive buttons."
+    "section": "USB Serial Communication",
+    "text": "USB Serial Communication\nThe Raspberry Pi connects to the ESP32 using:\n/dev/ttyUSB0\n115200 baud\nThe serial-reading loop is executed in a worker thread. In this way, waiting for the physical microswitch does not freeze the display interface or the capacitive buttons."
   },
   {
     "objectID": "raspberry-control.html#raspberry-pi-commands",
     "href": "raspberry-control.html#raspberry-pi-commands",
     "title": "Raspberry Pi Application",
-    "section": "",
-    "text": "source /home/aless/venvs/uncinetto/bin/activate\n\n\n\npython3 -m serial.tools.list_ports -v\n\n\n\nsudo mkdir -p /mnt/pattern_usb\nsudo mount /dev/sda1 /mnt/pattern_usb\nls -lah /mnt/pattern_usb\n\n\n\npython3 /home/aless/gfxhat_pattern_ui_usb.py --usb-dir /mnt/pattern_usb --port /dev/ttyUSB0"
+    "section": "Raspberry Pi Commands",
+    "text": "Raspberry Pi Commands\n\nVirtual Environment\nsource /home/aless/venvs/uncinetto/bin/activate\n\n\nDetect the ESP32 Port\npython3 -m serial.tools.list_ports -v\n\n\nMount the Pattern USB Drive\nsudo mkdir -p /mnt/pattern_usb\nsudo mount /dev/sda1 /mnt/pattern_usb\nls -lah /mnt/pattern_usb\n\n\nStart the Integrated Application\npython3 /home/aless/gfxhat_pattern_ui_usb.py --usb-dir /mnt/pattern_usb --port /dev/ttyUSB0"
   },
   {
     "objectID": "raspberry-control.html#vision-integration",
     "href": "raspberry-control.html#vision-integration",
     "title": "Raspberry Pi Application",
-    "section": "",
-    "text": "The error-recognition algorithm is executed on the Raspberry Pi and is designed to inspect the yarn configuration near the hook. The interface already provides the event:\napp.notify_error()\nThe final closed-loop step is to connect this recognition event to the physical machine pause/stop behavior."
+    "section": "Vision Integration",
+    "text": "Vision Integration\nThe error-recognition algorithm is executed on the Raspberry Pi and is designed to inspect the yarn configuration near the hook. The interface already provides the event:\napp.notify_error()\nThe final closed-loop step is to connect this recognition event to the physical machine pause/stop behavior."
   },
   {
     "objectID": "raspberry-control.html#related-pages",
     "href": "raspberry-control.html#related-pages",
     "title": "Raspberry Pi Application",
-    "section": "",
-    "text": "Display Interface — GFX HAT\nESP32 and Actuation\nError Recognition Overview"
+    "section": "Related Pages",
+    "text": "Related Pages\n\nDisplay Interface — GFX HAT\nESP32 and Actuation\nError Recognition Overview"
   },
   {
     "objectID": "servo-arms.html",
     "href": "servo-arms.html",
     "title": "3D-Printed Servo Arms",
     "section": "",
-    "text": "Three custom mechanical arms were designed to connect the servomotors to the yarn-selection mechanism. Each arm converts the angular position of one servo into the displacement required to activate or release one colour channel.\nThe use of custom components makes it possible to:\n\nadapt the actuator geometry to the machine structure;\nobtain repeatable motion for the three yarn channels;\nreproduce the mechanism through 3D printing;\ncalibrate mechanical movement through firmware angles.\n\n\n\n\n\n\n\nMechanical actuator\nElectrical actuator\nESP32 command\n\n\n\n\nYarn-selection arm 1\nServo 1 on GPIO13\nC1\n\n\nYarn-selection arm 2\nServo 2 on GPIO14\nC2\n\n\nYarn-selection arm 3\nServo 3 on GPIO27\nC3\n\n\n\n\n\n\nThe firmware defines two positions for each printed arm:\n\nDOWN: inactive position, used when the corresponding yarn channel is not selected;\nUP: active position, used when that yarn channel must participate in the current pixel.\n\nAt the current calibration stage the initial values are:\n\n\n\nArm\nDOWN\nUP\n\n\n\n\nArm 1\n60°\n140°\n\n\nArm 2\n60°\n140°\n\n\nArm 3\n60°\n140°\n\n\n\nThese values are initial experimental settings and should be refined after final assembly.\n\n\n\n\nKeep yarns disconnected during the first powered test.\nPower the servo supply and run a command that sends all servos to DOWN.\nMount each printed arm in the intended inactive orientation.\nSend C1, C2 and C3 individually.\nCheck that each arm moves without collisions or excessive mechanical force.\nModify the UP_n and DOWN_n angles in servo_switch_usb.ino if necessary.\nRepeat the test with the complete three-arm assembly.\nConnect the yarns only after safe motion has been confirmed.\n\n\n\n\nStore photographs and CAD renders in:\nimages/servo_arms/\n├── cad_model.png\n├── printed_arm.jpg\n├── mounted_arm.jpg\n└── complete_module.jpg\nAfter adding the images to the repository, uncomment or adapt the following blocks:\n&lt;!--\n![](images/servo_arms/cad_model.png){fig-alt=\"CAD model of the servo arm\" width=65%}\n\n![](images/servo_arms/complete_module.jpg){fig-alt=\"Complete three-servo selection module\" width=65%}\n--&gt;\n\n\n\nDuring first tests, the printed arms must be free to move and must not be forced against a mechanical stop. A blocked servo can draw excessive current and damage the actuator or the printed part.\n\n\n\n\nESP32 and Actuation\nWiring and Power Supply\nComponents Overview"
+    "text": "Three custom mechanical arms were designed to connect the servomotors to the yarn-selection mechanism. Each arm converts the angular position of one servo into the displacement required to activate or release one colour channel.\nThe use of custom components makes it possible to:\n\nadapt the actuator geometry to the machine structure;\nobtain repeatable motion for the three yarn channels;\nreproduce the mechanism through 3D printing;\ncalibrate mechanical movement through firmware angles."
   },
   {
     "objectID": "servo-arms.html#design-objective",
@@ -941,50 +1032,50 @@
     "objectID": "servo-arms.html#servo-association",
     "href": "servo-arms.html#servo-association",
     "title": "3D-Printed Servo Arms",
-    "section": "",
-    "text": "Mechanical actuator\nElectrical actuator\nESP32 command\n\n\n\n\nYarn-selection arm 1\nServo 1 on GPIO13\nC1\n\n\nYarn-selection arm 2\nServo 2 on GPIO14\nC2\n\n\nYarn-selection arm 3\nServo 3 on GPIO27\nC3"
+    "section": "Servo Association",
+    "text": "Servo Association\n\n\n\nMechanical actuator\nElectrical actuator\nESP32 command\n\n\n\n\nYarn-selection arm 1\nServo 1 on GPIO13\nC1\n\n\nYarn-selection arm 2\nServo 2 on GPIO14\nC2\n\n\nYarn-selection arm 3\nServo 3 on GPIO27\nC3"
   },
   {
     "objectID": "servo-arms.html#active-and-inactive-positions",
     "href": "servo-arms.html#active-and-inactive-positions",
     "title": "3D-Printed Servo Arms",
-    "section": "",
-    "text": "The firmware defines two positions for each printed arm:\n\nDOWN: inactive position, used when the corresponding yarn channel is not selected;\nUP: active position, used when that yarn channel must participate in the current pixel.\n\nAt the current calibration stage the initial values are:\n\n\n\nArm\nDOWN\nUP\n\n\n\n\nArm 1\n60°\n140°\n\n\nArm 2\n60°\n140°\n\n\nArm 3\n60°\n140°\n\n\n\nThese values are initial experimental settings and should be refined after final assembly."
+    "section": "Active and Inactive Positions",
+    "text": "Active and Inactive Positions\nThe firmware defines two positions for each printed arm:\n\nDOWN: inactive position, used when the corresponding yarn channel is not selected;\nUP: active position, used when that yarn channel must participate in the current pixel.\n\nAt the current calibration stage the initial values are:\n\n\n\nArm\nDOWN\nUP\n\n\n\n\nArm 1\n60°\n140°\n\n\nArm 2\n60°\n140°\n\n\nArm 3\n60°\n140°\n\n\n\nThese values are initial experimental settings and should be refined after final assembly."
   },
   {
     "objectID": "servo-arms.html#recommended-assembly-and-calibration-procedure",
     "href": "servo-arms.html#recommended-assembly-and-calibration-procedure",
     "title": "3D-Printed Servo Arms",
-    "section": "",
-    "text": "Keep yarns disconnected during the first powered test.\nPower the servo supply and run a command that sends all servos to DOWN.\nMount each printed arm in the intended inactive orientation.\nSend C1, C2 and C3 individually.\nCheck that each arm moves without collisions or excessive mechanical force.\nModify the UP_n and DOWN_n angles in servo_switch_usb.ino if necessary.\nRepeat the test with the complete three-arm assembly.\nConnect the yarns only after safe motion has been confirmed."
+    "section": "Recommended Assembly and Calibration Procedure",
+    "text": "Recommended Assembly and Calibration Procedure\n\nKeep yarns disconnected during the first powered test.\nPower the servo supply and run a command that sends all servos to DOWN.\nMount each printed arm in the intended inactive orientation.\nSend C1, C2 and C3 individually.\nCheck that each arm moves without collisions or excessive mechanical force.\nModify the UP_n and DOWN_n angles in servo_switch_usb.ino if necessary.\nRepeat the test with the complete three-arm assembly.\nConnect the yarns only after safe motion has been confirmed."
   },
   {
     "objectID": "servo-arms.html#images-to-add",
     "href": "servo-arms.html#images-to-add",
     "title": "3D-Printed Servo Arms",
-    "section": "",
-    "text": "Store photographs and CAD renders in:\nimages/servo_arms/\n├── cad_model.png\n├── printed_arm.jpg\n├── mounted_arm.jpg\n└── complete_module.jpg\nAfter adding the images to the repository, uncomment or adapt the following blocks:\n&lt;!--\n![](images/servo_arms/cad_model.png){fig-alt=\"CAD model of the servo arm\" width=65%}\n\n![](images/servo_arms/complete_module.jpg){fig-alt=\"Complete three-servo selection module\" width=65%}\n--&gt;"
+    "section": "Images to Add",
+    "text": "Images to Add\nStore photographs and CAD renders in:\nimages/servo_arms/\n├── cad_model.png\n├── printed_arm.jpg\n├── mounted_arm.jpg\n└── complete_module.jpg\nAfter adding the images to the repository, uncomment or adapt the following blocks:\n&lt;!--\n![](images/servo_arms/cad_model.png){fig-alt=\"CAD model of the servo arm\" width=65%}\n\n![](images/servo_arms/complete_module.jpg){fig-alt=\"Complete three-servo selection module\" width=65%}\n--&gt;"
   },
   {
     "objectID": "servo-arms.html#safety-note",
     "href": "servo-arms.html#safety-note",
     "title": "3D-Printed Servo Arms",
-    "section": "",
-    "text": "During first tests, the printed arms must be free to move and must not be forced against a mechanical stop. A blocked servo can draw excessive current and damage the actuator or the printed part."
+    "section": "Safety Note",
+    "text": "Safety Note\nDuring first tests, the printed arms must be free to move and must not be forced against a mechanical stop. A blocked servo can draw excessive current and damage the actuator or the printed part."
   },
   {
     "objectID": "servo-arms.html#related-pages",
     "href": "servo-arms.html#related-pages",
     "title": "3D-Printed Servo Arms",
-    "section": "",
-    "text": "ESP32 and Actuation\nWiring and Power Supply\nComponents Overview"
+    "section": "Related Pages",
+    "text": "Related Pages\n\nESP32 and Actuation\nWiring and Power Supply\nComponents Overview"
   },
   {
     "objectID": "troubleshooting.html",
     "href": "troubleshooting.html",
     "title": "Troubleshooting",
     "section": "",
-    "text": "Problem\nLikely cause\nSolution\n\n\n\n\nNo PNG files appear on the display\nUSB flash drive detected but not mounted\nMount /dev/sda1 in /mnt/pattern_usb\n\n\nESP32 is not detected\nWrong serial device selected\nList ports and use /dev/ttyUSB0 when available\n\n\nlcd.contrast() error\nInstalled gfxhat library has no contrast() method\nGuard the call with hasattr(lcd, \"contrast\")\n\n\nArduino compilation reports redefinition\nTwo complete .ino files are in the same sketch folder\nPut servo_switch_usb.ino in its own folder\n\n\nServos do not move\nExternal 5 V supply is off or wiring is incomplete\nVerify DC-DC supply, signal pins and common ground\n\n\nMicroswitch does not generate advancement\nConnected to NC or wrong GPIO\nUse COM → GND, NO → GPIO25\n\n\nDisplay works but progress does not increase\nNo NEXT message received from ESP32\nCheck microswitch and USB serial connection\n\n\n\n\n\n\nCheck the storage device:\nlsblk -o NAME,SIZE,FSTYPE,LABEL,MOUNTPOINTS,MODEL\nIn the tested setup, the pattern flash drive appears as:\n/dev/sda1\nIf no mount point is shown, mount it:\nsudo mkdir -p /mnt/pattern_usb\nsudo mount /dev/sda1 /mnt/pattern_usb\nls -lah /mnt/pattern_usb\nThe PNG files must be directly inside /mnt/pattern_usb.\n\n\n\nList serial devices:\npython3 -m serial.tools.list_ports -v\nThe tested ESP32 CP2102 bridge appears as:\n/dev/ttyUSB0\nUse it when launching the interface:\npython3 /home/aless/gfxhat_pattern_ui_usb.py --usb-dir /mnt/pattern_usb --port /dev/ttyUSB0\n\n\n\nIf the program stops with:\nAttributeError: module 'gfxhat.lcd' has no attribute 'contrast'\nreplace the unconditional call with:\nlcd.clear()\nif hasattr(lcd, \"contrast\"):\n    lcd.contrast(42)\nself.set_backlight((0, 40, 70))\n\n\n\nEach Arduino sketch must be placed in its own directory:\nservo_switch_usb/\n└── servo_switch_usb.ino\nDo not keep the former firmware .ino in the same directory as the new USB-controlled sketch.\n\n\n\n\nOperating the Machine\nDisplay Interface — GFX HAT\nESP32 and Actuation"
+    "text": "Problem\nLikely cause\nSolution\n\n\n\n\nNo PNG files appear on the display\nUSB flash drive detected but not mounted\nMount /dev/sda1 in /mnt/pattern_usb\n\n\nESP32 is not detected\nWrong serial device selected\nList ports and use /dev/ttyUSB0 when available\n\n\nlcd.contrast() error\nInstalled gfxhat library has no contrast() method\nGuard the call with hasattr(lcd, \"contrast\")\n\n\nArduino compilation reports redefinition\nTwo complete .ino files are in the same sketch folder\nPut servo_switch_usb.ino in its own folder\n\n\nServos do not move\nExternal 5 V supply is off or wiring is incomplete\nVerify DC-DC supply, signal pins and common ground\n\n\nMicroswitch does not generate advancement\nConnected to NC or wrong GPIO\nUse COM → GND, NO → GPIO25\n\n\nDisplay works but progress does not increase\nNo NEXT message received from ESP32\nCheck microswitch and USB serial connection"
   },
   {
     "objectID": "troubleshooting.html#common-issues",
@@ -997,35 +1088,35 @@
     "objectID": "troubleshooting.html#usb-flash-drive-not-visible",
     "href": "troubleshooting.html#usb-flash-drive-not-visible",
     "title": "Troubleshooting",
-    "section": "",
-    "text": "Check the storage device:\nlsblk -o NAME,SIZE,FSTYPE,LABEL,MOUNTPOINTS,MODEL\nIn the tested setup, the pattern flash drive appears as:\n/dev/sda1\nIf no mount point is shown, mount it:\nsudo mkdir -p /mnt/pattern_usb\nsudo mount /dev/sda1 /mnt/pattern_usb\nls -lah /mnt/pattern_usb\nThe PNG files must be directly inside /mnt/pattern_usb."
+    "section": "USB Flash Drive Not Visible",
+    "text": "USB Flash Drive Not Visible\nCheck the storage device:\nlsblk -o NAME,SIZE,FSTYPE,LABEL,MOUNTPOINTS,MODEL\nIn the tested setup, the pattern flash drive appears as:\n/dev/sda1\nIf no mount point is shown, mount it:\nsudo mkdir -p /mnt/pattern_usb\nsudo mount /dev/sda1 /mnt/pattern_usb\nls -lah /mnt/pattern_usb\nThe PNG files must be directly inside /mnt/pattern_usb."
   },
   {
     "objectID": "troubleshooting.html#esp32-serial-port",
     "href": "troubleshooting.html#esp32-serial-port",
     "title": "Troubleshooting",
-    "section": "",
-    "text": "List serial devices:\npython3 -m serial.tools.list_ports -v\nThe tested ESP32 CP2102 bridge appears as:\n/dev/ttyUSB0\nUse it when launching the interface:\npython3 /home/aless/gfxhat_pattern_ui_usb.py --usb-dir /mnt/pattern_usb --port /dev/ttyUSB0"
+    "section": "ESP32 Serial Port",
+    "text": "ESP32 Serial Port\nList serial devices:\npython3 -m serial.tools.list_ports -v\nThe tested ESP32 CP2102 bridge appears as:\n/dev/ttyUSB0\nUse it when launching the interface:\npython3 /home/aless/gfxhat_pattern_ui_usb.py --usb-dir /mnt/pattern_usb --port /dev/ttyUSB0"
   },
   {
     "objectID": "troubleshooting.html#gfx-hat-contrast-compatibility",
     "href": "troubleshooting.html#gfx-hat-contrast-compatibility",
     "title": "Troubleshooting",
-    "section": "",
-    "text": "If the program stops with:\nAttributeError: module 'gfxhat.lcd' has no attribute 'contrast'\nreplace the unconditional call with:\nlcd.clear()\nif hasattr(lcd, \"contrast\"):\n    lcd.contrast(42)\nself.set_backlight((0, 40, 70))"
+    "section": "GFX HAT Contrast Compatibility",
+    "text": "GFX HAT Contrast Compatibility\nIf the program stops with:\nAttributeError: module 'gfxhat.lcd' has no attribute 'contrast'\nreplace the unconditional call with:\nlcd.clear()\nif hasattr(lcd, \"contrast\"):\n    lcd.contrast(42)\nself.set_backlight((0, 40, 70))"
   },
   {
     "objectID": "troubleshooting.html#arduino-redefinition-error",
     "href": "troubleshooting.html#arduino-redefinition-error",
     "title": "Troubleshooting",
-    "section": "",
-    "text": "Each Arduino sketch must be placed in its own directory:\nservo_switch_usb/\n└── servo_switch_usb.ino\nDo not keep the former firmware .ino in the same directory as the new USB-controlled sketch."
+    "section": "Arduino Redefinition Error",
+    "text": "Arduino Redefinition Error\nEach Arduino sketch must be placed in its own directory:\nservo_switch_usb/\n└── servo_switch_usb.ino\nDo not keep the former firmware .ino in the same directory as the new USB-controlled sketch."
   },
   {
     "objectID": "troubleshooting.html#related-pages",
     "href": "troubleshooting.html#related-pages",
     "title": "Troubleshooting",
-    "section": "",
-    "text": "Operating the Machine\nDisplay Interface — GFX HAT\nESP32 and Actuation"
+    "section": "Related Pages",
+    "text": "Related Pages\n\nOperating the Machine\nDisplay Interface — GFX HAT\nESP32 and Actuation"
   }
 ]

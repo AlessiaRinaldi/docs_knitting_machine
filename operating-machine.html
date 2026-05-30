@@ -166,7 +166,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="./stepper-motor.html">
- <span class="dropdown-text">Stepper Motor — Planned Development</span></a>
+ <span class="dropdown-text">Stepper Motor</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./wiring-power.html">
@@ -248,24 +248,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#operating-the-machine" id="toc-operating-the-machine" class="nav-link active" data-scroll-target="#operating-the-machine">Operating the Machine</a>
+  <li><a href="#required-software" id="toc-required-software" class="nav-link active" data-scroll-target="#required-software">Required Software</a></li>
+  <li><a href="#pattern-editor-setup-on-the-user-computer" id="toc-pattern-editor-setup-on-the-user-computer" class="nav-link" data-scroll-target="#pattern-editor-setup-on-the-user-computer">1. Pattern Editor Setup on the User Computer</a>
   <ul>
-  <li><a href="#operator-workflow" id="toc-operator-workflow" class="nav-link" data-scroll-target="#operator-workflow">Operator Workflow</a>
-  <ul class="collapse">
-  <li><a href="#create-the-pattern" id="toc-create-the-pattern" class="nav-link" data-scroll-target="#create-the-pattern">1. Create the Pattern</a></li>
-  <li><a href="#copy-the-pattern-to-the-usb-drive" id="toc-copy-the-pattern-to-the-usb-drive" class="nav-link" data-scroll-target="#copy-the-pattern-to-the-usb-drive">2. Copy the Pattern to the USB Drive</a></li>
-  <li><a href="#prepare-the-hardware" id="toc-prepare-the-hardware" class="nav-link" data-scroll-target="#prepare-the-hardware">3. Prepare the Hardware</a></li>
-  <li><a href="#start-the-application" id="toc-start-the-application" class="nav-link" data-scroll-target="#start-the-application">4. Start the Application</a></li>
-  <li><a href="#select-the-png-from-the-display" id="toc-select-the-png-from-the-display" class="nav-link" data-scroll-target="#select-the-png-from-the-display">5. Select the PNG from the Display</a></li>
-  <li><a href="#insert-the-yarns" id="toc-insert-the-yarns" class="nav-link" data-scroll-target="#insert-the-yarns">6. Insert the Yarns</a></li>
-  <li><a href="#start-production" id="toc-start-production" class="nav-link" data-scroll-target="#start-production">7. Start Production</a></li>
-  <li><a href="#monitor-the-process" id="toc-monitor-the-process" class="nav-link" data-scroll-target="#monitor-the-process">8. Monitor the Process</a></li>
-  <li><a href="#pause-and-resume" id="toc-pause-and-resume" class="nav-link" data-scroll-target="#pause-and-resume">9. Pause and Resume</a></li>
-  <li><a href="#completion" id="toc-completion" class="nav-link" data-scroll-target="#completion">10. Completion</a></li>
+  <li><a href="#install-python" id="toc-install-python" class="nav-link" data-scroll-target="#install-python">1.1 Install Python</a></li>
+  <li><a href="#create-a-virtual-environment" id="toc-create-a-virtual-environment" class="nav-link" data-scroll-target="#create-a-virtual-environment">1.2 Create a Virtual Environment</a></li>
+  <li><a href="#install-the-required-python-library" id="toc-install-the-required-python-library" class="nav-link" data-scroll-target="#install-the-required-python-library">1.3 Install the Required Python Library</a></li>
+  <li><a href="#run-the-pattern-editor" id="toc-run-the-pattern-editor" class="nav-link" data-scroll-target="#run-the-pattern-editor">1.4 Run the Pattern Editor</a></li>
   </ul></li>
+  <li><a href="#create-the-pattern" id="toc-create-the-pattern" class="nav-link" data-scroll-target="#create-the-pattern">2. Create the Pattern</a></li>
+  <li><a href="#copy-the-png-to-the-usb-drive" id="toc-copy-the-png-to-the-usb-drive" class="nav-link" data-scroll-target="#copy-the-png-to-the-usb-drive">3. Copy the PNG to the USB Drive</a></li>
+  <li><a href="#raspberry-pi-software-setup" id="toc-raspberry-pi-software-setup" class="nav-link" data-scroll-target="#raspberry-pi-software-setup">4. Raspberry Pi Software Setup</a>
+  <ul>
+  <li><a href="#install-the-required-system-packages" id="toc-install-the-required-system-packages" class="nav-link" data-scroll-target="#install-the-required-system-packages">4.1 Install the Required System Packages</a></li>
+  <li><a href="#create-the-python-virtual-environment" id="toc-create-the-python-virtual-environment" class="nav-link" data-scroll-target="#create-the-python-virtual-environment">4.2 Create the Python Virtual Environment</a></li>
+  <li><a href="#install-the-required-python-libraries" id="toc-install-the-required-python-libraries" class="nav-link" data-scroll-target="#install-the-required-python-libraries">4.3 Install the Required Python Libraries</a></li>
+  <li><a href="#enable-raspberry-pi-interfaces" id="toc-enable-raspberry-pi-interfaces" class="nav-link" data-scroll-target="#enable-raspberry-pi-interfaces">4.4 Enable Raspberry Pi Interfaces</a></li>
+  <li><a href="#give-serial-permission-to-the-user" id="toc-give-serial-permission-to-the-user" class="nav-link" data-scroll-target="#give-serial-permission-to-the-user">4.5 Give Serial Permission to the User</a></li>
+  </ul></li>
+  <li><a href="#insert-the-usb-drive-into-the-machine" id="toc-insert-the-usb-drive-into-the-machine" class="nav-link" data-scroll-target="#insert-the-usb-drive-into-the-machine">5. Insert the USB Drive into the Machine</a></li>
+  <li><a href="#mount-the-usb-drive-on-the-raspberry-pi" id="toc-mount-the-usb-drive-on-the-raspberry-pi" class="nav-link" data-scroll-target="#mount-the-usb-drive-on-the-raspberry-pi">6. Mount the USB Drive on the Raspberry Pi</a></li>
+  <li><a href="#prepare-the-hardware" id="toc-prepare-the-hardware" class="nav-link" data-scroll-target="#prepare-the-hardware">7. Prepare the Hardware</a></li>
+  <li><a href="#find-the-esp32-serial-port" id="toc-find-the-esp32-serial-port" class="nav-link" data-scroll-target="#find-the-esp32-serial-port">8. Find the ESP32 Serial Port</a></li>
+  <li><a href="#start-the-raspberry-pi-application" id="toc-start-the-raspberry-pi-application" class="nav-link" data-scroll-target="#start-the-raspberry-pi-application">9. Start the Raspberry Pi Application</a></li>
+  <li><a href="#select-the-png-from-the-display" id="toc-select-the-png-from-the-display" class="nav-link" data-scroll-target="#select-the-png-from-the-display">10. Select the PNG from the Display</a></li>
+  <li><a href="#insert-the-yarns" id="toc-insert-the-yarns" class="nav-link" data-scroll-target="#insert-the-yarns">11. Insert the Yarns</a></li>
+  <li><a href="#start-production" id="toc-start-production" class="nav-link" data-scroll-target="#start-production">12. Start Production</a></li>
+  <li><a href="#monitor-the-process" id="toc-monitor-the-process" class="nav-link" data-scroll-target="#monitor-the-process">13. Monitor the Process</a></li>
+  <li><a href="#pause-and-resume" id="toc-pause-and-resume" class="nav-link" data-scroll-target="#pause-and-resume">14. Pause and Resume</a></li>
+  <li><a href="#completion" id="toc-completion" class="nav-link" data-scroll-target="#completion">15. Completion</a></li>
+  <li><a href="#unmount-the-usb-drive" id="toc-unmount-the-usb-drive" class="nav-link" data-scroll-target="#unmount-the-usb-drive">16. Unmount the USB Drive</a></li>
   <li><a href="#current-limitation" id="toc-current-limitation" class="nav-link" data-scroll-target="#current-limitation">Current Limitation</a></li>
+  <li><a href="#common-commands" id="toc-common-commands" class="nav-link" data-scroll-target="#common-commands">Common Commands</a></li>
   <li><a href="#related-pages" id="toc-related-pages" class="nav-link" data-scroll-target="#related-pages">Related Pages</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -291,46 +306,240 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="operating-the-machine" class="level1">
-<h1>Operating the Machine</h1>
-<section id="operator-workflow" class="level2">
-<h2 class="anchored" data-anchor-id="operator-workflow">Operator Workflow</h2>
-<p>This page describes the procedure followed by the user, from the digital pattern to the running prototype.</p>
-<section id="create-the-pattern" class="level3">
-<h3 class="anchored" data-anchor-id="create-the-pattern">1. Create the Pattern</h3>
-<p>Create a three-colour PNG file with the <a href="./pattern-editor.html">Pattern Editor</a>. The pattern must be 48 pixels wide and contain exactly three RGB colours.</p>
+<p>This page describes the complete operating procedure of the prototype, from the creation of the digital pattern to the execution of the machine.</p>
+<p>The workflow is divided into two parts:</p>
+<ol type="1">
+<li>the <strong>user computer</strong>, where the PNG pattern is created with the Pattern Editor;</li>
+<li>the <strong>machine</strong>, where the USB drive is inserted and the Raspberry Pi runs the display interface and communicates with the ESP32.</li>
+</ol>
+<section id="required-software" class="level2">
+<h2 class="anchored" data-anchor-id="required-software">Required Software</h2>
+<p>Two different software environments are used:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Device</th>
+<th>Purpose</th>
+<th>Main script</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>User computer</td>
+<td>Create the PNG pattern</td>
+<td><code>pattern_editor_v3_scroll_sidebar.py</code></td>
+</tr>
+<tr class="even">
+<td>Raspberry Pi inside the machine</td>
+<td>Read the USB drive, manage the display and communicate with the ESP32</td>
+<td><code>gfxhat_pattern_ui_usb.py</code></td>
+</tr>
+</tbody>
+</table>
 </section>
-<section id="copy-the-pattern-to-the-usb-drive" class="level3">
-<h3 class="anchored" data-anchor-id="copy-the-pattern-to-the-usb-drive">2. Copy the Pattern to the USB Drive</h3>
-<p>Copy one or more <code>.png</code> files directly into the root folder of the USB flash drive.</p>
+<section id="pattern-editor-setup-on-the-user-computer" class="level2">
+<h2 class="anchored" data-anchor-id="pattern-editor-setup-on-the-user-computer">1. Pattern Editor Setup on the User Computer</h2>
+<p>The user must run the Pattern Editor on their own computer.</p>
+<p>The editor is used to create a PNG file compatible with the machine.</p>
+<section id="install-python" class="level3">
+<h3 class="anchored" data-anchor-id="install-python">1.1 Install Python</h3>
+<p>Install Python 3 on the computer.</p>
+<p>To check if Python is installed, open a terminal and run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>or, on some systems:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If Python is not installed, install it from the official Python website or through the operating system package manager.</p>
 </section>
-<section id="prepare-the-hardware" class="level3">
-<h3 class="anchored" data-anchor-id="prepare-the-hardware">3. Prepare the Hardware</h3>
+<section id="create-a-virtual-environment" class="level3">
+<h3 class="anchored" data-anchor-id="create-a-virtual-environment">1.2 Create a Virtual Environment</h3>
+<p>Go to the folder where the Pattern Editor script is located.</p>
+<p>On Windows:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>py <span class="op">-</span>m venv <span class="op">.</span><span class="fu">venv</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">.</span><span class="fu">venv</span>\Scripts\activate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>On Linux or macOS:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv .venv</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="install-the-required-python-library" class="level3">
+<h3 class="anchored" data-anchor-id="install-the-required-python-library">1.3 Install the Required Python Library</h3>
+<p>The Pattern Editor requires <code>Pillow</code> to open and save PNG images.</p>
+<p>Install it with:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pillow</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If the computer uses Linux and the error <code>No module named tkinter</code> appears, install Tkinter with:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install python3-tk</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Tkinter is used for the graphical interface of the Pattern Editor.</p>
+</section>
+<section id="run-the-pattern-editor" class="level3">
+<h3 class="anchored" data-anchor-id="run-the-pattern-editor">1.4 Run the Pattern Editor</h3>
+<p>Run the script:</p>
+<p>On Windows:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>py pattern_editor_v3_scroll_sidebar<span class="op">.</span><span class="fu">py</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>On Linux or macOS:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> pattern_editor_v3_scroll_sidebar.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The Pattern Editor opens a graphical interface where the user can draw the pattern.</p>
+<p>The exported PNG must respect the following rules:</p>
+<ul>
+<li>width: <strong>48 pixels</strong>;</li>
+<li>image format: <strong>RGB PNG</strong>;</li>
+<li>number of colours: <strong>exactly three</strong>.</li>
+</ul>
+<p>The height of the pattern can be chosen by the user according to the number of rows to be produced.</p>
+</section>
+</section>
+<section id="create-the-pattern" class="level2">
+<h2 class="anchored" data-anchor-id="create-the-pattern">2. Create the Pattern</h2>
+<p>Create a three-colour PNG file with the <a href="./pattern-editor.html">Pattern Editor</a>.</p>
+<p>The pattern must:</p>
+<ul>
+<li>be <strong>48 pixels wide</strong>;</li>
+<li>be saved as a <strong>PNG RGB image</strong>;</li>
+<li>contain <strong>three RGB colours</strong>.</li>
+</ul>
+<p>When the PNG is saved, the editor also shows the colour-to-command interpretation used by the machine.</p>
+<p>The colour mapping is based on the order in which the three colours appear in the PNG file. The Raspberry Pi uses this order to associate the colours with the commands sent to the ESP32.</p>
+</section>
+<section id="copy-the-png-to-the-usb-drive" class="level2">
+<h2 class="anchored" data-anchor-id="copy-the-png-to-the-usb-drive">3. Copy the PNG to the USB Drive</h2>
+<p>After saving the pattern, copy the <code>.png</code> file directly into the root folder of the USB flash drive.</p>
+<p>Example:</p>
+<pre class="text"><code>USB drive
+├── flowers_pattern.png
+├── stars_pattern.png
+└── hearts_pattern.png</code></pre>
+<p>The files must not be placed inside subfolders.</p>
+<p>When the copy is complete, safely eject the USB drive from the computer.</p>
+</section>
+<section id="raspberry-pi-software-setup" class="level2">
+<h2 class="anchored" data-anchor-id="raspberry-pi-software-setup">4. Raspberry Pi Software Setup</h2>
+<p>This setup must be performed on the Raspberry Pi inside the machine.</p>
+<p>It is required only the first time the system is configured.</p>
+<section id="install-the-required-system-packages" class="level3">
+<h3 class="anchored" data-anchor-id="install-the-required-system-packages">4.1 Install the Required System Packages</h3>
+<p>Open a terminal on the Raspberry Pi and install the required packages:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> python3-venv python3-pip</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="create-the-python-virtual-environment" class="level3">
+<h3 class="anchored" data-anchor-id="create-the-python-virtual-environment">4.2 Create the Python Virtual Environment</h3>
+<p>Create a dedicated virtual environment:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> /home/aless/venvs</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv /home/aless/venvs/uncinetto</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Activate it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> /home/aless/venvs/uncinetto/bin/activate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Upgrade <code>pip</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">--upgrade</span> pip</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="install-the-required-python-libraries" class="level3">
+<h3 class="anchored" data-anchor-id="install-the-required-python-libraries">4.3 Install the Required Python Libraries</h3>
+<p>Install the Python libraries used by the Raspberry Pi interface:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pillow pyserial gfxhat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The libraries are used for:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Library</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>pillow</code></td>
+<td>Opening and validating PNG images</td>
+</tr>
+<tr class="even">
+<td><code>pyserial</code></td>
+<td>USB serial communication between Raspberry Pi and ESP32</td>
+</tr>
+<tr class="odd">
+<td><code>gfxhat</code></td>
+<td>Managing the GFX HAT display and buttons</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="enable-raspberry-pi-interfaces" class="level3">
+<h3 class="anchored" data-anchor-id="enable-raspberry-pi-interfaces">4.4 Enable Raspberry Pi Interfaces</h3>
+<p>The GFX HAT requires the Raspberry Pi hardware interfaces.</p>
+<p>Open the configuration menu:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> raspi-config</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Enable:</p>
+<pre class="text"><code>Interface Options → I2C → Enable
+Interface Options → SPI → Enable</code></pre>
+<p>Then reboot the Raspberry Pi:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> reboot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="give-serial-permission-to-the-user" class="level3">
+<h3 class="anchored" data-anchor-id="give-serial-permission-to-the-user">4.5 Give Serial Permission to the User</h3>
+<p>To allow the Raspberry Pi user to access the ESP32 through USB serial, add the user to the <code>dialout</code> group:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> usermod <span class="at">-aG</span> dialout <span class="va">$USER</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Then reboot:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> reboot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="insert-the-usb-drive-into-the-machine" class="level2">
+<h2 class="anchored" data-anchor-id="insert-the-usb-drive-into-the-machine">5. Insert the USB Drive into the Machine</h2>
+<p>After creating the PNG on the user computer, insert the USB flash drive into the machine.</p>
+<p>The Raspberry Pi inside the machine will read the PNG files from the USB drive.</p>
+</section>
+<section id="mount-the-usb-drive-on-the-raspberry-pi" class="level2">
+<h2 class="anchored" data-anchor-id="mount-the-usb-drive-on-the-raspberry-pi">6. Mount the USB Drive on the Raspberry Pi</h2>
+<p>Check the device name assigned to the USB drive:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">lsblk</span> <span class="at">-o</span> NAME,SIZE,FSTYPE,LABEL,MOUNTPOINTS</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>In the current prototype, the USB drive is usually detected as:</p>
+<pre class="text"><code>/dev/sda1</code></pre>
+<p>Create the mount folder if it does not already exist:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir <span class="at">-p</span> /mnt/pattern_usb</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Mount the USB drive:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mount /dev/sda1 /mnt/pattern_usb</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Check that the PNG files are visible:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /mnt/pattern_usb</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If the USB drive has a different device name, replace <code>/dev/sda1</code> with the correct one.</p>
+</section>
+<section id="prepare-the-hardware" class="level2">
+<h2 class="anchored" data-anchor-id="prepare-the-hardware">7. Prepare the Hardware</h2>
 <p>Before starting a real test, verify that:</p>
 <ul>
 <li>the Raspberry Pi is powered;</li>
+<li>the GFX HAT display is connected to the Raspberry Pi;</li>
 <li>the ESP32 is connected to the Raspberry Pi through its USB cable;</li>
-<li>the three servomotors are supplied by the external regulated 5 V power supply;</li>
-<li>the DC-DC ground and the ESP32 ground are connected;</li>
-<li>the printed servo arms can move freely;</li>
+<li>the three servomotors and the stepper are supplied by the external power supply;</li>
+<li>all the GND are connected;</li>
 <li>the microswitch is connected to the ESP32.</li>
 </ul>
 <p>See <a href="./wiring-power.html">Wiring and Power Supply</a> for the complete connections.</p>
 </section>
-<section id="start-the-application" class="level3">
-<h3 class="anchored" data-anchor-id="start-the-application">4. Start the Application</h3>
-<p>Mount the USB flash drive and run the integrated interface:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> /home/aless/venvs/uncinetto/bin/activate</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mount /dev/sda1 /mnt/pattern_usb</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> /home/aless/gfxhat_pattern_ui_usb.py <span class="at">--usb-dir</span> /mnt/pattern_usb <span class="at">--port</span> /dev/ttyUSB0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="find-the-esp32-serial-port" class="level2">
+<h2 class="anchored" data-anchor-id="find-the-esp32-serial-port">8. Find the ESP32 Serial Port</h2>
+<p>Check which serial port is assigned to the ESP32:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /dev/ttyUSB<span class="pp">*</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>or:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /dev/ttyACM<span class="pp">*</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>In the current prototype, the ESP32 is usually available as:</p>
+<pre class="text"><code>/dev/ttyUSB0</code></pre>
+<p>If the ESP32 appears with a different name, use that port when running the application.</p>
 </section>
-<section id="select-the-png-from-the-display" class="level3">
-<h3 class="anchored" data-anchor-id="select-the-png-from-the-display">5. Select the PNG from the Display</h3>
+<section id="start-the-raspberry-pi-application" class="level2">
+<h2 class="anchored" data-anchor-id="start-the-raspberry-pi-application">9. Start the Raspberry Pi Application</h2>
+<p>Activate the virtual environment:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> /home/aless/venvs/uncinetto/bin/activate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Run the integrated interface:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> /home/aless/gfxhat_pattern_ui_usb.py <span class="at">--usb-dir</span> /mnt/pattern_usb <span class="at">--port</span> /dev/ttyUSB0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If the ESP32 is detected as <code>/dev/ttyACM0</code>, use:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> /home/aless/gfxhat_pattern_ui_usb.py <span class="at">--usb-dir</span> /mnt/pattern_usb <span class="at">--port</span> /dev/ttyACM0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The command starts the Raspberry Pi interface, reads the PNG files from the USB drive and opens the serial communication with the ESP32.</p>
+</section>
+<section id="select-the-png-from-the-display" class="level2">
+<h2 class="anchored" data-anchor-id="select-the-png-from-the-display">10. Select the PNG from the Display</h2>
 <p>The display shows the files available on the USB drive:</p>
 <pre class="text"><code>SELEZIONA PNG
-&gt; pattern_01.png
-  pattern_02.png
-  pattern_03.png
+&gt; flowers_pattern.png
+  stars_pattern.png
+  hearts_pattern.png
 ^v SPOSTA  OK SEL  + REF</code></pre>
 <p>Use:</p>
 <table class="caption-top table">
@@ -356,11 +565,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 </section>
-<section id="insert-the-yarns" class="level3">
-<h3 class="anchored" data-anchor-id="insert-the-yarns">6. Insert the Yarns</h3>
+<section id="insert-the-yarns" class="level2">
+<h2 class="anchored" data-anchor-id="insert-the-yarns">11. Insert the Yarns</h2>
 <p>After file selection, the display shows:</p>
 <pre class="text"><code>PATTERN SELEZIONATO
-pattern_01.png
+flowers_pattern.png
 
 INSERIRE
 I FILATI
@@ -368,24 +577,40 @@ I FILATI
 + AVVIA    &lt; MENU</code></pre>
 <p>Place the three yarns consistently with the colour-to-servo mapping generated by the Raspberry Pi.</p>
 </section>
-<section id="start-production" class="level3">
-<h3 class="anchored" data-anchor-id="start-production">7. Start Production</h3>
-<p>Press <code>PLUS</code> (<code>AVVIA</code>). The Raspberry Pi validates the PNG, opens the USB serial communication with the ESP32 and immediately sends the command corresponding to the first pixel.</p>
+<section id="start-production" class="level2">
+<h2 class="anchored" data-anchor-id="start-production">12. Start Production</h2>
+<p>Press <code>PLUS</code> (<code>AVVIA</code>).</p>
+<p>The Raspberry Pi:</p>
+<ol type="1">
+<li>validates the PNG file;</li>
+<li>checks that the image is 48 pixels wide;</li>
+<li>checks that the image contains exactly three RGB colours;</li>
+<li>opens the USB serial communication with the ESP32;</li>
+<li>sends the command corresponding to the first pixel.</li>
+</ol>
 </section>
-<section id="monitor-the-process" class="level3">
-<h3 class="anchored" data-anchor-id="monitor-the-process">8. Monitor the Process</h3>
+<section id="monitor-the-process" class="level2">
+<h2 class="anchored" data-anchor-id="monitor-the-process">13. Monitor the Process</h2>
 <p>While the system is running, the display shows:</p>
-<pre class="text"><code>pattern_01.png
+<pre class="text"><code>flowers_pattern.png
 IN LAVORAZIONE
 
 [ progress bar ]
 
 36%   18/50
 - STOP</code></pre>
-<p>Every press of the synchronization microswitch causes the ESP32 to send <code>NEXT</code> to the Raspberry Pi. The Raspberry Pi then updates the percentage and sends the command for the following pixel.</p>
+<p>Every press of the synchronization microswitch causes the ESP32 to send:</p>
+<pre class="text"><code>NEXT</code></pre>
+<p>to the Raspberry Pi.</p>
+<p>The Raspberry Pi then:</p>
+<ol type="1">
+<li>moves to the following pixel;</li>
+<li>updates the percentage on the display;</li>
+<li>sends the next colour-selection command to the ESP32.</li>
+</ol>
 </section>
-<section id="pause-and-resume" class="level3">
-<h3 class="anchored" data-anchor-id="pause-and-resume">9. Pause and Resume</h3>
+<section id="pause-and-resume" class="level2">
+<h2 class="anchored" data-anchor-id="pause-and-resume">14. Pause and Resume</h2>
 <p>During processing:</p>
 <table class="caption-top table">
 <thead>
@@ -409,9 +634,10 @@ IN LAVORAZIONE
 </tr>
 </tbody>
 </table>
+<p>When the process is paused, the current pixel index is preserved. When the user resumes the process, the system continues from the same position.</p>
 </section>
-<section id="completion" class="level3">
-<h3 class="anchored" data-anchor-id="completion">10. Completion</h3>
+<section id="completion" class="level2">
+<h2 class="anchored" data-anchor-id="completion">15. Completion</h2>
 <p>At the end of the pattern, all servos are moved to their inactive position and the display shows:</p>
 <pre class="text"><code>LAVORO
 COMPLETATO
@@ -419,11 +645,63 @@ COMPLETATO
 [ 100% ]
 
 OK / &lt; MENU</code></pre>
+<p>The user can then return to the menu and select another PNG file.</p>
 </section>
+<section id="unmount-the-usb-drive" class="level2">
+<h2 class="anchored" data-anchor-id="unmount-the-usb-drive">16. Unmount the USB Drive</h2>
+<p>Before removing the USB flash drive from the machine, unmount it safely:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> umount /mnt/pattern_usb</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The USB drive can then be physically removed from the Raspberry Pi.</p>
 </section>
 <section id="current-limitation" class="level2">
 <h2 class="anchored" data-anchor-id="current-limitation">Current Limitation</h2>
-<p>The current stop/resume implementation acts on the three colour-selection servomotors. Control of an additional main stepper drive is planned but is not part of the tested actuation firmware yet.</p>
+<p>The current stop/resume implementation acts on the three colour-selection servomotors.</p>
+<p>Control of an additional main stepper drive is planned but is not part of the tested actuation firmware yet.</p>
+</section>
+<section id="common-commands" class="level2">
+<h2 class="anchored" data-anchor-id="common-commands">Common Commands</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Operation</th>
+<th>Command</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Run Pattern Editor on the user computer</td>
+<td><code>python3 pattern_editor_v3_scroll_sidebar.py</code></td>
+</tr>
+<tr class="even">
+<td>Activate Raspberry Pi virtual environment</td>
+<td><code>source /home/aless/venvs/uncinetto/bin/activate</code></td>
+</tr>
+<tr class="odd">
+<td>Check USB drive name</td>
+<td><code>lsblk -o NAME,SIZE,FSTYPE,LABEL,MOUNTPOINTS</code></td>
+</tr>
+<tr class="even">
+<td>Mount USB drive on Raspberry Pi</td>
+<td><code>sudo mount /dev/sda1 /mnt/pattern_usb</code></td>
+</tr>
+<tr class="odd">
+<td>Check ESP32 serial port</td>
+<td><code>ls /dev/ttyUSB*</code></td>
+</tr>
+<tr class="even">
+<td>Run machine interface</td>
+<td><code>python3 /home/aless/gfxhat_pattern_ui_usb.py --usb-dir /mnt/pattern_usb --port /dev/ttyUSB0</code></td>
+</tr>
+<tr class="odd">
+<td>Unmount USB drive</td>
+<td><code>sudo umount /mnt/pattern_usb</code></td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="related-pages" class="level2">
 <h2 class="anchored" data-anchor-id="related-pages">Related Pages</h2>
@@ -431,11 +709,11 @@ OK / &lt; MENU</code></pre>
 <li><a href="./pattern-editor.html">Pattern Editor</a></li>
 <li><a href="./display-interface.html">Display Interface — GFX HAT</a></li>
 <li><a href="./esp32-actuation.html">ESP32 and Actuation</a></li>
+<li><a href="./wiring-power.html">Wiring and Power Supply</a></li>
 <li><a href="./troubleshooting.html">Troubleshooting</a></li>
 </ul>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
