@@ -6,6 +6,8 @@ title: "Pattern Editor"
 
 The Pattern Editor is the user-side tool used to create the textile pattern before running the machine. The user draws a three-colour image and exports it as a `.png` file, which is then transferred to the Raspberry Pi through a USB flash drive.
 
+![Pattern editor interface](images/pattern_editor.png){#fig-pattern-editor width="90%" fig-align="center"}
+
 ## Workflow
 
 ```text
@@ -42,6 +44,9 @@ When a pattern is started, the Raspberry Pi reads the image pixels in sequence a
 | First distinct colour found | `C1` | Servo 1 |
 | Second distinct colour found | `C2` | Servo 2 |
 | Third distinct colour found | `C3` | Servo 3 |
+
+
+![Colour order for yarn actuators](images/interpretazione_macchina.png){#fig-pattern-editor width="50%" fig-align="center"}
 
 Before starting production, the user must place the real yarns according to the colour-to-servo mapping shown in the Raspberry Pi terminal.
 
