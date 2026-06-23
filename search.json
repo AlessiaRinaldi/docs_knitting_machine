@@ -109,14 +109,14 @@
     "href": "pattern-editor.html",
     "title": "Pattern Editor",
     "section": "",
-    "text": "The Pattern Editor is the user-side tool used to create the textile pattern before running the machine. The user draws a three-colour image and exports it as a .png file, which is then transferred to the Raspberry Pi through a USB flash drive."
+    "text": "The Pattern Editor is the user-side tool used to create the textile pattern before running the machine. The user draws a three-colour image and exports it as a .png file, which is then transferred to the Raspberry Pi through a USB flash drive.\n\n\n\n\n\n\nFigure 1: Pattern editor interface"
   },
   {
     "objectID": "pattern-editor.html#purpose",
     "href": "pattern-editor.html#purpose",
     "title": "Pattern Editor",
     "section": "",
-    "text": "The Pattern Editor is the user-side tool used to create the textile pattern before running the machine. The user draws a three-colour image and exports it as a .png file, which is then transferred to the Raspberry Pi through a USB flash drive."
+    "text": "The Pattern Editor is the user-side tool used to create the textile pattern before running the machine. The user draws a three-colour image and exports it as a .png file, which is then transferred to the Raspberry Pi through a USB flash drive.\n\n\n\n\n\n\nFigure 1: Pattern editor interface"
   },
   {
     "objectID": "pattern-editor.html#workflow",
@@ -137,7 +137,7 @@
     "href": "pattern-editor.html#automatic-colour-association",
     "title": "Pattern Editor",
     "section": "Automatic Colour Association",
-    "text": "Automatic Colour Association\nWhen a pattern is started, the Raspberry Pi reads the image pixels in sequence and associates the three colours to the three servo-controlled yarn channels in order of first occurrence:\n\n\n\nColour order in the PNG\nCommand sent to ESP32\nYarn actuator\n\n\n\n\nFirst distinct colour found\nC1\nServo 1\n\n\nSecond distinct colour found\nC2\nServo 2\n\n\nThird distinct colour found\nC3\nServo 3\n\n\n\nBefore starting production, the user must place the real yarns according to the colour-to-servo mapping shown in the Raspberry Pi terminal."
+    "text": "Automatic Colour Association\nWhen a pattern is started, the Raspberry Pi reads the image pixels in sequence and associates the three colours to the three servo-controlled yarn channels in order of first occurrence:\n\n\n\nColour order in the PNG\nCommand sent to ESP32\nYarn actuator\n\n\n\n\nFirst distinct colour found\nC1\nServo 1\n\n\nSecond distinct colour found\nC2\nServo 2\n\n\nThird distinct colour found\nC3\nServo 3\n\n\n\n\n\n\n\n\n\nFigure 2: Colour order for yarn actuators\n\n\n\nBefore starting production, the user must place the real yarns according to the colour-to-servo mapping shown in the Raspberry Pi terminal."
   },
   {
     "objectID": "pattern-editor.html#transfer-to-the-machine",
