@@ -14,7 +14,7 @@ The operator interface is implemented with a **Pimoroni GFX HAT** connected to t
 The interface is controlled by the integrated script:
 
 ```text
-gfxhat_pattern_ui_usb.py
+raspberry.py
 ```
 
 This script no longer acts only as a display demonstration: in real mode it selects the PNG pattern, opens the USB serial port to the ESP32, sends colour commands and updates progress when the ESP32 reports a microswitch event.
@@ -103,7 +103,7 @@ Demo mode tests the UI without moving the motors:
 
 ```bash
 source /home/aless/venvs/uncinetto/bin/activate
-python3 /home/aless/gfxhat_pattern_ui_usb.py --usb-dir /mnt/pattern_usb --demo
+python3 /home/aless/raspberry.py --usb-dir /mnt/pattern_usb --demo
 ```
 
 ### Real Mode
@@ -112,21 +112,8 @@ Real mode communicates with the ESP32, detected in the tested setup at `/dev/tty
 
 ```bash
 source /home/aless/venvs/uncinetto/bin/activate
-python3 /home/aless/gfxhat_pattern_ui_usb.py --usb-dir /mnt/pattern_usb --port /dev/ttyUSB0
+python3 /home/aless/raspberry.py --usb-dir /mnt/pattern_usb --port /dev/ttyUSB0
 ```
-
-## Compatibility Note: LCD Contrast
-
-During initial tests the installed `gfxhat` library did not expose `lcd.contrast()`. The robust display initialization is:
-
-```python
-lcd.clear()
-if hasattr(lcd, "contrast"):
-    lcd.contrast(42)
-self.set_backlight((0, 40, 70))
-```
-
-This allows the program to run with library versions that do not implement the contrast method.
 
 ## Future Alert Integration
 

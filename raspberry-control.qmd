@@ -20,7 +20,7 @@ The Raspberry Pi implements the high-level control layer of the prototype. It is
 The active user-interface and machine-control program is:
 
 ```text
-gfxhat_pattern_ui_usb.py
+raspberry.py
 ```
 
 ### Main Software Classes
@@ -78,7 +78,7 @@ ls -lah /mnt/pattern_usb
 ### Start the Integrated Application
 
 ```bash
-python3 /home/aless/gfxhat_pattern_ui_usb.py --usb-dir /mnt/pattern_usb --port /dev/ttyUSB0
+python3 /home/aless/raspberry.py --usb-dir /mnt/pattern_usb --port /dev/ttyUSB0
 ```
 
 ## Vision Integration

@@ -215,8 +215,21 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#purpose" id="toc-purpose" class="nav-link active" data-scroll-target="#purpose">Purpose</a></li>
   <li><a href="#workflow" id="toc-workflow" class="nav-link" data-scroll-target="#workflow">Workflow</a></li>
+  <li><a href="#editing-modes" id="toc-editing-modes" class="nav-link" data-scroll-target="#editing-modes">Editing Modes</a>
+  <ul>
+  <li><a href="#single-pattern" id="toc-single-pattern" class="nav-link" data-scroll-target="#single-pattern">Single Pattern</a></li>
+  <li><a href="#repeated-pattern" id="toc-repeated-pattern" class="nav-link" data-scroll-target="#repeated-pattern">Repeated Pattern</a>
+  <ul class="collapse">
+  <li><a href="#repeat-vertically" id="toc-repeat-vertically" class="nav-link" data-scroll-target="#repeat-vertically">Repeat Vertically</a></li>
+  <li><a href="#different-modules" id="toc-different-modules" class="nav-link" data-scroll-target="#different-modules">Different Modules</a></li>
+  </ul></li>
+  </ul></li>
   <li><a href="#pattern-constraints" id="toc-pattern-constraints" class="nav-link" data-scroll-target="#pattern-constraints">Pattern Constraints</a></li>
+  <li><a href="#colour-palette" id="toc-colour-palette" class="nav-link" data-scroll-target="#colour-palette">Colour Palette</a></li>
   <li><a href="#automatic-colour-association" id="toc-automatic-colour-association" class="nav-link" data-scroll-target="#automatic-colour-association">Automatic Colour Association</a></li>
+  <li><a href="#opening-an-existing-pattern" id="toc-opening-an-existing-pattern" class="nav-link" data-scroll-target="#opening-an-existing-pattern">Opening an Existing Pattern</a></li>
+  <li><a href="#importing-an-image" id="toc-importing-an-image" class="nav-link" data-scroll-target="#importing-an-image">Importing an Image</a></li>
+  <li><a href="#exporting-the-pattern" id="toc-exporting-the-pattern" class="nav-link" data-scroll-target="#exporting-the-pattern">Exporting the Pattern</a></li>
   <li><a href="#transfer-to-the-machine" id="toc-transfer-to-the-machine" class="nav-link" data-scroll-target="#transfer-to-the-machine">Transfer to the Machine</a></li>
   <li><a href="#related-pages" id="toc-related-pages" class="nav-link" data-scroll-target="#related-pages">Related Pages</a></li>
   </ul>
@@ -246,7 +259,14 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="purpose" class="level2">
 <h2 class="anchored" data-anchor-id="purpose">Purpose</h2>
-<p>The Pattern Editor is the user-side tool used to create the textile pattern before running the machine. The user draws a three-colour image and exports it as a <code>.png</code> file, which is then transferred to the Raspberry Pi through a USB flash drive.</p>
+<p>The Pattern Editor is the user-side tool used to create, edit and preview the textile pattern before running the machine.</p>
+<p>The editor supports two different pattern creation methods:</p>
+<ul>
+<li><strong>Single Pattern</strong>, where the user draws the complete final pattern directly on a 48-pixel-wide grid;</li>
+<li><strong>Repeated Pattern</strong>, where the user creates an 8-pixel-wide module that is automatically repeated 6 times horizontally to obtain the required final width of 48 pixels.</li>
+</ul>
+<p>The editor also allows the user to define the three yarn colours, preview the final pattern, open existing compatible PNG files and import external images.</p>
+<p>The final pattern is exported as an RGB <code>.png</code> file and transferred to the Raspberry Pi through a USB flash drive.</p>
 <div id="fig-pattern-editor" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-pattern-editor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -262,17 +282,78 @@ Figure&nbsp;1: Pattern editor interface
 <h2 class="anchored" data-anchor-id="workflow">Workflow</h2>
 <pre class="text"><code>Open the Pattern Editor
         ↓
-Draw the desired three-colour pattern
+Choose Single Pattern or Repeated Pattern
         ↓
-Export the image as a PNG file
+Define the pattern height or module structure
+        ↓
+Select the three yarn colours
+        ↓
+Draw the pattern
+        ↓
+Check the final preview and colour mapping
+        ↓
+Export the final pattern as a PNG file
         ↓
 Copy the PNG file to the USB flash drive
         ↓
 Select the file from the machine display</code></pre>
 </section>
+<section id="editing-modes" class="level2">
+<h2 class="anchored" data-anchor-id="editing-modes">Editing Modes</h2>
+<section id="single-pattern" class="level3">
+<h3 class="anchored" data-anchor-id="single-pattern">Single Pattern</h3>
+<p>In <strong>Single Pattern</strong> mode, the user draws the complete pattern directly.</p>
+<p>The grid is always:</p>
+<ul>
+<li><strong>48 pixels wide</strong>;</li>
+<li>variable in height.</li>
+</ul>
+<p>Each row of the editor corresponds directly to one row of the exported PNG.</p>
+<p>This mode is also used when opening an existing compatible PNG file or importing an external image.</p>
+</section>
+<section id="repeated-pattern" class="level3">
+<h3 class="anchored" data-anchor-id="repeated-pattern">Repeated Pattern</h3>
+<p>In <strong>Repeated Pattern</strong> mode, the user works with modules that are:</p>
+<ul>
+<li><strong>8 pixels wide</strong>;</li>
+<li>automatically repeated <strong>6 times horizontally</strong>.</li>
+</ul>
+<p>The resulting final pattern is therefore always 48 pixels wide.</p>
+<p>Two vertical construction methods are available.</p>
+<section id="repeat-vertically" class="level4">
+<h4 class="anchored" data-anchor-id="repeat-vertically">Repeat Vertically</h4>
+<p>A single 8-pixel-wide module is created and repeated a selected number of times vertically.</p>
+<p>For example:</p>
+<pre class="text"><code>Module: 8 × 10 px
+
+Horizontal repetition:
+8 px × 6 = 48 px
+
+Vertical repetition:
+10 px × 4 = 40 px
+
+Final pattern:
+48 × 40 px</code></pre>
+</section>
+<section id="different-modules" class="level4">
+<h4 class="anchored" data-anchor-id="different-modules">Different Modules</h4>
+<p>The pattern can also be built from multiple 8-pixel-wide modules.</p>
+<p>Each module can have its own height and can be:</p>
+<ul>
+<li>created;</li>
+<li>duplicated;</li>
+<li>deleted;</li>
+<li>reordered;</li>
+<li>resized.</li>
+</ul>
+<p>The modules are expanded to 48 pixels horizontally and then combined vertically to generate the final pattern.</p>
+<p>In Repeated Pattern mode, the editor displays a non-editable preview of the actual 48-pixel-wide pattern that will be exported.</p>
+</section>
+</section>
+</section>
 <section id="pattern-constraints" class="level2">
 <h2 class="anchored" data-anchor-id="pattern-constraints">Pattern Constraints</h2>
-<p>The current control software accepts patterns with the following properties:</p>
+<p>The current Pattern Editor and machine control software use the following final pattern properties:</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -290,8 +371,16 @@ Select the file from the machine display</code></pre>
 <td><code>.png</code></td>
 </tr>
 <tr class="even">
+<td>Colour mode</td>
+<td>RGB</td>
+</tr>
+<tr class="odd">
 <td>Image width</td>
 <td>Exactly 48 pixels</td>
+</tr>
+<tr class="even">
+<td>Image height</td>
+<td>From 1 to 1000 pixels</td>
 </tr>
 <tr class="odd">
 <td>Number of colours</td>
@@ -303,15 +392,30 @@ Select the file from the machine display</code></pre>
 </tr>
 </tbody>
 </table>
-<p>The image height is not fixed: it determines the length of the produced pattern.</p>
+<p>The image height is not fixed. It determines the total number of rows contained in the pattern.</p>
+<p>The editor prevents the PNG from being saved if the final pattern does not contain exactly three distinct colours.</p>
+</section>
+<section id="colour-palette" class="level2">
+<h2 class="anchored" data-anchor-id="colour-palette">Colour Palette</h2>
+<p>The Pattern Editor contains a palette with three colours.</p>
+<p>Each colour can be changed by the user before or during pattern creation.</p>
+<p>The selected colour is used to paint cells in the editor grid.</p>
+<p>The three palette colours must be different from one another.</p>
+<p>All three colours must also appear at least once in the final pattern before the PNG can be exported.</p>
 </section>
 <section id="automatic-colour-association" class="level2">
 <h2 class="anchored" data-anchor-id="automatic-colour-association">Automatic Colour Association</h2>
-<p>When a pattern is started, the Raspberry Pi reads the image pixels in sequence and associates the three colours to the three servo-controlled yarn channels in order of first occurrence:</p>
+<p>The final pattern is scanned in pixel order to determine the association between image colours and the three yarn-control commands.</p>
+<p>The mapping is based on the <strong>first occurrence of each distinct colour in the final 48-pixel-wide pattern</strong>.</p>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
 <thead>
 <tr class="header">
-<th>Colour order in the PNG</th>
+<th>Colour order in the final pattern</th>
 <th>Command sent to ESP32</th>
 <th>Yarn actuator</th>
 </tr>
@@ -334,26 +438,83 @@ Select the file from the machine display</code></pre>
 </tr>
 </tbody>
 </table>
-<div id="fig-pattern-editor" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<p>For example, if the first three distinct colours encountered in the final pattern are:</p>
+<pre class="text"><code>Blue → Pink → Purple</code></pre>
+<p>the machine interpretation becomes:</p>
+<pre class="text"><code>C1 / Servo 1 → Blue
+C2 / Servo 2 → Pink
+C3 / Servo 3 → Purple</code></pre>
+<p>The Pattern Editor displays this interpretation directly in the interface and shows it again after the PNG is saved.</p>
+<div id="fig-pattern-colour-mapping" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-pattern-editor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="fig-pattern-colour-mapping-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/interpretazione_macchina.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pattern-editor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pattern-colour-mapping-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2: Colour order for yarn actuators
 </figcaption>
 </figure>
 </div>
-<p>Before starting production, the user must place the real yarns according to the colour-to-servo mapping shown in the Raspberry Pi terminal.</p>
+<p>Before starting production, the real yarns must be positioned according to this colour-to-servo association.</p>
+</section>
+<section id="opening-an-existing-pattern" class="level2">
+<h2 class="anchored" data-anchor-id="opening-an-existing-pattern">Opening an Existing Pattern</h2>
+<p>The Pattern Editor can open an existing PNG pattern.</p>
+<p>A compatible file must:</p>
+<ul>
+<li>be exactly <strong>48 pixels wide</strong>;</li>
+<li>have a height between <strong>1 and 1000 pixels</strong>;</li>
+<li>contain exactly <strong>three distinct colours</strong>.</li>
+</ul>
+<p>When an existing PNG is opened, it is loaded as a <strong>Single Pattern</strong>.</p>
+<p>The original modular structure cannot be reconstructed from the exported PNG because the file only contains the final 48-pixel-wide image.</p>
+</section>
+<section id="importing-an-image" class="level2">
+<h2 class="anchored" data-anchor-id="importing-an-image">Importing an Image</h2>
+<p>The Pattern Editor can also import external images in formats such as:</p>
+<ul>
+<li>PNG;</li>
+<li>JPEG;</li>
+<li>BMP;</li>
+<li>WebP.</li>
+</ul>
+<p>The imported image is automatically:</p>
+<ol type="1">
+<li>converted to RGB;</li>
+<li>resized proportionally to <strong>48 pixels wide</strong>;</li>
+<li>reduced to <strong>three colours</strong>;</li>
+<li>converted into an editable Single Pattern.</li>
+</ol>
+<p>The aspect ratio is preserved when calculating the new height.</p>
+<p>If the resulting image exceeds the maximum height of 1000 pixels, the import is rejected.</p>
+<p>An image that cannot be reduced successfully to exactly three colours is also rejected.</p>
+</section>
+<section id="exporting-the-pattern" class="level2">
+<h2 class="anchored" data-anchor-id="exporting-the-pattern">Exporting the Pattern</h2>
+<p>When <strong>Save Pattern PNG</strong> is selected, the editor first verifies that:</p>
+<ul>
+<li>the final pattern exists;</li>
+<li>its width is 48 pixels;</li>
+<li>its height does not exceed 1000 pixels;</li>
+<li>exactly three colours are used.</li>
+</ul>
+<p>The file is then exported as an RGB PNG.</p>
+<p>After saving, the editor displays:</p>
+<ul>
+<li>the final image dimensions;</li>
+<li>the association between the three colours and commands <code>C1</code>, <code>C2</code> and <code>C3</code>.</li>
+</ul>
 </section>
 <section id="transfer-to-the-machine" class="level2">
 <h2 class="anchored" data-anchor-id="transfer-to-the-machine">Transfer to the Machine</h2>
-<p>Store the exported PNG files directly on the USB flash drive:</p>
+<p>Store the exported PNG files directly in the root folder of the USB flash drive:</p>
 <pre class="text"><code>USB_DRIVE/
 ├── pattern_01.png
 ├── pattern_02.png
 └── pattern_03.png</code></pre>
-<p>The machine interface will list these files on the GFX HAT display.</p>
+<p>Do not place the pattern files inside subfolders.</p>
+<p>After copying the files, safely eject the USB flash drive and connect it to the Raspberry Pi.</p>
+<p>The machine interface will list the available PNG patterns on the GFX HAT display.</p>
 </section>
 <section id="related-pages" class="level2">
 <h2 class="anchored" data-anchor-id="related-pages">Related Pages</h2>
@@ -440,7 +601,7 @@ Figure&nbsp;2: Colour order for yarn actuators
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/f17911ff-6108-4f47-972d-94e57a3f454a\.netlify\.app\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

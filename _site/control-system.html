@@ -243,7 +243,7 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="architecture" class="level2">
 <h2 class="anchored" data-anchor-id="architecture">Architecture</h2>
-<p>The prototype is organized into two processing levels:</p>
+<p>The prototype is organized into these processing levels:</p>
 <ul>
 <li>the <strong>user computer</strong>, where the PNG pattern is created with the Pattern Editor;</li>
 <li>the <strong>Raspberry Pi</strong>, which implements the user interface, reads and validates PNG patterns, manages process progress and hosts the error-recognition pipeline;</li>
@@ -373,7 +373,7 @@ End of image: DOWN command and completion screen</code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/f17911ff-6108-4f47-972d-94e57a3f454a\.netlify\.app\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

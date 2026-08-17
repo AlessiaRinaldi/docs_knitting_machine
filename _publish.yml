@@ -1,0 +1,4 @@
+- source: project
+  quarto-pub:
+    - id: f17911ff-6108-4f47-972d-94e57a3f454a
+      url: https://alessia-rinaldi.quarto.pub/docs_knitting_machine

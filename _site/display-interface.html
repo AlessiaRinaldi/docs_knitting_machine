@@ -263,7 +263,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#demo-mode" id="toc-demo-mode" class="nav-link" data-scroll-target="#demo-mode">Demo Mode</a></li>
   <li><a href="#real-mode" id="toc-real-mode" class="nav-link" data-scroll-target="#real-mode">Real Mode</a></li>
   </ul></li>
-  <li><a href="#compatibility-note-lcd-contrast" id="toc-compatibility-note-lcd-contrast" class="nav-link" data-scroll-target="#compatibility-note-lcd-contrast">Compatibility Note: LCD Contrast</a></li>
   <li><a href="#future-alert-integration" id="toc-future-alert-integration" class="nav-link" data-scroll-target="#future-alert-integration">Future Alert Integration</a></li>
   <li><a href="#related-pages" id="toc-related-pages" class="nav-link" data-scroll-target="#related-pages">Related Pages</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
@@ -302,7 +301,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>six button indicator LEDs.</li>
 </ul>
 <p>The interface is controlled by the integrated script:</p>
-<pre class="text"><code>gfxhat_pattern_ui_usb.py</code></pre>
+<pre class="text"><code>raspberry.py</code></pre>
 <p>This script no longer acts only as a display demonstration: in real mode it selects the PNG pattern, opens the USB serial port to the ESP32, sends colour commands and updates progress when the ESP32 reports a microswitch event.</p>
 </section>
 <section id="screens-and-buttons" class="level2">
@@ -422,23 +421,14 @@ IN LAVORAZIONE
 <h3 class="anchored" data-anchor-id="demo-mode">Demo Mode</h3>
 <p>Demo mode tests the UI without moving the motors:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> /home/aless/venvs/uncinetto/bin/activate</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> /home/aless/gfxhat_pattern_ui_usb.py <span class="at">--usb-dir</span> /mnt/pattern_usb <span class="at">--demo</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> /home/aless/raspberry.py <span class="at">--usb-dir</span> /mnt/pattern_usb <span class="at">--demo</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="real-mode" class="level3">
 <h3 class="anchored" data-anchor-id="real-mode">Real Mode</h3>
 <p>Real mode communicates with the ESP32, detected in the tested setup at <code>/dev/ttyUSB0</code>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> /home/aless/venvs/uncinetto/bin/activate</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> /home/aless/gfxhat_pattern_ui_usb.py <span class="at">--usb-dir</span> /mnt/pattern_usb <span class="at">--port</span> /dev/ttyUSB0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> /home/aless/raspberry.py <span class="at">--usb-dir</span> /mnt/pattern_usb <span class="at">--port</span> /dev/ttyUSB0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-</section>
-<section id="compatibility-note-lcd-contrast" class="level2">
-<h2 class="anchored" data-anchor-id="compatibility-note-lcd-contrast">Compatibility Note: LCD Contrast</h2>
-<p>During initial tests the installed <code>gfxhat</code> library did not expose <code>lcd.contrast()</code>. The robust display initialization is:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>lcd.clear()</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">hasattr</span>(lcd, <span class="st">"contrast"</span>):</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    lcd.contrast(<span class="dv">42</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="va">self</span>.set_backlight((<span class="dv">0</span>, <span class="dv">40</span>, <span class="dv">70</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>This allows the program to run with library versions that do not implement the contrast method.</p>
 </section>
 <section id="future-alert-integration" class="level2">
 <h2 class="anchored" data-anchor-id="future-alert-integration">Future Alert Integration</h2>
@@ -542,7 +532,7 @@ IN LAVORAZIONE
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/f17911ff-6108-4f47-972d-94e57a3f454a\.netlify\.app\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

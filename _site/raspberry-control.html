@@ -306,7 +306,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="integrated-script" class="level2">
 <h2 class="anchored" data-anchor-id="integrated-script">Integrated Script</h2>
 <p>The active user-interface and machine-control program is:</p>
-<pre class="text"><code>gfxhat_pattern_ui_usb.py</code></pre>
+<pre class="text"><code>raspberry.py</code></pre>
 <section id="main-software-classes" class="level3">
 <h3 class="anchored" data-anchor-id="main-software-classes">Main Software Classes</h3>
 <table class="caption-top table">
@@ -376,7 +376,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="start-the-integrated-application" class="level3">
 <h3 class="anchored" data-anchor-id="start-the-integrated-application">Start the Integrated Application</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> /home/aless/gfxhat_pattern_ui_usb.py <span class="at">--usb-dir</span> /mnt/pattern_usb <span class="at">--port</span> /dev/ttyUSB0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> /home/aless/raspberry.py <span class="at">--usb-dir</span> /mnt/pattern_usb <span class="at">--port</span> /dev/ttyUSB0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="vision-integration" class="level2">
@@ -470,7 +470,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/f17911ff-6108-4f47-972d-94e57a3f454a\.netlify\.app\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

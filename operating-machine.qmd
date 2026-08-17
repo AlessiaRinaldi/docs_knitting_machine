@@ -15,8 +15,8 @@ Two different software environments are used:
 
 | Device | Purpose | Main script |
 |---|---|---|
-| User computer | Create the PNG pattern | `pattern_editor_v3_scroll_sidebar.py` |
-| Raspberry Pi inside the machine | Read the USB drive, manage the display and communicate with the ESP32 | `gfxhat_pattern_ui_usb.py` |
+| User computer | Create the PNG pattern | `pattern_editor.py` |
+| Raspberry Pi inside the machine | Read the USB drive, manage the display and communicate with the ESP32 | `raspberry.py` |
 
 ## 1. Pattern Editor Setup on the User Computer
 
@@ -85,42 +85,68 @@ Run the script:
 On Windows:
 
 ```powershell
-py pattern_editor_v3_scroll_sidebar.py
+py pattern_editor.py
 ```
 
 On Linux or macOS:
 
 ```bash
-python3 pattern_editor_v3_scroll_sidebar.py
+python3 pattern_editor.py
 ```
+The Pattern Editor opens a graphical interface where the user can create, edit, import and preview the pattern before exporting it for the machine.
 
-The Pattern Editor opens a graphical interface where the user can draw the pattern.
+Two editing modes are available:
 
-The exported PNG must respect the following rules:
+- **Single Pattern**: the user draws the complete pattern directly on a **48-pixel-wide** grid. The height can be selected according to the required number of rows.
+- **Repeated Pattern**: the user draws an **8-pixel-wide module**, which is automatically repeated **6 times horizontally** to obtain the required final width of 48 pixels. Vertically, the same module can be repeated several times, or different modules with different heights can be combined.
 
-- width: **48 pixels**;
-- image format: **RGB PNG**;
-- number of colours: **exactly three**.
+In Repeated Pattern mode, the editor displays a preview of the final 48-pixel-wide pattern.
 
-The height of the pattern can be chosen by the user according to the number of rows to be produced.
+The final exported pattern must:
+
+- be **48 pixels wide**;
+- have a height between **1 and 1000 pixels**;
+- be saved as an **RGB PNG image**;
+- contain **exactly three distinct RGB colours**.
+
+The three colours can be selected directly from the editor palette.
 
 ## 2. Create the Pattern
 
-Create a three-colour PNG file with the [Pattern Editor](pattern-editor.qmd).
+Create the pattern using the [Pattern Editor](pattern-editor.qmd).
 
-The pattern must:
+Choose one of the available editing modes:
 
-- be **48 pixels wide**;
-- be saved as a **PNG RGB image**;
-- contain **three RGB colours**.
+- **Single Pattern** to draw the complete 48-pixel-wide pattern directly;
+- **Repeated Pattern** to create an 8-pixel-wide module that is automatically repeated 6 times horizontally.
 
-When the PNG is saved, the editor also shows the colour-to-command interpretation used by the machine.
+When using **Repeated Pattern**, the vertical structure can be created in two ways:
 
-The colour mapping is based on the order in which the three colours appear in the PNG file. The Raspberry Pi uses this order to associate the colours with the commands sent to the ESP32.
+- **Repeat vertically**: the same module is repeated a selected number of times;
+- **Different modules**: multiple 8-pixel-wide modules can be created, duplicated, reordered and assigned different heights.
+
+The final preview always represents the actual **48 × H pixel** pattern that will be exported.
+
+Before saving, the editor checks that all three selected colours are actually used in the final pattern. The PNG cannot be saved unless it contains exactly three distinct colours.
+
+When the pattern is saved, the editor also shows the colour-to-command interpretation used by the machine:
+
+- **C1 / Servo 1**
+- **C2 / Servo 2**
+- **C3 / Servo 3**
+
+The mapping is determined by the order in which the three colours first appear in the **final 48-pixel-wide pattern**, reading the image from the first row onwards.
+
+The editor can also:
+
+- open an existing compatible **48-pixel-wide, three-colour PNG**;
+- import a PNG, JPEG, BMP or WebP image and automatically resize it to 48 pixels wide and reduce it to three colours.
+
+Opened or imported images are loaded as a **Single Pattern**.
 
 ## 3. Copy the PNG to the USB Drive
 
-After saving the pattern, copy the `.png` file directly into the root folder of the USB flash drive.
+After saving the pattern, copy the exported `.png` file directly into the root folder of the USB flash drive.
 
 Example:
 
@@ -310,13 +336,13 @@ source /home/aless/venvs/uncinetto/bin/activate
 Run the integrated interface:
 
 ```bash
-python3 /home/aless/gfxhat_pattern_ui_usb.py --usb-dir /mnt/pattern_usb --port /dev/ttyUSB0
+python3 /home/aless/raspberry.py --usb-dir /mnt/pattern_usb --port /dev/ttyUSB0
 ```
 
 If the ESP32 is detected as `/dev/ttyACM0`, use:
 
 ```bash
-python3 /home/aless/gfxhat_pattern_ui_usb.py --usb-dir /mnt/pattern_usb --port /dev/ttyACM0
+python3 /home/aless/raspberry.py --usb-dir /mnt/pattern_usb --port /dev/ttyACM0
 ```
 
 The command starts the Raspberry Pi interface, reads the PNG files from the USB drive and opens the serial communication with the ESP32.
@@ -383,13 +409,7 @@ IN LAVORAZIONE
 - STOP
 ```
 
-Every press of the synchronization microswitch causes the ESP32 to send:
-
-```text
-NEXT
-```
-
-to the Raspberry Pi.
+Every press of the synchronization microswitch causes the ESP32 to send a "NEXT" to the Raspberry Pi.
 
 The Raspberry Pi then:
 
@@ -444,12 +464,12 @@ Control of an additional main stepper drive is planned but is not part of the te
 
 | Operation | Command |
 |---|---|
-| Run Pattern Editor on the user computer | `python3 pattern_editor_v3_scroll_sidebar.py` |
+| Run Pattern Editor on the user computer | `python3 pattern_editor.py` |
 | Activate Raspberry Pi virtual environment | `source /home/aless/venvs/uncinetto/bin/activate` |
 | Check USB drive name | `lsblk -o NAME,SIZE,FSTYPE,LABEL,MOUNTPOINTS` |
 | Mount USB drive on Raspberry Pi | `sudo mount /dev/sda1 /mnt/pattern_usb` |
 | Check ESP32 serial port | `ls /dev/ttyUSB*` |
-| Run machine interface | `python3 /home/aless/gfxhat_pattern_ui_usb.py --usb-dir /mnt/pattern_usb --port /dev/ttyUSB0` |
+| Run machine interface | `python3 /home/aless/raspberry.py --usb-dir /mnt/pattern_usb --port /dev/ttyUSB0` |
 | Unmount USB drive | `sudo umount /mnt/pattern_usb` |
 
 ## Related Pages

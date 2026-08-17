@@ -4,7 +4,7 @@ title: "Control System Overview"
 
 ## Architecture
 
-The prototype is organized into two processing levels:
+The prototype is organized into these processing levels:
 
 - the **user computer**, where the PNG pattern is created with the Pattern Editor;
 - the **Raspberry Pi**, which implements the user interface, reads and validates PNG patterns, manages process progress and hosts the error-recognition pipeline;
